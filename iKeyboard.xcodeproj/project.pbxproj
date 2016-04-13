@@ -22,6 +22,8 @@
 		C74B813F1CBE4267005307FF /* white2.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B81381CBE4267005307FF /* white2.png */; };
 		C74B81401CBE4267005307FF /* white1.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B81391CBE4267005307FF /* white1.png */; };
 		C74B81431CBE4325005307FF /* iKeyboardNormalModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B81421CBE4325005307FF /* iKeyboardNormalModeViewController.m */; };
+		C74B81471CBE54EB005307FF /* keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B81461CBE54EB005307FF /* keyboard.png */; };
+		C74B81491CBE5C9D005307FF /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B81481CBE5C9D005307FF /* frame.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		C74B81391CBE4267005307FF /* white1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white1.png; sourceTree = "<group>"; };
 		C74B81411CBE4325005307FF /* iKeyboardNormalModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iKeyboardNormalModeViewController.h; sourceTree = "<group>"; };
 		C74B81421CBE4325005307FF /* iKeyboardNormalModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iKeyboardNormalModeViewController.m; sourceTree = "<group>"; };
+		C74B81461CBE54EB005307FF /* keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard.png; sourceTree = "<group>"; };
+		C74B81481CBE5C9D005307FF /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 		C74B81301CBE3A0D005307FF /* image */ = {
 			isa = PBXGroup;
 			children = (
+				C74B81481CBE5C9D005307FF /* frame.png */,
+				C74B81461CBE54EB005307FF /* keyboard.png */,
 				C74B81331CBE4267005307FF /* white7.png */,
 				C74B81341CBE4267005307FF /* white6.png */,
 				C74B81351CBE4267005307FF /* white5.png */,
@@ -181,7 +187,9 @@
 				C74B813E1CBE4267005307FF /* white3.png in Resources */,
 				C74B813F1CBE4267005307FF /* white2.png in Resources */,
 				C74B81221CBE335C005307FF /* Assets.xcassets in Resources */,
+				C74B81491CBE5C9D005307FF /* frame.png in Resources */,
 				C74B81321CBE3A0D005307FF /* part_of_keyboard.png in Resources */,
+				C74B81471CBE54EB005307FF /* keyboard.png in Resources */,
 				C74B813C1CBE4267005307FF /* white5.png in Resources */,
 				C74B81201CBE335C005307FF /* Main.storyboard in Resources */,
 				C74B813A1CBE4267005307FF /* white7.png in Resources */,
@@ -355,6 +363,7 @@
 				C74B812B1CBE335C005307FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

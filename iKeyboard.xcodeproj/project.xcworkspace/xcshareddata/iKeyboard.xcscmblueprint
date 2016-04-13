@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "60031C61DDD07B7813819537C36533D45475CDF1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "60B80CDD6EF1327ECD7C719BADD62A3162622CF2" : 0,
+    "60031C61DDD07B7813819537C36533D45475CDF1" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "8A01909D-8CC5-44FF-89A5-76E94EC7898C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "60B80CDD6EF1327ECD7C719BADD62A3162622CF2" : "",
+    "60031C61DDD07B7813819537C36533D45475CDF1" : "ikeyboard\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "iKeyboard",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "iKeyboard.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/qsyyzxp12\/ikeyboard",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "60031C61DDD07B7813819537C36533D45475CDF1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/qsyyzxp12\/Serafim.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "60B80CDD6EF1327ECD7C719BADD62A3162622CF2"
+    }
+  ]
+}

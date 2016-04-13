@@ -9,7 +9,6 @@
 #import "iKeyboardNormalModeViewController.h"
 
 #define BORDER_WIDTH_OF_KEYBOARD_IMAGE 2
-#define OFFSET_BETWEEN_BG_AND_KEY_IMAGEVIEW 8
 
 @interface iKeyboardNormalModeViewController ()
 
@@ -27,19 +26,34 @@
 
 -(void) UIbuild
 {
-    NSLog(@"xx");
-    [self.keyboardBgImageView setImage:[UIImage imageNamed:@"part_of_keyboard.png"]];
+    self.wholeKeyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
+   // [self.wholeKeyboardImageView.layer setBorderWidth:BORDER_WIDTH_OF_KEYBOARD_IMAGE];
+    self.wholeKeyboardImageView.frame = CGRectMake(0, CGRectGetMinY(self.view.frame)+CGRectGetHeight(self.view.frame)/5, self.view.frame.size.width, self.view.frame.size.height/6);
+    [self.view addSubview:self.wholeKeyboardImageView];
+    
+    self.frameImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"frame.png"]];
+    // [self.wholeKeyboardImageView.layer setBorderWidth:BORDER_WIDTH_OF_KEYBOARD_IMAGE];
+    [self.frameImageView sizeToFit];
+    self.frameImageView.frame = CGRectMake(252, CGRectGetMinY(self.wholeKeyboardImageView.frame), self.frameImageView.frame.size.width+3, self.frameImageView.frame.size.height);
+    [self.view addSubview:self.frameImageView];
+    
+    //55
+    NSLog(@"%f, %f", self.wholeKeyboardImageView.frame.size.width, self.wholeKeyboardImageView.frame.size.height);
+    
+    self.keyboardBgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"part_of_keyboard.png"]];
+    [self.keyboardBgImageView.layer setBorderWidth:BORDER_WIDTH_OF_KEYBOARD_IMAGE];
    // self.keyboardBgImageView.backgroundColor = [UIColor yellowColor];
     self.keyboardBgImageView.frame = CGRectMake(0, CGRectGetMidY(self.view.frame), self.view.frame.size.width, self.view.frame.size.height/2);
+    [self.view addSubview:self.keyboardBgImageView];
     
     CGFloat oneKeyWidth = (self.keyboardBgImageView.frame.size.width-BORDER_WIDTH_OF_KEYBOARD_IMAGE*8)/7;
     
     CGFloat keyX = BORDER_WIDTH_OF_KEYBOARD_IMAGE;
-    CGFloat keyY = CGRectGetMidY(self.view.frame)-OFFSET_BETWEEN_BG_AND_KEY_IMAGEVIEW;
-    CGFloat keyHeight = self.keyboardBgImageView.frame.size.height+ OFFSET_BETWEEN_BG_AND_KEY_IMAGEVIEW;
+    CGFloat keyY = CGRectGetMinY(self.keyboardBgImageView.frame)+BORDER_WIDTH_OF_KEYBOARD_IMAGE;
+    CGFloat keyHeight = self.keyboardBgImageView.frame.size.height-BORDER_WIDTH_OF_KEYBOARD_IMAGE;
     
     self.whiteKeyImageViewArray = [[NSMutableArray alloc] init];
-    
+  
     for(int i=0; i<7; i++)
     {
         NSString* imageName = [NSString stringWithFormat:@"white%d.png", i+1];

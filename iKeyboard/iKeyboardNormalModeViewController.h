@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface iKeyboardNormalModeViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIImageView *keyboardBgImageView;
+
+@property UIImageView *wholeKeyboardImageView;
+@property UIImageView *frameImageView;
+@property UIImageView *keyboardBgImageView;
 @property NSMutableArray* whiteKeyImageViewArray;
 
 @end
