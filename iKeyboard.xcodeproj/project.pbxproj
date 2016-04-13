@@ -1,0 +1,362 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C74B81171CBE335C005307FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B81161CBE335C005307FF /* main.m */; };
+		C74B811A1CBE335C005307FF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B81191CBE335C005307FF /* AppDelegate.m */; };
+		C74B81201CBE335C005307FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74B811E1CBE335C005307FF /* Main.storyboard */; };
+		C74B81221CBE335C005307FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C74B81211CBE335C005307FF /* Assets.xcassets */; };
+		C74B81251CBE335C005307FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74B81231CBE335C005307FF /* LaunchScreen.storyboard */; };
+		C74B812E1CBE358F005307FF /* iKeyboardMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B812D1CBE358F005307FF /* iKeyboardMenuViewController.m */; };
+		C74B81321CBE3A0D005307FF /* part_of_keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B81311CBE3A0D005307FF /* part_of_keyboard.png */; };
+		C74B813A1CBE4267005307FF /* white7.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B81331CBE4267005307FF /* white7.png */; };
+		C74B813B1CBE4267005307FF /* white6.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B81341CBE4267005307FF /* white6.png */; };
+		C74B813C1CBE4267005307FF /* white5.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B81351CBE4267005307FF /* white5.png */; };
+		C74B813D1CBE4267005307FF /* white4.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B81361CBE4267005307FF /* white4.png */; };
+		C74B813E1CBE4267005307FF /* white3.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B81371CBE4267005307FF /* white3.png */; };
+		C74B813F1CBE4267005307FF /* white2.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B81381CBE4267005307FF /* white2.png */; };
+		C74B81401CBE4267005307FF /* white1.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B81391CBE4267005307FF /* white1.png */; };
+		C74B81431CBE4325005307FF /* iKeyboardNormalModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B81421CBE4325005307FF /* iKeyboardNormalModeViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C74B81121CBE335B005307FF /* iKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C74B81161CBE335C005307FF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C74B81181CBE335C005307FF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C74B81191CBE335C005307FF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C74B811F1CBE335C005307FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C74B81211CBE335C005307FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C74B81241CBE335C005307FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C74B81261CBE335C005307FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C74B812C1CBE358F005307FF /* iKeyboardMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iKeyboardMenuViewController.h; sourceTree = "<group>"; };
+		C74B812D1CBE358F005307FF /* iKeyboardMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iKeyboardMenuViewController.m; sourceTree = "<group>"; };
+		C74B81311CBE3A0D005307FF /* part_of_keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = part_of_keyboard.png; sourceTree = "<group>"; };
+		C74B81331CBE4267005307FF /* white7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white7.png; sourceTree = "<group>"; };
+		C74B81341CBE4267005307FF /* white6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white6.png; sourceTree = "<group>"; };
+		C74B81351CBE4267005307FF /* white5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white5.png; sourceTree = "<group>"; };
+		C74B81361CBE4267005307FF /* white4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white4.png; sourceTree = "<group>"; };
+		C74B81371CBE4267005307FF /* white3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white3.png; sourceTree = "<group>"; };
+		C74B81381CBE4267005307FF /* white2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white2.png; sourceTree = "<group>"; };
+		C74B81391CBE4267005307FF /* white1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white1.png; sourceTree = "<group>"; };
+		C74B81411CBE4325005307FF /* iKeyboardNormalModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iKeyboardNormalModeViewController.h; sourceTree = "<group>"; };
+		C74B81421CBE4325005307FF /* iKeyboardNormalModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iKeyboardNormalModeViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C74B810F1CBE335B005307FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C74B81091CBE335B005307FF = {
+			isa = PBXGroup;
+			children = (
+				C74B81141CBE335C005307FF /* iKeyboard */,
+				C74B81301CBE3A0D005307FF /* image */,
+				C74B81131CBE335B005307FF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C74B81131CBE335B005307FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C74B81121CBE335B005307FF /* iKeyboard.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C74B81141CBE335C005307FF /* iKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				C74B81181CBE335C005307FF /* AppDelegate.h */,
+				C74B81191CBE335C005307FF /* AppDelegate.m */,
+				C74B812C1CBE358F005307FF /* iKeyboardMenuViewController.h */,
+				C74B812D1CBE358F005307FF /* iKeyboardMenuViewController.m */,
+				C74B81411CBE4325005307FF /* iKeyboardNormalModeViewController.h */,
+				C74B81421CBE4325005307FF /* iKeyboardNormalModeViewController.m */,
+				C74B811E1CBE335C005307FF /* Main.storyboard */,
+				C74B81211CBE335C005307FF /* Assets.xcassets */,
+				C74B81231CBE335C005307FF /* LaunchScreen.storyboard */,
+				C74B81261CBE335C005307FF /* Info.plist */,
+				C74B81151CBE335C005307FF /* Supporting Files */,
+			);
+			path = iKeyboard;
+			sourceTree = "<group>";
+		};
+		C74B81151CBE335C005307FF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C74B81161CBE335C005307FF /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C74B81301CBE3A0D005307FF /* image */ = {
+			isa = PBXGroup;
+			children = (
+				C74B81331CBE4267005307FF /* white7.png */,
+				C74B81341CBE4267005307FF /* white6.png */,
+				C74B81351CBE4267005307FF /* white5.png */,
+				C74B81361CBE4267005307FF /* white4.png */,
+				C74B81371CBE4267005307FF /* white3.png */,
+				C74B81381CBE4267005307FF /* white2.png */,
+				C74B81391CBE4267005307FF /* white1.png */,
+				C74B81311CBE3A0D005307FF /* part_of_keyboard.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C74B81111CBE335B005307FF /* iKeyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C74B81291CBE335C005307FF /* Build configuration list for PBXNativeTarget "iKeyboard" */;
+			buildPhases = (
+				C74B810E1CBE335B005307FF /* Sources */,
+				C74B810F1CBE335B005307FF /* Frameworks */,
+				C74B81101CBE335B005307FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iKeyboard;
+			productName = iKeyboard;
+			productReference = C74B81121CBE335B005307FF /* iKeyboard.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C74B810A1CBE335B005307FF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Lin Chih-An";
+				TargetAttributes = {
+					C74B81111CBE335B005307FF = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = KRGS5BKS3M;
+					};
+				};
+			};
+			buildConfigurationList = C74B810D1CBE335B005307FF /* Build configuration list for PBXProject "iKeyboard" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C74B81091CBE335B005307FF;
+			productRefGroup = C74B81131CBE335B005307FF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C74B81111CBE335B005307FF /* iKeyboard */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C74B81101CBE335B005307FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C74B813B1CBE4267005307FF /* white6.png in Resources */,
+				C74B81401CBE4267005307FF /* white1.png in Resources */,
+				C74B81251CBE335C005307FF /* LaunchScreen.storyboard in Resources */,
+				C74B813D1CBE4267005307FF /* white4.png in Resources */,
+				C74B813E1CBE4267005307FF /* white3.png in Resources */,
+				C74B813F1CBE4267005307FF /* white2.png in Resources */,
+				C74B81221CBE335C005307FF /* Assets.xcassets in Resources */,
+				C74B81321CBE3A0D005307FF /* part_of_keyboard.png in Resources */,
+				C74B813C1CBE4267005307FF /* white5.png in Resources */,
+				C74B81201CBE335C005307FF /* Main.storyboard in Resources */,
+				C74B813A1CBE4267005307FF /* white7.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C74B810E1CBE335B005307FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C74B811A1CBE335C005307FF /* AppDelegate.m in Sources */,
+				C74B81431CBE4325005307FF /* iKeyboardNormalModeViewController.m in Sources */,
+				C74B81171CBE335C005307FF /* main.m in Sources */,
+				C74B812E1CBE358F005307FF /* iKeyboardMenuViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C74B811E1CBE335C005307FF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C74B811F1CBE335C005307FF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C74B81231CBE335C005307FF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C74B81241CBE335C005307FF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C74B81271CBE335C005307FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C74B81281CBE335C005307FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C74B812A1CBE335C005307FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = iKeyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.iKeyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		C74B812B1CBE335C005307FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = iKeyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.iKeyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C74B810D1CBE335B005307FF /* Build configuration list for PBXProject "iKeyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C74B81271CBE335C005307FF /* Debug */,
+				C74B81281CBE335C005307FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C74B81291CBE335C005307FF /* Build configuration list for PBXNativeTarget "iKeyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C74B812A1CBE335C005307FF /* Debug */,
+				C74B812B1CBE335C005307FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C74B810A1CBE335B005307FF /* Project object */;
+}
