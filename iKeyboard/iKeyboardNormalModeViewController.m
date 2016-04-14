@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.octaveNo = 3;
+    self.octaveNo = 4;
     
     [self UIbuild];
     // Do any additional setup after loading the view.
@@ -30,6 +30,7 @@
 -(void) UIbuild
 {
     self.wholeKeyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
+    [self.wholeKeyboardImageView.layer setBorderWidth:1];
    // [self.wholeKeyboardImageView.layer setBorderWidth:BORDER_WIDTH_OF_KEYBOARD_IMAGE];
     self.wholeKeyboardImageView.frame = CGRectMake(0, CGRectGetMinY(self.view.frame)+CGRectGetHeight(self.view.frame)/5, self.view.frame.size.width, self.view.frame.size.height/6);
     [self.view addSubview:self.wholeKeyboardImageView];
@@ -100,7 +101,7 @@
     if(sender.tag == 0)
     {
         NSLog(@"left arrow clicked");
-        if(self.octaveNo > 0)
+        if(self.octaveNo > 1)
         {
             [self.frameImageView setFrame:CGRectMake(self.frameImageView.frame.origin.x - self.frameImageView.frame.size.width, self.frameImageView.frame.origin.y, self.frameImageView.frame.size.width, self.frameImageView.frame.size.height)];
             self.octaveNo--;
@@ -109,7 +110,7 @@
     else
     {
         NSLog(@"right arrow clicked");
-        if(self.octaveNo < 6)
+        if(self.octaveNo < 7)
         {
             [self.frameImageView setFrame:CGRectMake(self.frameImageView.frame.origin.x + self.frameImageView.frame.size.width, self.frameImageView.frame.origin.y, self.frameImageView.frame.size.width, self.frameImageView.frame.size.height)];
             self.octaveNo++;
