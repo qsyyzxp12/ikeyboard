@@ -24,6 +24,8 @@
 		C74B81431CBE4325005307FF /* iKeyboardNormalModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B81421CBE4325005307FF /* iKeyboardNormalModeViewController.m */; };
 		C74B81471CBE54EB005307FF /* keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B81461CBE54EB005307FF /* keyboard.png */; };
 		C74B81491CBE5C9D005307FF /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B81481CBE5C9D005307FF /* frame.png */; };
+		C74B814C1CBF6B9B005307FF /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B814A1CBF6B9B005307FF /* rightArrow.png */; };
+		C74B814D1CBF6B9B005307FF /* leftArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C74B814B1CBF6B9B005307FF /* leftArrow.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		C74B81421CBE4325005307FF /* iKeyboardNormalModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iKeyboardNormalModeViewController.m; sourceTree = "<group>"; };
 		C74B81461CBE54EB005307FF /* keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard.png; sourceTree = "<group>"; };
 		C74B81481CBE5C9D005307FF /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame.png; sourceTree = "<group>"; };
+		C74B814A1CBF6B9B005307FF /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightArrow.png; sourceTree = "<group>"; };
+		C74B814B1CBF6B9B005307FF /* leftArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftArrow.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,8 @@
 		C74B81301CBE3A0D005307FF /* image */ = {
 			isa = PBXGroup;
 			children = (
+				C74B814A1CBF6B9B005307FF /* rightArrow.png */,
+				C74B814B1CBF6B9B005307FF /* leftArrow.png */,
 				C74B81481CBE5C9D005307FF /* frame.png */,
 				C74B81461CBE54EB005307FF /* keyboard.png */,
 				C74B81331CBE4267005307FF /* white7.png */,
@@ -182,6 +188,8 @@
 			files = (
 				C74B813B1CBE4267005307FF /* white6.png in Resources */,
 				C74B81401CBE4267005307FF /* white1.png in Resources */,
+				C74B814D1CBF6B9B005307FF /* leftArrow.png in Resources */,
+				C74B814C1CBF6B9B005307FF /* rightArrow.png in Resources */,
 				C74B81251CBE335C005307FF /* LaunchScreen.storyboard in Resources */,
 				C74B813D1CBE4267005307FF /* white4.png in Resources */,
 				C74B813E1CBE4267005307FF /* white3.png in Resources */,

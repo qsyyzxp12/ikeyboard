@@ -34,11 +34,8 @@
     self.frameImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"frame.png"]];
     // [self.wholeKeyboardImageView.layer setBorderWidth:BORDER_WIDTH_OF_KEYBOARD_IMAGE];
     [self.frameImageView sizeToFit];
-    self.frameImageView.frame = CGRectMake(252, CGRectGetMinY(self.wholeKeyboardImageView.frame), self.frameImageView.frame.size.width+3, self.frameImageView.frame.size.height);
+    self.frameImageView.frame = CGRectMake(251, CGRectGetMinY(self.wholeKeyboardImageView.frame), self.frameImageView.frame.size.width+4, self.frameImageView.frame.size.height);
     [self.view addSubview:self.frameImageView];
-    
-    //55
-    NSLog(@"%f, %f", self.wholeKeyboardImageView.frame.size.width, self.wholeKeyboardImageView.frame.size.height);
     
     self.keyboardBgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"part_of_keyboard.png"]];
     [self.keyboardBgImageView.layer setBorderWidth:BORDER_WIDTH_OF_KEYBOARD_IMAGE];
@@ -74,9 +71,38 @@
         [self.whiteKeyImageViewArray addObject:whiteKeyImageView];
         keyX += BORDER_WIDTH_OF_KEYBOARD_IMAGE + oneKeyWidth;
     }
+    
+    UIButton* lArrowButton = [[UIButton alloc] init];
+    lArrowButton.tag = 0;
+    [lArrowButton setImage:[UIImage imageNamed:@"leftArrow.png"] forState:UIControlStateNormal];
+    [lArrowButton setFrame:CGRectMake(20, CGRectGetMinY(self.keyboardBgImageView.frame)-30, 50, 20)];
+    [lArrowButton addTarget:self action:@selector(arrowButtoClicked:) forControlEvents:UIControlEventTouchUpInside];
+ //   [self.switchModeButton setShowsTouchWhenHighlighted:YES];
+    [self.view addSubview:lArrowButton];
+    
+    UIButton* rArrowButton = [[UIButton alloc] init];
+    rArrowButton.tag = 1;
+    [rArrowButton setImage:[UIImage imageNamed:@"rightArrow.png"] forState:UIControlStateNormal];
+    [rArrowButton setFrame:CGRectMake(500, CGRectGetMinY(self.keyboardBgImageView.frame)-30, 50, 20)];
+    [rArrowButton addTarget:self action:@selector(arrowButtoClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:rArrowButton];
 }
 
 #pragma mark - Actions
+
+- (void) arrowButtoClicked:(UIButton*) sender
+{
+    if(sender.tag == 0)
+    {
+        NSLog(@"left arrow clicked");
+        [self.frameImageView setFrame:CGRectMake(self.frameImageView.frame.origin.x - self.frameImageView.frame.size.width, self.frameImageView.frame.origin.y, self.frameImageView.frame.size.width, self.frameImageView.frame.size.height)];
+    }
+    else
+    {
+        NSLog(@"right arrow clicked");
+        [self.frameImageView setFrame:CGRectMake(self.frameImageView.frame.origin.x + self.frameImageView.frame.size.width, self.frameImageView.frame.origin.y, self.frameImageView.frame.size.width, self.frameImageView.frame.size.height)];
+    }
+}
 
 - (void) keyTapped:(UIPanGestureRecognizer*) recognizer
 {
