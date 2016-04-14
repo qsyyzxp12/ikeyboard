@@ -14,5 +14,5 @@
 @property UIImageView *frameImageView;
 @property UIImageView *keyboardBgImageView;
 @property NSMutableArray* whiteKeyImageViewArray;
-
+@property int octaveNo;
 @end

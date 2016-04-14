@@ -18,6 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.octaveNo = 3;
+    
     [self UIbuild];
     // Do any additional setup after loading the view.
 }
@@ -97,12 +100,20 @@
     if(sender.tag == 0)
     {
         NSLog(@"left arrow clicked");
-        [self.frameImageView setFrame:CGRectMake(self.frameImageView.frame.origin.x - self.frameImageView.frame.size.width, self.frameImageView.frame.origin.y, self.frameImageView.frame.size.width, self.frameImageView.frame.size.height)];
+        if(self.octaveNo > 0)
+        {
+            [self.frameImageView setFrame:CGRectMake(self.frameImageView.frame.origin.x - self.frameImageView.frame.size.width, self.frameImageView.frame.origin.y, self.frameImageView.frame.size.width, self.frameImageView.frame.size.height)];
+            self.octaveNo--;
+        }
     }
     else
     {
         NSLog(@"right arrow clicked");
-        [self.frameImageView setFrame:CGRectMake(self.frameImageView.frame.origin.x + self.frameImageView.frame.size.width, self.frameImageView.frame.origin.y, self.frameImageView.frame.size.width, self.frameImageView.frame.size.height)];
+        if(self.octaveNo < 6)
+        {
+            [self.frameImageView setFrame:CGRectMake(self.frameImageView.frame.origin.x + self.frameImageView.frame.size.width, self.frameImageView.frame.origin.y, self.frameImageView.frame.size.width, self.frameImageView.frame.size.height)];
+            self.octaveNo++;
+        }
     }
 }
 
