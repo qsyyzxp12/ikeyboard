@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface iKeyboardNormalModeViewController : UIViewController
+
 
 @property UIImageView *wholeKeyboardImageView;
 @property UIImageView *frameImageView;
 @property UIImageView *keyboardBgImageView;
 @property NSMutableArray* whiteKeyImageViewArray;
 @property int octaveNo;
+@property AVAudioPlayer* soundPlayer;
+
 @end

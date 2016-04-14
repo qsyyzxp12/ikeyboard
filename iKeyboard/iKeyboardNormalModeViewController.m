@@ -21,8 +21,23 @@
     
     self.octaveNo = 4;
     
+    [self audioPlayerInit];
     [self UIbuild];
+    
+    
+  //  AudioServicesPlaySystemSound(playSoundID);
     // Do any additional setup after loading the view.
+}
+
+-(void) audioPlayerInit
+{
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"piano_a0" ofType:@"wav"];
+    NSURL *soundURL = [[NSURL alloc] initFileURLWithPath:soundFilePath];
+    self.soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:nil];
+    [self.soundPlayer prepareToPlay];
+    [self.soundPlayer setVolume:1];
+    self.soundPlayer.numberOfLoops = 1;
+    
 }
 
 #pragma mark - User Interface
@@ -123,6 +138,7 @@
     UIImageView* imageView = (UIImageView*)recognizer.view;
     if(recognizer.state == UIGestureRecognizerStateBegan)
     {
+        [self.soundPlayer play];
         int keyNo = (int)imageView.tag;
         NSLog(@"tap key %d", keyNo);
         imageView.highlighted = YES;
@@ -131,6 +147,12 @@
     {
         NSLog(@"end");
         imageView.highlighted = NO;
+        [self.soundPlayer stop];
+        self.soundPlayer.currentTime = 0;
+        [self.soundPlayer prepareToPlay];
+//        AudioServicesRemoveSystemSoundCompletion(playSoundID);
+  //      AudioServicesDisposeSystemSoundID(playSoundID);
+
     }
 }
 
