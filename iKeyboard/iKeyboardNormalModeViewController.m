@@ -54,17 +54,19 @@
     for(int i=0; i<7; i++)
     {
         NSString* imageName = [NSString stringWithFormat:@"white%d.png", i+1];
-        UIImageView* whiteKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-//        whiteKeyImageView.backgroundColor = [UIColor redColor];
+        NSString* highlightImageName = [NSString stringWithFormat:@"white%d_highlight.png", i+1];
+        UIImageView* whiteKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName] highlightedImage:[UIImage imageNamed:highlightImageName]];
+
         whiteKeyImageView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
         whiteKeyImageView.tag = i;
         [whiteKeyImageView setUserInteractionEnabled:YES];
         
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
+        UILongPressGestureRecognizer *tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
                                                         initWithTarget:self
                                                         action:@selector(keyTapped:)];
-        [tapGestureRecognizer setNumberOfTapsRequired:1];
-        [tapGestureRecognizer setNumberOfTouchesRequired:1];
+        [tapGestureRecognizer setMinimumPressDuration:0.01];
+  //      [tapGestureRecognizer setNumberOfTapsRequired:1];
+  //      [tapGestureRecognizer setNumberOfTouchesRequired:1];
         [whiteKeyImageView addGestureRecognizer:tapGestureRecognizer];
         
         [self.view addSubview:whiteKeyImageView];
@@ -104,10 +106,20 @@
     }
 }
 
-- (void) keyTapped:(UIPanGestureRecognizer*) recognizer
+- (void) keyTapped:(UILongPressGestureRecognizer*) recognizer
 {
-    int keyNo = (int)recognizer.view.tag;
-    NSLog(@"tap key %d", keyNo);
+    UIImageView* imageView = (UIImageView*)recognizer.view;
+    if(recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        int keyNo = (int)imageView.tag;
+        NSLog(@"tap key %d", keyNo);
+        imageView.highlighted = YES;
+    }
+    else if(recognizer.state == UIGestureRecognizerStateEnded)
+    {
+        NSLog(@"end");
+        imageView.highlighted = NO;
+    }
 }
 
 #pragma mark - the others
