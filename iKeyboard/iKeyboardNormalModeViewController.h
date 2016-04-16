@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVAudioPlayer.h>
 
 // 從文件中可知道建議最佳Buffer數量為3
 static const int kNumberOfBuffers = 3;
@@ -28,6 +29,7 @@ typedef struct {
 @interface iKeyboardNormalModeViewController : UIViewController
 {
     MCAudioPlayerState aqData;
+    AVAudioPlayer* player;
 }
 
 @property UIImageView *wholeKeyboardImageView;
