@@ -22,22 +22,59 @@
     
     self.octaveNo = 4;
     
-    [self MCPlayerInit];
+    [self AVAudioPlayerInit];
     [self UIbuild];
-    
     
   //  AudioServicesPlaySystemSound(playSoundID);
     // Do any additional setup after loading the view.
 }
 
--(void) MCPlayerInit
+-(void) AVAudioPlayerInit
 {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"piano_a0"
-                                                     ofType:@"wav"];
-
-    player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL
-                                                             fileURLWithPath:path] error:NULL];
-    player.delegate = self;
+    NSMutableArray* octavesArray = [[NSMutableArray alloc] initWithCapacity:9];
+    NSString *path;
+    AVAudioPlayer* player;
+    for(int i=0; i<9; i++)
+    {
+        NSMutableDictionary* octaveDic = [[NSMutableDictionary alloc] init];
+        octavesArray[i] = octaveDic;
+        if(i == 0)
+        {
+            path = [[NSBundle mainBundle] pathForResource:@"piano_a0" ofType:@"wav"];
+            player = [[AVAudioPlayer alloc] initWithContentsOfURL:
+                                     [NSURL fileURLWithPath:path] error:NULL];
+            [player prepareToPlay];
+            [octaveDic setObject:player forKey:@"a"];
+            
+            path = [[NSBundle mainBundle] pathForResource:@"piano_b0" ofType:@"wav"];
+            player = [[AVAudioPlayer alloc] initWithContentsOfURL:
+                                     [NSURL fileURLWithPath:path] error:NULL];
+            [player prepareToPlay];
+            [octaveDic setObject:player forKey:@"b"];
+            continue;
+        }
+        else if(i == 8)
+        {
+            path = [[NSBundle mainBundle] pathForResource:@"piano_c8" ofType:@"wav"];
+            player = [[AVAudioPlayer alloc] initWithContentsOfURL:
+                      [NSURL fileURLWithPath:path] error:NULL];
+            [player prepareToPlay];
+            [octaveDic setObject:player forKey:@"b"];
+            continue;
+        }
+        for(int j=(int)'a'; j<(int)'h'; j++)
+        {
+            NSString* fileName = [NSString stringWithFormat:@"piano_%c%d", (char)j, i];
+            path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"wav"];
+            player = [[AVAudioPlayer alloc] initWithContentsOfURL:
+                      [NSURL fileURLWithPath:path] error:NULL];
+            [player prepareToPlay];
+            NSString* key = [NSString stringWithFormat:@"%c", (char)j];
+            [octaveDic setObject:player forKey:key];
+        }
+    }
+    
+    self.octavesArray = octavesArray;
 }
 
 
@@ -78,7 +115,12 @@
         UIImageView* whiteKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName] highlightedImage:[UIImage imageNamed:highlightImageName]];
 
         whiteKeyImageView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
-        whiteKeyImageView.tag = i;
+        
+        if(i >= 0 && i < 5)
+            whiteKeyImageView.tag = 99 + i;
+        else
+            whiteKeyImageView.tag = 92 + i;
+        
         [whiteKeyImageView setUserInteractionEnabled:YES];
         
         UILongPressGestureRecognizer *tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
@@ -139,18 +181,22 @@
     UIImageView* imageView = (UIImageView*)recognizer.view;
     if(recognizer.state == UIGestureRecognizerStateBegan)
     {
-        [player play];
         int keyNo = (int)imageView.tag;
-        NSLog(@"tap key %d", keyNo);
+        NSLog(@"tap key %c", (char)keyNo);
         imageView.highlighted = YES;
-       
+        NSDictionary* octaveDic = [self.octavesArray objectAtIndex:self.octaveNo];
+        NSString* key = [NSString stringWithFormat:@"%c", (char)keyNo];
+        self.playingPlayer = [octaveDic objectForKey:key];
+        [self.playingPlayer play];
+        
     }
     else if(recognizer.state == UIGestureRecognizerStateEnded)
     {
         NSLog(@"end");
         imageView.highlighted = NO;
-        [player stop];
-        player.currentTime = 0;
+        [self.playingPlayer stop];
+        self.playingPlayer.currentTime = 0;
+        [self.playingPlayer prepareToPlay];
     }
 }
 
