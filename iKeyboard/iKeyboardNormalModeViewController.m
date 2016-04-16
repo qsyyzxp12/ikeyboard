@@ -7,6 +7,7 @@
 //
 
 #import "iKeyboardNormalModeViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 #define BORDER_WIDTH_OF_KEYBOARD_IMAGE 2
 
@@ -21,7 +22,7 @@
     
     self.octaveNo = 4;
     
-    [self audioPlayerInit];
+    [self MCPlayerInit];
     [self UIbuild];
     
     
@@ -29,15 +30,113 @@
     // Do any additional setup after loading the view.
 }
 
--(void) audioPlayerInit
+-(void) MCPlayerInit
 {
-    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"piano_a0" ofType:@"wav"];
-    NSURL *soundURL = [[NSURL alloc] initFileURLWithPath:soundFilePath];
-    self.soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:nil];
-    [self.soundPlayer prepareToPlay];
-    [self.soundPlayer setVolume:1];
-    self.soundPlayer.numberOfLoops = 1;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"piano_a0" ofType:@"wav"];
+    NSURL* urlPath = [NSURL fileURLWithPath:path];
+    CFURLRef url = (__bridge CFURLRef)urlPath;
     
+    OSStatus status = AudioFileOpenURL(url, kAudioFileReadPermission, 0, &aqData.mAudioFile);
+    if (status == noErr)
+    {
+        // 透過AudioFileGetProperty從檔案中獲得音檔資訊
+        UInt32 dataFormat = sizeof(aqData.mDataFormat);
+        AudioFileGetProperty(aqData.mAudioFile, kAudioFilePropertyDataFormat, &dataFormat, &aqData.mDataFormat);
+        
+        // 建立Audio Queue
+        AudioQueueNewOutput(&aqData.mDataFormat, HandleOutputBuffer, &aqData, CFRunLoopGetCurrent(), kCFRunLoopCommonModes, 0, &aqData.mQueue);
+        
+        // 取出最大的packet size計算buffer會需要
+        UInt32 maxPacketSize;
+        UInt32 propertySize = sizeof(maxPacketSize);
+        AudioFileGetProperty(aqData.mAudioFile, kAudioFilePropertyPacketSizeUpperBound, &propertySize, &maxPacketSize);
+        
+        // 計算需要讀取的packet
+        DeriveBufferSize(aqData.mDataFormat, maxPacketSize, 0.5, &aqData.bufferByteSize, &aqData.mNumberPacketToRead);
+        
+        // 如果是VBR的話會有packet description
+        BOOL isFormatVBR = aqData.mDataFormat.mBytesPerPacket == 0 || aqData.mDataFormat.mFramesPerPacket == 0;
+        if (isFormatVBR) {
+            aqData.mPacketDecription = (AudioStreamPacketDescription *) malloc(aqData.mNumberPacketToRead * sizeof(AudioStreamPacketDescription));
+        }
+        else {  // CBR不需要設定
+            aqData.mPacketDecription = NULL;
+        }
+        
+        // 調整音量
+        Float32 gain = 1.0;
+        AudioQueueSetParameter(aqData.mQueue, kAudioQueueParam_Volume, gain);
+        
+        // 初始化設定
+        aqData.mCurrentPacket = 0;
+        aqData.mIsRunning = true;
+        
+        // 這邊就是開始初始化buffer並且丟入我們剛剛寫的callback之中取讀取資料
+        for (int i = 0; i<kNumberOfBuffers; i++) {
+            AudioQueueAllocateBuffer(aqData.mQueue, aqData.bufferByteSize, &aqData.mBuffers[i]);
+            HandleOutputBuffer(&aqData, aqData.mQueue, aqData.mBuffers[i]);
+        }
+        
+        // 萬事俱備後就可以開始播放
+        AudioQueuePrime(aqData.mQueue, kNumberOfBuffers, NULL);
+    }
+}
+
+void DeriveBufferSize(AudioStreamBasicDescription asbd, UInt32 maxPacketSize, Float64 seconds, UInt32 *outputBufferSize, UInt32 *outputNumberOfPacketToRead)
+{
+    static const int maxBufferSize = 0x50000;    //320k
+    static const int minBufferSize = 0x4000;     //64k
+    
+    // 如果有取得到frame資訊，就去計算一段時間內(seconds)需要取得多少packet
+    if (asbd.mFramesPerPacket!=0) {
+        Float64 numberPacketForTime = asbd.mSampleRate / asbd.mFramesPerPacket * seconds;
+        *outputBufferSize = numberPacketForTime * maxPacketSize;
+    }
+    else {
+        // 如果沒有就取最大packet或是buffer的size
+        *outputBufferSize = MAX(maxBufferSize, maxPacketSize);
+    }
+    
+    // 限制buffer size在定義的range裡面
+    if (*outputBufferSize > maxBufferSize && *outputBufferSize > maxPacketSize) {
+        *outputBufferSize = maxBufferSize;
+    }
+    else {
+        if (*outputBufferSize < minBufferSize) {
+            *outputBufferSize = minBufferSize;
+        }
+    }
+    
+    *outputNumberOfPacketToRead = *outputBufferSize / maxPacketSize;
+}
+
+static void HandleOutputBuffer(void *inAqData, AudioQueueRef inQueue, AudioQueueBufferRef inBuffer)
+{
+    MCAudioPlayerState *aqData = inAqData;
+    if (aqData->mIsRunning ==0)
+        return;
+    
+    
+    // 從檔案讀取出需要播放的packet數量以及使用多少byte
+    UInt32 numberBytesReadFromFile;
+    UInt32 numberPackets = aqData->mNumberPacketToRead;
+    AudioFileReadPackets(aqData->mAudioFile, false, &numberBytesReadFromFile, aqData->mPacketDecription, aqData->mCurrentPacket, &numberPackets, inBuffer->mAudioData);
+    
+    if (numberPackets>0) {
+        // 設定buffer所使用的byte大小
+        inBuffer->mAudioDataByteSize = numberBytesReadFromFile;
+        
+        // 將buffer放進queue之中
+        AudioQueueEnqueueBuffer(aqData->mQueue, inBuffer, (aqData->mPacketDecription ? numberPackets : 0), aqData->mPacketDecription);
+        
+        // 將讀取packet位置往前移
+        aqData->mCurrentPacket += numberPackets;
+    }
+    else {
+        // 如果沒有packet要讀取，代表已經讀完檔案
+        AudioQueueStop(aqData->mQueue, false);
+        aqData->mIsRunning = false;
+    }
 }
 
 #pragma mark - User Interface
@@ -138,21 +237,27 @@
     UIImageView* imageView = (UIImageView*)recognizer.view;
     if(recognizer.state == UIGestureRecognizerStateBegan)
     {
-        [self.soundPlayer play];
+        AudioQueueStart(aqData.mQueue, NULL);
         int keyNo = (int)imageView.tag;
         NSLog(@"tap key %d", keyNo);
         imageView.highlighted = YES;
+       
     }
     else if(recognizer.state == UIGestureRecognizerStateEnded)
     {
         NSLog(@"end");
         imageView.highlighted = NO;
-        [self.soundPlayer stop];
-        self.soundPlayer.currentTime = 0;
-        [self.soundPlayer prepareToPlay];
-//        AudioServicesRemoveSystemSoundCompletion(playSoundID);
-  //      AudioServicesDisposeSystemSoundID(playSoundID);
-
+        AudioQueueStop(aqData.mQueue, YES);
+        
+        aqData.mCurrentPacket = 0;
+        aqData.mIsRunning = true;
+        
+        // 這邊就是開始初始化buffer並且丟入我們剛剛寫的callback之中取讀取資料
+        for (int i = 0; i<kNumberOfBuffers; i++) {
+            AudioQueueAllocateBuffer(aqData.mQueue, aqData.bufferByteSize, &aqData.mBuffers[i]);
+            HandleOutputBuffer(&aqData, aqData.mQueue, aqData.mBuffers[i]);
+        }
+        AudioQueuePrime(aqData.mQueue, kNumberOfBuffers, NULL);
     }
 }
 

@@ -85,46 +85,7 @@
 		C74B81CA1CBF9FC6005307FF /* piano_g5.wav in Resources */ = {isa = PBXBuildFile; fileRef = C74B81961CBF9FC6005307FF /* piano_g5.wav */; };
 		C74B81CB1CBF9FC6005307FF /* piano_g6.wav in Resources */ = {isa = PBXBuildFile; fileRef = C74B81971CBF9FC6005307FF /* piano_g6.wav */; };
 		C74B81CC1CBF9FC6005307FF /* piano_g7.wav in Resources */ = {isa = PBXBuildFile; fileRef = C74B81981CBF9FC6005307FF /* piano_g7.wav */; };
-		C757D59D1CBFE1C5002BDF5D /* libFinch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C757D5911CBFDFBA002BDF5D /* libFinch.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		C757D5901CBFDFBA002BDF5D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C757D5891CBFDFB9002BDF5D /* Finch.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0D2AA93E14174FA000F4071B;
-			remoteInfo = Finch;
-		};
-		C757D5921CBFDFBA002BDF5D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C757D5891CBFDFB9002BDF5D /* Finch.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0D1BA656141A45B6004A5A9F;
-			remoteInfo = Tests;
-		};
-		C757D5941CBFDFBA002BDF5D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C757D5891CBFDFB9002BDF5D /* Finch.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0D2AA971141750F700F4071B;
-			remoteInfo = "Finch Demo";
-		};
-		C757D5961CBFDFBA002BDF5D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C757D5891CBFDFB9002BDF5D /* Finch.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0DAF0EA516947C8D00612EED;
-			remoteInfo = "Test Runner";
-		};
-		C757D59B1CBFE19C002BDF5D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C757D5891CBFDFB9002BDF5D /* Finch.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 0D2AA93D14174FA000F4071B;
-			remoteInfo = Finch;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		C74B81121CBE335B005307FF /* iKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,7 +171,6 @@
 		C74B81961CBF9FC6005307FF /* piano_g5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = piano_g5.wav; sourceTree = "<group>"; };
 		C74B81971CBF9FC6005307FF /* piano_g6.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = piano_g6.wav; sourceTree = "<group>"; };
 		C74B81981CBF9FC6005307FF /* piano_g7.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = piano_g7.wav; sourceTree = "<group>"; };
-		C757D5891CBFDFB9002BDF5D /* Finch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Finch.xcodeproj; path = Finch/Finch.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,7 +178,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C757D59D1CBFE1C5002BDF5D /* libFinch.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +191,6 @@
 				C74B81301CBE3A0D005307FF /* image */,
 				C74B815C1CBF9FC6005307FF /* voice */,
 				C74B81131CBE335B005307FF /* Products */,
-				C757D5891CBFDFB9002BDF5D /* Finch.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -419,17 +377,6 @@
 			path = g;
 			sourceTree = "<group>";
 		};
-		C757D58A1CBFDFB9002BDF5D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C757D5911CBFDFBA002BDF5D /* libFinch.a */,
-				C757D5931CBFDFBA002BDF5D /* Tests.octest */,
-				C757D5951CBFDFBA002BDF5D /* Finch Demo.app */,
-				C757D5971CBFDFBA002BDF5D /* TestRunner.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -444,7 +391,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C757D59C1CBFE19C002BDF5D /* PBXTargetDependency */,
 			);
 			name = iKeyboard;
 			productName = iKeyboard;
@@ -477,49 +423,12 @@
 			mainGroup = C74B81091CBE335B005307FF;
 			productRefGroup = C74B81131CBE335B005307FF /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = C757D58A1CBFDFB9002BDF5D /* Products */;
-					ProjectRef = C757D5891CBFDFB9002BDF5D /* Finch.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				C74B81111CBE335B005307FF /* iKeyboard */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		C757D5911CBFDFBA002BDF5D /* libFinch.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libFinch.a;
-			remoteRef = C757D5901CBFDFBA002BDF5D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C757D5931CBFDFBA002BDF5D /* Tests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = Tests.octest;
-			remoteRef = C757D5921CBFDFBA002BDF5D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C757D5951CBFDFBA002BDF5D /* Finch Demo.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "Finch Demo.app";
-			remoteRef = C757D5941CBFDFBA002BDF5D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C757D5971CBFDFBA002BDF5D /* TestRunner.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = TestRunner.app;
-			remoteRef = C757D5961CBFDFBA002BDF5D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C74B81101CBE335B005307FF /* Resources */ = {
@@ -618,14 +527,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		C757D59C1CBFE19C002BDF5D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Finch;
-			targetProxy = C757D59B1CBFE19C002BDF5D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C74B811E1CBE335C005307FF /* Main.storyboard */ = {
