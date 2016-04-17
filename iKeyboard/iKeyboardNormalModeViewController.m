@@ -179,24 +179,27 @@
 - (void) keyTapped:(UILongPressGestureRecognizer*) recognizer
 {
     UIImageView* imageView = (UIImageView*)recognizer.view;
+    int keyNo = (int)imageView.tag;
     if(recognizer.state == UIGestureRecognizerStateBegan)
     {
-        int keyNo = (int)imageView.tag;
-        NSLog(@"tap key %c", (char)keyNo);
+    //    NSLog(@"tap key %c", (char)keyNo);
         imageView.highlighted = YES;
         NSDictionary* octaveDic = [self.octavesArray objectAtIndex:self.octaveNo];
         NSString* key = [NSString stringWithFormat:@"%c", (char)keyNo];
-        self.playingPlayer = [octaveDic objectForKey:key];
-        [self.playingPlayer play];
+        [[octaveDic objectForKey:key] play];
         
     }
     else if(recognizer.state == UIGestureRecognizerStateEnded)
     {
-        NSLog(@"end");
+  //      NSLog(@"end");
         imageView.highlighted = NO;
-        [self.playingPlayer stop];
-        self.playingPlayer.currentTime = 0;
-        [self.playingPlayer prepareToPlay];
+        
+        NSDictionary* octaveDic = [self.octavesArray objectAtIndex:self.octaveNo];
+        NSString* key = [NSString stringWithFormat:@"%c", (char)keyNo];
+        
+        [[octaveDic objectForKey:key] stop];
+        ((AVAudioPlayer*)[octaveDic objectForKey:key]).currentTime = 0;
+        [[octaveDic objectForKey:key] prepareToPlay];
     }
 }
 

@@ -18,5 +18,4 @@
 @property int octaveNo;
 @property int graphSampleRate;
 @property NSArray* octavesArray;
-@property AVAudioPlayer* playingPlayer;
 @end
