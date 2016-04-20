@@ -9,7 +9,11 @@
 #import "iKeyboardNormalModeViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 
-#define BORDER_WIDTH_OF_KEYBOARD_IMAGE 2
+#define KEYBOARD_IMAGE_GAP_BETWEEN_KEYS 6
+#define KEYBOARD_IMAGE_RIGHT_PADDING 5
+#define KEYBOARD_IMAGE_LEFT_PADDING 3
+#define KEYBOARD_IMAGE_TOP_PADDING 53
+#define KEYBOARD_IMAGE_BUTTON_PADDING 3
 
 @interface iKeyboardNormalModeViewController ()
 
@@ -95,25 +99,25 @@
     [self.view addSubview:self.frameImageView];
     
     self.keyboardBgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"part_of_keyboard.png"]];
-    [self.keyboardBgImageView.layer setBorderWidth:BORDER_WIDTH_OF_KEYBOARD_IMAGE];
+ //   [self.keyboardBgImageView.layer setBorderWidth:BORDER_WIDTH_OF_KEYBOARD_IMAGE];
    // self.keyboardBgImageView.backgroundColor = [UIColor yellowColor];
     self.keyboardBgImageView.frame = CGRectMake(0, CGRectGetMidY(self.view.frame), self.view.frame.size.width, self.view.frame.size.height/2);
     [self.view addSubview:self.keyboardBgImageView];
     
-    CGFloat oneKeyWidth = (self.keyboardBgImageView.frame.size.width-BORDER_WIDTH_OF_KEYBOARD_IMAGE*8)/7;
+    CGFloat oneKeyWidth = (self.keyboardBgImageView.frame.size.width - KEYBOARD_IMAGE_RIGHT_PADDING -KEYBOARD_IMAGE_GAP_BETWEEN_KEYS*13 - KEYBOARD_IMAGE_LEFT_PADDING)/14;
     
-    CGFloat keyX = BORDER_WIDTH_OF_KEYBOARD_IMAGE;
-    CGFloat keyY = CGRectGetMinY(self.keyboardBgImageView.frame)+BORDER_WIDTH_OF_KEYBOARD_IMAGE;
-    CGFloat keyHeight = self.keyboardBgImageView.frame.size.height-BORDER_WIDTH_OF_KEYBOARD_IMAGE;
+    CGFloat keyX = KEYBOARD_IMAGE_LEFT_PADDING;
+    CGFloat keyY = CGRectGetMinY(self.keyboardBgImageView.frame)+KEYBOARD_IMAGE_TOP_PADDING;
+    CGFloat keyHeight = self.keyboardBgImageView.frame.size.height - KEYBOARD_IMAGE_TOP_PADDING - KEYBOARD_IMAGE_BUTTON_PADDING;
     
     self.whiteKeyImageViewArray = [[NSMutableArray alloc] init];
-  
-    for(int i=0; i<7; i++)
-    {
-        NSString* imageName = [NSString stringWithFormat:@"white%d.png", i+1];
-        NSString* highlightImageName = [NSString stringWithFormat:@"white%d_highlight.png", i+1];
-        UIImageView* whiteKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName] highlightedImage:[UIImage imageNamed:highlightImageName]];
 
+    for(int i=0; i<14; i++)
+    {
+        NSString* imageName = [NSString stringWithFormat:@"wkey%d.png", i+1];
+        NSString* highlightImageName = [NSString stringWithFormat:@"wkey%d_highlight.png", i+1];
+        UIImageView* whiteKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName] highlightedImage:[UIImage imageNamed:highlightImageName]];
+        
         whiteKeyImageView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
         
         if(i >= 0 && i < 5)
@@ -133,7 +137,7 @@
         
         [self.view addSubview:whiteKeyImageView];
         [self.whiteKeyImageViewArray addObject:whiteKeyImageView];
-        keyX += BORDER_WIDTH_OF_KEYBOARD_IMAGE + oneKeyWidth;
+        keyX += KEYBOARD_IMAGE_GAP_BETWEEN_KEYS + oneKeyWidth;
     }
     
     UIButton* lArrowButton = [[UIButton alloc] init];
