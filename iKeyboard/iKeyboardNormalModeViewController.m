@@ -129,13 +129,19 @@
                                                         initWithTarget:self
                                                         action:@selector(keyTapped:)];
         [tapGestureRecognizer setMinimumPressDuration:0.01];
-  //      [tapGestureRecognizer setNumberOfTapsRequired:1];
-  //      [tapGestureRecognizer setNumberOfTouchesRequired:1];
         [whiteKeyImageView addGestureRecognizer:tapGestureRecognizer];
         
         [self.view addSubview:whiteKeyImageView];
         [self.whiteKeyImageViewArray addObject:whiteKeyImageView];
+        
+        UILabel* noLabel = [[UILabel alloc] initWithFrame:CGRectMake(keyX, CGRectGetMaxY(whiteKeyImageView.frame)-keyHeight*0.2, oneKeyWidth, keyHeight*0.2)];
+        
+        noLabel.textAlignment = NSTextAlignmentCenter;
+        noLabel.text = [NSString stringWithFormat:@"%d", i%7+1];
+        [self.view addSubview:noLabel];
+        
         keyX += KEYBOARD_IMAGE_GAP_BETWEEN_KEYS + oneKeyWidth;
+        
     }
     
     UIButton* lArrowButton = [[UIButton alloc] init];
