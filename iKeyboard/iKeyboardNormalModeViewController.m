@@ -24,7 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.octaveNo = 4;
+    self.lower_octave_no = 3;
+    self.noteNameMap = [[NSArray alloc] initWithObjects:@"c", @"d", @"e", @"f", @"g", @"a", @"b", @"c", @"d", @"e", @"f", @"g", @"a", @"b", nil];
     
     [self AVAudioPlayerInit];
     [self UIbuild];
@@ -120,10 +121,7 @@
         
         whiteKeyImageView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
         
-        if(i >= 0 && i < 5)
-            whiteKeyImageView.tag = 99 + i;
-        else
-            whiteKeyImageView.tag = 92 + i;
+        whiteKeyImageView.tag = i;
         
         [whiteKeyImageView setUserInteractionEnabled:YES];
         
@@ -163,19 +161,19 @@
     if(sender.tag == 0)
     {
         NSLog(@"left arrow clicked");
-        if(self.octaveNo > 1)
+        if(self.lower_octave_no > 1)
         {
-            [self.frameImageView setFrame:CGRectMake(self.frameImageView.frame.origin.x - self.frameImageView.frame.size.width, self.frameImageView.frame.origin.y, self.frameImageView.frame.size.width, self.frameImageView.frame.size.height)];
-            self.octaveNo--;
+     //       [self.frameImageView setFrame:CGRectMake(self.frameImageView.frame.origin.x - self.frameImageView.frame.size.width, self.frameImageView.frame.origin.y, self.frameImageView.frame.size.width, self.frameImageView.frame.size.height)];
+            self.lower_octave_no -= 2;
         }
     }
     else
     {
         NSLog(@"right arrow clicked");
-        if(self.octaveNo < 7)
+        if(self.lower_octave_no < 7)
         {
-            [self.frameImageView setFrame:CGRectMake(self.frameImageView.frame.origin.x + self.frameImageView.frame.size.width, self.frameImageView.frame.origin.y, self.frameImageView.frame.size.width, self.frameImageView.frame.size.height)];
-            self.octaveNo++;
+       //     [self.frameImageView setFrame:CGRectMake(self.frameImageView.frame.origin.x + self.frameImageView.frame.size.width, self.frameImageView.frame.origin.y, self.frameImageView.frame.size.width, self.frameImageView.frame.size.height)];
+            self.lower_octave_no += 2;
         }
     }
 }
@@ -186,24 +184,35 @@
     int keyNo = (int)imageView.tag;
     if(recognizer.state == UIGestureRecognizerStateBegan)
     {
-    //    NSLog(@"tap key %c", (char)keyNo);
         imageView.highlighted = YES;
-        NSDictionary* octaveDic = [self.octavesArray objectAtIndex:self.octaveNo];
-        NSString* key = [NSString stringWithFormat:@"%c", (char)keyNo];
-        [[octaveDic objectForKey:key] play];
         
+        int octaveNo;
+        if( keyNo > 6)
+            octaveNo = self.lower_octave_no + 1;
+        else
+            octaveNo = self.lower_octave_no;
+        
+        NSDictionary* octaveDic = [self.octavesArray objectAtIndex:octaveNo];
+        NSString* key = self.noteNameMap[keyNo];
+        [[octaveDic objectForKey:key] play];
     }
     else if(recognizer.state == UIGestureRecognizerStateEnded)
     {
-  //      NSLog(@"end");
         imageView.highlighted = NO;
         
-        NSDictionary* octaveDic = [self.octavesArray objectAtIndex:self.octaveNo];
-        NSString* key = [NSString stringWithFormat:@"%c", (char)keyNo];
+        int octaveNo;
+        if( keyNo > 6)
+            octaveNo = self.lower_octave_no + 1;
+        else
+            octaveNo = self.lower_octave_no;
+        
+        NSDictionary* octaveDic = [self.octavesArray objectAtIndex:octaveNo];
+        NSString* key = self.noteNameMap[keyNo];
         
         [[octaveDic objectForKey:key] stop];
         ((AVAudioPlayer*)[octaveDic objectForKey:key]).currentTime = 0;
         [[octaveDic objectForKey:key] prepareToPlay];
+    
     }
 }
 

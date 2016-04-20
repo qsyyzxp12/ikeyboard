@@ -15,7 +15,8 @@
 @property UIImageView *frameImageView;
 @property UIImageView *keyboardBgImageView;
 @property NSMutableArray* whiteKeyImageViewArray;
-@property int octaveNo;
+@property int lower_octave_no;
 @property int graphSampleRate;
 @property NSArray* octavesArray;
+@property NSArray* noteNameMap;
 @end
