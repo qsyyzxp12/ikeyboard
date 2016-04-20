@@ -87,7 +87,7 @@
 
 -(void) UIbuild
 {
-    self.wholeKeyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
+ /*   self.wholeKeyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
     [self.wholeKeyboardImageView.layer setBorderWidth:1];
    // [self.wholeKeyboardImageView.layer setBorderWidth:BORDER_WIDTH_OF_KEYBOARD_IMAGE];
     self.wholeKeyboardImageView.frame = CGRectMake(0, CGRectGetMinY(self.view.frame)+CGRectGetHeight(self.view.frame)/5, self.view.frame.size.width, self.view.frame.size.height/6);
@@ -98,12 +98,24 @@
     [self.frameImageView sizeToFit];
     self.frameImageView.frame = CGRectMake(251, CGRectGetMinY(self.wholeKeyboardImageView.frame), self.frameImageView.frame.size.width+4, self.frameImageView.frame.size.height);
     [self.view addSubview:self.frameImageView];
+   */
+    
+    self.instrumentImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"piano_outline.png"]];
+    self.instrumentImageView.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.05, CGRectGetHeight(self.view.frame)*0.16, CGRectGetWidth(self.view.frame)*0.135, self.view.frame.size.height*0.495);
+    [self.view addSubview:self.instrumentImageView];
+    
+    UIImageView* blueToothIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blueToothIcon.png"]];
+    [blueToothIcon sizeToFit];
+    blueToothIcon.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.8, CGRectGetHeight(self.view.frame)*0.1, CGRectGetWidth(blueToothIcon.frame)*0.6, CGRectGetHeight(blueToothIcon.frame)*0.6);
+    [self.view addSubview:blueToothIcon];
     
     self.keyboardBgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"part_of_keyboard.png"]];
  //   [self.keyboardBgImageView.layer setBorderWidth:BORDER_WIDTH_OF_KEYBOARD_IMAGE];
    // self.keyboardBgImageView.backgroundColor = [UIColor yellowColor];
     self.keyboardBgImageView.frame = CGRectMake(0, CGRectGetMidY(self.view.frame), self.view.frame.size.width, self.view.frame.size.height/2);
     [self.view addSubview:self.keyboardBgImageView];
+    
+    
     
     CGFloat oneKeyWidth = (self.keyboardBgImageView.frame.size.width - KEYBOARD_IMAGE_RIGHT_PADDING -KEYBOARD_IMAGE_GAP_BETWEEN_KEYS*13 - KEYBOARD_IMAGE_LEFT_PADDING)/14;
     
@@ -143,7 +155,7 @@
         keyX += KEYBOARD_IMAGE_GAP_BETWEEN_KEYS + oneKeyWidth;
         
     }
-    
+/*
     UIButton* lArrowButton = [[UIButton alloc] init];
     lArrowButton.tag = 0;
     [lArrowButton setImage:[UIImage imageNamed:@"leftArrow.png"] forState:UIControlStateNormal];
@@ -157,7 +169,7 @@
     [rArrowButton setImage:[UIImage imageNamed:@"rightArrow.png"] forState:UIControlStateNormal];
     [rArrowButton setFrame:CGRectMake(500, CGRectGetMinY(self.keyboardBgImageView.frame)-30, 50, 20)];
     [rArrowButton addTarget:self action:@selector(arrowButtoClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:rArrowButton];
+    [self.view addSubview:rArrowButton];*/
 }
 
 #pragma mark - Actions

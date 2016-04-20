@@ -11,8 +11,9 @@
 
 @interface iKeyboardNormalModeViewController : UIViewController
 
-@property UIImageView *wholeKeyboardImageView;
-@property UIImageView *frameImageView;
+//@property UIImageView *wholeKeyboardImageView;
+//@property UIImageView *frameImageView;
+@property UIImageView *instrumentImageView;
 @property UIImageView *keyboardBgImageView;
 @property NSMutableArray* whiteKeyImageViewArray;
 @property int lower_octave_no;
