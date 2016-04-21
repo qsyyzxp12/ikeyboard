@@ -20,4 +20,5 @@
 @property int graphSampleRate;
 @property NSArray* octavesArray;
 @property NSArray* noteNameMap;
+@property UILabel* blueToothStatusLabel;
 @end

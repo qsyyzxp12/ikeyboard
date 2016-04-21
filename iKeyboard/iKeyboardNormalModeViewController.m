@@ -109,6 +109,14 @@
     blueToothIcon.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.8, CGRectGetHeight(self.view.frame)*0.1, CGRectGetWidth(blueToothIcon.frame)*0.6, CGRectGetHeight(blueToothIcon.frame)*0.6);
     [self.view addSubview:blueToothIcon];
     
+    self.blueToothStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(blueToothIcon.frame), CGRectGetMinY(blueToothIcon.frame), 100, CGRectGetHeight(blueToothIcon.frame))];
+    self.blueToothStatusLabel.text = @"Unconnected";
+    //self.blueToothStatusLabel.backgroundColor = [UIColor redColor];
+    [self.blueToothStatusLabel setFont:[UIFont systemFontOfSize:15]];
+    self.blueToothStatusLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.blueToothStatusLabel];
+    
+    
     self.keyboardBgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"part_of_keyboard.png"]];
  //   [self.keyboardBgImageView.layer setBorderWidth:BORDER_WIDTH_OF_KEYBOARD_IMAGE];
    // self.keyboardBgImageView.backgroundColor = [UIColor yellowColor];
