@@ -123,7 +123,10 @@
     self.keyboardBgImageView.frame = CGRectMake(0, CGRectGetMidY(self.view.frame), self.view.frame.size.width, self.view.frame.size.height/2);
     [self.view addSubview:self.keyboardBgImageView];
     
-    
+    UIImageView* tablature = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tablature.png"]];
+    [tablature.layer setBorderWidth:2];
+    tablature.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.23, CGRectGetHeight(self.view.frame)*0.095, CGRectGetWidth(self.view.frame)*0.55, CGRectGetHeight(self.view.frame)*0.39);
+    [self.view addSubview:tablature];
     
     CGFloat oneKeyWidth = (self.keyboardBgImageView.frame.size.width - KEYBOARD_IMAGE_RIGHT_PADDING -KEYBOARD_IMAGE_GAP_BETWEEN_KEYS*13 - KEYBOARD_IMAGE_LEFT_PADDING)/14;
     
