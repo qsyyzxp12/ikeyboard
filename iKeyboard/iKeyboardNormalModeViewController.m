@@ -26,6 +26,7 @@
     
     self.lower_octave_no = 3;
     self.noteNameMap = [[NSArray alloc] initWithObjects:@"c", @"d", @"e", @"f", @"g", @"a", @"b", @"c", @"d", @"e", @"f", @"g", @"a", @"b", nil];
+    self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"guitar_outline.png", @"piano_outline.png", @"violin_outline.png", nil];
     
     [self AVAudioPlayerInit];
     [self UIbuild];
@@ -87,22 +88,12 @@
 
 -(void) UIbuild
 {
- /*   self.wholeKeyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
-    [self.wholeKeyboardImageView.layer setBorderWidth:1];
-   // [self.wholeKeyboardImageView.layer setBorderWidth:BORDER_WIDTH_OF_KEYBOARD_IMAGE];
-    self.wholeKeyboardImageView.frame = CGRectMake(0, CGRectGetMinY(self.view.frame)+CGRectGetHeight(self.view.frame)/5, self.view.frame.size.width, self.view.frame.size.height/6);
-    [self.view addSubview:self.wholeKeyboardImageView];
-    
-    self.frameImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"frame.png"]];
-    // [self.wholeKeyboardImageView.layer setBorderWidth:BORDER_WIDTH_OF_KEYBOARD_IMAGE];
-    [self.frameImageView sizeToFit];
-    self.frameImageView.frame = CGRectMake(251, CGRectGetMinY(self.wholeKeyboardImageView.frame), self.frameImageView.frame.size.width+4, self.frameImageView.frame.size.height);
-    [self.view addSubview:self.frameImageView];
-   */
-    
-    self.instrumentImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"piano_outline.png"]];
-    self.instrumentImageView.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.05, CGRectGetHeight(self.view.frame)*0.16, CGRectGetWidth(self.view.frame)*0.135, self.view.frame.size.height*0.495);
-    [self.view addSubview:self.instrumentImageView];
+    self.instrumentButton = [[UIButton alloc] init];
+    [self.instrumentButton setImage:[UIImage imageNamed:@"piano_outline.png"] forState:UIControlStateNormal];
+    self.instrumentButton.adjustsImageWhenHighlighted = NO;
+    [self.instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0.05, CGRectGetHeight(self.view.frame)*0.16, CGRectGetWidth(self.view.frame)*0.135, self.view.frame.size.height*0.495)];
+    [self.instrumentButton addTarget:self action:@selector(instrumentButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.instrumentButton];
     
     UIImageView* blueToothIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blueToothIcon.png"]];
     [blueToothIcon sizeToFit];
@@ -116,23 +107,19 @@
     self.blueToothStatusLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.blueToothStatusLabel];
     
+    self.mistView = [[UIView alloc] initWithFrame:self.view.frame];
+    self.mistView.alpha = 0.5;
+    self.mistView.backgroundColor = [UIColor grayColor];
     
-    self.keyboardBgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"part_of_keyboard.png"]];
- //   [self.keyboardBgImageView.layer setBorderWidth:BORDER_WIDTH_OF_KEYBOARD_IMAGE];
-   // self.keyboardBgImageView.backgroundColor = [UIColor yellowColor];
-    self.keyboardBgImageView.frame = CGRectMake(0, CGRectGetMidY(self.view.frame), self.view.frame.size.width, self.view.frame.size.height/2);
-    [self.view addSubview:self.keyboardBgImageView];
+    UIImageView* keyboardBgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"part_of_keyboard.png"]];
+    keyboardBgImageView.frame = CGRectMake(0, CGRectGetMidY(self.view.frame), self.view.frame.size.width, self.view.frame.size.height/2);
+    [self.view addSubview:keyboardBgImageView];
     
-    UIImageView* tablature = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tablature.png"]];
-    [tablature.layer setBorderWidth:2];
-    tablature.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.23, CGRectGetHeight(self.view.frame)*0.095, CGRectGetWidth(self.view.frame)*0.55, CGRectGetHeight(self.view.frame)*0.39);
-    [self.view addSubview:tablature];
-    
-    CGFloat oneKeyWidth = (self.keyboardBgImageView.frame.size.width - KEYBOARD_IMAGE_RIGHT_PADDING -KEYBOARD_IMAGE_GAP_BETWEEN_KEYS*13 - KEYBOARD_IMAGE_LEFT_PADDING)/14;
+    CGFloat oneKeyWidth = (keyboardBgImageView.frame.size.width - KEYBOARD_IMAGE_RIGHT_PADDING -KEYBOARD_IMAGE_GAP_BETWEEN_KEYS*13 - KEYBOARD_IMAGE_LEFT_PADDING)/14;
     
     CGFloat keyX = KEYBOARD_IMAGE_LEFT_PADDING;
-    CGFloat keyY = CGRectGetMinY(self.keyboardBgImageView.frame)+KEYBOARD_IMAGE_TOP_PADDING;
-    CGFloat keyHeight = self.keyboardBgImageView.frame.size.height - KEYBOARD_IMAGE_TOP_PADDING - KEYBOARD_IMAGE_BUTTON_PADDING;
+    CGFloat keyY = CGRectGetMinY(keyboardBgImageView.frame)+KEYBOARD_IMAGE_TOP_PADDING;
+    CGFloat keyHeight = keyboardBgImageView.frame.size.height - KEYBOARD_IMAGE_TOP_PADDING - KEYBOARD_IMAGE_BUTTON_PADDING;
     
     self.whiteKeyImageViewArray = [[NSMutableArray alloc] init];
 
@@ -166,11 +153,11 @@
         keyX += KEYBOARD_IMAGE_GAP_BETWEEN_KEYS + oneKeyWidth;
         
     }
-/*
+
     UIButton* lArrowButton = [[UIButton alloc] init];
     lArrowButton.tag = 0;
     [lArrowButton setImage:[UIImage imageNamed:@"leftArrow.png"] forState:UIControlStateNormal];
-    [lArrowButton setFrame:CGRectMake(20, CGRectGetMinY(self.keyboardBgImageView.frame)-30, 50, 20)];
+    [lArrowButton setFrame:CGRectMake(20, CGRectGetMinY(keyboardBgImageView.frame)+15, 50, 20)];
     [lArrowButton addTarget:self action:@selector(arrowButtoClicked:) forControlEvents:UIControlEventTouchUpInside];
  //   [self.switchModeButton setShowsTouchWhenHighlighted:YES];
     [self.view addSubview:lArrowButton];
@@ -178,12 +165,75 @@
     UIButton* rArrowButton = [[UIButton alloc] init];
     rArrowButton.tag = 1;
     [rArrowButton setImage:[UIImage imageNamed:@"rightArrow.png"] forState:UIControlStateNormal];
-    [rArrowButton setFrame:CGRectMake(500, CGRectGetMinY(self.keyboardBgImageView.frame)-30, 50, 20)];
+    [rArrowButton setFrame:CGRectMake(CGRectGetMaxX(self.view.frame)-70, CGRectGetMinY(keyboardBgImageView.frame)+15, 50, 20)];
     [rArrowButton addTarget:self action:@selector(arrowButtoClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:rArrowButton];*/
+    [self.view addSubview:rArrowButton];
+    
+    [self drawInstrumentMenu];
+    [self drawTablatureScrollView];
+}
+
+-(void) drawTablatureScrollView
+{
+    self.tablatureScrollView = [[UIScrollView alloc] initWithFrame: CGRectMake(CGRectGetWidth(self.view.frame)*0.23, CGRectGetHeight(self.view.frame)*0.095, CGRectGetWidth(self.view.frame)*0.55, CGRectGetHeight(self.view.frame)*0.39)];
+    [self.tablatureScrollView.layer setBorderWidth:2];
+    [self.view addSubview:self.tablatureScrollView];
+   
+    UIImageView* tablature = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tablature.png"]];
+    [tablature sizeToFit];
+    float scale = CGRectGetWidth(self.tablatureScrollView.frame)/tablature.frame.size.width;
+    tablature.frame = CGRectMake(0, 0, CGRectGetWidth(self.tablatureScrollView.frame), tablature.frame.size.height*scale);
+    [self.tablatureScrollView addSubview:tablature];
+    
+    self.tablatureScrollView.contentSize = tablature.frame.size;
+}
+
+-(void) drawInstrumentMenu
+{
+    self.instrumentMenuScrollView = [[UIScrollView alloc] init];
+    self.instrumentMenuScrollView.frame = CGRectMake(7, CGRectGetHeight(self.view.frame)*0.33, self.view.frame.size.width-14, self.view.frame.size.height*0.53);
+    [self.instrumentMenuScrollView.layer setBorderWidth:2];
+    self.instrumentMenuScrollView.backgroundColor = [UIColor whiteColor];
+    
+    UIButton* instrumentButton = [[UIButton alloc] init];
+    [instrumentButton setImage:[UIImage imageNamed:@"piano_outline.png"] forState:UIControlStateNormal];
+    instrumentButton.tag = 1;
+    instrumentButton.adjustsImageWhenHighlighted = NO;
+    [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.41, CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.2, CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.18, self.instrumentMenuScrollView.frame.size.height*1.2)];
+    [instrumentButton addTarget:self action:@selector(changeInstrumentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.instrumentMenuScrollView addSubview:instrumentButton];
+    
+    instrumentButton = [[UIButton alloc] init];
+    [instrumentButton setImage:[UIImage imageNamed:@"guitar_outline.png"] forState:UIControlStateNormal];
+    instrumentButton.tag = 0;
+    instrumentButton.adjustsImageWhenHighlighted = NO;
+    [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.13, CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.2, CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.18, self.instrumentMenuScrollView.frame.size.height*1.2)];
+    [instrumentButton addTarget:self action:@selector(changeInstrumentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.instrumentMenuScrollView addSubview:instrumentButton];
+    
+    instrumentButton = [[UIButton alloc] init];
+    [instrumentButton setImage:[UIImage imageNamed:@"violin_outline.png"] forState:UIControlStateNormal];
+    instrumentButton.tag = 2;
+    instrumentButton.adjustsImageWhenHighlighted = NO;
+    [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.69, CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.2, CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.18, self.instrumentMenuScrollView.frame.size.height*1.2)];
+    [instrumentButton addTarget:self action:@selector(changeInstrumentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.instrumentMenuScrollView addSubview:instrumentButton];
 }
 
 #pragma mark - Actions
+
+-(void)changeInstrumentButtonClicked:(UIButton*) sender
+{
+    [self.instrumentButton setImage:[UIImage imageNamed:self.instrumentNameMap[sender.tag]] forState:UIControlStateNormal];
+    [self.mistView removeFromSuperview];
+    [self.instrumentMenuScrollView removeFromSuperview];
+}
+
+-(void)instrumentButtonClicked
+{
+    [self.view addSubview:self.mistView];
+    [self.view addSubview:self.instrumentMenuScrollView];
+}
 
 - (void) arrowButtoClicked:(UIButton*) sender
 {

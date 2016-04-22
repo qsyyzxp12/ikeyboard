@@ -102,6 +102,8 @@
 		C7B074D11CC75441008E6C9A /* wkey2_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B074C31CC75441008E6C9A /* wkey2_highlight.png */; };
 		C7B074D21CC75441008E6C9A /* wkey1_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B074C41CC75441008E6C9A /* wkey1_highlight.png */; };
 		C7B074D41CC89CA3008E6C9A /* tablature.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B074D31CC89CA3008E6C9A /* tablature.png */; };
+		C7B074D61CC8B984008E6C9A /* guitar_outline.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B074D51CC8B984008E6C9A /* guitar_outline.png */; };
+		C7B074D81CC8C69F008E6C9A /* violin_outline.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B074D71CC8C69F008E6C9A /* violin_outline.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -205,6 +207,8 @@
 		C7B074C31CC75441008E6C9A /* wkey2_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wkey2_highlight.png; sourceTree = "<group>"; };
 		C7B074C41CC75441008E6C9A /* wkey1_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wkey1_highlight.png; sourceTree = "<group>"; };
 		C7B074D31CC89CA3008E6C9A /* tablature.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablature.png; sourceTree = "<group>"; };
+		C7B074D51CC8B984008E6C9A /* guitar_outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guitar_outline.png; sourceTree = "<group>"; };
+		C7B074D71CC8C69F008E6C9A /* violin_outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = violin_outline.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +269,8 @@
 		C74B81301CBE3A0D005307FF /* image */ = {
 			isa = PBXGroup;
 			children = (
+				C7B074D71CC8C69F008E6C9A /* violin_outline.png */,
+				C7B074D51CC8B984008E6C9A /* guitar_outline.png */,
 				C7B074D31CC89CA3008E6C9A /* tablature.png */,
 				C7B074B71CC75441008E6C9A /* wkey14_highlight.png */,
 				C7B074B81CC75441008E6C9A /* wkey13_highlight.png */,
@@ -534,6 +540,7 @@
 				C74B81BF1CBF9FC6005307FF /* piano_f1.wav in Resources */,
 				C7B074D11CC75441008E6C9A /* wkey2_highlight.png in Resources */,
 				C7B074B41CC7513D008E6C9A /* wkey10.png in Resources */,
+				C7B074D61CC8B984008E6C9A /* guitar_outline.png in Resources */,
 				C74B81B71CBF9FC6005307FF /* piano_d7.wav in Resources */,
 				C7B074C91CC75441008E6C9A /* wkey10_highlight.png in Resources */,
 				C7B074B21CC7513D008E6C9A /* wkey12.png in Resources */,
@@ -541,6 +548,7 @@
 				C7B074A81CC741C5008E6C9A /* blueToothIcon.png in Resources */,
 				C7B074A51CC741C5008E6C9A /* wkey2.png in Resources */,
 				C74B81C31CBF9FC6005307FF /* piano_f5.wav in Resources */,
+				C7B074D81CC8C69F008E6C9A /* violin_outline.png in Resources */,
 				C74B81A71CBF9FC6005307FF /* piano_b6.wav in Resources */,
 				C74B81AF1CBF9FC6005307FF /* piano_c7.wav in Resources */,
 				C7B074A71CC741C5008E6C9A /* piano_outline.png in Resources */,
