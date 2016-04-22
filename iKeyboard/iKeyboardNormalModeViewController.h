@@ -25,4 +25,10 @@
 @property UIScrollView* instrumentMenuScrollView;
 @property UIScrollView* tablatureScrollView;
 @property UIView* mistView;
+@property CGFloat screenHeight;
+@property int keyboard_top_padding;
+@property int keyboard_left_padding;
+@property int keyboard_right_padding;
+@property int keyboard_button_padding;
+@property int keyboard_gap_between_keys;
 @end

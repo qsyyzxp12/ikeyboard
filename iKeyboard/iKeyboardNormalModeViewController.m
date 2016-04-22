@@ -9,11 +9,10 @@
 #import "iKeyboardNormalModeViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 
-#define KEYBOARD_IMAGE_GAP_BETWEEN_KEYS 6
-#define KEYBOARD_IMAGE_RIGHT_PADDING 5
-#define KEYBOARD_IMAGE_LEFT_PADDING 3
-#define KEYBOARD_IMAGE_TOP_PADDING 53
-#define KEYBOARD_IMAGE_BUTTON_PADDING 3
+#define IPhone4 [[UIScreen mainScreen] bounds].size.width == (double)480
+#define IPhone5 [[UIScreen mainScreen] bounds].size.width == (double)568
+#define IPhone6 [[UIScreen mainScreen] bounds].size.width == (double)667
+#define IPhone6sPlus [[UIScreen mainScreen] bounds].size.width == (double)736
 
 @interface iKeyboardNormalModeViewController ()
 
@@ -27,6 +26,10 @@
     self.lower_octave_no = 3;
     self.noteNameMap = [[NSArray alloc] initWithObjects:@"c", @"d", @"e", @"f", @"g", @"a", @"b", @"c", @"d", @"e", @"f", @"g", @"a", @"b", nil];
     self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"guitar_outline.png", @"piano_outline.png", @"violin_outline.png", nil];
+    
+    self.screenHeight = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height;
+    
+    NSLog(@"%f",[[UIScreen mainScreen] bounds].size.width);
     
     [self AVAudioPlayerInit];
     [self UIbuild];
@@ -86,18 +89,55 @@
 
 #pragma mark - User Interface
 
+-(void) screenCheck
+{
+    if(IPhone4)
+    {
+        self.keyboard_top_padding = 40;
+        self.keyboard_button_padding = 1;
+        self.keyboard_left_padding = 2;
+        self.keyboard_right_padding = 4;
+        self.keyboard_gap_between_keys = 4;
+    }
+    else if(IPhone5)
+    {
+        self.keyboard_top_padding = 40;
+        self.keyboard_button_padding = 1;
+        self.keyboard_left_padding = 3;
+        self.keyboard_right_padding = 5;
+        self.keyboard_gap_between_keys = 6;
+    }
+    else if(IPhone6)
+    {
+        self.keyboard_top_padding = 47;
+        self.keyboard_button_padding = 2;
+        self.keyboard_left_padding = 3;
+        self.keyboard_right_padding = 5;
+        self.keyboard_gap_between_keys = 6;
+    }
+    else if(IPhone6sPlus)
+    {
+        self.keyboard_top_padding = 52;
+        self.keyboard_button_padding = 2;
+        self.keyboard_left_padding = 3;
+        self.keyboard_right_padding = 5;
+        self.keyboard_gap_between_keys = 6;
+    }
+}
+
 -(void) UIbuild
 {
+    [self screenCheck];
     self.instrumentButton = [[UIButton alloc] init];
     [self.instrumentButton setImage:[UIImage imageNamed:@"piano_outline.png"] forState:UIControlStateNormal];
     self.instrumentButton.adjustsImageWhenHighlighted = NO;
-    [self.instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0.05, CGRectGetHeight(self.view.frame)*0.16, CGRectGetWidth(self.view.frame)*0.135, self.view.frame.size.height*0.495)];
+    [self.instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0.05, self.navigationController.navigationBar.frame.size.height+self.screenHeight*0.1, CGRectGetWidth(self.view.frame)*0.135, self.screenHeight*0.56)];
     [self.instrumentButton addTarget:self action:@selector(instrumentButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.instrumentButton];
     
     UIImageView* blueToothIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blueToothIcon.png"]];
     [blueToothIcon sizeToFit];
-    blueToothIcon.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.8, CGRectGetHeight(self.view.frame)*0.1, CGRectGetWidth(blueToothIcon.frame)*0.6, CGRectGetHeight(blueToothIcon.frame)*0.6);
+    blueToothIcon.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.8, self.navigationController.navigationBar.frame.size.height+5, CGRectGetWidth(blueToothIcon.frame)*0.6, CGRectGetHeight(blueToothIcon.frame)*0.6);
     [self.view addSubview:blueToothIcon];
     
     self.blueToothStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(blueToothIcon.frame), CGRectGetMinY(blueToothIcon.frame), 100, CGRectGetHeight(blueToothIcon.frame))];
@@ -110,16 +150,23 @@
     self.mistView = [[UIView alloc] initWithFrame:self.view.frame];
     self.mistView.alpha = 0.5;
     self.mistView.backgroundColor = [UIColor grayColor];
+    UITapGestureRecognizer* tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mistViewTapped)];
+    tapGest.numberOfTapsRequired = 1;
+    tapGest.numberOfTouchesRequired = 1;
+    [self.mistView addGestureRecognizer:tapGest];
     
     UIImageView* keyboardBgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"part_of_keyboard.png"]];
-    keyboardBgImageView.frame = CGRectMake(0, CGRectGetMidY(self.view.frame), self.view.frame.size.width, self.view.frame.size.height/2);
+    keyboardBgImageView.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame)-self.screenHeight/2, self.view.frame.size.width, self.screenHeight/2);
     [self.view addSubview:keyboardBgImageView];
     
-    CGFloat oneKeyWidth = (keyboardBgImageView.frame.size.width - KEYBOARD_IMAGE_RIGHT_PADDING -KEYBOARD_IMAGE_GAP_BETWEEN_KEYS*13 - KEYBOARD_IMAGE_LEFT_PADDING)/14;
+    CGFloat oneKeyWidth = (keyboardBgImageView.frame.size.width - self.keyboard_right_padding -self.keyboard_gap_between_keys*13 - self.keyboard_left_padding)/14;
     
-    CGFloat keyX = KEYBOARD_IMAGE_LEFT_PADDING;
-    CGFloat keyY = CGRectGetMinY(keyboardBgImageView.frame)+KEYBOARD_IMAGE_TOP_PADDING;
-    CGFloat keyHeight = keyboardBgImageView.frame.size.height - KEYBOARD_IMAGE_TOP_PADDING - KEYBOARD_IMAGE_BUTTON_PADDING;
+    CGFloat keyX = self.keyboard_left_padding;
+    CGFloat keyY = CGRectGetMinY(keyboardBgImageView.frame)+self.keyboard_top_padding;
+    CGFloat keyHeight = keyboardBgImageView.frame.size.height - self.keyboard_top_padding - self.keyboard_button_padding;
+    
+    NSLog(@"%f", keyHeight);
+    NSLog(@"%f", keyHeight/keyboardBgImageView.frame.size.height);
     
     self.whiteKeyImageViewArray = [[NSMutableArray alloc] init];
 
@@ -128,9 +175,8 @@
         NSString* imageName = [NSString stringWithFormat:@"wkey%d.png", i+1];
         NSString* highlightImageName = [NSString stringWithFormat:@"wkey%d_highlight.png", i+1];
         UIImageView* whiteKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName] highlightedImage:[UIImage imageNamed:highlightImageName]];
-        
         whiteKeyImageView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
-        
+
         whiteKeyImageView.tag = i;
         
         [whiteKeyImageView setUserInteractionEnabled:YES];
@@ -140,7 +186,7 @@
                                                         action:@selector(keyTapped:)];
         [tapGestureRecognizer setMinimumPressDuration:0.01];
         [whiteKeyImageView addGestureRecognizer:tapGestureRecognizer];
-        
+        whiteKeyImageView.backgroundColor = [UIColor redColor];
         [self.view addSubview:whiteKeyImageView];
         [self.whiteKeyImageViewArray addObject:whiteKeyImageView];
         
@@ -150,7 +196,7 @@
         noLabel.text = [NSString stringWithFormat:@"%d", i%7+1];
         [self.view addSubview:noLabel];
         
-        keyX += KEYBOARD_IMAGE_GAP_BETWEEN_KEYS + oneKeyWidth;
+        keyX += self.keyboard_gap_between_keys + oneKeyWidth;
         
     }
 
@@ -175,7 +221,9 @@
 
 -(void) drawTablatureScrollView
 {
-    self.tablatureScrollView = [[UIScrollView alloc] initWithFrame: CGRectMake(CGRectGetWidth(self.view.frame)*0.23, CGRectGetHeight(self.view.frame)*0.095, CGRectGetWidth(self.view.frame)*0.55, CGRectGetHeight(self.view.frame)*0.39)];
+    NSLog(@"%f", self.navigationController.navigationBar.frame.size.height);
+    
+    self.tablatureScrollView = [[UIScrollView alloc] initWithFrame: CGRectMake(CGRectGetWidth(self.view.frame)*0.23, self.navigationController.navigationBar.frame.size.height+5, CGRectGetWidth(self.view.frame)*0.55, self.screenHeight/2-10)];
     [self.tablatureScrollView.layer setBorderWidth:2];
     [self.view addSubview:self.tablatureScrollView];
    
@@ -221,6 +269,12 @@
 }
 
 #pragma mark - Actions
+
+-(void)mistViewTapped
+{
+    [self.mistView removeFromSuperview];
+    [self.instrumentMenuScrollView removeFromSuperview];
+}
 
 -(void)changeInstrumentButtonClicked:(UIButton*) sender
 {
