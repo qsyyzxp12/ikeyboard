@@ -29,8 +29,6 @@
     
     self.screenHeight = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height;
     
-    NSLog(@"%f",[[UIScreen mainScreen] bounds].size.width);
-    
     [self AVAudioPlayerInit];
     [self UIbuild];
     
@@ -140,10 +138,12 @@
     blueToothIcon.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.8, self.navigationController.navigationBar.frame.size.height+5, CGRectGetWidth(blueToothIcon.frame)*0.6, CGRectGetHeight(blueToothIcon.frame)*0.6);
     [self.view addSubview:blueToothIcon];
     
-    self.blueToothStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(blueToothIcon.frame), CGRectGetMinY(blueToothIcon.frame), 100, CGRectGetHeight(blueToothIcon.frame))];
+    self.blueToothStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(blueToothIcon.frame), CGRectGetMinY(blueToothIcon.frame), CGRectGetMaxX(self.view.frame)-CGRectGetMaxX(blueToothIcon.frame)-5, CGRectGetHeight(blueToothIcon.frame))];
     self.blueToothStatusLabel.text = @"Unconnected";
+    self.blueToothStatusLabel.numberOfLines = 1;
+    self.blueToothStatusLabel.adjustsFontSizeToFitWidth = YES;
     //self.blueToothStatusLabel.backgroundColor = [UIColor redColor];
-    [self.blueToothStatusLabel setFont:[UIFont systemFontOfSize:15]];
+//    [self.blueToothStatusLabel setFont:[UIFont systemFontOfSize:15]];
     self.blueToothStatusLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.blueToothStatusLabel];
     
@@ -165,9 +165,6 @@
     CGFloat keyY = CGRectGetMinY(keyboardBgImageView.frame)+self.keyboard_top_padding;
     CGFloat keyHeight = keyboardBgImageView.frame.size.height - self.keyboard_top_padding - self.keyboard_button_padding;
     
-    NSLog(@"%f", keyHeight);
-    NSLog(@"%f", keyHeight/keyboardBgImageView.frame.size.height);
-    
     self.whiteKeyImageViewArray = [[NSMutableArray alloc] init];
 
     for(int i=0; i<14; i++)
@@ -186,7 +183,7 @@
                                                         action:@selector(keyTapped:)];
         [tapGestureRecognizer setMinimumPressDuration:0.01];
         [whiteKeyImageView addGestureRecognizer:tapGestureRecognizer];
-        whiteKeyImageView.backgroundColor = [UIColor redColor];
+       // whiteKeyImageView.backgroundColor = [UIColor redColor];
         [self.view addSubview:whiteKeyImageView];
         [self.whiteKeyImageViewArray addObject:whiteKeyImageView];
         
@@ -221,8 +218,6 @@
 
 -(void) drawTablatureScrollView
 {
-    NSLog(@"%f", self.navigationController.navigationBar.frame.size.height);
-    
     self.tablatureScrollView = [[UIScrollView alloc] initWithFrame: CGRectMake(CGRectGetWidth(self.view.frame)*0.23, self.navigationController.navigationBar.frame.size.height+5, CGRectGetWidth(self.view.frame)*0.55, self.screenHeight/2-10)];
     [self.tablatureScrollView.layer setBorderWidth:2];
     [self.view addSubview:self.tablatureScrollView];
@@ -293,19 +288,15 @@
 {
     if(sender.tag == 0)
     {
-        NSLog(@"left arrow clicked");
         if(self.lower_octave_no > 1)
         {
-     //       [self.frameImageView setFrame:CGRectMake(self.frameImageView.frame.origin.x - self.frameImageView.frame.size.width, self.frameImageView.frame.origin.y, self.frameImageView.frame.size.width, self.frameImageView.frame.size.height)];
             self.lower_octave_no -= 2;
         }
     }
     else
     {
-        NSLog(@"right arrow clicked");
         if(self.lower_octave_no < 7)
         {
-       //     [self.frameImageView setFrame:CGRectMake(self.frameImageView.frame.origin.x + self.frameImageView.frame.size.width, self.frameImageView.frame.origin.y, self.frameImageView.frame.size.width, self.frameImageView.frame.size.height)];
             self.lower_octave_no += 2;
         }
     }
