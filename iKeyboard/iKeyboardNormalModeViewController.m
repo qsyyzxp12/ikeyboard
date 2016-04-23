@@ -31,9 +31,6 @@
     
     [self AVAudioPlayerInit];
     [self UIbuild];
-    
-  //  AudioServicesPlaySystemSound(playSoundID);
-    // Do any additional setup after loading the view.
 }
 
 -(void) AVAudioPlayerInit
@@ -165,8 +162,8 @@
     CGFloat keyY = CGRectGetMinY(keyboardBgImageView.frame)+self.keyboard_top_padding;
     CGFloat keyHeight = keyboardBgImageView.frame.size.height - self.keyboard_top_padding - self.keyboard_button_padding;
     
+    //White Keys
     self.whiteKeyImageViewArray = [[NSMutableArray alloc] init];
-
     for(int i=0; i<14; i++)
     {
         NSString* imageName = [NSString stringWithFormat:@"wkey%d.png", i+1];
@@ -197,6 +194,11 @@
         
     }
 
+    //Black keys
+    for(int i=0; i<10; i++)
+    {
+    }
+    
     UIButton* lArrowButton = [[UIButton alloc] init];
     lArrowButton.tag = 0;
     [lArrowButton setImage:[UIImage imageNamed:@"leftArrow.png"] forState:UIControlStateNormal];
@@ -221,8 +223,8 @@
     self.tablatureScrollView = [[UIScrollView alloc] initWithFrame: CGRectMake(CGRectGetWidth(self.view.frame)*0.23, self.navigationController.navigationBar.frame.size.height+5, CGRectGetWidth(self.view.frame)*0.55, self.screenHeight/2-10)];
     [self.tablatureScrollView.layer setBorderWidth:2];
     [self.view addSubview:self.tablatureScrollView];
-   
-    UIImageView* tablature = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tablature.png"]];
+ 
+    UIImageView* tablature = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tablature.jpg"]];
     [tablature sizeToFit];
     float scale = CGRectGetWidth(self.tablatureScrollView.frame)/tablature.frame.size.width;
     tablature.frame = CGRectMake(0, 0, CGRectGetWidth(self.tablatureScrollView.frame), tablature.frame.size.height*scale);
