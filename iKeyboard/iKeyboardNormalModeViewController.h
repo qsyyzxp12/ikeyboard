@@ -31,4 +31,5 @@
 @property int keyboard_right_padding;
 @property int keyboard_button_padding;
 @property int keyboard_gap_between_keys;
+@property CGSize blackKeySize;
 @end

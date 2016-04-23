@@ -24,7 +24,7 @@
     [super viewDidLoad];
     
     self.lower_octave_no = 3;
-    self.noteNameMap = [[NSArray alloc] initWithObjects:@"c", @"d", @"e", @"f", @"g", @"a", @"b", @"c", @"d", @"e", @"f", @"g", @"a", @"b", nil];
+    self.noteNameMap = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"A", @"B", @"C#", @"D#", @"F#", @"G#", @"A#", @"C#", @"D#", @"F#", @"G#", @"A#", nil];
     self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"guitar_outline.png", @"piano_outline.png", @"violin_outline.png", nil];
     
     self.screenHeight = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height;
@@ -35,45 +35,33 @@
 
 -(void) AVAudioPlayerInit
 {
-    NSMutableArray* octavesArray = [[NSMutableArray alloc] initWithCapacity:9];
+    NSArray* halfStepArray = [[NSArray alloc] initWithObjects:@"A", @"C", @"D", @"F", @"G", nil];
+    
+    NSMutableArray* octavesArray = [[NSMutableArray alloc] initWithCapacity:7];
     NSString *path;
     AVAudioPlayer* player;
-    for(int i=0; i<9; i++)
+    for(int i=0; i<7; i++)
     {
         NSMutableDictionary* octaveDic = [[NSMutableDictionary alloc] init];
         octavesArray[i] = octaveDic;
-        if(i == 0)
+        for(int j=(int)'A'; j<(int)'H'; j++)
         {
-            path = [[NSBundle mainBundle] pathForResource:@"piano_a0" ofType:@"wav"];
-            player = [[AVAudioPlayer alloc] initWithContentsOfURL:
-                                     [NSURL fileURLWithPath:path] error:NULL];
-            [player prepareToPlay];
-            [octaveDic setObject:player forKey:@"a"];
-            
-            path = [[NSBundle mainBundle] pathForResource:@"piano_b0" ofType:@"wav"];
-            player = [[AVAudioPlayer alloc] initWithContentsOfURL:
-                                     [NSURL fileURLWithPath:path] error:NULL];
-            [player prepareToPlay];
-            [octaveDic setObject:player forKey:@"b"];
-            continue;
-        }
-        else if(i == 8)
-        {
-            path = [[NSBundle mainBundle] pathForResource:@"piano_c8" ofType:@"wav"];
-            player = [[AVAudioPlayer alloc] initWithContentsOfURL:
-                      [NSURL fileURLWithPath:path] error:NULL];
-            [player prepareToPlay];
-            [octaveDic setObject:player forKey:@"b"];
-            continue;
-        }
-        for(int j=(int)'a'; j<(int)'h'; j++)
-        {
-            NSString* fileName = [NSString stringWithFormat:@"piano_%c%d", (char)j, i];
-            path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"wav"];
+            NSString* fileName = [NSString stringWithFormat:@"piano_%c%d", (char)j, i+1];
+            path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"mp3"];
             player = [[AVAudioPlayer alloc] initWithContentsOfURL:
                       [NSURL fileURLWithPath:path] error:NULL];
             [player prepareToPlay];
             NSString* key = [NSString stringWithFormat:@"%c", (char)j];
+            [octaveDic setObject:player forKey:key];
+        }
+        for(NSString* halfStep in halfStepArray)
+        {
+            NSString* fileName = [NSString stringWithFormat:@"piano_%@%d#", halfStep, i+1];
+            path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"mp3"];
+            player = [[AVAudioPlayer alloc] initWithContentsOfURL:
+                      [NSURL fileURLWithPath:path] error:NULL];
+            [player prepareToPlay];
+            NSString* key = [NSString stringWithFormat:@"%@#", halfStep];
             [octaveDic setObject:player forKey:key];
         }
     }
@@ -109,6 +97,7 @@
         self.keyboard_left_padding = 3;
         self.keyboard_right_padding = 5;
         self.keyboard_gap_between_keys = 6;
+        self.blackKeySize = CGSizeMake(28, 65);
     }
     else if(IPhone6sPlus)
     {
@@ -162,6 +151,7 @@
     CGFloat keyY = CGRectGetMinY(keyboardBgImageView.frame)+self.keyboard_top_padding;
     CGFloat keyHeight = keyboardBgImageView.frame.size.height - self.keyboard_top_padding - self.keyboard_button_padding;
     
+    
     //White Keys
     self.whiteKeyImageViewArray = [[NSMutableArray alloc] init];
     for(int i=0; i<14; i++)
@@ -176,9 +166,10 @@
         [whiteKeyImageView setUserInteractionEnabled:YES];
         
         UILongPressGestureRecognizer *tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
-                                                        initWithTarget:self
-                                                        action:@selector(keyTapped:)];
+                                                              initWithTarget:self
+                                                              action:@selector(keyTapped:)];
         [tapGestureRecognizer setMinimumPressDuration:0.01];
+        
         [whiteKeyImageView addGestureRecognizer:tapGestureRecognizer];
        // whiteKeyImageView.backgroundColor = [UIColor redColor];
         [self.view addSubview:whiteKeyImageView];
@@ -195,8 +186,39 @@
     }
 
     //Black keys
+    
+    CGFloat offset1 = 30;
+    CGFloat offset2 = 20;
+    keyX = self.keyboard_left_padding;
     for(int i=0; i<10; i++)
     {
+        UIImageView* blackKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bkey.png"] highlightedImage:[UIImage imageNamed:@"bkey_highlight.png"]];
+        blackKeyImageView.tag = 14+i;
+        
+        [blackKeyImageView setUserInteractionEnabled:YES];
+        UILongPressGestureRecognizer *tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
+                                                              initWithTarget:self
+                                                              action:@selector(keyTapped:)];
+        [tapGestureRecognizer setMinimumPressDuration:0.01];
+        
+        [blackKeyImageView addGestureRecognizer:tapGestureRecognizer];
+        
+        switch (i)
+        {
+            case 0:
+                keyX += offset1;
+                break;
+            case 2: case 5: case 7:
+                keyX += offset1*2 + self.keyboard_gap_between_keys;
+                break;
+            default:
+                keyX += offset2;
+                break;
+        }
+        
+        blackKeyImageView.frame = CGRectMake(keyX, keyY, self.blackKeySize.width, self.blackKeySize.height);
+        keyX += self.blackKeySize.width;
+        [self.view addSubview:blackKeyImageView];
     }
     
     UIButton* lArrowButton = [[UIButton alloc] init];
@@ -292,14 +314,14 @@
     {
         if(self.lower_octave_no > 1)
         {
-            self.lower_octave_no -= 2;
+            self.lower_octave_no--;
         }
     }
     else
     {
-        if(self.lower_octave_no < 7)
+        if(self.lower_octave_no < 6)
         {
-            self.lower_octave_no += 2;
+            self.lower_octave_no++;
         }
     }
 }
@@ -311,34 +333,36 @@
     if(recognizer.state == UIGestureRecognizerStateBegan)
     {
         imageView.highlighted = YES;
-        
+
         int octaveNo;
-        if( keyNo > 6)
+        if( (keyNo > 6 && keyNo < 14) || keyNo > 18)
             octaveNo = self.lower_octave_no + 1;
         else
             octaveNo = self.lower_octave_no;
         
-        NSDictionary* octaveDic = [self.octavesArray objectAtIndex:octaveNo];
+        NSDictionary* octaveDic = [self.octavesArray objectAtIndex:octaveNo-1];
         NSString* key = self.noteNameMap[keyNo];
         [[octaveDic objectForKey:key] play];
     }
     else if(recognizer.state == UIGestureRecognizerStateEnded)
     {
         imageView.highlighted = NO;
-        
+        int i=0;
+        while (i<10000000)
+            i++;
+
         int octaveNo;
-        if( keyNo > 6)
+        if( (keyNo > 6 && keyNo < 14) || keyNo > 18)
             octaveNo = self.lower_octave_no + 1;
         else
             octaveNo = self.lower_octave_no;
         
-        NSDictionary* octaveDic = [self.octavesArray objectAtIndex:octaveNo];
+        NSDictionary* octaveDic = [self.octavesArray objectAtIndex:octaveNo-1];
         NSString* key = self.noteNameMap[keyNo];
         
         [[octaveDic objectForKey:key] stop];
         ((AVAudioPlayer*)[octaveDic objectForKey:key]).currentTime = 0;
         [[octaveDic objectForKey:key] prepareToPlay];
-    
     }
 }
 
