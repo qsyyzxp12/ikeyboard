@@ -14,16 +14,20 @@
 @property UIImageView *wholeKeyboardImageView;
 @property UIImageView *frameImageView;
 @property UIButton* instrumentButton;
-@property NSMutableArray* whiteKeyImageViewArray;
-@property int lower_octave_no;
-@property int graphSampleRate;
-@property NSArray* octavesArray;
-@property NSArray* noteNameMap;
-@property NSArray* instrumentNameMap;
 @property UILabel* blueToothStatusLabel;
 @property UIScrollView* instrumentMenuScrollView;
 @property UIScrollView* tablatureScrollView;
 @property UIView* mistView;
+
+@property NSMutableArray* whiteKeyImageViewArray;
+@property NSMutableArray* instrumentOctavesArray;
+
+@property int instrumentNo;
+@property int lower_octave_no;
+
+@property NSArray* noteNameMap;
+@property NSArray* instrumentNameMap;
+
 @property CGFloat screenHeight;
 @property int keyboard_top_padding;
 @property int keyboard_left_padding;

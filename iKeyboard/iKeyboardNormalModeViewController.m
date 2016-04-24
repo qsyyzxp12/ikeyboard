@@ -24,8 +24,9 @@
     [super viewDidLoad];
     
     self.lower_octave_no = 3;
+    self.instrumentNo = 1;
     self.noteNameMap = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"A", @"B", @"C#", @"D#", @"F#", @"G#", @"A#", @"C#", @"D#", @"F#", @"G#", @"A#", nil];
-    self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"guitar_outline.png", @"piano_outline.png", @"violin_outline.png", nil];
+    self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"guitar", @"piano", @"string", nil];
     
     self.screenHeight = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height;
     
@@ -35,38 +36,52 @@
 
 -(void) AVAudioPlayerInit
 {
+    self.instrumentOctavesArray = [[NSMutableArray alloc] init];
+    
     NSArray* halfStepArray = [[NSArray alloc] initWithObjects:@"A", @"C", @"D", @"F", @"G", nil];
     
-    NSMutableArray* octavesArray = [[NSMutableArray alloc] initWithCapacity:7];
-    NSString *path;
-    AVAudioPlayer* player;
-    for(int i=0; i<7; i++)
+    for(NSString* instrumentName in self.instrumentNameMap)
     {
-        NSMutableDictionary* octaveDic = [[NSMutableDictionary alloc] init];
-        octavesArray[i] = octaveDic;
-        for(int j=(int)'A'; j<(int)'H'; j++)
+        if(instrumentName)
         {
-            NSString* fileName = [NSString stringWithFormat:@"piano_%c%d", (char)j, i+1];
-            path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"mp3"];
-            player = [[AVAudioPlayer alloc] initWithContentsOfURL:
-                      [NSURL fileURLWithPath:path] error:NULL];
-            [player prepareToPlay];
-            NSString* key = [NSString stringWithFormat:@"%c", (char)j];
-            [octaveDic setObject:player forKey:key];
-        }
-        for(NSString* halfStep in halfStepArray)
-        {
-            NSString* fileName = [NSString stringWithFormat:@"piano_%@%d#", halfStep, i+1];
-            path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"mp3"];
-            player = [[AVAudioPlayer alloc] initWithContentsOfURL:
-                      [NSURL fileURLWithPath:path] error:NULL];
-            [player prepareToPlay];
-            NSString* key = [NSString stringWithFormat:@"%@#", halfStep];
-            [octaveDic setObject:player forKey:key];
+            NSLog(@"instrument name = %@", instrumentName);
+            NSMutableArray* octavesArray = [[NSMutableArray alloc] initWithCapacity:7];
+            NSString *path;
+            AVAudioPlayer* player;
+            for(int i=0; i<7; i++)
+            {
+                NSMutableDictionary* octaveDic = [[NSMutableDictionary alloc] init];
+                octavesArray[i] = octaveDic;
+                NSLog(@"\tOctave %d", i+1);
+                for(int j=(int)'A'; j<(int)'H'; j++)
+                {
+                    NSLog(@"\t\twhite key %c", (char)j);
+                    NSString* fileName = [NSString stringWithFormat:@"%@_%c%d", instrumentName, (char)j, i+1];
+                    path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"mp3"];
+                    player = [[AVAudioPlayer alloc] initWithContentsOfURL:
+                              [NSURL fileURLWithPath:path] error:NULL];
+                    [player prepareToPlay];
+                    NSString* key = [NSString stringWithFormat:@"%c", (char)j];
+                    if(!player)
+                        NSLog(@"xx");
+                    [octaveDic setObject:player forKey:key];
+                }
+                for(NSString* halfStep in halfStepArray)
+                {
+                    NSLog(@"\t\tblack key %@", halfStep);
+                    NSString* fileName = [NSString stringWithFormat:@"%@_%@%d#", instrumentName, halfStep, i+1];
+                    path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"mp3"];
+                    player = [[AVAudioPlayer alloc] initWithContentsOfURL:
+                              [NSURL fileURLWithPath:path] error:NULL];
+                    [player prepareToPlay];
+                    NSString* key = [NSString stringWithFormat:@"%@#", halfStep];
+                    [octaveDic setObject:player forKey:key];
+                }
+            }
+            
+            [self.instrumentOctavesArray addObject:octavesArray];
         }
     }
-    
-    self.octavesArray = octavesArray;
 }
 
 
@@ -308,7 +323,8 @@
 
 -(void)changeInstrumentButtonClicked:(UIButton*) sender
 {
-    [self.instrumentButton setImage:[UIImage imageNamed:self.instrumentNameMap[sender.tag]] forState:UIControlStateNormal];
+    NSString* pictureName = [NSString stringWithFormat:@"%@_outline.png", self.instrumentNameMap[sender.tag]];
+    [self.instrumentButton setImage:[UIImage imageNamed:pictureName] forState:UIControlStateNormal];
     [self.mistView removeFromSuperview];
     [self.instrumentMenuScrollView removeFromSuperview];
 }
@@ -358,7 +374,8 @@
         else
             octaveNo = self.lower_octave_no;
         
-        NSDictionary* octaveDic = [self.octavesArray objectAtIndex:octaveNo-1];
+        NSArray* octavesArray = [self.instrumentOctavesArray objectAtIndex:self.instrumentNo];
+        NSDictionary* octaveDic = [octavesArray objectAtIndex:octaveNo-1];
         NSString* key = self.noteNameMap[keyNo];
         [[octaveDic objectForKey:key] play];
     }
@@ -375,7 +392,8 @@
         else
             octaveNo = self.lower_octave_no;
         
-        NSDictionary* octaveDic = [self.octavesArray objectAtIndex:octaveNo-1];
+        NSArray* octavesArray = [self.instrumentOctavesArray objectAtIndex:self.instrumentNo];
+        NSDictionary* octaveDic = [octavesArray objectAtIndex:octaveNo-1];
         NSString* key = self.noteNameMap[keyNo];
         
         [[octaveDic objectForKey:key] stop];
