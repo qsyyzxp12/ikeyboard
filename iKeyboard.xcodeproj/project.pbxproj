@@ -14,90 +14,6 @@
 		C74B81251CBE335C005307FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74B81231CBE335C005307FF /* LaunchScreen.storyboard */; };
 		C74B812E1CBE358F005307FF /* iKeyboardMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B812D1CBE358F005307FF /* iKeyboardMenuViewController.m */; };
 		C74B81431CBE4325005307FF /* iKeyboardNormalModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B81421CBE4325005307FF /* iKeyboardNormalModeViewController.m */; };
-		C74DCE501CCBCAEA006D5F4D /* piano_A1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCDF61CCBCAEA006D5F4D /* piano_A1#.mp3 */; };
-		C74DCE511CCBCAEA006D5F4D /* piano_A1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCDF71CCBCAEA006D5F4D /* piano_A1.mp3 */; };
-		C74DCE521CCBCAEA006D5F4D /* piano_B1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCDF81CCBCAEA006D5F4D /* piano_B1.mp3 */; };
-		C74DCE531CCBCAEA006D5F4D /* piano_C1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCDF91CCBCAEA006D5F4D /* piano_C1#.mp3 */; };
-		C74DCE541CCBCAEA006D5F4D /* piano_C1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCDFA1CCBCAEA006D5F4D /* piano_C1.mp3 */; };
-		C74DCE551CCBCAEA006D5F4D /* piano_D1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCDFB1CCBCAEA006D5F4D /* piano_D1#.mp3 */; };
-		C74DCE561CCBCAEA006D5F4D /* piano_D1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCDFC1CCBCAEA006D5F4D /* piano_D1.mp3 */; };
-		C74DCE571CCBCAEA006D5F4D /* piano_E1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCDFD1CCBCAEA006D5F4D /* piano_E1.mp3 */; };
-		C74DCE581CCBCAEA006D5F4D /* piano_F1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCDFE1CCBCAEA006D5F4D /* piano_F1#.mp3 */; };
-		C74DCE591CCBCAEA006D5F4D /* piano_F1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCDFF1CCBCAEA006D5F4D /* piano_F1.mp3 */; };
-		C74DCE5A1CCBCAEA006D5F4D /* piano_G1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE001CCBCAEA006D5F4D /* piano_G1#.mp3 */; };
-		C74DCE5B1CCBCAEA006D5F4D /* piano_G1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE011CCBCAEA006D5F4D /* piano_G1.mp3 */; };
-		C74DCE5C1CCBCAEA006D5F4D /* piano_A2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE031CCBCAEA006D5F4D /* piano_A2#.mp3 */; };
-		C74DCE5D1CCBCAEA006D5F4D /* piano_A2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE041CCBCAEA006D5F4D /* piano_A2.mp3 */; };
-		C74DCE5E1CCBCAEA006D5F4D /* piano_B2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE051CCBCAEA006D5F4D /* piano_B2.mp3 */; };
-		C74DCE5F1CCBCAEA006D5F4D /* piano_C2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE061CCBCAEA006D5F4D /* piano_C2#.mp3 */; };
-		C74DCE601CCBCAEA006D5F4D /* piano_C2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE071CCBCAEA006D5F4D /* piano_C2.mp3 */; };
-		C74DCE611CCBCAEA006D5F4D /* piano_D2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE081CCBCAEA006D5F4D /* piano_D2#.mp3 */; };
-		C74DCE621CCBCAEA006D5F4D /* piano_D2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE091CCBCAEA006D5F4D /* piano_D2.mp3 */; };
-		C74DCE631CCBCAEA006D5F4D /* piano_E2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE0A1CCBCAEA006D5F4D /* piano_E2.mp3 */; };
-		C74DCE641CCBCAEA006D5F4D /* piano_F2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE0B1CCBCAEA006D5F4D /* piano_F2#.mp3 */; };
-		C74DCE651CCBCAEA006D5F4D /* piano_F2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE0C1CCBCAEA006D5F4D /* piano_F2.mp3 */; };
-		C74DCE661CCBCAEA006D5F4D /* piano_G2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE0D1CCBCAEA006D5F4D /* piano_G2#.mp3 */; };
-		C74DCE671CCBCAEA006D5F4D /* piano_G2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE0E1CCBCAEA006D5F4D /* piano_G2.mp3 */; };
-		C74DCE681CCBCAEA006D5F4D /* piano_A3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE101CCBCAEA006D5F4D /* piano_A3#.mp3 */; };
-		C74DCE691CCBCAEA006D5F4D /* piano_A3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE111CCBCAEA006D5F4D /* piano_A3.mp3 */; };
-		C74DCE6A1CCBCAEA006D5F4D /* piano_B3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE121CCBCAEA006D5F4D /* piano_B3.mp3 */; };
-		C74DCE6B1CCBCAEA006D5F4D /* piano_C3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE131CCBCAEA006D5F4D /* piano_C3#.mp3 */; };
-		C74DCE6C1CCBCAEA006D5F4D /* piano_C3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE141CCBCAEA006D5F4D /* piano_C3.mp3 */; };
-		C74DCE6D1CCBCAEA006D5F4D /* piano_D3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE151CCBCAEA006D5F4D /* piano_D3#.mp3 */; };
-		C74DCE6E1CCBCAEA006D5F4D /* piano_D3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE161CCBCAEA006D5F4D /* piano_D3.mp3 */; };
-		C74DCE6F1CCBCAEA006D5F4D /* piano_E3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE171CCBCAEA006D5F4D /* piano_E3.mp3 */; };
-		C74DCE701CCBCAEA006D5F4D /* piano_F3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE181CCBCAEA006D5F4D /* piano_F3#.mp3 */; };
-		C74DCE711CCBCAEA006D5F4D /* piano_F3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE191CCBCAEA006D5F4D /* piano_F3.mp3 */; };
-		C74DCE721CCBCAEA006D5F4D /* piano_G3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE1A1CCBCAEA006D5F4D /* piano_G3#.mp3 */; };
-		C74DCE731CCBCAEA006D5F4D /* piano_G3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE1B1CCBCAEA006D5F4D /* piano_G3.mp3 */; };
-		C74DCE741CCBCAEA006D5F4D /* piano_A4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE1D1CCBCAEA006D5F4D /* piano_A4#.mp3 */; };
-		C74DCE751CCBCAEA006D5F4D /* piano_A4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE1E1CCBCAEA006D5F4D /* piano_A4.mp3 */; };
-		C74DCE761CCBCAEA006D5F4D /* piano_B4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE1F1CCBCAEA006D5F4D /* piano_B4.mp3 */; };
-		C74DCE771CCBCAEA006D5F4D /* piano_C4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE201CCBCAEA006D5F4D /* piano_C4#.mp3 */; };
-		C74DCE781CCBCAEA006D5F4D /* piano_C4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE211CCBCAEA006D5F4D /* piano_C4.mp3 */; };
-		C74DCE791CCBCAEA006D5F4D /* piano_D4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE221CCBCAEA006D5F4D /* piano_D4#.mp3 */; };
-		C74DCE7A1CCBCAEA006D5F4D /* piano_D4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE231CCBCAEA006D5F4D /* piano_D4.mp3 */; };
-		C74DCE7B1CCBCAEA006D5F4D /* piano_E4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE241CCBCAEA006D5F4D /* piano_E4.mp3 */; };
-		C74DCE7C1CCBCAEA006D5F4D /* piano_F4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE251CCBCAEA006D5F4D /* piano_F4#.mp3 */; };
-		C74DCE7D1CCBCAEA006D5F4D /* piano_F4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE261CCBCAEA006D5F4D /* piano_F4.mp3 */; };
-		C74DCE7E1CCBCAEA006D5F4D /* piano_G4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE271CCBCAEA006D5F4D /* piano_G4#.mp3 */; };
-		C74DCE7F1CCBCAEA006D5F4D /* piano_G4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE281CCBCAEA006D5F4D /* piano_G4.mp3 */; };
-		C74DCE801CCBCAEA006D5F4D /* piano_A5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE2A1CCBCAEA006D5F4D /* piano_A5#.mp3 */; };
-		C74DCE811CCBCAEA006D5F4D /* piano_A5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE2B1CCBCAEA006D5F4D /* piano_A5.mp3 */; };
-		C74DCE821CCBCAEA006D5F4D /* piano_B5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE2C1CCBCAEA006D5F4D /* piano_B5.mp3 */; };
-		C74DCE831CCBCAEA006D5F4D /* piano_C5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE2D1CCBCAEA006D5F4D /* piano_C5#.mp3 */; };
-		C74DCE841CCBCAEA006D5F4D /* piano_C5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE2E1CCBCAEA006D5F4D /* piano_C5.mp3 */; };
-		C74DCE851CCBCAEA006D5F4D /* piano_D5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE2F1CCBCAEA006D5F4D /* piano_D5#.mp3 */; };
-		C74DCE861CCBCAEA006D5F4D /* piano_D5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE301CCBCAEA006D5F4D /* piano_D5.mp3 */; };
-		C74DCE871CCBCAEA006D5F4D /* piano_E5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE311CCBCAEA006D5F4D /* piano_E5.mp3 */; };
-		C74DCE881CCBCAEA006D5F4D /* piano_F5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE321CCBCAEA006D5F4D /* piano_F5#.mp3 */; };
-		C74DCE891CCBCAEA006D5F4D /* piano_F5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE331CCBCAEA006D5F4D /* piano_F5.mp3 */; };
-		C74DCE8A1CCBCAEA006D5F4D /* piano_G5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE341CCBCAEA006D5F4D /* piano_G5#.mp3 */; };
-		C74DCE8B1CCBCAEA006D5F4D /* piano_G5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE351CCBCAEA006D5F4D /* piano_G5.mp3 */; };
-		C74DCE8C1CCBCAEA006D5F4D /* piano_A6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE371CCBCAEA006D5F4D /* piano_A6#.mp3 */; };
-		C74DCE8D1CCBCAEA006D5F4D /* piano_A6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE381CCBCAEA006D5F4D /* piano_A6.mp3 */; };
-		C74DCE8E1CCBCAEA006D5F4D /* piano_B6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE391CCBCAEA006D5F4D /* piano_B6.mp3 */; };
-		C74DCE8F1CCBCAEA006D5F4D /* piano_C6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE3A1CCBCAEA006D5F4D /* piano_C6#.mp3 */; };
-		C74DCE901CCBCAEA006D5F4D /* piano_C6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE3B1CCBCAEA006D5F4D /* piano_C6.mp3 */; };
-		C74DCE911CCBCAEA006D5F4D /* piano_D6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE3C1CCBCAEA006D5F4D /* piano_D6#.mp3 */; };
-		C74DCE921CCBCAEA006D5F4D /* piano_D6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE3D1CCBCAEA006D5F4D /* piano_D6.mp3 */; };
-		C74DCE931CCBCAEA006D5F4D /* piano_E6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE3E1CCBCAEA006D5F4D /* piano_E6.mp3 */; };
-		C74DCE941CCBCAEA006D5F4D /* piano_F6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE3F1CCBCAEA006D5F4D /* piano_F6#.mp3 */; };
-		C74DCE951CCBCAEA006D5F4D /* piano_F6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE401CCBCAEA006D5F4D /* piano_F6.mp3 */; };
-		C74DCE961CCBCAEA006D5F4D /* piano_G6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE411CCBCAEA006D5F4D /* piano_G6#.mp3 */; };
-		C74DCE971CCBCAEA006D5F4D /* piano_G6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE421CCBCAEA006D5F4D /* piano_G6.mp3 */; };
-		C74DCE981CCBCAEA006D5F4D /* piano_A7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE441CCBCAEA006D5F4D /* piano_A7#.mp3 */; };
-		C74DCE991CCBCAEA006D5F4D /* piano_A7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE451CCBCAEA006D5F4D /* piano_A7.mp3 */; };
-		C74DCE9A1CCBCAEA006D5F4D /* piano_B7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE461CCBCAEA006D5F4D /* piano_B7.mp3 */; };
-		C74DCE9B1CCBCAEA006D5F4D /* piano_C7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE471CCBCAEA006D5F4D /* piano_C7#.mp3 */; };
-		C74DCE9C1CCBCAEA006D5F4D /* piano_C7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE481CCBCAEA006D5F4D /* piano_C7.mp3 */; };
-		C74DCE9D1CCBCAEA006D5F4D /* piano_D7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE491CCBCAEA006D5F4D /* piano_D7#.mp3 */; };
-		C74DCE9E1CCBCAEA006D5F4D /* piano_D7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE4A1CCBCAEA006D5F4D /* piano_D7.mp3 */; };
-		C74DCE9F1CCBCAEA006D5F4D /* piano_E7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE4B1CCBCAEA006D5F4D /* piano_E7.mp3 */; };
-		C74DCEA01CCBCAEA006D5F4D /* piano_F7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE4C1CCBCAEA006D5F4D /* piano_F7#.mp3 */; };
-		C74DCEA11CCBCAEA006D5F4D /* piano_F7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE4D1CCBCAEA006D5F4D /* piano_F7.mp3 */; };
-		C74DCEA21CCBCAEA006D5F4D /* piano_G7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE4E1CCBCAEA006D5F4D /* piano_G7#.mp3 */; };
-		C74DCEA31CCBCAEA006D5F4D /* piano_G7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCE4F1CCBCAEA006D5F4D /* piano_G7.mp3 */; };
 		C74DCED11CCBD517006D5F4D /* blueToothIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = C74DCEA51CCBD516006D5F4D /* blueToothIcon.png */; };
 		C74DCED21CCBD517006D5F4D /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = C74DCEA61CCBD516006D5F4D /* frame.png */; };
 		C74DCED31CCBD517006D5F4D /* guitar_outline.png in Resources */ = {isa = PBXBuildFile; fileRef = C74DCEA81CCBD516006D5F4D /* guitar_outline.png */; };
@@ -138,6 +54,174 @@
 		C74DCEF61CCBD517006D5F4D /* part_of_keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = C74DCECE1CCBD517006D5F4D /* part_of_keyboard.png */; };
 		C74DCEF71CCBD517006D5F4D /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C74DCECF1CCBD517006D5F4D /* rightArrow.png */; };
 		C74DCEF81CCBD517006D5F4D /* tablature.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C74DCED01CCBD517006D5F4D /* tablature.jpg */; };
+		C74DCF551CCBE0C4006D5F4D /* piano_A1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCEFB1CCBE0C4006D5F4D /* piano_A1#.mp3 */; };
+		C74DCF561CCBE0C4006D5F4D /* piano_A1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCEFC1CCBE0C4006D5F4D /* piano_A1.mp3 */; };
+		C74DCF571CCBE0C4006D5F4D /* piano_B1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCEFD1CCBE0C4006D5F4D /* piano_B1.mp3 */; };
+		C74DCF581CCBE0C4006D5F4D /* piano_C1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCEFE1CCBE0C4006D5F4D /* piano_C1#.mp3 */; };
+		C74DCF591CCBE0C4006D5F4D /* piano_C1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCEFF1CCBE0C4006D5F4D /* piano_C1.mp3 */; };
+		C74DCF5A1CCBE0C4006D5F4D /* piano_D1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF001CCBE0C4006D5F4D /* piano_D1#.mp3 */; };
+		C74DCF5B1CCBE0C4006D5F4D /* piano_D1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF011CCBE0C4006D5F4D /* piano_D1.mp3 */; };
+		C74DCF5C1CCBE0C4006D5F4D /* piano_E1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF021CCBE0C4006D5F4D /* piano_E1.mp3 */; };
+		C74DCF5D1CCBE0C4006D5F4D /* piano_F1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF031CCBE0C4006D5F4D /* piano_F1#.mp3 */; };
+		C74DCF5E1CCBE0C4006D5F4D /* piano_F1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF041CCBE0C4006D5F4D /* piano_F1.mp3 */; };
+		C74DCF5F1CCBE0C4006D5F4D /* piano_G1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF051CCBE0C4006D5F4D /* piano_G1#.mp3 */; };
+		C74DCF601CCBE0C4006D5F4D /* piano_G1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF061CCBE0C4006D5F4D /* piano_G1.mp3 */; };
+		C74DCF611CCBE0C4006D5F4D /* piano_A2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF081CCBE0C4006D5F4D /* piano_A2#.mp3 */; };
+		C74DCF621CCBE0C4006D5F4D /* piano_A2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF091CCBE0C4006D5F4D /* piano_A2.mp3 */; };
+		C74DCF631CCBE0C4006D5F4D /* piano_B2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF0A1CCBE0C4006D5F4D /* piano_B2.mp3 */; };
+		C74DCF641CCBE0C4006D5F4D /* piano_C2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF0B1CCBE0C4006D5F4D /* piano_C2#.mp3 */; };
+		C74DCF651CCBE0C4006D5F4D /* piano_C2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF0C1CCBE0C4006D5F4D /* piano_C2.mp3 */; };
+		C74DCF661CCBE0C4006D5F4D /* piano_D2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF0D1CCBE0C4006D5F4D /* piano_D2#.mp3 */; };
+		C74DCF671CCBE0C4006D5F4D /* piano_D2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF0E1CCBE0C4006D5F4D /* piano_D2.mp3 */; };
+		C74DCF681CCBE0C4006D5F4D /* piano_E2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF0F1CCBE0C4006D5F4D /* piano_E2.mp3 */; };
+		C74DCF691CCBE0C4006D5F4D /* piano_F2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF101CCBE0C4006D5F4D /* piano_F2#.mp3 */; };
+		C74DCF6A1CCBE0C4006D5F4D /* piano_F2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF111CCBE0C4006D5F4D /* piano_F2.mp3 */; };
+		C74DCF6B1CCBE0C4006D5F4D /* piano_G2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF121CCBE0C4006D5F4D /* piano_G2#.mp3 */; };
+		C74DCF6C1CCBE0C4006D5F4D /* piano_G2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF131CCBE0C4006D5F4D /* piano_G2.mp3 */; };
+		C74DCF6D1CCBE0C4006D5F4D /* piano_A3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF151CCBE0C4006D5F4D /* piano_A3#.mp3 */; };
+		C74DCF6E1CCBE0C4006D5F4D /* piano_A3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF161CCBE0C4006D5F4D /* piano_A3.mp3 */; };
+		C74DCF6F1CCBE0C4006D5F4D /* piano_B3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF171CCBE0C4006D5F4D /* piano_B3.mp3 */; };
+		C74DCF701CCBE0C4006D5F4D /* piano_C3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF181CCBE0C4006D5F4D /* piano_C3#.mp3 */; };
+		C74DCF711CCBE0C4006D5F4D /* piano_C3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF191CCBE0C4006D5F4D /* piano_C3.mp3 */; };
+		C74DCF721CCBE0C4006D5F4D /* piano_D3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF1A1CCBE0C4006D5F4D /* piano_D3#.mp3 */; };
+		C74DCF731CCBE0C4006D5F4D /* piano_D3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF1B1CCBE0C4006D5F4D /* piano_D3.mp3 */; };
+		C74DCF741CCBE0C4006D5F4D /* piano_E3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF1C1CCBE0C4006D5F4D /* piano_E3.mp3 */; };
+		C74DCF751CCBE0C4006D5F4D /* piano_F3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF1D1CCBE0C4006D5F4D /* piano_F3#.mp3 */; };
+		C74DCF761CCBE0C4006D5F4D /* piano_F3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF1E1CCBE0C4006D5F4D /* piano_F3.mp3 */; };
+		C74DCF771CCBE0C4006D5F4D /* piano_G3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF1F1CCBE0C4006D5F4D /* piano_G3#.mp3 */; };
+		C74DCF781CCBE0C4006D5F4D /* piano_G3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF201CCBE0C4006D5F4D /* piano_G3.mp3 */; };
+		C74DCF791CCBE0C4006D5F4D /* piano_A4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF221CCBE0C4006D5F4D /* piano_A4#.mp3 */; };
+		C74DCF7A1CCBE0C4006D5F4D /* piano_A4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF231CCBE0C4006D5F4D /* piano_A4.mp3 */; };
+		C74DCF7B1CCBE0C4006D5F4D /* piano_B4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF241CCBE0C4006D5F4D /* piano_B4.mp3 */; };
+		C74DCF7C1CCBE0C4006D5F4D /* piano_C4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF251CCBE0C4006D5F4D /* piano_C4#.mp3 */; };
+		C74DCF7D1CCBE0C4006D5F4D /* piano_C4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF261CCBE0C4006D5F4D /* piano_C4.mp3 */; };
+		C74DCF7E1CCBE0C4006D5F4D /* piano_D4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF271CCBE0C4006D5F4D /* piano_D4#.mp3 */; };
+		C74DCF7F1CCBE0C4006D5F4D /* piano_D4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF281CCBE0C4006D5F4D /* piano_D4.mp3 */; };
+		C74DCF801CCBE0C4006D5F4D /* piano_E4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF291CCBE0C4006D5F4D /* piano_E4.mp3 */; };
+		C74DCF811CCBE0C4006D5F4D /* piano_F4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF2A1CCBE0C4006D5F4D /* piano_F4#.mp3 */; };
+		C74DCF821CCBE0C4006D5F4D /* piano_F4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF2B1CCBE0C4006D5F4D /* piano_F4.mp3 */; };
+		C74DCF831CCBE0C4006D5F4D /* piano_G4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF2C1CCBE0C4006D5F4D /* piano_G4#.mp3 */; };
+		C74DCF841CCBE0C4006D5F4D /* piano_G4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF2D1CCBE0C4006D5F4D /* piano_G4.mp3 */; };
+		C74DCF851CCBE0C4006D5F4D /* piano_A5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF2F1CCBE0C4006D5F4D /* piano_A5#.mp3 */; };
+		C74DCF861CCBE0C4006D5F4D /* piano_A5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF301CCBE0C4006D5F4D /* piano_A5.mp3 */; };
+		C74DCF871CCBE0C4006D5F4D /* piano_B5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF311CCBE0C4006D5F4D /* piano_B5.mp3 */; };
+		C74DCF881CCBE0C4006D5F4D /* piano_C5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF321CCBE0C4006D5F4D /* piano_C5#.mp3 */; };
+		C74DCF891CCBE0C4006D5F4D /* piano_C5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF331CCBE0C4006D5F4D /* piano_C5.mp3 */; };
+		C74DCF8A1CCBE0C4006D5F4D /* piano_D5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF341CCBE0C4006D5F4D /* piano_D5#.mp3 */; };
+		C74DCF8B1CCBE0C4006D5F4D /* piano_D5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF351CCBE0C4006D5F4D /* piano_D5.mp3 */; };
+		C74DCF8C1CCBE0C4006D5F4D /* piano_E5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF361CCBE0C4006D5F4D /* piano_E5.mp3 */; };
+		C74DCF8D1CCBE0C4006D5F4D /* piano_F5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF371CCBE0C4006D5F4D /* piano_F5#.mp3 */; };
+		C74DCF8E1CCBE0C4006D5F4D /* piano_F5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF381CCBE0C4006D5F4D /* piano_F5.mp3 */; };
+		C74DCF8F1CCBE0C4006D5F4D /* piano_G5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF391CCBE0C4006D5F4D /* piano_G5#.mp3 */; };
+		C74DCF901CCBE0C4006D5F4D /* piano_G5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF3A1CCBE0C4006D5F4D /* piano_G5.mp3 */; };
+		C74DCF911CCBE0C4006D5F4D /* piano_A6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF3C1CCBE0C4006D5F4D /* piano_A6#.mp3 */; };
+		C74DCF921CCBE0C4006D5F4D /* piano_A6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF3D1CCBE0C4006D5F4D /* piano_A6.mp3 */; };
+		C74DCF931CCBE0C4006D5F4D /* piano_B6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF3E1CCBE0C4006D5F4D /* piano_B6.mp3 */; };
+		C74DCF941CCBE0C4006D5F4D /* piano_C6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF3F1CCBE0C4006D5F4D /* piano_C6#.mp3 */; };
+		C74DCF951CCBE0C4006D5F4D /* piano_C6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF401CCBE0C4006D5F4D /* piano_C6.mp3 */; };
+		C74DCF961CCBE0C4006D5F4D /* piano_D6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF411CCBE0C4006D5F4D /* piano_D6#.mp3 */; };
+		C74DCF971CCBE0C4006D5F4D /* piano_D6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF421CCBE0C4006D5F4D /* piano_D6.mp3 */; };
+		C74DCF981CCBE0C4006D5F4D /* piano_E6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF431CCBE0C4006D5F4D /* piano_E6.mp3 */; };
+		C74DCF991CCBE0C4006D5F4D /* piano_F6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF441CCBE0C4006D5F4D /* piano_F6#.mp3 */; };
+		C74DCF9A1CCBE0C4006D5F4D /* piano_F6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF451CCBE0C4006D5F4D /* piano_F6.mp3 */; };
+		C74DCF9B1CCBE0C4006D5F4D /* piano_G6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF461CCBE0C4006D5F4D /* piano_G6#.mp3 */; };
+		C74DCF9C1CCBE0C4006D5F4D /* piano_G6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF471CCBE0C4006D5F4D /* piano_G6.mp3 */; };
+		C74DCF9D1CCBE0C4006D5F4D /* piano_A7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF491CCBE0C4006D5F4D /* piano_A7#.mp3 */; };
+		C74DCF9E1CCBE0C4006D5F4D /* piano_A7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF4A1CCBE0C4006D5F4D /* piano_A7.mp3 */; };
+		C74DCF9F1CCBE0C4006D5F4D /* piano_B7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF4B1CCBE0C4006D5F4D /* piano_B7.mp3 */; };
+		C74DCFA01CCBE0C4006D5F4D /* piano_C7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF4C1CCBE0C4006D5F4D /* piano_C7#.mp3 */; };
+		C74DCFA11CCBE0C4006D5F4D /* piano_C7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF4D1CCBE0C4006D5F4D /* piano_C7.mp3 */; };
+		C74DCFA21CCBE0C4006D5F4D /* piano_D7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF4E1CCBE0C4006D5F4D /* piano_D7#.mp3 */; };
+		C74DCFA31CCBE0C4006D5F4D /* piano_D7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF4F1CCBE0C4006D5F4D /* piano_D7.mp3 */; };
+		C74DCFA41CCBE0C4006D5F4D /* piano_E7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF501CCBE0C4006D5F4D /* piano_E7.mp3 */; };
+		C74DCFA51CCBE0C4006D5F4D /* piano_F7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF511CCBE0C4006D5F4D /* piano_F7#.mp3 */; };
+		C74DCFA61CCBE0C4006D5F4D /* piano_F7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF521CCBE0C4006D5F4D /* piano_F7.mp3 */; };
+		C74DCFA71CCBE0C4006D5F4D /* piano_G7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF531CCBE0C4006D5F4D /* piano_G7#.mp3 */; };
+		C74DCFA81CCBE0C4006D5F4D /* piano_G7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCF541CCBE0C4006D5F4D /* piano_G7.mp3 */; };
+		C74DD0051CCC6CF2006D5F4D /* guitar_A1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFAB1CCC6CF2006D5F4D /* guitar_A1#.mp3 */; };
+		C74DD0061CCC6CF2006D5F4D /* guitar_A1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFAC1CCC6CF2006D5F4D /* guitar_A1.mp3 */; };
+		C74DD0071CCC6CF2006D5F4D /* guitar_B1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFAD1CCC6CF2006D5F4D /* guitar_B1.mp3 */; };
+		C74DD0081CCC6CF2006D5F4D /* guitar_C1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFAE1CCC6CF2006D5F4D /* guitar_C1#.mp3 */; };
+		C74DD0091CCC6CF2006D5F4D /* guitar_C1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFAF1CCC6CF2006D5F4D /* guitar_C1.mp3 */; };
+		C74DD00A1CCC6CF2006D5F4D /* guitar_D1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFB01CCC6CF2006D5F4D /* guitar_D1#.mp3 */; };
+		C74DD00B1CCC6CF2006D5F4D /* guitar_D1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFB11CCC6CF2006D5F4D /* guitar_D1.mp3 */; };
+		C74DD00C1CCC6CF2006D5F4D /* guitar_E1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFB21CCC6CF2006D5F4D /* guitar_E1.mp3 */; };
+		C74DD00D1CCC6CF2006D5F4D /* guitar_F1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFB31CCC6CF2006D5F4D /* guitar_F1#.mp3 */; };
+		C74DD00E1CCC6CF2006D5F4D /* guitar_F1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFB41CCC6CF2006D5F4D /* guitar_F1.mp3 */; };
+		C74DD00F1CCC6CF2006D5F4D /* guitar_G1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFB51CCC6CF2006D5F4D /* guitar_G1#.mp3 */; };
+		C74DD0101CCC6CF2006D5F4D /* guitar_G1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFB61CCC6CF2006D5F4D /* guitar_G1.mp3 */; };
+		C74DD0111CCC6CF2006D5F4D /* guitar_A2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFB81CCC6CF2006D5F4D /* guitar_A2#.mp3 */; };
+		C74DD0121CCC6CF2006D5F4D /* guitar_A2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFB91CCC6CF2006D5F4D /* guitar_A2.mp3 */; };
+		C74DD0131CCC6CF2006D5F4D /* guitar_B2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFBA1CCC6CF2006D5F4D /* guitar_B2.mp3 */; };
+		C74DD0141CCC6CF2006D5F4D /* guitar_C2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFBB1CCC6CF2006D5F4D /* guitar_C2#.mp3 */; };
+		C74DD0151CCC6CF2006D5F4D /* guitar_C2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFBC1CCC6CF2006D5F4D /* guitar_C2.mp3 */; };
+		C74DD0161CCC6CF2006D5F4D /* guitar_D2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFBD1CCC6CF2006D5F4D /* guitar_D2#.mp3 */; };
+		C74DD0171CCC6CF2006D5F4D /* guitar_D2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFBE1CCC6CF2006D5F4D /* guitar_D2.mp3 */; };
+		C74DD0181CCC6CF2006D5F4D /* guitar_E2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFBF1CCC6CF2006D5F4D /* guitar_E2.mp3 */; };
+		C74DD0191CCC6CF2006D5F4D /* guitar_F2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFC01CCC6CF2006D5F4D /* guitar_F2#.mp3 */; };
+		C74DD01A1CCC6CF2006D5F4D /* guitar_F2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFC11CCC6CF2006D5F4D /* guitar_F2.mp3 */; };
+		C74DD01B1CCC6CF2006D5F4D /* guitar_G2#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFC21CCC6CF2006D5F4D /* guitar_G2#.mp3 */; };
+		C74DD01C1CCC6CF2006D5F4D /* guitar_G2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFC31CCC6CF2006D5F4D /* guitar_G2.mp3 */; };
+		C74DD01D1CCC6CF2006D5F4D /* guitar_A3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFC51CCC6CF2006D5F4D /* guitar_A3#.mp3 */; };
+		C74DD01E1CCC6CF2006D5F4D /* guitar_A3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFC61CCC6CF2006D5F4D /* guitar_A3.mp3 */; };
+		C74DD01F1CCC6CF2006D5F4D /* guitar_B3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFC71CCC6CF2006D5F4D /* guitar_B3.mp3 */; };
+		C74DD0201CCC6CF2006D5F4D /* guitar_C3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFC81CCC6CF2006D5F4D /* guitar_C3#.mp3 */; };
+		C74DD0211CCC6CF2006D5F4D /* guitar_C3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFC91CCC6CF2006D5F4D /* guitar_C3.mp3 */; };
+		C74DD0221CCC6CF2006D5F4D /* guitar_D3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFCA1CCC6CF2006D5F4D /* guitar_D3#.mp3 */; };
+		C74DD0231CCC6CF2006D5F4D /* guitar_D3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFCB1CCC6CF2006D5F4D /* guitar_D3.mp3 */; };
+		C74DD0241CCC6CF2006D5F4D /* guitar_E3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFCC1CCC6CF2006D5F4D /* guitar_E3.mp3 */; };
+		C74DD0251CCC6CF2006D5F4D /* guitar_F3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFCD1CCC6CF2006D5F4D /* guitar_F3#.mp3 */; };
+		C74DD0261CCC6CF2006D5F4D /* guitar_F3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFCE1CCC6CF2006D5F4D /* guitar_F3.mp3 */; };
+		C74DD0271CCC6CF2006D5F4D /* guitar_G3#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFCF1CCC6CF2006D5F4D /* guitar_G3#.mp3 */; };
+		C74DD0281CCC6CF2006D5F4D /* guitar_G3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFD01CCC6CF2006D5F4D /* guitar_G3.mp3 */; };
+		C74DD0291CCC6CF2006D5F4D /* guitar_A4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFD21CCC6CF2006D5F4D /* guitar_A4#.mp3 */; };
+		C74DD02A1CCC6CF2006D5F4D /* guitar_A4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFD31CCC6CF2006D5F4D /* guitar_A4.mp3 */; };
+		C74DD02B1CCC6CF2006D5F4D /* guitar_B4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFD41CCC6CF2006D5F4D /* guitar_B4.mp3 */; };
+		C74DD02C1CCC6CF2006D5F4D /* guitar_C4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFD51CCC6CF2006D5F4D /* guitar_C4#.mp3 */; };
+		C74DD02D1CCC6CF2006D5F4D /* guitar_C4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFD61CCC6CF2006D5F4D /* guitar_C4.mp3 */; };
+		C74DD02E1CCC6CF2006D5F4D /* guitar_D4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFD71CCC6CF2006D5F4D /* guitar_D4#.mp3 */; };
+		C74DD02F1CCC6CF2006D5F4D /* guitar_D4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFD81CCC6CF2006D5F4D /* guitar_D4.mp3 */; };
+		C74DD0301CCC6CF2006D5F4D /* guitar_E4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFD91CCC6CF2006D5F4D /* guitar_E4.mp3 */; };
+		C74DD0311CCC6CF2006D5F4D /* guitar_F4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFDA1CCC6CF2006D5F4D /* guitar_F4#.mp3 */; };
+		C74DD0321CCC6CF2006D5F4D /* guitar_F4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFDB1CCC6CF2006D5F4D /* guitar_F4.mp3 */; };
+		C74DD0331CCC6CF2006D5F4D /* guitar_G4#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFDC1CCC6CF2006D5F4D /* guitar_G4#.mp3 */; };
+		C74DD0341CCC6CF2006D5F4D /* guitar_G4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFDD1CCC6CF2006D5F4D /* guitar_G4.mp3 */; };
+		C74DD0351CCC6CF2006D5F4D /* guitar_A5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFDF1CCC6CF2006D5F4D /* guitar_A5#.mp3 */; };
+		C74DD0361CCC6CF2006D5F4D /* guitar_A5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFE01CCC6CF2006D5F4D /* guitar_A5.mp3 */; };
+		C74DD0371CCC6CF2006D5F4D /* guitar_B5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFE11CCC6CF2006D5F4D /* guitar_B5.mp3 */; };
+		C74DD0381CCC6CF2006D5F4D /* guitar_C5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFE21CCC6CF2006D5F4D /* guitar_C5#.mp3 */; };
+		C74DD0391CCC6CF2006D5F4D /* guitar_C5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFE31CCC6CF2006D5F4D /* guitar_C5.mp3 */; };
+		C74DD03A1CCC6CF2006D5F4D /* guitar_D5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFE41CCC6CF2006D5F4D /* guitar_D5#.mp3 */; };
+		C74DD03B1CCC6CF2006D5F4D /* guitar_D5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFE51CCC6CF2006D5F4D /* guitar_D5.mp3 */; };
+		C74DD03C1CCC6CF2006D5F4D /* guitar_E5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFE61CCC6CF2006D5F4D /* guitar_E5.mp3 */; };
+		C74DD03D1CCC6CF2006D5F4D /* guitar_F5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFE71CCC6CF2006D5F4D /* guitar_F5#.mp3 */; };
+		C74DD03E1CCC6CF2006D5F4D /* guitar_F5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFE81CCC6CF2006D5F4D /* guitar_F5.mp3 */; };
+		C74DD03F1CCC6CF2006D5F4D /* guitar_G5#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFE91CCC6CF2006D5F4D /* guitar_G5#.mp3 */; };
+		C74DD0401CCC6CF2006D5F4D /* guitar_G5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFEA1CCC6CF2006D5F4D /* guitar_G5.mp3 */; };
+		C74DD0411CCC6CF2006D5F4D /* guitar_A6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFEC1CCC6CF2006D5F4D /* guitar_A6#.mp3 */; };
+		C74DD0421CCC6CF2006D5F4D /* guitar_A6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFED1CCC6CF2006D5F4D /* guitar_A6.mp3 */; };
+		C74DD0431CCC6CF2006D5F4D /* guitar_B6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFEE1CCC6CF2006D5F4D /* guitar_B6.mp3 */; };
+		C74DD0441CCC6CF2006D5F4D /* guitar_C6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFEF1CCC6CF2006D5F4D /* guitar_C6#.mp3 */; };
+		C74DD0451CCC6CF2006D5F4D /* guitar_C6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFF01CCC6CF2006D5F4D /* guitar_C6.mp3 */; };
+		C74DD0461CCC6CF2006D5F4D /* guitar_D6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFF11CCC6CF2006D5F4D /* guitar_D6#.mp3 */; };
+		C74DD0471CCC6CF2006D5F4D /* guitar_D6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFF21CCC6CF2006D5F4D /* guitar_D6.mp3 */; };
+		C74DD0481CCC6CF2006D5F4D /* guitar_E6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFF31CCC6CF2006D5F4D /* guitar_E6.mp3 */; };
+		C74DD0491CCC6CF2006D5F4D /* guitar_F6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFF41CCC6CF2006D5F4D /* guitar_F6#.mp3 */; };
+		C74DD04A1CCC6CF2006D5F4D /* guitar_F6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFF51CCC6CF2006D5F4D /* guitar_F6.mp3 */; };
+		C74DD04B1CCC6CF2006D5F4D /* guitar_G6#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFF61CCC6CF2006D5F4D /* guitar_G6#.mp3 */; };
+		C74DD04C1CCC6CF2006D5F4D /* guitar_G6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFF71CCC6CF2006D5F4D /* guitar_G6.mp3 */; };
+		C74DD04D1CCC6CF2006D5F4D /* guitar_A7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFF91CCC6CF2006D5F4D /* guitar_A7#.mp3 */; };
+		C74DD04E1CCC6CF2006D5F4D /* guitar_A7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFFA1CCC6CF2006D5F4D /* guitar_A7.mp3 */; };
+		C74DD04F1CCC6CF2006D5F4D /* guitar_B7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFFB1CCC6CF2006D5F4D /* guitar_B7.mp3 */; };
+		C74DD0501CCC6CF2006D5F4D /* guitar_C7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFFC1CCC6CF2006D5F4D /* guitar_C7#.mp3 */; };
+		C74DD0511CCC6CF2006D5F4D /* guitar_C7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFFD1CCC6CF2006D5F4D /* guitar_C7.mp3 */; };
+		C74DD0521CCC6CF2006D5F4D /* guitar_D7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFFE1CCC6CF2006D5F4D /* guitar_D7#.mp3 */; };
+		C74DD0531CCC6CF2006D5F4D /* guitar_D7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCFFF1CCC6CF2006D5F4D /* guitar_D7.mp3 */; };
+		C74DD0541CCC6CF2006D5F4D /* guitar_E7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DD0001CCC6CF2006D5F4D /* guitar_E7.mp3 */; };
+		C74DD0551CCC6CF2006D5F4D /* guitar_F7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DD0011CCC6CF2006D5F4D /* guitar_F7#.mp3 */; };
+		C74DD0561CCC6CF2006D5F4D /* guitar_F7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DD0021CCC6CF2006D5F4D /* guitar_F7.mp3 */; };
+		C74DD0571CCC6CF2006D5F4D /* guitar_G7#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DD0031CCC6CF2006D5F4D /* guitar_G7#.mp3 */; };
+		C74DD0581CCC6CF2006D5F4D /* guitar_G7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DD0041CCC6CF2006D5F4D /* guitar_G7.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -153,90 +237,6 @@
 		C74B812D1CBE358F005307FF /* iKeyboardMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iKeyboardMenuViewController.m; sourceTree = "<group>"; };
 		C74B81411CBE4325005307FF /* iKeyboardNormalModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iKeyboardNormalModeViewController.h; sourceTree = "<group>"; };
 		C74B81421CBE4325005307FF /* iKeyboardNormalModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iKeyboardNormalModeViewController.m; sourceTree = "<group>"; };
-		C74DCDF61CCBCAEA006D5F4D /* piano_A1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A1#.mp3"; sourceTree = "<group>"; };
-		C74DCDF71CCBCAEA006D5F4D /* piano_A1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A1.mp3; sourceTree = "<group>"; };
-		C74DCDF81CCBCAEA006D5F4D /* piano_B1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B1.mp3; sourceTree = "<group>"; };
-		C74DCDF91CCBCAEA006D5F4D /* piano_C1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_C1#.mp3"; sourceTree = "<group>"; };
-		C74DCDFA1CCBCAEA006D5F4D /* piano_C1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_C1.mp3; sourceTree = "<group>"; };
-		C74DCDFB1CCBCAEA006D5F4D /* piano_D1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_D1#.mp3"; sourceTree = "<group>"; };
-		C74DCDFC1CCBCAEA006D5F4D /* piano_D1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_D1.mp3; sourceTree = "<group>"; };
-		C74DCDFD1CCBCAEA006D5F4D /* piano_E1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_E1.mp3; sourceTree = "<group>"; };
-		C74DCDFE1CCBCAEA006D5F4D /* piano_F1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_F1#.mp3"; sourceTree = "<group>"; };
-		C74DCDFF1CCBCAEA006D5F4D /* piano_F1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_F1.mp3; sourceTree = "<group>"; };
-		C74DCE001CCBCAEA006D5F4D /* piano_G1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_G1#.mp3"; sourceTree = "<group>"; };
-		C74DCE011CCBCAEA006D5F4D /* piano_G1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_G1.mp3; sourceTree = "<group>"; };
-		C74DCE031CCBCAEA006D5F4D /* piano_A2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A2#.mp3"; sourceTree = "<group>"; };
-		C74DCE041CCBCAEA006D5F4D /* piano_A2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A2.mp3; sourceTree = "<group>"; };
-		C74DCE051CCBCAEA006D5F4D /* piano_B2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B2.mp3; sourceTree = "<group>"; };
-		C74DCE061CCBCAEA006D5F4D /* piano_C2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_C2#.mp3"; sourceTree = "<group>"; };
-		C74DCE071CCBCAEA006D5F4D /* piano_C2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_C2.mp3; sourceTree = "<group>"; };
-		C74DCE081CCBCAEA006D5F4D /* piano_D2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_D2#.mp3"; sourceTree = "<group>"; };
-		C74DCE091CCBCAEA006D5F4D /* piano_D2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_D2.mp3; sourceTree = "<group>"; };
-		C74DCE0A1CCBCAEA006D5F4D /* piano_E2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_E2.mp3; sourceTree = "<group>"; };
-		C74DCE0B1CCBCAEA006D5F4D /* piano_F2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_F2#.mp3"; sourceTree = "<group>"; };
-		C74DCE0C1CCBCAEA006D5F4D /* piano_F2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_F2.mp3; sourceTree = "<group>"; };
-		C74DCE0D1CCBCAEA006D5F4D /* piano_G2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_G2#.mp3"; sourceTree = "<group>"; };
-		C74DCE0E1CCBCAEA006D5F4D /* piano_G2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_G2.mp3; sourceTree = "<group>"; };
-		C74DCE101CCBCAEA006D5F4D /* piano_A3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A3#.mp3"; sourceTree = "<group>"; };
-		C74DCE111CCBCAEA006D5F4D /* piano_A3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A3.mp3; sourceTree = "<group>"; };
-		C74DCE121CCBCAEA006D5F4D /* piano_B3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B3.mp3; sourceTree = "<group>"; };
-		C74DCE131CCBCAEA006D5F4D /* piano_C3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_C3#.mp3"; sourceTree = "<group>"; };
-		C74DCE141CCBCAEA006D5F4D /* piano_C3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_C3.mp3; sourceTree = "<group>"; };
-		C74DCE151CCBCAEA006D5F4D /* piano_D3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_D3#.mp3"; sourceTree = "<group>"; };
-		C74DCE161CCBCAEA006D5F4D /* piano_D3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_D3.mp3; sourceTree = "<group>"; };
-		C74DCE171CCBCAEA006D5F4D /* piano_E3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_E3.mp3; sourceTree = "<group>"; };
-		C74DCE181CCBCAEA006D5F4D /* piano_F3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_F3#.mp3"; sourceTree = "<group>"; };
-		C74DCE191CCBCAEA006D5F4D /* piano_F3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_F3.mp3; sourceTree = "<group>"; };
-		C74DCE1A1CCBCAEA006D5F4D /* piano_G3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_G3#.mp3"; sourceTree = "<group>"; };
-		C74DCE1B1CCBCAEA006D5F4D /* piano_G3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_G3.mp3; sourceTree = "<group>"; };
-		C74DCE1D1CCBCAEA006D5F4D /* piano_A4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A4#.mp3"; sourceTree = "<group>"; };
-		C74DCE1E1CCBCAEA006D5F4D /* piano_A4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A4.mp3; sourceTree = "<group>"; };
-		C74DCE1F1CCBCAEA006D5F4D /* piano_B4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B4.mp3; sourceTree = "<group>"; };
-		C74DCE201CCBCAEA006D5F4D /* piano_C4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_C4#.mp3"; sourceTree = "<group>"; };
-		C74DCE211CCBCAEA006D5F4D /* piano_C4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_C4.mp3; sourceTree = "<group>"; };
-		C74DCE221CCBCAEA006D5F4D /* piano_D4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_D4#.mp3"; sourceTree = "<group>"; };
-		C74DCE231CCBCAEA006D5F4D /* piano_D4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_D4.mp3; sourceTree = "<group>"; };
-		C74DCE241CCBCAEA006D5F4D /* piano_E4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_E4.mp3; sourceTree = "<group>"; };
-		C74DCE251CCBCAEA006D5F4D /* piano_F4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_F4#.mp3"; sourceTree = "<group>"; };
-		C74DCE261CCBCAEA006D5F4D /* piano_F4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_F4.mp3; sourceTree = "<group>"; };
-		C74DCE271CCBCAEA006D5F4D /* piano_G4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_G4#.mp3"; sourceTree = "<group>"; };
-		C74DCE281CCBCAEA006D5F4D /* piano_G4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_G4.mp3; sourceTree = "<group>"; };
-		C74DCE2A1CCBCAEA006D5F4D /* piano_A5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A5#.mp3"; sourceTree = "<group>"; };
-		C74DCE2B1CCBCAEA006D5F4D /* piano_A5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A5.mp3; sourceTree = "<group>"; };
-		C74DCE2C1CCBCAEA006D5F4D /* piano_B5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B5.mp3; sourceTree = "<group>"; };
-		C74DCE2D1CCBCAEA006D5F4D /* piano_C5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_C5#.mp3"; sourceTree = "<group>"; };
-		C74DCE2E1CCBCAEA006D5F4D /* piano_C5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_C5.mp3; sourceTree = "<group>"; };
-		C74DCE2F1CCBCAEA006D5F4D /* piano_D5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_D5#.mp3"; sourceTree = "<group>"; };
-		C74DCE301CCBCAEA006D5F4D /* piano_D5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_D5.mp3; sourceTree = "<group>"; };
-		C74DCE311CCBCAEA006D5F4D /* piano_E5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_E5.mp3; sourceTree = "<group>"; };
-		C74DCE321CCBCAEA006D5F4D /* piano_F5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_F5#.mp3"; sourceTree = "<group>"; };
-		C74DCE331CCBCAEA006D5F4D /* piano_F5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_F5.mp3; sourceTree = "<group>"; };
-		C74DCE341CCBCAEA006D5F4D /* piano_G5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_G5#.mp3"; sourceTree = "<group>"; };
-		C74DCE351CCBCAEA006D5F4D /* piano_G5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_G5.mp3; sourceTree = "<group>"; };
-		C74DCE371CCBCAEA006D5F4D /* piano_A6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A6#.mp3"; sourceTree = "<group>"; };
-		C74DCE381CCBCAEA006D5F4D /* piano_A6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A6.mp3; sourceTree = "<group>"; };
-		C74DCE391CCBCAEA006D5F4D /* piano_B6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B6.mp3; sourceTree = "<group>"; };
-		C74DCE3A1CCBCAEA006D5F4D /* piano_C6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_C6#.mp3"; sourceTree = "<group>"; };
-		C74DCE3B1CCBCAEA006D5F4D /* piano_C6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_C6.mp3; sourceTree = "<group>"; };
-		C74DCE3C1CCBCAEA006D5F4D /* piano_D6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_D6#.mp3"; sourceTree = "<group>"; };
-		C74DCE3D1CCBCAEA006D5F4D /* piano_D6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_D6.mp3; sourceTree = "<group>"; };
-		C74DCE3E1CCBCAEA006D5F4D /* piano_E6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_E6.mp3; sourceTree = "<group>"; };
-		C74DCE3F1CCBCAEA006D5F4D /* piano_F6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_F6#.mp3"; sourceTree = "<group>"; };
-		C74DCE401CCBCAEA006D5F4D /* piano_F6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_F6.mp3; sourceTree = "<group>"; };
-		C74DCE411CCBCAEA006D5F4D /* piano_G6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_G6#.mp3"; sourceTree = "<group>"; };
-		C74DCE421CCBCAEA006D5F4D /* piano_G6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_G6.mp3; sourceTree = "<group>"; };
-		C74DCE441CCBCAEA006D5F4D /* piano_A7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A7#.mp3"; sourceTree = "<group>"; };
-		C74DCE451CCBCAEA006D5F4D /* piano_A7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A7.mp3; sourceTree = "<group>"; };
-		C74DCE461CCBCAEA006D5F4D /* piano_B7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B7.mp3; sourceTree = "<group>"; };
-		C74DCE471CCBCAEA006D5F4D /* piano_C7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_C7#.mp3"; sourceTree = "<group>"; };
-		C74DCE481CCBCAEA006D5F4D /* piano_C7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_C7.mp3; sourceTree = "<group>"; };
-		C74DCE491CCBCAEA006D5F4D /* piano_D7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_D7#.mp3"; sourceTree = "<group>"; };
-		C74DCE4A1CCBCAEA006D5F4D /* piano_D7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_D7.mp3; sourceTree = "<group>"; };
-		C74DCE4B1CCBCAEA006D5F4D /* piano_E7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_E7.mp3; sourceTree = "<group>"; };
-		C74DCE4C1CCBCAEA006D5F4D /* piano_F7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_F7#.mp3"; sourceTree = "<group>"; };
-		C74DCE4D1CCBCAEA006D5F4D /* piano_F7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_F7.mp3; sourceTree = "<group>"; };
-		C74DCE4E1CCBCAEA006D5F4D /* piano_G7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_G7#.mp3"; sourceTree = "<group>"; };
-		C74DCE4F1CCBCAEA006D5F4D /* piano_G7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_G7.mp3; sourceTree = "<group>"; };
 		C74DCEA51CCBD516006D5F4D /* blueToothIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueToothIcon.png; sourceTree = "<group>"; };
 		C74DCEA61CCBD516006D5F4D /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame.png; sourceTree = "<group>"; };
 		C74DCEA81CCBD516006D5F4D /* guitar_outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guitar_outline.png; sourceTree = "<group>"; };
@@ -277,6 +277,174 @@
 		C74DCECE1CCBD517006D5F4D /* part_of_keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = part_of_keyboard.png; sourceTree = "<group>"; };
 		C74DCECF1CCBD517006D5F4D /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightArrow.png; sourceTree = "<group>"; };
 		C74DCED01CCBD517006D5F4D /* tablature.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tablature.jpg; sourceTree = "<group>"; };
+		C74DCEFB1CCBE0C4006D5F4D /* piano_A1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A1#.mp3"; sourceTree = "<group>"; };
+		C74DCEFC1CCBE0C4006D5F4D /* piano_A1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A1.mp3; sourceTree = "<group>"; };
+		C74DCEFD1CCBE0C4006D5F4D /* piano_B1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B1.mp3; sourceTree = "<group>"; };
+		C74DCEFE1CCBE0C4006D5F4D /* piano_C1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_C1#.mp3"; sourceTree = "<group>"; };
+		C74DCEFF1CCBE0C4006D5F4D /* piano_C1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_C1.mp3; sourceTree = "<group>"; };
+		C74DCF001CCBE0C4006D5F4D /* piano_D1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_D1#.mp3"; sourceTree = "<group>"; };
+		C74DCF011CCBE0C4006D5F4D /* piano_D1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_D1.mp3; sourceTree = "<group>"; };
+		C74DCF021CCBE0C4006D5F4D /* piano_E1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_E1.mp3; sourceTree = "<group>"; };
+		C74DCF031CCBE0C4006D5F4D /* piano_F1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_F1#.mp3"; sourceTree = "<group>"; };
+		C74DCF041CCBE0C4006D5F4D /* piano_F1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_F1.mp3; sourceTree = "<group>"; };
+		C74DCF051CCBE0C4006D5F4D /* piano_G1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_G1#.mp3"; sourceTree = "<group>"; };
+		C74DCF061CCBE0C4006D5F4D /* piano_G1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_G1.mp3; sourceTree = "<group>"; };
+		C74DCF081CCBE0C4006D5F4D /* piano_A2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A2#.mp3"; sourceTree = "<group>"; };
+		C74DCF091CCBE0C4006D5F4D /* piano_A2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A2.mp3; sourceTree = "<group>"; };
+		C74DCF0A1CCBE0C4006D5F4D /* piano_B2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B2.mp3; sourceTree = "<group>"; };
+		C74DCF0B1CCBE0C4006D5F4D /* piano_C2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_C2#.mp3"; sourceTree = "<group>"; };
+		C74DCF0C1CCBE0C4006D5F4D /* piano_C2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_C2.mp3; sourceTree = "<group>"; };
+		C74DCF0D1CCBE0C4006D5F4D /* piano_D2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_D2#.mp3"; sourceTree = "<group>"; };
+		C74DCF0E1CCBE0C4006D5F4D /* piano_D2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_D2.mp3; sourceTree = "<group>"; };
+		C74DCF0F1CCBE0C4006D5F4D /* piano_E2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_E2.mp3; sourceTree = "<group>"; };
+		C74DCF101CCBE0C4006D5F4D /* piano_F2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_F2#.mp3"; sourceTree = "<group>"; };
+		C74DCF111CCBE0C4006D5F4D /* piano_F2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_F2.mp3; sourceTree = "<group>"; };
+		C74DCF121CCBE0C4006D5F4D /* piano_G2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_G2#.mp3"; sourceTree = "<group>"; };
+		C74DCF131CCBE0C4006D5F4D /* piano_G2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_G2.mp3; sourceTree = "<group>"; };
+		C74DCF151CCBE0C4006D5F4D /* piano_A3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A3#.mp3"; sourceTree = "<group>"; };
+		C74DCF161CCBE0C4006D5F4D /* piano_A3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A3.mp3; sourceTree = "<group>"; };
+		C74DCF171CCBE0C4006D5F4D /* piano_B3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B3.mp3; sourceTree = "<group>"; };
+		C74DCF181CCBE0C4006D5F4D /* piano_C3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_C3#.mp3"; sourceTree = "<group>"; };
+		C74DCF191CCBE0C4006D5F4D /* piano_C3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_C3.mp3; sourceTree = "<group>"; };
+		C74DCF1A1CCBE0C4006D5F4D /* piano_D3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_D3#.mp3"; sourceTree = "<group>"; };
+		C74DCF1B1CCBE0C4006D5F4D /* piano_D3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_D3.mp3; sourceTree = "<group>"; };
+		C74DCF1C1CCBE0C4006D5F4D /* piano_E3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_E3.mp3; sourceTree = "<group>"; };
+		C74DCF1D1CCBE0C4006D5F4D /* piano_F3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_F3#.mp3"; sourceTree = "<group>"; };
+		C74DCF1E1CCBE0C4006D5F4D /* piano_F3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_F3.mp3; sourceTree = "<group>"; };
+		C74DCF1F1CCBE0C4006D5F4D /* piano_G3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_G3#.mp3"; sourceTree = "<group>"; };
+		C74DCF201CCBE0C4006D5F4D /* piano_G3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_G3.mp3; sourceTree = "<group>"; };
+		C74DCF221CCBE0C4006D5F4D /* piano_A4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A4#.mp3"; sourceTree = "<group>"; };
+		C74DCF231CCBE0C4006D5F4D /* piano_A4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A4.mp3; sourceTree = "<group>"; };
+		C74DCF241CCBE0C4006D5F4D /* piano_B4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B4.mp3; sourceTree = "<group>"; };
+		C74DCF251CCBE0C4006D5F4D /* piano_C4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_C4#.mp3"; sourceTree = "<group>"; };
+		C74DCF261CCBE0C4006D5F4D /* piano_C4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_C4.mp3; sourceTree = "<group>"; };
+		C74DCF271CCBE0C4006D5F4D /* piano_D4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_D4#.mp3"; sourceTree = "<group>"; };
+		C74DCF281CCBE0C4006D5F4D /* piano_D4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_D4.mp3; sourceTree = "<group>"; };
+		C74DCF291CCBE0C4006D5F4D /* piano_E4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_E4.mp3; sourceTree = "<group>"; };
+		C74DCF2A1CCBE0C4006D5F4D /* piano_F4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_F4#.mp3"; sourceTree = "<group>"; };
+		C74DCF2B1CCBE0C4006D5F4D /* piano_F4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_F4.mp3; sourceTree = "<group>"; };
+		C74DCF2C1CCBE0C4006D5F4D /* piano_G4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_G4#.mp3"; sourceTree = "<group>"; };
+		C74DCF2D1CCBE0C4006D5F4D /* piano_G4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_G4.mp3; sourceTree = "<group>"; };
+		C74DCF2F1CCBE0C4006D5F4D /* piano_A5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A5#.mp3"; sourceTree = "<group>"; };
+		C74DCF301CCBE0C4006D5F4D /* piano_A5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A5.mp3; sourceTree = "<group>"; };
+		C74DCF311CCBE0C4006D5F4D /* piano_B5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B5.mp3; sourceTree = "<group>"; };
+		C74DCF321CCBE0C4006D5F4D /* piano_C5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_C5#.mp3"; sourceTree = "<group>"; };
+		C74DCF331CCBE0C4006D5F4D /* piano_C5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_C5.mp3; sourceTree = "<group>"; };
+		C74DCF341CCBE0C4006D5F4D /* piano_D5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_D5#.mp3"; sourceTree = "<group>"; };
+		C74DCF351CCBE0C4006D5F4D /* piano_D5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_D5.mp3; sourceTree = "<group>"; };
+		C74DCF361CCBE0C4006D5F4D /* piano_E5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_E5.mp3; sourceTree = "<group>"; };
+		C74DCF371CCBE0C4006D5F4D /* piano_F5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_F5#.mp3"; sourceTree = "<group>"; };
+		C74DCF381CCBE0C4006D5F4D /* piano_F5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_F5.mp3; sourceTree = "<group>"; };
+		C74DCF391CCBE0C4006D5F4D /* piano_G5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_G5#.mp3"; sourceTree = "<group>"; };
+		C74DCF3A1CCBE0C4006D5F4D /* piano_G5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_G5.mp3; sourceTree = "<group>"; };
+		C74DCF3C1CCBE0C4006D5F4D /* piano_A6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A6#.mp3"; sourceTree = "<group>"; };
+		C74DCF3D1CCBE0C4006D5F4D /* piano_A6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A6.mp3; sourceTree = "<group>"; };
+		C74DCF3E1CCBE0C4006D5F4D /* piano_B6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B6.mp3; sourceTree = "<group>"; };
+		C74DCF3F1CCBE0C4006D5F4D /* piano_C6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_C6#.mp3"; sourceTree = "<group>"; };
+		C74DCF401CCBE0C4006D5F4D /* piano_C6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_C6.mp3; sourceTree = "<group>"; };
+		C74DCF411CCBE0C4006D5F4D /* piano_D6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_D6#.mp3"; sourceTree = "<group>"; };
+		C74DCF421CCBE0C4006D5F4D /* piano_D6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_D6.mp3; sourceTree = "<group>"; };
+		C74DCF431CCBE0C4006D5F4D /* piano_E6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_E6.mp3; sourceTree = "<group>"; };
+		C74DCF441CCBE0C4006D5F4D /* piano_F6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_F6#.mp3"; sourceTree = "<group>"; };
+		C74DCF451CCBE0C4006D5F4D /* piano_F6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_F6.mp3; sourceTree = "<group>"; };
+		C74DCF461CCBE0C4006D5F4D /* piano_G6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_G6#.mp3"; sourceTree = "<group>"; };
+		C74DCF471CCBE0C4006D5F4D /* piano_G6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_G6.mp3; sourceTree = "<group>"; };
+		C74DCF491CCBE0C4006D5F4D /* piano_A7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A7#.mp3"; sourceTree = "<group>"; };
+		C74DCF4A1CCBE0C4006D5F4D /* piano_A7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A7.mp3; sourceTree = "<group>"; };
+		C74DCF4B1CCBE0C4006D5F4D /* piano_B7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B7.mp3; sourceTree = "<group>"; };
+		C74DCF4C1CCBE0C4006D5F4D /* piano_C7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_C7#.mp3"; sourceTree = "<group>"; };
+		C74DCF4D1CCBE0C4006D5F4D /* piano_C7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_C7.mp3; sourceTree = "<group>"; };
+		C74DCF4E1CCBE0C4006D5F4D /* piano_D7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_D7#.mp3"; sourceTree = "<group>"; };
+		C74DCF4F1CCBE0C4006D5F4D /* piano_D7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_D7.mp3; sourceTree = "<group>"; };
+		C74DCF501CCBE0C4006D5F4D /* piano_E7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_E7.mp3; sourceTree = "<group>"; };
+		C74DCF511CCBE0C4006D5F4D /* piano_F7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_F7#.mp3"; sourceTree = "<group>"; };
+		C74DCF521CCBE0C4006D5F4D /* piano_F7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_F7.mp3; sourceTree = "<group>"; };
+		C74DCF531CCBE0C4006D5F4D /* piano_G7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_G7#.mp3"; sourceTree = "<group>"; };
+		C74DCF541CCBE0C4006D5F4D /* piano_G7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_G7.mp3; sourceTree = "<group>"; };
+		C74DCFAB1CCC6CF2006D5F4D /* guitar_A1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_A1#.mp3"; sourceTree = "<group>"; };
+		C74DCFAC1CCC6CF2006D5F4D /* guitar_A1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_A1.mp3; sourceTree = "<group>"; };
+		C74DCFAD1CCC6CF2006D5F4D /* guitar_B1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_B1.mp3; sourceTree = "<group>"; };
+		C74DCFAE1CCC6CF2006D5F4D /* guitar_C1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_C1#.mp3"; sourceTree = "<group>"; };
+		C74DCFAF1CCC6CF2006D5F4D /* guitar_C1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_C1.mp3; sourceTree = "<group>"; };
+		C74DCFB01CCC6CF2006D5F4D /* guitar_D1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_D1#.mp3"; sourceTree = "<group>"; };
+		C74DCFB11CCC6CF2006D5F4D /* guitar_D1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_D1.mp3; sourceTree = "<group>"; };
+		C74DCFB21CCC6CF2006D5F4D /* guitar_E1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_E1.mp3; sourceTree = "<group>"; };
+		C74DCFB31CCC6CF2006D5F4D /* guitar_F1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_F1#.mp3"; sourceTree = "<group>"; };
+		C74DCFB41CCC6CF2006D5F4D /* guitar_F1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_F1.mp3; sourceTree = "<group>"; };
+		C74DCFB51CCC6CF2006D5F4D /* guitar_G1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_G1#.mp3"; sourceTree = "<group>"; };
+		C74DCFB61CCC6CF2006D5F4D /* guitar_G1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_G1.mp3; sourceTree = "<group>"; };
+		C74DCFB81CCC6CF2006D5F4D /* guitar_A2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_A2#.mp3"; sourceTree = "<group>"; };
+		C74DCFB91CCC6CF2006D5F4D /* guitar_A2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_A2.mp3; sourceTree = "<group>"; };
+		C74DCFBA1CCC6CF2006D5F4D /* guitar_B2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_B2.mp3; sourceTree = "<group>"; };
+		C74DCFBB1CCC6CF2006D5F4D /* guitar_C2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_C2#.mp3"; sourceTree = "<group>"; };
+		C74DCFBC1CCC6CF2006D5F4D /* guitar_C2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_C2.mp3; sourceTree = "<group>"; };
+		C74DCFBD1CCC6CF2006D5F4D /* guitar_D2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_D2#.mp3"; sourceTree = "<group>"; };
+		C74DCFBE1CCC6CF2006D5F4D /* guitar_D2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_D2.mp3; sourceTree = "<group>"; };
+		C74DCFBF1CCC6CF2006D5F4D /* guitar_E2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_E2.mp3; sourceTree = "<group>"; };
+		C74DCFC01CCC6CF2006D5F4D /* guitar_F2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_F2#.mp3"; sourceTree = "<group>"; };
+		C74DCFC11CCC6CF2006D5F4D /* guitar_F2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_F2.mp3; sourceTree = "<group>"; };
+		C74DCFC21CCC6CF2006D5F4D /* guitar_G2#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_G2#.mp3"; sourceTree = "<group>"; };
+		C74DCFC31CCC6CF2006D5F4D /* guitar_G2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_G2.mp3; sourceTree = "<group>"; };
+		C74DCFC51CCC6CF2006D5F4D /* guitar_A3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_A3#.mp3"; sourceTree = "<group>"; };
+		C74DCFC61CCC6CF2006D5F4D /* guitar_A3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_A3.mp3; sourceTree = "<group>"; };
+		C74DCFC71CCC6CF2006D5F4D /* guitar_B3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_B3.mp3; sourceTree = "<group>"; };
+		C74DCFC81CCC6CF2006D5F4D /* guitar_C3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_C3#.mp3"; sourceTree = "<group>"; };
+		C74DCFC91CCC6CF2006D5F4D /* guitar_C3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_C3.mp3; sourceTree = "<group>"; };
+		C74DCFCA1CCC6CF2006D5F4D /* guitar_D3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_D3#.mp3"; sourceTree = "<group>"; };
+		C74DCFCB1CCC6CF2006D5F4D /* guitar_D3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_D3.mp3; sourceTree = "<group>"; };
+		C74DCFCC1CCC6CF2006D5F4D /* guitar_E3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_E3.mp3; sourceTree = "<group>"; };
+		C74DCFCD1CCC6CF2006D5F4D /* guitar_F3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_F3#.mp3"; sourceTree = "<group>"; };
+		C74DCFCE1CCC6CF2006D5F4D /* guitar_F3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_F3.mp3; sourceTree = "<group>"; };
+		C74DCFCF1CCC6CF2006D5F4D /* guitar_G3#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_G3#.mp3"; sourceTree = "<group>"; };
+		C74DCFD01CCC6CF2006D5F4D /* guitar_G3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_G3.mp3; sourceTree = "<group>"; };
+		C74DCFD21CCC6CF2006D5F4D /* guitar_A4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_A4#.mp3"; sourceTree = "<group>"; };
+		C74DCFD31CCC6CF2006D5F4D /* guitar_A4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_A4.mp3; sourceTree = "<group>"; };
+		C74DCFD41CCC6CF2006D5F4D /* guitar_B4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_B4.mp3; sourceTree = "<group>"; };
+		C74DCFD51CCC6CF2006D5F4D /* guitar_C4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_C4#.mp3"; sourceTree = "<group>"; };
+		C74DCFD61CCC6CF2006D5F4D /* guitar_C4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_C4.mp3; sourceTree = "<group>"; };
+		C74DCFD71CCC6CF2006D5F4D /* guitar_D4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_D4#.mp3"; sourceTree = "<group>"; };
+		C74DCFD81CCC6CF2006D5F4D /* guitar_D4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_D4.mp3; sourceTree = "<group>"; };
+		C74DCFD91CCC6CF2006D5F4D /* guitar_E4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_E4.mp3; sourceTree = "<group>"; };
+		C74DCFDA1CCC6CF2006D5F4D /* guitar_F4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_F4#.mp3"; sourceTree = "<group>"; };
+		C74DCFDB1CCC6CF2006D5F4D /* guitar_F4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_F4.mp3; sourceTree = "<group>"; };
+		C74DCFDC1CCC6CF2006D5F4D /* guitar_G4#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_G4#.mp3"; sourceTree = "<group>"; };
+		C74DCFDD1CCC6CF2006D5F4D /* guitar_G4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_G4.mp3; sourceTree = "<group>"; };
+		C74DCFDF1CCC6CF2006D5F4D /* guitar_A5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_A5#.mp3"; sourceTree = "<group>"; };
+		C74DCFE01CCC6CF2006D5F4D /* guitar_A5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_A5.mp3; sourceTree = "<group>"; };
+		C74DCFE11CCC6CF2006D5F4D /* guitar_B5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_B5.mp3; sourceTree = "<group>"; };
+		C74DCFE21CCC6CF2006D5F4D /* guitar_C5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_C5#.mp3"; sourceTree = "<group>"; };
+		C74DCFE31CCC6CF2006D5F4D /* guitar_C5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_C5.mp3; sourceTree = "<group>"; };
+		C74DCFE41CCC6CF2006D5F4D /* guitar_D5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_D5#.mp3"; sourceTree = "<group>"; };
+		C74DCFE51CCC6CF2006D5F4D /* guitar_D5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_D5.mp3; sourceTree = "<group>"; };
+		C74DCFE61CCC6CF2006D5F4D /* guitar_E5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_E5.mp3; sourceTree = "<group>"; };
+		C74DCFE71CCC6CF2006D5F4D /* guitar_F5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_F5#.mp3"; sourceTree = "<group>"; };
+		C74DCFE81CCC6CF2006D5F4D /* guitar_F5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_F5.mp3; sourceTree = "<group>"; };
+		C74DCFE91CCC6CF2006D5F4D /* guitar_G5#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_G5#.mp3"; sourceTree = "<group>"; };
+		C74DCFEA1CCC6CF2006D5F4D /* guitar_G5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_G5.mp3; sourceTree = "<group>"; };
+		C74DCFEC1CCC6CF2006D5F4D /* guitar_A6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_A6#.mp3"; sourceTree = "<group>"; };
+		C74DCFED1CCC6CF2006D5F4D /* guitar_A6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_A6.mp3; sourceTree = "<group>"; };
+		C74DCFEE1CCC6CF2006D5F4D /* guitar_B6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_B6.mp3; sourceTree = "<group>"; };
+		C74DCFEF1CCC6CF2006D5F4D /* guitar_C6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_C6#.mp3"; sourceTree = "<group>"; };
+		C74DCFF01CCC6CF2006D5F4D /* guitar_C6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_C6.mp3; sourceTree = "<group>"; };
+		C74DCFF11CCC6CF2006D5F4D /* guitar_D6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_D6#.mp3"; sourceTree = "<group>"; };
+		C74DCFF21CCC6CF2006D5F4D /* guitar_D6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_D6.mp3; sourceTree = "<group>"; };
+		C74DCFF31CCC6CF2006D5F4D /* guitar_E6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_E6.mp3; sourceTree = "<group>"; };
+		C74DCFF41CCC6CF2006D5F4D /* guitar_F6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_F6#.mp3"; sourceTree = "<group>"; };
+		C74DCFF51CCC6CF2006D5F4D /* guitar_F6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_F6.mp3; sourceTree = "<group>"; };
+		C74DCFF61CCC6CF2006D5F4D /* guitar_G6#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_G6#.mp3"; sourceTree = "<group>"; };
+		C74DCFF71CCC6CF2006D5F4D /* guitar_G6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_G6.mp3; sourceTree = "<group>"; };
+		C74DCFF91CCC6CF2006D5F4D /* guitar_A7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_A7#.mp3"; sourceTree = "<group>"; };
+		C74DCFFA1CCC6CF2006D5F4D /* guitar_A7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_A7.mp3; sourceTree = "<group>"; };
+		C74DCFFB1CCC6CF2006D5F4D /* guitar_B7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_B7.mp3; sourceTree = "<group>"; };
+		C74DCFFC1CCC6CF2006D5F4D /* guitar_C7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_C7#.mp3"; sourceTree = "<group>"; };
+		C74DCFFD1CCC6CF2006D5F4D /* guitar_C7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_C7.mp3; sourceTree = "<group>"; };
+		C74DCFFE1CCC6CF2006D5F4D /* guitar_D7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_D7#.mp3"; sourceTree = "<group>"; };
+		C74DCFFF1CCC6CF2006D5F4D /* guitar_D7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_D7.mp3; sourceTree = "<group>"; };
+		C74DD0001CCC6CF2006D5F4D /* guitar_E7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_E7.mp3; sourceTree = "<group>"; };
+		C74DD0011CCC6CF2006D5F4D /* guitar_F7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_F7#.mp3"; sourceTree = "<group>"; };
+		C74DD0021CCC6CF2006D5F4D /* guitar_F7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_F7.mp3; sourceTree = "<group>"; };
+		C74DD0031CCC6CF2006D5F4D /* guitar_G7#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "guitar_G7#.mp3"; sourceTree = "<group>"; };
+		C74DD0041CCC6CF2006D5F4D /* guitar_G7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_G7.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,156 +505,10 @@
 		C74B815C1CBF9FC6005307FF /* voice */ = {
 			isa = PBXGroup;
 			children = (
-				C74DCDF41CCBCAEA006D5F4D /* piano */,
+				C74DCFA91CCC6CF2006D5F4D /* guitar */,
+				C74DCEF91CCBE0C4006D5F4D /* piano */,
 			);
 			path = voice;
-			sourceTree = "<group>";
-		};
-		C74DCDF41CCBCAEA006D5F4D /* piano */ = {
-			isa = PBXGroup;
-			children = (
-				C74DCDF51CCBCAEA006D5F4D /* ocative1 */,
-				C74DCE021CCBCAEA006D5F4D /* ocative2 */,
-				C74DCE0F1CCBCAEA006D5F4D /* ocative3 */,
-				C74DCE1C1CCBCAEA006D5F4D /* ocative4 */,
-				C74DCE291CCBCAEA006D5F4D /* ocative5 */,
-				C74DCE361CCBCAEA006D5F4D /* ocative6 */,
-				C74DCE431CCBCAEA006D5F4D /* ocative7 */,
-			);
-			path = piano;
-			sourceTree = "<group>";
-		};
-		C74DCDF51CCBCAEA006D5F4D /* ocative1 */ = {
-			isa = PBXGroup;
-			children = (
-				C74DCDF61CCBCAEA006D5F4D /* piano_A1#.mp3 */,
-				C74DCDF71CCBCAEA006D5F4D /* piano_A1.mp3 */,
-				C74DCDF81CCBCAEA006D5F4D /* piano_B1.mp3 */,
-				C74DCDF91CCBCAEA006D5F4D /* piano_C1#.mp3 */,
-				C74DCDFA1CCBCAEA006D5F4D /* piano_C1.mp3 */,
-				C74DCDFB1CCBCAEA006D5F4D /* piano_D1#.mp3 */,
-				C74DCDFC1CCBCAEA006D5F4D /* piano_D1.mp3 */,
-				C74DCDFD1CCBCAEA006D5F4D /* piano_E1.mp3 */,
-				C74DCDFE1CCBCAEA006D5F4D /* piano_F1#.mp3 */,
-				C74DCDFF1CCBCAEA006D5F4D /* piano_F1.mp3 */,
-				C74DCE001CCBCAEA006D5F4D /* piano_G1#.mp3 */,
-				C74DCE011CCBCAEA006D5F4D /* piano_G1.mp3 */,
-			);
-			path = ocative1;
-			sourceTree = "<group>";
-		};
-		C74DCE021CCBCAEA006D5F4D /* ocative2 */ = {
-			isa = PBXGroup;
-			children = (
-				C74DCE031CCBCAEA006D5F4D /* piano_A2#.mp3 */,
-				C74DCE041CCBCAEA006D5F4D /* piano_A2.mp3 */,
-				C74DCE051CCBCAEA006D5F4D /* piano_B2.mp3 */,
-				C74DCE061CCBCAEA006D5F4D /* piano_C2#.mp3 */,
-				C74DCE071CCBCAEA006D5F4D /* piano_C2.mp3 */,
-				C74DCE081CCBCAEA006D5F4D /* piano_D2#.mp3 */,
-				C74DCE091CCBCAEA006D5F4D /* piano_D2.mp3 */,
-				C74DCE0A1CCBCAEA006D5F4D /* piano_E2.mp3 */,
-				C74DCE0B1CCBCAEA006D5F4D /* piano_F2#.mp3 */,
-				C74DCE0C1CCBCAEA006D5F4D /* piano_F2.mp3 */,
-				C74DCE0D1CCBCAEA006D5F4D /* piano_G2#.mp3 */,
-				C74DCE0E1CCBCAEA006D5F4D /* piano_G2.mp3 */,
-			);
-			path = ocative2;
-			sourceTree = "<group>";
-		};
-		C74DCE0F1CCBCAEA006D5F4D /* ocative3 */ = {
-			isa = PBXGroup;
-			children = (
-				C74DCE101CCBCAEA006D5F4D /* piano_A3#.mp3 */,
-				C74DCE111CCBCAEA006D5F4D /* piano_A3.mp3 */,
-				C74DCE121CCBCAEA006D5F4D /* piano_B3.mp3 */,
-				C74DCE131CCBCAEA006D5F4D /* piano_C3#.mp3 */,
-				C74DCE141CCBCAEA006D5F4D /* piano_C3.mp3 */,
-				C74DCE151CCBCAEA006D5F4D /* piano_D3#.mp3 */,
-				C74DCE161CCBCAEA006D5F4D /* piano_D3.mp3 */,
-				C74DCE171CCBCAEA006D5F4D /* piano_E3.mp3 */,
-				C74DCE181CCBCAEA006D5F4D /* piano_F3#.mp3 */,
-				C74DCE191CCBCAEA006D5F4D /* piano_F3.mp3 */,
-				C74DCE1A1CCBCAEA006D5F4D /* piano_G3#.mp3 */,
-				C74DCE1B1CCBCAEA006D5F4D /* piano_G3.mp3 */,
-			);
-			path = ocative3;
-			sourceTree = "<group>";
-		};
-		C74DCE1C1CCBCAEA006D5F4D /* ocative4 */ = {
-			isa = PBXGroup;
-			children = (
-				C74DCE1D1CCBCAEA006D5F4D /* piano_A4#.mp3 */,
-				C74DCE1E1CCBCAEA006D5F4D /* piano_A4.mp3 */,
-				C74DCE1F1CCBCAEA006D5F4D /* piano_B4.mp3 */,
-				C74DCE201CCBCAEA006D5F4D /* piano_C4#.mp3 */,
-				C74DCE211CCBCAEA006D5F4D /* piano_C4.mp3 */,
-				C74DCE221CCBCAEA006D5F4D /* piano_D4#.mp3 */,
-				C74DCE231CCBCAEA006D5F4D /* piano_D4.mp3 */,
-				C74DCE241CCBCAEA006D5F4D /* piano_E4.mp3 */,
-				C74DCE251CCBCAEA006D5F4D /* piano_F4#.mp3 */,
-				C74DCE261CCBCAEA006D5F4D /* piano_F4.mp3 */,
-				C74DCE271CCBCAEA006D5F4D /* piano_G4#.mp3 */,
-				C74DCE281CCBCAEA006D5F4D /* piano_G4.mp3 */,
-			);
-			path = ocative4;
-			sourceTree = "<group>";
-		};
-		C74DCE291CCBCAEA006D5F4D /* ocative5 */ = {
-			isa = PBXGroup;
-			children = (
-				C74DCE2A1CCBCAEA006D5F4D /* piano_A5#.mp3 */,
-				C74DCE2B1CCBCAEA006D5F4D /* piano_A5.mp3 */,
-				C74DCE2C1CCBCAEA006D5F4D /* piano_B5.mp3 */,
-				C74DCE2D1CCBCAEA006D5F4D /* piano_C5#.mp3 */,
-				C74DCE2E1CCBCAEA006D5F4D /* piano_C5.mp3 */,
-				C74DCE2F1CCBCAEA006D5F4D /* piano_D5#.mp3 */,
-				C74DCE301CCBCAEA006D5F4D /* piano_D5.mp3 */,
-				C74DCE311CCBCAEA006D5F4D /* piano_E5.mp3 */,
-				C74DCE321CCBCAEA006D5F4D /* piano_F5#.mp3 */,
-				C74DCE331CCBCAEA006D5F4D /* piano_F5.mp3 */,
-				C74DCE341CCBCAEA006D5F4D /* piano_G5#.mp3 */,
-				C74DCE351CCBCAEA006D5F4D /* piano_G5.mp3 */,
-			);
-			path = ocative5;
-			sourceTree = "<group>";
-		};
-		C74DCE361CCBCAEA006D5F4D /* ocative6 */ = {
-			isa = PBXGroup;
-			children = (
-				C74DCE371CCBCAEA006D5F4D /* piano_A6#.mp3 */,
-				C74DCE381CCBCAEA006D5F4D /* piano_A6.mp3 */,
-				C74DCE391CCBCAEA006D5F4D /* piano_B6.mp3 */,
-				C74DCE3A1CCBCAEA006D5F4D /* piano_C6#.mp3 */,
-				C74DCE3B1CCBCAEA006D5F4D /* piano_C6.mp3 */,
-				C74DCE3C1CCBCAEA006D5F4D /* piano_D6#.mp3 */,
-				C74DCE3D1CCBCAEA006D5F4D /* piano_D6.mp3 */,
-				C74DCE3E1CCBCAEA006D5F4D /* piano_E6.mp3 */,
-				C74DCE3F1CCBCAEA006D5F4D /* piano_F6#.mp3 */,
-				C74DCE401CCBCAEA006D5F4D /* piano_F6.mp3 */,
-				C74DCE411CCBCAEA006D5F4D /* piano_G6#.mp3 */,
-				C74DCE421CCBCAEA006D5F4D /* piano_G6.mp3 */,
-			);
-			path = ocative6;
-			sourceTree = "<group>";
-		};
-		C74DCE431CCBCAEA006D5F4D /* ocative7 */ = {
-			isa = PBXGroup;
-			children = (
-				C74DCE441CCBCAEA006D5F4D /* piano_A7#.mp3 */,
-				C74DCE451CCBCAEA006D5F4D /* piano_A7.mp3 */,
-				C74DCE461CCBCAEA006D5F4D /* piano_B7.mp3 */,
-				C74DCE471CCBCAEA006D5F4D /* piano_C7#.mp3 */,
-				C74DCE481CCBCAEA006D5F4D /* piano_C7.mp3 */,
-				C74DCE491CCBCAEA006D5F4D /* piano_D7#.mp3 */,
-				C74DCE4A1CCBCAEA006D5F4D /* piano_D7.mp3 */,
-				C74DCE4B1CCBCAEA006D5F4D /* piano_E7.mp3 */,
-				C74DCE4C1CCBCAEA006D5F4D /* piano_F7#.mp3 */,
-				C74DCE4D1CCBCAEA006D5F4D /* piano_F7.mp3 */,
-				C74DCE4E1CCBCAEA006D5F4D /* piano_G7#.mp3 */,
-				C74DCE4F1CCBCAEA006D5F4D /* piano_G7.mp3 */,
-			);
-			path = ocative7;
 			sourceTree = "<group>";
 		};
 		C74DCEA41CCBD516006D5F4D /* image */ = {
@@ -568,6 +590,300 @@
 			path = normal;
 			sourceTree = "<group>";
 		};
+		C74DCEF91CCBE0C4006D5F4D /* piano */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCEFA1CCBE0C4006D5F4D /* octave1 */,
+				C74DCF071CCBE0C4006D5F4D /* octave2 */,
+				C74DCF141CCBE0C4006D5F4D /* octave3 */,
+				C74DCF211CCBE0C4006D5F4D /* octave4 */,
+				C74DCF2E1CCBE0C4006D5F4D /* octave5 */,
+				C74DCF3B1CCBE0C4006D5F4D /* octave6 */,
+				C74DCF481CCBE0C4006D5F4D /* octave7 */,
+			);
+			path = piano;
+			sourceTree = "<group>";
+		};
+		C74DCEFA1CCBE0C4006D5F4D /* octave1 */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCEFB1CCBE0C4006D5F4D /* piano_A1#.mp3 */,
+				C74DCEFC1CCBE0C4006D5F4D /* piano_A1.mp3 */,
+				C74DCEFD1CCBE0C4006D5F4D /* piano_B1.mp3 */,
+				C74DCEFE1CCBE0C4006D5F4D /* piano_C1#.mp3 */,
+				C74DCEFF1CCBE0C4006D5F4D /* piano_C1.mp3 */,
+				C74DCF001CCBE0C4006D5F4D /* piano_D1#.mp3 */,
+				C74DCF011CCBE0C4006D5F4D /* piano_D1.mp3 */,
+				C74DCF021CCBE0C4006D5F4D /* piano_E1.mp3 */,
+				C74DCF031CCBE0C4006D5F4D /* piano_F1#.mp3 */,
+				C74DCF041CCBE0C4006D5F4D /* piano_F1.mp3 */,
+				C74DCF051CCBE0C4006D5F4D /* piano_G1#.mp3 */,
+				C74DCF061CCBE0C4006D5F4D /* piano_G1.mp3 */,
+			);
+			path = octave1;
+			sourceTree = "<group>";
+		};
+		C74DCF071CCBE0C4006D5F4D /* octave2 */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCF081CCBE0C4006D5F4D /* piano_A2#.mp3 */,
+				C74DCF091CCBE0C4006D5F4D /* piano_A2.mp3 */,
+				C74DCF0A1CCBE0C4006D5F4D /* piano_B2.mp3 */,
+				C74DCF0B1CCBE0C4006D5F4D /* piano_C2#.mp3 */,
+				C74DCF0C1CCBE0C4006D5F4D /* piano_C2.mp3 */,
+				C74DCF0D1CCBE0C4006D5F4D /* piano_D2#.mp3 */,
+				C74DCF0E1CCBE0C4006D5F4D /* piano_D2.mp3 */,
+				C74DCF0F1CCBE0C4006D5F4D /* piano_E2.mp3 */,
+				C74DCF101CCBE0C4006D5F4D /* piano_F2#.mp3 */,
+				C74DCF111CCBE0C4006D5F4D /* piano_F2.mp3 */,
+				C74DCF121CCBE0C4006D5F4D /* piano_G2#.mp3 */,
+				C74DCF131CCBE0C4006D5F4D /* piano_G2.mp3 */,
+			);
+			path = octave2;
+			sourceTree = "<group>";
+		};
+		C74DCF141CCBE0C4006D5F4D /* octave3 */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCF151CCBE0C4006D5F4D /* piano_A3#.mp3 */,
+				C74DCF161CCBE0C4006D5F4D /* piano_A3.mp3 */,
+				C74DCF171CCBE0C4006D5F4D /* piano_B3.mp3 */,
+				C74DCF181CCBE0C4006D5F4D /* piano_C3#.mp3 */,
+				C74DCF191CCBE0C4006D5F4D /* piano_C3.mp3 */,
+				C74DCF1A1CCBE0C4006D5F4D /* piano_D3#.mp3 */,
+				C74DCF1B1CCBE0C4006D5F4D /* piano_D3.mp3 */,
+				C74DCF1C1CCBE0C4006D5F4D /* piano_E3.mp3 */,
+				C74DCF1D1CCBE0C4006D5F4D /* piano_F3#.mp3 */,
+				C74DCF1E1CCBE0C4006D5F4D /* piano_F3.mp3 */,
+				C74DCF1F1CCBE0C4006D5F4D /* piano_G3#.mp3 */,
+				C74DCF201CCBE0C4006D5F4D /* piano_G3.mp3 */,
+			);
+			path = octave3;
+			sourceTree = "<group>";
+		};
+		C74DCF211CCBE0C4006D5F4D /* octave4 */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCF221CCBE0C4006D5F4D /* piano_A4#.mp3 */,
+				C74DCF231CCBE0C4006D5F4D /* piano_A4.mp3 */,
+				C74DCF241CCBE0C4006D5F4D /* piano_B4.mp3 */,
+				C74DCF251CCBE0C4006D5F4D /* piano_C4#.mp3 */,
+				C74DCF261CCBE0C4006D5F4D /* piano_C4.mp3 */,
+				C74DCF271CCBE0C4006D5F4D /* piano_D4#.mp3 */,
+				C74DCF281CCBE0C4006D5F4D /* piano_D4.mp3 */,
+				C74DCF291CCBE0C4006D5F4D /* piano_E4.mp3 */,
+				C74DCF2A1CCBE0C4006D5F4D /* piano_F4#.mp3 */,
+				C74DCF2B1CCBE0C4006D5F4D /* piano_F4.mp3 */,
+				C74DCF2C1CCBE0C4006D5F4D /* piano_G4#.mp3 */,
+				C74DCF2D1CCBE0C4006D5F4D /* piano_G4.mp3 */,
+			);
+			path = octave4;
+			sourceTree = "<group>";
+		};
+		C74DCF2E1CCBE0C4006D5F4D /* octave5 */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCF2F1CCBE0C4006D5F4D /* piano_A5#.mp3 */,
+				C74DCF301CCBE0C4006D5F4D /* piano_A5.mp3 */,
+				C74DCF311CCBE0C4006D5F4D /* piano_B5.mp3 */,
+				C74DCF321CCBE0C4006D5F4D /* piano_C5#.mp3 */,
+				C74DCF331CCBE0C4006D5F4D /* piano_C5.mp3 */,
+				C74DCF341CCBE0C4006D5F4D /* piano_D5#.mp3 */,
+				C74DCF351CCBE0C4006D5F4D /* piano_D5.mp3 */,
+				C74DCF361CCBE0C4006D5F4D /* piano_E5.mp3 */,
+				C74DCF371CCBE0C4006D5F4D /* piano_F5#.mp3 */,
+				C74DCF381CCBE0C4006D5F4D /* piano_F5.mp3 */,
+				C74DCF391CCBE0C4006D5F4D /* piano_G5#.mp3 */,
+				C74DCF3A1CCBE0C4006D5F4D /* piano_G5.mp3 */,
+			);
+			path = octave5;
+			sourceTree = "<group>";
+		};
+		C74DCF3B1CCBE0C4006D5F4D /* octave6 */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCF3C1CCBE0C4006D5F4D /* piano_A6#.mp3 */,
+				C74DCF3D1CCBE0C4006D5F4D /* piano_A6.mp3 */,
+				C74DCF3E1CCBE0C4006D5F4D /* piano_B6.mp3 */,
+				C74DCF3F1CCBE0C4006D5F4D /* piano_C6#.mp3 */,
+				C74DCF401CCBE0C4006D5F4D /* piano_C6.mp3 */,
+				C74DCF411CCBE0C4006D5F4D /* piano_D6#.mp3 */,
+				C74DCF421CCBE0C4006D5F4D /* piano_D6.mp3 */,
+				C74DCF431CCBE0C4006D5F4D /* piano_E6.mp3 */,
+				C74DCF441CCBE0C4006D5F4D /* piano_F6#.mp3 */,
+				C74DCF451CCBE0C4006D5F4D /* piano_F6.mp3 */,
+				C74DCF461CCBE0C4006D5F4D /* piano_G6#.mp3 */,
+				C74DCF471CCBE0C4006D5F4D /* piano_G6.mp3 */,
+			);
+			path = octave6;
+			sourceTree = "<group>";
+		};
+		C74DCF481CCBE0C4006D5F4D /* octave7 */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCF491CCBE0C4006D5F4D /* piano_A7#.mp3 */,
+				C74DCF4A1CCBE0C4006D5F4D /* piano_A7.mp3 */,
+				C74DCF4B1CCBE0C4006D5F4D /* piano_B7.mp3 */,
+				C74DCF4C1CCBE0C4006D5F4D /* piano_C7#.mp3 */,
+				C74DCF4D1CCBE0C4006D5F4D /* piano_C7.mp3 */,
+				C74DCF4E1CCBE0C4006D5F4D /* piano_D7#.mp3 */,
+				C74DCF4F1CCBE0C4006D5F4D /* piano_D7.mp3 */,
+				C74DCF501CCBE0C4006D5F4D /* piano_E7.mp3 */,
+				C74DCF511CCBE0C4006D5F4D /* piano_F7#.mp3 */,
+				C74DCF521CCBE0C4006D5F4D /* piano_F7.mp3 */,
+				C74DCF531CCBE0C4006D5F4D /* piano_G7#.mp3 */,
+				C74DCF541CCBE0C4006D5F4D /* piano_G7.mp3 */,
+			);
+			path = octave7;
+			sourceTree = "<group>";
+		};
+		C74DCFA91CCC6CF2006D5F4D /* guitar */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCFAA1CCC6CF2006D5F4D /* octave1 */,
+				C74DCFB71CCC6CF2006D5F4D /* octave2 */,
+				C74DCFC41CCC6CF2006D5F4D /* octave3 */,
+				C74DCFD11CCC6CF2006D5F4D /* octave4 */,
+				C74DCFDE1CCC6CF2006D5F4D /* octave5 */,
+				C74DCFEB1CCC6CF2006D5F4D /* octave6 */,
+				C74DCFF81CCC6CF2006D5F4D /* octave7 */,
+			);
+			path = guitar;
+			sourceTree = "<group>";
+		};
+		C74DCFAA1CCC6CF2006D5F4D /* octave1 */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCFAB1CCC6CF2006D5F4D /* guitar_A1#.mp3 */,
+				C74DCFAC1CCC6CF2006D5F4D /* guitar_A1.mp3 */,
+				C74DCFAD1CCC6CF2006D5F4D /* guitar_B1.mp3 */,
+				C74DCFAE1CCC6CF2006D5F4D /* guitar_C1#.mp3 */,
+				C74DCFAF1CCC6CF2006D5F4D /* guitar_C1.mp3 */,
+				C74DCFB01CCC6CF2006D5F4D /* guitar_D1#.mp3 */,
+				C74DCFB11CCC6CF2006D5F4D /* guitar_D1.mp3 */,
+				C74DCFB21CCC6CF2006D5F4D /* guitar_E1.mp3 */,
+				C74DCFB31CCC6CF2006D5F4D /* guitar_F1#.mp3 */,
+				C74DCFB41CCC6CF2006D5F4D /* guitar_F1.mp3 */,
+				C74DCFB51CCC6CF2006D5F4D /* guitar_G1#.mp3 */,
+				C74DCFB61CCC6CF2006D5F4D /* guitar_G1.mp3 */,
+			);
+			path = octave1;
+			sourceTree = "<group>";
+		};
+		C74DCFB71CCC6CF2006D5F4D /* octave2 */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCFB81CCC6CF2006D5F4D /* guitar_A2#.mp3 */,
+				C74DCFB91CCC6CF2006D5F4D /* guitar_A2.mp3 */,
+				C74DCFBA1CCC6CF2006D5F4D /* guitar_B2.mp3 */,
+				C74DCFBB1CCC6CF2006D5F4D /* guitar_C2#.mp3 */,
+				C74DCFBC1CCC6CF2006D5F4D /* guitar_C2.mp3 */,
+				C74DCFBD1CCC6CF2006D5F4D /* guitar_D2#.mp3 */,
+				C74DCFBE1CCC6CF2006D5F4D /* guitar_D2.mp3 */,
+				C74DCFBF1CCC6CF2006D5F4D /* guitar_E2.mp3 */,
+				C74DCFC01CCC6CF2006D5F4D /* guitar_F2#.mp3 */,
+				C74DCFC11CCC6CF2006D5F4D /* guitar_F2.mp3 */,
+				C74DCFC21CCC6CF2006D5F4D /* guitar_G2#.mp3 */,
+				C74DCFC31CCC6CF2006D5F4D /* guitar_G2.mp3 */,
+			);
+			path = octave2;
+			sourceTree = "<group>";
+		};
+		C74DCFC41CCC6CF2006D5F4D /* octave3 */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCFC51CCC6CF2006D5F4D /* guitar_A3#.mp3 */,
+				C74DCFC61CCC6CF2006D5F4D /* guitar_A3.mp3 */,
+				C74DCFC71CCC6CF2006D5F4D /* guitar_B3.mp3 */,
+				C74DCFC81CCC6CF2006D5F4D /* guitar_C3#.mp3 */,
+				C74DCFC91CCC6CF2006D5F4D /* guitar_C3.mp3 */,
+				C74DCFCA1CCC6CF2006D5F4D /* guitar_D3#.mp3 */,
+				C74DCFCB1CCC6CF2006D5F4D /* guitar_D3.mp3 */,
+				C74DCFCC1CCC6CF2006D5F4D /* guitar_E3.mp3 */,
+				C74DCFCD1CCC6CF2006D5F4D /* guitar_F3#.mp3 */,
+				C74DCFCE1CCC6CF2006D5F4D /* guitar_F3.mp3 */,
+				C74DCFCF1CCC6CF2006D5F4D /* guitar_G3#.mp3 */,
+				C74DCFD01CCC6CF2006D5F4D /* guitar_G3.mp3 */,
+			);
+			path = octave3;
+			sourceTree = "<group>";
+		};
+		C74DCFD11CCC6CF2006D5F4D /* octave4 */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCFD21CCC6CF2006D5F4D /* guitar_A4#.mp3 */,
+				C74DCFD31CCC6CF2006D5F4D /* guitar_A4.mp3 */,
+				C74DCFD41CCC6CF2006D5F4D /* guitar_B4.mp3 */,
+				C74DCFD51CCC6CF2006D5F4D /* guitar_C4#.mp3 */,
+				C74DCFD61CCC6CF2006D5F4D /* guitar_C4.mp3 */,
+				C74DCFD71CCC6CF2006D5F4D /* guitar_D4#.mp3 */,
+				C74DCFD81CCC6CF2006D5F4D /* guitar_D4.mp3 */,
+				C74DCFD91CCC6CF2006D5F4D /* guitar_E4.mp3 */,
+				C74DCFDA1CCC6CF2006D5F4D /* guitar_F4#.mp3 */,
+				C74DCFDB1CCC6CF2006D5F4D /* guitar_F4.mp3 */,
+				C74DCFDC1CCC6CF2006D5F4D /* guitar_G4#.mp3 */,
+				C74DCFDD1CCC6CF2006D5F4D /* guitar_G4.mp3 */,
+			);
+			path = octave4;
+			sourceTree = "<group>";
+		};
+		C74DCFDE1CCC6CF2006D5F4D /* octave5 */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCFDF1CCC6CF2006D5F4D /* guitar_A5#.mp3 */,
+				C74DCFE01CCC6CF2006D5F4D /* guitar_A5.mp3 */,
+				C74DCFE11CCC6CF2006D5F4D /* guitar_B5.mp3 */,
+				C74DCFE21CCC6CF2006D5F4D /* guitar_C5#.mp3 */,
+				C74DCFE31CCC6CF2006D5F4D /* guitar_C5.mp3 */,
+				C74DCFE41CCC6CF2006D5F4D /* guitar_D5#.mp3 */,
+				C74DCFE51CCC6CF2006D5F4D /* guitar_D5.mp3 */,
+				C74DCFE61CCC6CF2006D5F4D /* guitar_E5.mp3 */,
+				C74DCFE71CCC6CF2006D5F4D /* guitar_F5#.mp3 */,
+				C74DCFE81CCC6CF2006D5F4D /* guitar_F5.mp3 */,
+				C74DCFE91CCC6CF2006D5F4D /* guitar_G5#.mp3 */,
+				C74DCFEA1CCC6CF2006D5F4D /* guitar_G5.mp3 */,
+			);
+			path = octave5;
+			sourceTree = "<group>";
+		};
+		C74DCFEB1CCC6CF2006D5F4D /* octave6 */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCFEC1CCC6CF2006D5F4D /* guitar_A6#.mp3 */,
+				C74DCFED1CCC6CF2006D5F4D /* guitar_A6.mp3 */,
+				C74DCFEE1CCC6CF2006D5F4D /* guitar_B6.mp3 */,
+				C74DCFEF1CCC6CF2006D5F4D /* guitar_C6#.mp3 */,
+				C74DCFF01CCC6CF2006D5F4D /* guitar_C6.mp3 */,
+				C74DCFF11CCC6CF2006D5F4D /* guitar_D6#.mp3 */,
+				C74DCFF21CCC6CF2006D5F4D /* guitar_D6.mp3 */,
+				C74DCFF31CCC6CF2006D5F4D /* guitar_E6.mp3 */,
+				C74DCFF41CCC6CF2006D5F4D /* guitar_F6#.mp3 */,
+				C74DCFF51CCC6CF2006D5F4D /* guitar_F6.mp3 */,
+				C74DCFF61CCC6CF2006D5F4D /* guitar_G6#.mp3 */,
+				C74DCFF71CCC6CF2006D5F4D /* guitar_G6.mp3 */,
+			);
+			path = octave6;
+			sourceTree = "<group>";
+		};
+		C74DCFF81CCC6CF2006D5F4D /* octave7 */ = {
+			isa = PBXGroup;
+			children = (
+				C74DCFF91CCC6CF2006D5F4D /* guitar_A7#.mp3 */,
+				C74DCFFA1CCC6CF2006D5F4D /* guitar_A7.mp3 */,
+				C74DCFFB1CCC6CF2006D5F4D /* guitar_B7.mp3 */,
+				C74DCFFC1CCC6CF2006D5F4D /* guitar_C7#.mp3 */,
+				C74DCFFD1CCC6CF2006D5F4D /* guitar_C7.mp3 */,
+				C74DCFFE1CCC6CF2006D5F4D /* guitar_D7#.mp3 */,
+				C74DCFFF1CCC6CF2006D5F4D /* guitar_D7.mp3 */,
+				C74DD0001CCC6CF2006D5F4D /* guitar_E7.mp3 */,
+				C74DD0011CCC6CF2006D5F4D /* guitar_F7#.mp3 */,
+				C74DD0021CCC6CF2006D5F4D /* guitar_F7.mp3 */,
+				C74DD0031CCC6CF2006D5F4D /* guitar_G7#.mp3 */,
+				C74DD0041CCC6CF2006D5F4D /* guitar_G7.mp3 */,
+			);
+			path = octave7;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -627,132 +943,216 @@
 			buildActionMask = 2147483647;
 			files = (
 				C74DCEEC1CCBD517006D5F4D /* wkey14.png in Resources */,
-				C74DCE821CCBCAEA006D5F4D /* piano_B5.mp3 in Resources */,
+				C74DD0221CCC6CF2006D5F4D /* guitar_D3#.mp3 in Resources */,
+				C74DD0491CCC6CF2006D5F4D /* guitar_F6#.mp3 in Resources */,
+				C74DCF871CCBE0C4006D5F4D /* piano_B5.mp3 in Resources */,
+				C74DCF6B1CCBE0C4006D5F4D /* piano_G2#.mp3 in Resources */,
 				C74DCEEB1CCBD517006D5F4D /* wkey13.png in Resources */,
-				C74DCE661CCBCAEA006D5F4D /* piano_G2#.mp3 in Resources */,
+				C74DD0211CCC6CF2006D5F4D /* guitar_C3.mp3 in Resources */,
 				C74DCED61CCBD517006D5F4D /* keyboard.png in Resources */,
-				C74DCE891CCBCAEA006D5F4D /* piano_F5.mp3 in Resources */,
+				C74DD0361CCC6CF2006D5F4D /* guitar_A5.mp3 in Resources */,
+				C74DD01B1CCC6CF2006D5F4D /* guitar_G2#.mp3 in Resources */,
 				C74DCEF51CCBD517006D5F4D /* leftArrow.png in Resources */,
-				C74DCE541CCBCAEA006D5F4D /* piano_C1.mp3 in Resources */,
-				C74DCE801CCBCAEA006D5F4D /* piano_A5#.mp3 in Resources */,
-				C74DCE6A1CCBCAEA006D5F4D /* piano_B3.mp3 in Resources */,
-				C74DCE871CCBCAEA006D5F4D /* piano_E5.mp3 in Resources */,
-				C74DCE7B1CCBCAEA006D5F4D /* piano_E4.mp3 in Resources */,
-				C74DCE711CCBCAEA006D5F4D /* piano_F3.mp3 in Resources */,
+				C74DCF8E1CCBE0C4006D5F4D /* piano_F5.mp3 in Resources */,
+				C74DD03A1CCC6CF2006D5F4D /* guitar_D5#.mp3 in Resources */,
+				C74DCF591CCBE0C4006D5F4D /* piano_C1.mp3 in Resources */,
+				C74DCF851CCBE0C4006D5F4D /* piano_A5#.mp3 in Resources */,
 				C74B81251CBE335C005307FF /* LaunchScreen.storyboard in Resources */,
-				C74DCE5A1CCBCAEA006D5F4D /* piano_G1#.mp3 in Resources */,
-				C74DCE851CCBCAEA006D5F4D /* piano_D5#.mp3 in Resources */,
+				C74DCF6F1CCBE0C4006D5F4D /* piano_B3.mp3 in Resources */,
+				C74DCF8C1CCBE0C4006D5F4D /* piano_E5.mp3 in Resources */,
 				C74DCEF71CCBD517006D5F4D /* rightArrow.png in Resources */,
-				C74DCE811CCBCAEA006D5F4D /* piano_A5.mp3 in Resources */,
+				C74DD0061CCC6CF2006D5F4D /* guitar_A1.mp3 in Resources */,
 				C74DCEDF1CCBD517006D5F4D /* wkey3_highlight.png in Resources */,
-				C74DCE8D1CCBCAEA006D5F4D /* piano_A6.mp3 in Resources */,
-				C74DCE6B1CCBCAEA006D5F4D /* piano_C3#.mp3 in Resources */,
-				C74DCE981CCBCAEA006D5F4D /* piano_A7#.mp3 in Resources */,
+				C74DCF801CCBE0C4006D5F4D /* piano_E4.mp3 in Resources */,
 				C74DCEE01CCBD517006D5F4D /* wkey4_highlight.png in Resources */,
-				C74DCE5E1CCBCAEA006D5F4D /* piano_B2.mp3 in Resources */,
-				C74DCE5B1CCBCAEA006D5F4D /* piano_G1.mp3 in Resources */,
+				C74DCF761CCBE0C4006D5F4D /* piano_F3.mp3 in Resources */,
 				C74DCED41CCBD517006D5F4D /* piano_outline.png in Resources */,
+				C74DD0501CCC6CF2006D5F4D /* guitar_C7#.mp3 in Resources */,
+				C74DCF5F1CCBE0C4006D5F4D /* piano_G1#.mp3 in Resources */,
+				C74DCF8A1CCBE0C4006D5F4D /* piano_D5#.mp3 in Resources */,
+				C74DCF861CCBE0C4006D5F4D /* piano_A5.mp3 in Resources */,
+				C74DD0331CCC6CF2006D5F4D /* guitar_G4#.mp3 in Resources */,
 				C74DCEEA1CCBD517006D5F4D /* wkey12.png in Resources */,
+				C74DCF921CCBE0C4006D5F4D /* piano_A6.mp3 in Resources */,
+				C74DCF701CCBE0C4006D5F4D /* piano_C3#.mp3 in Resources */,
+				C74DD0161CCC6CF2006D5F4D /* guitar_D2#.mp3 in Resources */,
+				C74DD0121CCC6CF2006D5F4D /* guitar_A2.mp3 in Resources */,
+				C74DCF9D1CCBE0C4006D5F4D /* piano_A7#.mp3 in Resources */,
+				C74DCF631CCBE0C4006D5F4D /* piano_B2.mp3 in Resources */,
+				C74DCF601CCBE0C4006D5F4D /* piano_G1.mp3 in Resources */,
+				C74DD00F1CCC6CF2006D5F4D /* guitar_G1#.mp3 in Resources */,
+				C74DD03B1CCC6CF2006D5F4D /* guitar_D5.mp3 in Resources */,
+				C74DD0571CCC6CF2006D5F4D /* guitar_G7#.mp3 in Resources */,
+				C74DCF671CCBE0C4006D5F4D /* piano_D2.mp3 in Resources */,
+				C74DCF6C1CCBE0C4006D5F4D /* piano_G2.mp3 in Resources */,
+				C74DCF911CCBE0C4006D5F4D /* piano_A6#.mp3 in Resources */,
+				C74DD0201CCC6CF2006D5F4D /* guitar_C3#.mp3 in Resources */,
+				C74DCF551CCBE0C4006D5F4D /* piano_A1#.mp3 in Resources */,
+				C74DD0461CCC6CF2006D5F4D /* guitar_D6#.mp3 in Resources */,
+				C74DD03E1CCC6CF2006D5F4D /* guitar_F5.mp3 in Resources */,
+				C74DD0321CCC6CF2006D5F4D /* guitar_F4.mp3 in Resources */,
+				C74DCF5A1CCBE0C4006D5F4D /* piano_D1#.mp3 in Resources */,
+				C74DD0531CCC6CF2006D5F4D /* guitar_D7.mp3 in Resources */,
+				C74DCF581CCBE0C4006D5F4D /* piano_C1#.mp3 in Resources */,
+				C74DCF641CCBE0C4006D5F4D /* piano_C2#.mp3 in Resources */,
+				C74DD0561CCC6CF2006D5F4D /* guitar_F7.mp3 in Resources */,
+				C74DCFA41CCBE0C4006D5F4D /* piano_E7.mp3 in Resources */,
+				C74DD0511CCC6CF2006D5F4D /* guitar_C7.mp3 in Resources */,
+				C74DCF8B1CCBE0C4006D5F4D /* piano_D5.mp3 in Resources */,
+				C74DCF621CCBE0C4006D5F4D /* piano_A2.mp3 in Resources */,
+				C74DD0441CCC6CF2006D5F4D /* guitar_C6#.mp3 in Resources */,
+				C74DCF791CCBE0C4006D5F4D /* piano_A4#.mp3 in Resources */,
+				C74DD0541CCC6CF2006D5F4D /* guitar_E7.mp3 in Resources */,
 				C74DCEF01CCBD517006D5F4D /* wkey5.png in Resources */,
-				C74DCE621CCBCAEA006D5F4D /* piano_D2.mp3 in Resources */,
 				C74DCED11CCBD517006D5F4D /* blueToothIcon.png in Resources */,
-				C74DCE671CCBCAEA006D5F4D /* piano_G2.mp3 in Resources */,
-				C74DCE8C1CCBCAEA006D5F4D /* piano_A6#.mp3 in Resources */,
-				C74DCE501CCBCAEA006D5F4D /* piano_A1#.mp3 in Resources */,
-				C74DCE551CCBCAEA006D5F4D /* piano_D1#.mp3 in Resources */,
-				C74DCE531CCBCAEA006D5F4D /* piano_C1#.mp3 in Resources */,
-				C74DCE5F1CCBCAEA006D5F4D /* piano_C2#.mp3 in Resources */,
-				C74DCE9F1CCBCAEA006D5F4D /* piano_E7.mp3 in Resources */,
-				C74DCE861CCBCAEA006D5F4D /* piano_D5.mp3 in Resources */,
-				C74DCE5D1CCBCAEA006D5F4D /* piano_A2.mp3 in Resources */,
-				C74DCE741CCBCAEA006D5F4D /* piano_A4#.mp3 in Resources */,
+				C74DD0151CCC6CF2006D5F4D /* guitar_C2.mp3 in Resources */,
+				C74DD01D1CCC6CF2006D5F4D /* guitar_A3#.mp3 in Resources */,
 				C74DCEE11CCBD517006D5F4D /* wkey5_highlight.png in Resources */,
+				C74DD0291CCC6CF2006D5F4D /* guitar_A4#.mp3 in Resources */,
+				C74DD00A1CCC6CF2006D5F4D /* guitar_D1#.mp3 in Resources */,
+				C74DD0481CCC6CF2006D5F4D /* guitar_E6.mp3 in Resources */,
+				C74DCF821CCBE0C4006D5F4D /* piano_F4.mp3 in Resources */,
 				C74DCED91CCBD517006D5F4D /* wkey11_highlight.png in Resources */,
 				C74DCEE41CCBD517006D5F4D /* wkey8_highlight.png in Resources */,
+				C74DD0371CCC6CF2006D5F4D /* guitar_B5.mp3 in Resources */,
 				C74DCEDA1CCBD517006D5F4D /* wkey12_highlight.png in Resources */,
-				C74DCE7D1CCBCAEA006D5F4D /* piano_F4.mp3 in Resources */,
-				C74DCE9A1CCBCAEA006D5F4D /* piano_B7.mp3 in Resources */,
-				C74DCE611CCBCAEA006D5F4D /* piano_D2#.mp3 in Resources */,
 				C74DCEE31CCBD517006D5F4D /* wkey7_highlight.png in Resources */,
+				C74DD02B1CCC6CF2006D5F4D /* guitar_B4.mp3 in Resources */,
+				C74DD0431CCC6CF2006D5F4D /* guitar_B6.mp3 in Resources */,
+				C74DCF9F1CCBE0C4006D5F4D /* piano_B7.mp3 in Resources */,
+				C74DD00D1CCC6CF2006D5F4D /* guitar_F1#.mp3 in Resources */,
+				C74DD02D1CCC6CF2006D5F4D /* guitar_C4.mp3 in Resources */,
+				C74DCF661CCBE0C4006D5F4D /* piano_D2#.mp3 in Resources */,
+				C74DCF841CCBE0C4006D5F4D /* piano_G4.mp3 in Resources */,
+				C74DCF691CCBE0C4006D5F4D /* piano_F2#.mp3 in Resources */,
+				C74DCF6E1CCBE0C4006D5F4D /* piano_A3.mp3 in Resources */,
+				C74DD0411CCC6CF2006D5F4D /* guitar_A6#.mp3 in Resources */,
+				C74DD0381CCC6CF2006D5F4D /* guitar_C5#.mp3 in Resources */,
+				C74DD03F1CCC6CF2006D5F4D /* guitar_G5#.mp3 in Resources */,
+				C74DD0131CCC6CF2006D5F4D /* guitar_B2.mp3 in Resources */,
+				C74DCF681CCBE0C4006D5F4D /* piano_E2.mp3 in Resources */,
+				C74DCFA61CCBE0C4006D5F4D /* piano_F7.mp3 in Resources */,
+				C74DD03C1CCC6CF2006D5F4D /* guitar_E5.mp3 in Resources */,
+				C74DD03D1CCC6CF2006D5F4D /* guitar_F5#.mp3 in Resources */,
+				C74DCF6D1CCBE0C4006D5F4D /* piano_A3#.mp3 in Resources */,
+				C74DD02F1CCC6CF2006D5F4D /* guitar_D4.mp3 in Resources */,
 				C74DCEF21CCBD517006D5F4D /* wkey7.png in Resources */,
-				C74DCE7F1CCBCAEA006D5F4D /* piano_G4.mp3 in Resources */,
+				C74DD0401CCC6CF2006D5F4D /* guitar_G5.mp3 in Resources */,
+				C74DD00B1CCC6CF2006D5F4D /* guitar_D1.mp3 in Resources */,
+				C74DD01A1CCC6CF2006D5F4D /* guitar_F2.mp3 in Resources */,
+				C74DD0101CCC6CF2006D5F4D /* guitar_G1.mp3 in Resources */,
 				C74DCEE81CCBD517006D5F4D /* wkey10.png in Resources */,
-				C74DCE641CCBCAEA006D5F4D /* piano_F2#.mp3 in Resources */,
+				C74DCF931CCBE0C4006D5F4D /* piano_B6.mp3 in Resources */,
 				C74DCED71CCBD517006D5F4D /* bkey_highlight.png in Resources */,
 				C74DCEDE1CCBD517006D5F4D /* wkey2_highlight.png in Resources */,
-				C74DCE691CCBCAEA006D5F4D /* piano_A3.mp3 in Resources */,
-				C74DCE631CCBCAEA006D5F4D /* piano_E2.mp3 in Resources */,
-				C74DCEA11CCBCAEA006D5F4D /* piano_F7.mp3 in Resources */,
-				C74DCE681CCBCAEA006D5F4D /* piano_A3#.mp3 in Resources */,
-				C74DCE8E1CCBCAEA006D5F4D /* piano_B6.mp3 in Resources */,
+				C74DD0111CCC6CF2006D5F4D /* guitar_A2#.mp3 in Resources */,
+				C74DCF981CCBE0C4006D5F4D /* piano_E6.mp3 in Resources */,
 				C74DCEDC1CCBD517006D5F4D /* wkey14_highlight.png in Resources */,
+				C74DCF571CCBE0C4006D5F4D /* piano_B1.mp3 in Resources */,
+				C74DCF5B1CCBE0C4006D5F4D /* piano_D1.mp3 in Resources */,
+				C74DCF6A1CCBE0C4006D5F4D /* piano_F2.mp3 in Resources */,
+				C74DD04A1CCC6CF2006D5F4D /* guitar_F6.mp3 in Resources */,
 				C74DCEF41CCBD517006D5F4D /* wkey9.png in Resources */,
-				C74DCE931CCBCAEA006D5F4D /* piano_E6.mp3 in Resources */,
+				C74DCF9B1CCBE0C4006D5F4D /* piano_G6#.mp3 in Resources */,
 				C74DCEF11CCBD517006D5F4D /* wkey6.png in Resources */,
-				C74DCE521CCBCAEA006D5F4D /* piano_B1.mp3 in Resources */,
-				C74DCE561CCBCAEA006D5F4D /* piano_D1.mp3 in Resources */,
+				C74DD02A1CCC6CF2006D5F4D /* guitar_A4.mp3 in Resources */,
+				C74DD0171CCC6CF2006D5F4D /* guitar_D2.mp3 in Resources */,
+				C74DCF711CCBE0C4006D5F4D /* piano_C3.mp3 in Resources */,
+				C74DCFA21CCBE0C4006D5F4D /* piano_D7#.mp3 in Resources */,
+				C74DCF5E1CCBE0C4006D5F4D /* piano_F1.mp3 in Resources */,
 				C74DCED81CCBD517006D5F4D /* wkey10_highlight.png in Resources */,
-				C74DCE651CCBCAEA006D5F4D /* piano_F2.mp3 in Resources */,
-				C74DCE961CCBCAEA006D5F4D /* piano_G6#.mp3 in Resources */,
-				C74DCE6C1CCBCAEA006D5F4D /* piano_C3.mp3 in Resources */,
-				C74DCE9D1CCBCAEA006D5F4D /* piano_D7#.mp3 in Resources */,
-				C74DCE591CCBCAEA006D5F4D /* piano_F1.mp3 in Resources */,
+				C74DD0301CCC6CF2006D5F4D /* guitar_E4.mp3 in Resources */,
+				C74DCF901CCBE0C4006D5F4D /* piano_G5.mp3 in Resources */,
+				C74DCF651CCBE0C4006D5F4D /* piano_C2.mp3 in Resources */,
+				C74DD00C1CCC6CF2006D5F4D /* guitar_E1.mp3 in Resources */,
 				C74DCED51CCBD517006D5F4D /* violin_outline.png in Resources */,
-				C74DCE8B1CCBCAEA006D5F4D /* piano_G5.mp3 in Resources */,
+				C74DCF831CCBE0C4006D5F4D /* piano_G4#.mp3 in Resources */,
+				C74DD01E1CCC6CF2006D5F4D /* guitar_A3.mp3 in Resources */,
 				C74DCEE71CCBD517006D5F4D /* wkey1.png in Resources */,
+				C74DD0051CCC6CF2006D5F4D /* guitar_A1#.mp3 in Resources */,
+				C74DD0081CCC6CF2006D5F4D /* guitar_C1#.mp3 in Resources */,
 				C74DCEEF1CCBD517006D5F4D /* wkey4.png in Resources */,
-				C74DCE601CCBCAEA006D5F4D /* piano_C2.mp3 in Resources */,
-				C74DCE7E1CCBCAEA006D5F4D /* piano_G4#.mp3 in Resources */,
 				C74DCEE21CCBD517006D5F4D /* wkey6_highlight.png in Resources */,
-				C74DCE901CCBCAEA006D5F4D /* piano_C6.mp3 in Resources */,
-				C74DCE571CCBCAEA006D5F4D /* piano_E1.mp3 in Resources */,
-				C74DCEA21CCBCAEA006D5F4D /* piano_G7#.mp3 in Resources */,
 				C74DCEED1CCBD517006D5F4D /* wkey2.png in Resources */,
-				C74DCE7A1CCBCAEA006D5F4D /* piano_D4.mp3 in Resources */,
-				C74DCE7C1CCBCAEA006D5F4D /* piano_F4#.mp3 in Resources */,
-				C74DCE9C1CCBCAEA006D5F4D /* piano_C7.mp3 in Resources */,
-				C74DCE791CCBCAEA006D5F4D /* piano_D4#.mp3 in Resources */,
-				C74DCE9E1CCBCAEA006D5F4D /* piano_D7.mp3 in Resources */,
 				C74DCEE51CCBD517006D5F4D /* wkey9_highlight.png in Resources */,
-				C74DCE941CCBCAEA006D5F4D /* piano_F6#.mp3 in Resources */,
+				C74DD01F1CCC6CF2006D5F4D /* guitar_B3.mp3 in Resources */,
+				C74DCF951CCBE0C4006D5F4D /* piano_C6.mp3 in Resources */,
+				C74DD02C1CCC6CF2006D5F4D /* guitar_C4#.mp3 in Resources */,
+				C74DD04D1CCC6CF2006D5F4D /* guitar_A7#.mp3 in Resources */,
+				C74DD0581CCC6CF2006D5F4D /* guitar_G7.mp3 in Resources */,
+				C74DCF5C1CCBE0C4006D5F4D /* piano_E1.mp3 in Resources */,
+				C74DCFA71CCBE0C4006D5F4D /* piano_G7#.mp3 in Resources */,
+				C74DD00E1CCC6CF2006D5F4D /* guitar_F1.mp3 in Resources */,
 				C74DCED21CCBD517006D5F4D /* frame.png in Resources */,
-				C74DCE731CCBCAEA006D5F4D /* piano_G3.mp3 in Resources */,
-				C74DCE6D1CCBCAEA006D5F4D /* piano_D3#.mp3 in Resources */,
+				C74DCF7F1CCBE0C4006D5F4D /* piano_D4.mp3 in Resources */,
+				C74DD04B1CCC6CF2006D5F4D /* guitar_G6#.mp3 in Resources */,
+				C74DD02E1CCC6CF2006D5F4D /* guitar_D4#.mp3 in Resources */,
+				C74DCF811CCBE0C4006D5F4D /* piano_F4#.mp3 in Resources */,
+				C74DCFA11CCBE0C4006D5F4D /* piano_C7.mp3 in Resources */,
+				C74DCF7E1CCBE0C4006D5F4D /* piano_D4#.mp3 in Resources */,
+				C74DCFA31CCBE0C4006D5F4D /* piano_D7.mp3 in Resources */,
+				C74DD04E1CCC6CF2006D5F4D /* guitar_A7.mp3 in Resources */,
+				C74DCF991CCBE0C4006D5F4D /* piano_F6#.mp3 in Resources */,
+				C74DCF781CCBE0C4006D5F4D /* piano_G3.mp3 in Resources */,
+				C74DD0251CCC6CF2006D5F4D /* guitar_F3#.mp3 in Resources */,
+				C74DCF721CCBE0C4006D5F4D /* piano_D3#.mp3 in Resources */,
+				C74DCF5D1CCBE0C4006D5F4D /* piano_F1#.mp3 in Resources */,
 				C74DCEDB1CCBD517006D5F4D /* wkey13_highlight.png in Resources */,
-				C74DCE581CCBCAEA006D5F4D /* piano_F1#.mp3 in Resources */,
+				C74DCF751CCBE0C4006D5F4D /* piano_F3#.mp3 in Resources */,
+				C74DD0311CCC6CF2006D5F4D /* guitar_F4#.mp3 in Resources */,
 				C74B81221CBE335C005307FF /* Assets.xcassets in Resources */,
-				C74DCE701CCBCAEA006D5F4D /* piano_F3#.mp3 in Resources */,
-				C74DCE781CCBCAEA006D5F4D /* piano_C4.mp3 in Resources */,
-				C74DCE5C1CCBCAEA006D5F4D /* piano_A2#.mp3 in Resources */,
-				C74DCE831CCBCAEA006D5F4D /* piano_C5#.mp3 in Resources */,
-				C74DCE511CCBCAEA006D5F4D /* piano_A1.mp3 in Resources */,
-				C74DCEA01CCBCAEA006D5F4D /* piano_F7#.mp3 in Resources */,
-				C74DCE6F1CCBCAEA006D5F4D /* piano_E3.mp3 in Resources */,
-				C74DCE8A1CCBCAEA006D5F4D /* piano_G5#.mp3 in Resources */,
-				C74DCE751CCBCAEA006D5F4D /* piano_A4.mp3 in Resources */,
-				C74DCE771CCBCAEA006D5F4D /* piano_C4#.mp3 in Resources */,
 				C74DCEF81CCBD517006D5F4D /* tablature.jpg in Resources */,
-				C74DCE911CCBCAEA006D5F4D /* piano_D6#.mp3 in Resources */,
+				C74DD0141CCC6CF2006D5F4D /* guitar_C2#.mp3 in Resources */,
+				C74DCF7D1CCBE0C4006D5F4D /* piano_C4.mp3 in Resources */,
 				C74DCEE91CCBD517006D5F4D /* wkey11.png in Resources */,
-				C74DCEA31CCBCAEA006D5F4D /* piano_G7.mp3 in Resources */,
+				C74DD0071CCC6CF2006D5F4D /* guitar_B1.mp3 in Resources */,
+				C74DCF611CCBE0C4006D5F4D /* piano_A2#.mp3 in Resources */,
+				C74DD0471CCC6CF2006D5F4D /* guitar_D6.mp3 in Resources */,
+				C74DCF881CCBE0C4006D5F4D /* piano_C5#.mp3 in Resources */,
+				C74DD01C1CCC6CF2006D5F4D /* guitar_G2.mp3 in Resources */,
+				C74DCF561CCBE0C4006D5F4D /* piano_A1.mp3 in Resources */,
 				C74DCEDD1CCBD517006D5F4D /* wkey1_highlight.png in Resources */,
-				C74DCE841CCBCAEA006D5F4D /* piano_C5.mp3 in Resources */,
-				C74DCE921CCBCAEA006D5F4D /* piano_D6.mp3 in Resources */,
-				C74DCE6E1CCBCAEA006D5F4D /* piano_D3.mp3 in Resources */,
-				C74DCE971CCBCAEA006D5F4D /* piano_G6.mp3 in Resources */,
-				C74DCE991CCBCAEA006D5F4D /* piano_A7.mp3 in Resources */,
+				C74DD0551CCC6CF2006D5F4D /* guitar_F7#.mp3 in Resources */,
+				C74DD0241CCC6CF2006D5F4D /* guitar_E3.mp3 in Resources */,
+				C74DD0421CCC6CF2006D5F4D /* guitar_A6.mp3 in Resources */,
+				C74DD0271CCC6CF2006D5F4D /* guitar_G3#.mp3 in Resources */,
+				C74DD0351CCC6CF2006D5F4D /* guitar_A5#.mp3 in Resources */,
+				C74DCFA51CCBE0C4006D5F4D /* piano_F7#.mp3 in Resources */,
+				C74DCF741CCBE0C4006D5F4D /* piano_E3.mp3 in Resources */,
+				C74DCF8F1CCBE0C4006D5F4D /* piano_G5#.mp3 in Resources */,
 				C74DCED31CCBD517006D5F4D /* guitar_outline.png in Resources */,
+				C74DCF7A1CCBE0C4006D5F4D /* piano_A4.mp3 in Resources */,
+				C74DD04C1CCC6CF2006D5F4D /* guitar_G6.mp3 in Resources */,
+				C74DCF7C1CCBE0C4006D5F4D /* piano_C4#.mp3 in Resources */,
+				C74DCF961CCBE0C4006D5F4D /* piano_D6#.mp3 in Resources */,
+				C74DCFA81CCBE0C4006D5F4D /* piano_G7.mp3 in Resources */,
+				C74DD0261CCC6CF2006D5F4D /* guitar_F3.mp3 in Resources */,
+				C74DD04F1CCC6CF2006D5F4D /* guitar_B7.mp3 in Resources */,
 				C74DCEF31CCBD517006D5F4D /* wkey8.png in Resources */,
-				C74DCE881CCBCAEA006D5F4D /* piano_F5#.mp3 in Resources */,
+				C74DD0231CCC6CF2006D5F4D /* guitar_D3.mp3 in Resources */,
+				C74DCF891CCBE0C4006D5F4D /* piano_C5.mp3 in Resources */,
 				C74DCEF61CCBD517006D5F4D /* part_of_keyboard.png in Resources */,
-				C74DCE761CCBCAEA006D5F4D /* piano_B4.mp3 in Resources */,
 				C74B81201CBE335C005307FF /* Main.storyboard in Resources */,
-				C74DCE721CCBCAEA006D5F4D /* piano_G3#.mp3 in Resources */,
+				C74DD0521CCC6CF2006D5F4D /* guitar_D7#.mp3 in Resources */,
+				C74DCF971CCBE0C4006D5F4D /* piano_D6.mp3 in Resources */,
+				C74DCF731CCBE0C4006D5F4D /* piano_D3.mp3 in Resources */,
+				C74DD0451CCC6CF2006D5F4D /* guitar_C6.mp3 in Resources */,
+				C74DCF9C1CCBE0C4006D5F4D /* piano_G6.mp3 in Resources */,
+				C74DD0181CCC6CF2006D5F4D /* guitar_E2.mp3 in Resources */,
+				C74DCF9E1CCBE0C4006D5F4D /* piano_A7.mp3 in Resources */,
+				C74DD0191CCC6CF2006D5F4D /* guitar_F2#.mp3 in Resources */,
+				C74DCF8D1CCBE0C4006D5F4D /* piano_F5#.mp3 in Resources */,
+				C74DD0341CCC6CF2006D5F4D /* guitar_G4.mp3 in Resources */,
+				C74DCF7B1CCBE0C4006D5F4D /* piano_B4.mp3 in Resources */,
 				C74DCEEE1CCBD517006D5F4D /* wkey3.png in Resources */,
+				C74DCF771CCBE0C4006D5F4D /* piano_G3#.mp3 in Resources */,
+				C74DCFA01CCBE0C4006D5F4D /* piano_C7#.mp3 in Resources */,
+				C74DD0281CCC6CF2006D5F4D /* guitar_G3.mp3 in Resources */,
+				C74DCF9A1CCBE0C4006D5F4D /* piano_F6.mp3 in Resources */,
+				C74DCF941CCBE0C4006D5F4D /* piano_C6#.mp3 in Resources */,
+				C74DD0091CCC6CF2006D5F4D /* guitar_C1.mp3 in Resources */,
+				C74DD0391CCC6CF2006D5F4D /* guitar_C5.mp3 in Resources */,
 				C74DCEE61CCBD517006D5F4D /* bkey.png in Resources */,
-				C74DCE9B1CCBCAEA006D5F4D /* piano_C7#.mp3 in Resources */,
-				C74DCE951CCBCAEA006D5F4D /* piano_F6.mp3 in Resources */,
-				C74DCE8F1CCBCAEA006D5F4D /* piano_C6#.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -128,19 +128,24 @@
     self.blueToothStatusLabel.text = @"Unconnected";
     self.blueToothStatusLabel.numberOfLines = 1;
     self.blueToothStatusLabel.adjustsFontSizeToFitWidth = YES;
-    //self.blueToothStatusLabel.backgroundColor = [UIColor redColor];
-//    [self.blueToothStatusLabel setFont:[UIFont systemFontOfSize:15]];
     self.blueToothStatusLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.blueToothStatusLabel];
     
+    self.wholeKeyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
+    [self.wholeKeyboardImageView.layer setBorderWidth:2];
+    self.wholeKeyboardImageView.frame = CGRectMake(0, self.navigationController.navigationBar.frame.size.height+self.screenHeight/8, self.view.frame.size.width, self.screenHeight/4);
+    
+    
+    //MistView
     self.mistView = [[UIView alloc] initWithFrame:self.view.frame];
-    self.mistView.alpha = 0.5;
+    self.mistView.alpha = 0.8;
     self.mistView.backgroundColor = [UIColor grayColor];
     UITapGestureRecognizer* tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mistViewTapped)];
     tapGest.numberOfTapsRequired = 1;
     tapGest.numberOfTouchesRequired = 1;
     [self.mistView addGestureRecognizer:tapGest];
     
+    //Keyboard backgorund
     UIImageView* keyboardBgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"part_of_keyboard.png"]];
     keyboardBgImageView.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame)-self.screenHeight/2, self.view.frame.size.width, self.screenHeight/2);
     [self.view addSubview:keyboardBgImageView];
@@ -186,7 +191,6 @@
     }
 
     //Black keys
-    
     CGFloat offset1 = 30;
     CGFloat offset2 = 20;
     keyX = self.keyboard_left_padding;
@@ -221,21 +225,28 @@
         [self.view addSubview:blackKeyImageView];
     }
     
-    UIButton* lArrowButton = [[UIButton alloc] init];
-    lArrowButton.tag = 0;
-    [lArrowButton setImage:[UIImage imageNamed:@"leftArrow.png"] forState:UIControlStateNormal];
-    [lArrowButton setFrame:CGRectMake(20, CGRectGetMinY(keyboardBgImageView.frame)+15, 50, 20)];
-    [lArrowButton addTarget:self action:@selector(arrowButtoClicked:) forControlEvents:UIControlEventTouchUpInside];
- //   [self.switchModeButton setShowsTouchWhenHighlighted:YES];
-    [self.view addSubview:lArrowButton];
+    UIImageView* lArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow.png"]];
+    lArrowImageView.tag = 0;
+    [lArrowImageView setUserInteractionEnabled:YES];
+    lArrowImageView.frame = CGRectMake(20, CGRectGetMinY(keyboardBgImageView.frame)+15, 50, 20);
+    UILongPressGestureRecognizer *tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
+                                                          initWithTarget:self
+                                                          action:@selector(arrowImageViewClicked:)];
+    [tapGestureRecognizer setMinimumPressDuration:0.01];
+    [lArrowImageView addGestureRecognizer:tapGestureRecognizer];
+    [self.view addSubview:lArrowImageView];
     
-    UIButton* rArrowButton = [[UIButton alloc] init];
-    rArrowButton.tag = 1;
-    [rArrowButton setImage:[UIImage imageNamed:@"rightArrow.png"] forState:UIControlStateNormal];
-    [rArrowButton setFrame:CGRectMake(CGRectGetMaxX(self.view.frame)-70, CGRectGetMinY(keyboardBgImageView.frame)+15, 50, 20)];
-    [rArrowButton addTarget:self action:@selector(arrowButtoClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:rArrowButton];
-    
+    UIImageView* rArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rightArrow.png"]];
+    rArrowImageView.tag = 1;
+    [rArrowImageView setUserInteractionEnabled:YES];
+    rArrowImageView.frame = CGRectMake(CGRectGetMaxX(self.view.frame)-70, CGRectGetMinY(keyboardBgImageView.frame)+15, 50, 20);
+    tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
+                                                          initWithTarget:self
+                                                          action:@selector(arrowImageViewClicked:)];
+    [tapGestureRecognizer setMinimumPressDuration:0.01];
+    [rArrowImageView addGestureRecognizer:tapGestureRecognizer];
+    [self.view addSubview:rArrowImageView];
+
     [self drawInstrumentMenu];
     [self drawTablatureScrollView];
 }
@@ -308,21 +319,28 @@
     [self.view addSubview:self.instrumentMenuScrollView];
 }
 
-- (void) arrowButtoClicked:(UIButton*) sender
+- (void) arrowImageViewClicked:(UITapGestureRecognizer*) sender
 {
-    if(sender.tag == 0)
+    if(sender.state == UIGestureRecognizerStateBegan)
     {
-        if(self.lower_octave_no > 1)
+        UIImageView* imageView = (UIImageView*)sender.view;
+        if(imageView.tag == 0)
         {
-            self.lower_octave_no--;
+            if(self.lower_octave_no > 1)
+                self.lower_octave_no--;
         }
+        else
+        {
+            if(self.lower_octave_no < 6)
+                self.lower_octave_no++;
+        }
+        [self.view addSubview:self.mistView];
+        [self.view addSubview:self.wholeKeyboardImageView];
     }
-    else
+    else if(sender.state == UIGestureRecognizerStateEnded)
     {
-        if(self.lower_octave_no < 6)
-        {
-            self.lower_octave_no++;
-        }
+        [self.mistView removeFromSuperview];
+        [self.wholeKeyboardImageView removeFromSuperview];
     }
 }
 
