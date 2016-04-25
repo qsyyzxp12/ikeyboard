@@ -248,30 +248,6 @@
         [self.view addSubview:blackKeyImageView];
     }
     
-/*    UIImageView* lArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow.png"]];
-    lArrowImageView.tag = 0;
-    [lArrowImageView setUserInteractionEnabled:YES];
-    lArrowImageView.frame = CGRectMake(20, CGRectGetMinY(keyboardBgImageView.frame)+15, 50, 20);
-    UILongPressGestureRecognizer *tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
-                                                          initWithTarget:self
-                                                          action:@selector(arrowImageViewClicked:)];
-    [tapGestureRecognizer setMinimumPressDuration:0.01];
-    [lArrowImageView addGestureRecognizer:tapGestureRecognizer];
-    [self.view addSubview:lArrowImageView];
-    
-    UIImageView* rArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rightArrow.png"]];
-    rArrowImageView.tag = 1;
-    [rArrowImageView setUserInteractionEnabled:YES];
-    rArrowImageView.frame = CGRectMake(CGRectGetMaxX(self.view.frame)-70, CGRectGetMinY(keyboardBgImageView.frame)+15, 50, 20);
-    tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
-                                                          initWithTarget:self
-                                                          action:@selector(arrowImageViewClicked:)];
-    [tapGestureRecognizer setMinimumPressDuration:0.01];
-    [rArrowImageView addGestureRecognizer:tapGestureRecognizer];
-    [self.view addSubview:rArrowImageView];
-
-*/
-    
     UIImageView* keyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
     keyboardImageView.frame = CGRectMake(0, CGRectGetMinY(keyboardBgImageView.frame), CGRectGetWidth(self.view.frame), self.keyboard_top_padding*0.8);
     [keyboardImageView.layer setBorderWidth:1];
@@ -282,19 +258,48 @@
     [grayBarImageView.layer setBorderWidth:1];
     [self.view addSubview:grayBarImageView];
     
-    self.lightGrayBarImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lightGray.png"]];
-    self.lightGrayBarImageView.frame = CGRectMake(0, CGRectGetMinY(keyboardImageView.frame)-self.keyboard_top_padding*0.2, CGRectGetWidth(self.view.frame), self.keyboard_top_padding*0.2);
-    [self.lightGrayBarImageView.layer setBorderWidth:1];
-    [self.view addSubview:self.lightGrayBarImageView];
+    UIImageView* lightGrayBarImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lightGray.png"]];
+    lightGrayBarImageView.frame = CGRectMake(0, CGRectGetMinY(keyboardImageView.frame)-self.keyboard_top_padding*0.2, CGRectGetWidth(self.view.frame), self.keyboard_top_padding*0.2);
+    [lightGrayBarImageView.layer setBorderWidth:1];
+    [self.view addSubview:lightGrayBarImageView];
     
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.spinner.frame = CGRectMake(CGRectGetMidX(self.view.frame)-25, CGRectGetMidY(self.view.frame)-25, 50, 50);
     self.spinner.backgroundColor = [UIColor whiteColor];
     [self.spinner startAnimating];
     
+    self.leftMistBar = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(keyboardImageView.frame), 0, CGRectGetHeight(keyboardImageView.frame))];
+    self.leftMistBar.alpha = 0.5;
+    self.leftMistBar.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:self.leftMistBar];
+    
+    self.rightMistBar = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(keyboardImageView.frame), 0, CGRectGetHeight(keyboardImageView.frame))];
+    self.rightMistBar.alpha = 0.5;
+    self.rightMistBar.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:self.rightMistBar];
+    [self adjustMistBar];    
+
+    UIButton* octaveDownButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(keyboardImageView.frame), self.view.frame.size.width/2, CGRectGetHeight(keyboardImageView.frame))];
+    octaveDownButton.tag = 0;
+    [octaveDownButton addTarget:self action:@selector(arrowImageViewClicked:) forControlEvents:UIControlEventTouchUpInside];
+    octaveDownButton.adjustsImageWhenHighlighted = NO;
+    [self.view addSubview:octaveDownButton];
+
+    UIButton* octaveUpButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2, CGRectGetMinY(keyboardImageView.frame), self.view.frame.size.width/2, CGRectGetHeight(keyboardImageView.frame))];
+    octaveUpButton.tag = 1;
+    [octaveUpButton addTarget:self action:@selector(arrowImageViewClicked:) forControlEvents:UIControlEventTouchUpInside];
+    octaveUpButton.adjustsImageWhenHighlighted = NO;
+    [self.view addSubview:octaveUpButton];
     
     [self drawInstrumentMenu];
     [self drawTablatureScrollView];
+}
+
+-(void) adjustMistBar
+{
+    CGFloat octaveWidth = self.view.frame.size.width/7;
+    self.leftMistBar.frame = CGRectMake(0, CGRectGetMinY(self.leftMistBar.frame), octaveWidth*(self.lowerOctaveNo-1), CGRectGetHeight(self.leftMistBar.frame));
+    self.rightMistBar.frame = CGRectMake(CGRectGetMaxX(self.leftMistBar.frame)+octaveWidth*2, CGRectGetMinY(self.rightMistBar.frame), octaveWidth*(6-self.lowerOctaveNo), CGRectGetHeight(self.rightMistBar.frame));
 }
 
 -(void) drawTablatureScrollView
@@ -369,18 +374,21 @@
     [self.view addSubview:self.instrumentMenuScrollView];
 }
 
-- (void) arrowImageViewClicked:(UITapGestureRecognizer*) sender
+- (void) arrowImageViewClicked:(UIButton*) sender
 {
-    if(sender.state == UIGestureRecognizerStateBegan)
+/*    if(sender.state == UIGestureRecognizerStateBegan)
     {
         [self.view addSubview:self.mistView];
         [self.view addSubview:self.wholeKeyboardImageView];
         UIImageView* imageView = (UIImageView*)sender.view;
         if(imageView.tag == 0)
+  */
+        if(sender.tag == 0)
         {
             if(self.lowerOctaveNo > 1)
             {
                 self.lowerOctaveNo--;
+                [self adjustMistBar];
             }
         }
         else
@@ -388,9 +396,10 @@
             if(self.lowerOctaveNo < 6)
             {
                 self.lowerOctaveNo++;
+                [self adjustMistBar];
             }
         }
-    }
+ /*   }
     else if(sender.state == UIGestureRecognizerStateEnded)
     {
         int i=0;
@@ -398,7 +407,7 @@
             i++;
         [self.mistView removeFromSuperview];
         [self.wholeKeyboardImageView removeFromSuperview];
-    }
+    }*/
 }
 
 - (void) keyTapped:(UILongPressGestureRecognizer*) recognizer
