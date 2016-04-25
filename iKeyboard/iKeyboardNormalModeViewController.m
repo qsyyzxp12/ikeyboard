@@ -125,7 +125,7 @@
     [self screenCheck];
     
     self.instrumentImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"piano_outline.png"]];
-    self.instrumentImageView.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.05, self.navigationController.navigationBar.frame.size.height+self.screenHeight*0.1, CGRectGetWidth(self.view.frame)*0.135, self.screenHeight*0.56);
+    self.instrumentImageView.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.025, self.navigationController.navigationBar.frame.size.height+self.screenHeight*0.23, CGRectGetWidth(self.view.frame)*0.07, self.screenHeight*0.28);
     [self.view addSubview:self.instrumentImageView];
     
     UIButton* instrumentButton = [[UIButton alloc] init];
@@ -134,18 +134,22 @@
     [instrumentButton addTarget:self action:@selector(instrumentButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:instrumentButton];
   
+    UIButton* tablatureButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(instrumentButton.frame), CGRectGetMaxY(self.navigationController.navigationBar.frame)+ 15, CGRectGetWidth(instrumentButton.frame), CGRectGetWidth(instrumentButton.frame))];
+    [tablatureButton setImage:[UIImage imageNamed:@"book.png"] forState:UIControlStateNormal];
+    [self.view addSubview:tablatureButton];
+    
+    
     UIImageView* blueToothIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blueToothIcon.png"]];
-    [blueToothIcon sizeToFit];
-    blueToothIcon.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.8, self.navigationController.navigationBar.frame.size.height+5, CGRectGetWidth(blueToothIcon.frame)*0.6, CGRectGetHeight(blueToothIcon.frame)*0.6);
+    blueToothIcon.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.93, CGRectGetMinY(tablatureButton.frame), CGRectGetWidth(self.view.frame)*0.05, CGRectGetWidth(self.view.frame)*0.05);
     [self.view addSubview:blueToothIcon];
     
-    self.blueToothStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(blueToothIcon.frame), CGRectGetMinY(blueToothIcon.frame), CGRectGetMaxX(self.view.frame)-CGRectGetMaxX(blueToothIcon.frame)-5, CGRectGetHeight(blueToothIcon.frame))];
+/*    self.blueToothStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(blueToothIcon.frame), CGRectGetMinY(blueToothIcon.frame), CGRectGetMaxX(self.view.frame)-CGRectGetMaxX(blueToothIcon.frame)-5, CGRectGetHeight(blueToothIcon.frame))];
     self.blueToothStatusLabel.text = @"Unconnected";
     self.blueToothStatusLabel.numberOfLines = 1;
     self.blueToothStatusLabel.adjustsFontSizeToFitWidth = YES;
     self.blueToothStatusLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.blueToothStatusLabel];
-    
+  */
     self.wholeKeyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
     [self.wholeKeyboardImageView.layer setBorderWidth:2];
     self.wholeKeyboardImageView.frame = CGRectMake(0, self.navigationController.navigationBar.frame.size.height+self.screenHeight/8, self.view.frame.size.width, self.screenHeight/4);
@@ -244,7 +248,7 @@
         [self.view addSubview:blackKeyImageView];
     }
     
-    UIImageView* lArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow.png"]];
+/*    UIImageView* lArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow.png"]];
     lArrowImageView.tag = 0;
     [lArrowImageView setUserInteractionEnabled:YES];
     lArrowImageView.frame = CGRectMake(20, CGRectGetMinY(keyboardBgImageView.frame)+15, 50, 20);
@@ -266,18 +270,36 @@
     [rArrowImageView addGestureRecognizer:tapGestureRecognizer];
     [self.view addSubview:rArrowImageView];
 
-    [self drawInstrumentMenu];
-    [self drawTablatureScrollView];
+*/
+    
+    UIImageView* keyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
+    keyboardImageView.frame = CGRectMake(0, CGRectGetMinY(keyboardBgImageView.frame), CGRectGetWidth(self.view.frame), self.keyboard_top_padding*0.8);
+    [keyboardImageView.layer setBorderWidth:1];
+    [self.view addSubview:keyboardImageView];
+    
+    UIImageView* grayBarImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"gray.png"]];
+    grayBarImageView.frame = CGRectMake(0, CGRectGetMaxY(keyboardImageView.frame), CGRectGetWidth(self.view.frame), self.keyboard_top_padding*0.2);
+    [grayBarImageView.layer setBorderWidth:1];
+    [self.view addSubview:grayBarImageView];
+    
+    self.lightGrayBarImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lightGray.png"]];
+    self.lightGrayBarImageView.frame = CGRectMake(0, CGRectGetMinY(keyboardImageView.frame)-self.keyboard_top_padding*0.2, CGRectGetWidth(self.view.frame), self.keyboard_top_padding*0.2);
+    [self.lightGrayBarImageView.layer setBorderWidth:1];
+    [self.view addSubview:self.lightGrayBarImageView];
     
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.spinner.frame = CGRectMake(CGRectGetMidX(self.view.frame)-25, CGRectGetMidY(self.view.frame)-25, 50, 50);
     self.spinner.backgroundColor = [UIColor whiteColor];
     [self.spinner startAnimating];
+    
+    
+    [self drawInstrumentMenu];
+    [self drawTablatureScrollView];
 }
 
 -(void) drawTablatureScrollView
 {
-    self.tablatureScrollView = [[UIScrollView alloc] initWithFrame: CGRectMake(CGRectGetWidth(self.view.frame)*0.23, self.navigationController.navigationBar.frame.size.height+5, CGRectGetWidth(self.view.frame)*0.55, self.screenHeight/2-10)];
+    self.tablatureScrollView = [[UIScrollView alloc] initWithFrame: CGRectMake(CGRectGetWidth(self.view.frame)*0.12, self.navigationController.navigationBar.frame.size.height+5, CGRectGetWidth(self.view.frame)*0.78, self.screenHeight/2-10-self.keyboard_top_padding*0.2)];
     [self.tablatureScrollView.layer setBorderWidth:2];
     [self.view addSubview:self.tablatureScrollView];
  

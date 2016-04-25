@@ -19,6 +19,7 @@
 @property UIScrollView* instrumentMenuScrollView;
 @property UIScrollView* tablatureScrollView;
 @property UIView* mistView;
+@property UIImageView* lightGrayBarImageView;
 
 @property NSMutableArray* whiteKeyImageViewArray;
 @property NSMutableArray* octavesArray;
