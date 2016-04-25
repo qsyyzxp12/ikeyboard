@@ -25,6 +25,7 @@
     
     self.lowerOctaveNo = 3;
     self.instrumentNo = 1;
+    self.preloadInstrumentFinishedOctaveNo = 0;
     
     self.noteArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
     self.halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
@@ -46,7 +47,7 @@
     {
         for(NSString* noteName in self.noteArray)
         {
-            NSLog(@"%@", [NSString stringWithFormat:@"%@_%@%d", self.instrumentNameMap[self.instrumentNo], noteName, j]);
+           // NSLog(@"%@", [NSString stringWithFormat:@"%@_%@%d", self.instrumentNameMap[self.instrumentNo], noteName, j]);
             NSString* whiteKeySoundFileName = [NSString stringWithFormat:@"%@_%@%d", self.instrumentNameMap[self.instrumentNo], noteName, j];
             NSString* path = [[NSBundle mainBundle] pathForResource:whiteKeySoundFileName ofType:@"mp3"];
             AVAudioPlayer* player = [[AVAudioPlayer alloc] initWithContentsOfURL:
@@ -74,12 +75,31 @@
     
     self.playersArray = playersArray;
     NSArray* argu = [NSArray arrayWithObjects:[NSNumber numberWithInt:2], [NSNumber numberWithInt:0], nil];
-    NSThread *newThread = [[NSThread alloc] initWithTarget:self selector:@selector(preLoadPlayersWithLowerOctave:) object:argu];
+    NSThread *newThread = [[NSThread alloc] initWithTarget:self selector:@selector(preloadPlayers:) object:argu];
     [newThread start];
     
     NSArray* argu2 = [NSArray arrayWithObjects:[NSNumber numberWithInt:4], [NSNumber numberWithInt:1], nil];
-    NSThread *newThread2 = [[NSThread alloc] initWithTarget:self selector:@selector(preLoadPlayersWithLowerOctave:) object:argu2];
+    NSThread *newThread2 = [[NSThread alloc] initWithTarget:self selector:@selector(preloadPlayers:) object:argu2];
     [newThread2 start];
+    
+    NSThread* newThread3 = [[NSThread alloc] initWithTarget:self selector:@selector(preloadOtherInstrument:) object:[NSNumber numberWithInt:self.lowerOctaveNo]];
+    [newThread3 start];
+}
+
+-(void)preloadOtherInstrument:(NSNumber*)lowerOctaveNo
+{
+    
+    NSMutableDictionary* instrumentPlayersDic = [[NSMutableDictionary alloc] init];
+    for(NSString* name in self.instrumentNameMap)
+    {
+        if(![name isEqualToString:self.instrumentNameMap[self.instrumentNo]])
+        {
+            NSArray* playersArray = [self loadTwoOctaveWithLowerOctave:lowerOctaveNo.intValue instrumentName:name];
+            [instrumentPlayersDic setObject:playersArray forKey:name];
+        }
+    }
+    self.instrumentPlayersDic = instrumentPlayersDic;
+    self.preloadInstrumentFinishedOctaveNo = lowerOctaveNo.intValue;
 }
 
 -(void)avaudioPlayerGoUpper:(BOOL)isGoUpper
@@ -91,8 +111,8 @@
         if(self.lowerOctaveNo != 6)
         {
             NSArray* argu = [NSArray arrayWithObjects:[NSNumber numberWithInt:self.lowerOctaveNo+1], [NSNumber numberWithInt:1], nil];
-            self.subThread = [[NSThread alloc] initWithTarget:self selector:@selector(preLoadPlayersWithLowerOctave:) object:argu];
-            [self.subThread start];
+            NSThread* newThread = [[NSThread alloc] initWithTarget:self selector:@selector(preloadPlayers:) object:argu];
+            [newThread start];
         }
     }
     else
@@ -102,21 +122,29 @@
         if(self.lowerOctaveNo != 1)
         {
             NSArray* argu = [NSArray arrayWithObjects:[NSNumber numberWithInt:self.lowerOctaveNo-1], [NSNumber numberWithInt:0], nil];
-            self.subThread = [[NSThread alloc] initWithTarget:self selector:@selector(preLoadPlayersWithLowerOctave:) object:argu];
-            [self.subThread start];
+            NSThread* newThread = [[NSThread alloc] initWithTarget:self selector:@selector(preloadPlayers:) object:argu];
+            [newThread start];
         }
     }
 }
 
--(void)preLoadPlayersWithLowerOctave:(NSArray*)argu
+-(void)preloadPlayers:(NSArray*)argu
 {
     int lowerOctave = ((NSNumber*)(argu[0])).intValue;;
+    if(((NSNumber*)(argu[1])).intValue == 1)
+        self.nextPlayersArray = [self loadTwoOctaveWithLowerOctave:lowerOctave instrumentName:self.instrumentNameMap[self.instrumentNo]];
+    else
+        self.lastPlayersArray = [self loadTwoOctaveWithLowerOctave:lowerOctave instrumentName:self.instrumentNameMap[self.instrumentNo]];
+}
+
+-(NSMutableArray*) loadTwoOctaveWithLowerOctave:(int)lowerOctave instrumentName:(NSString*)instrumentName
+{
     NSMutableArray* playersArray = [[NSMutableArray alloc] init];
     for(int i = lowerOctave; i < lowerOctave+2; i++)
     {
         for(NSString* noteName in self.noteArray)
         {
-            NSString* whiteKeySoundFileName = [NSString stringWithFormat:@"%@_%@%d", self.instrumentNameMap[self.instrumentNo], noteName, i];
+            NSString* whiteKeySoundFileName = [NSString stringWithFormat:@"%@_%@%d", instrumentName, noteName, i];
             NSString* path = [[NSBundle mainBundle] pathForResource:whiteKeySoundFileName ofType:@"mp3"];
             AVAudioPlayer* player = [[AVAudioPlayer alloc] initWithContentsOfURL:
                                      [NSURL fileURLWithPath:path] error:NULL];
@@ -124,11 +152,18 @@
             [player prepareToPlay];
             [playersArray addObject:player];
         }
+        for(NSString* halfStep in self.halfStepArray)
+        {
+            NSString* blackkeySoundFileName = [NSString stringWithFormat:@"%@_%@%d#", instrumentName, halfStep, i];
+            NSString* path = [[NSBundle mainBundle] pathForResource:blackkeySoundFileName ofType:@"mp3"];
+            AVAudioPlayer* player = [[AVAudioPlayer alloc] initWithContentsOfURL:
+                                     [NSURL fileURLWithPath:path] error:NULL];
+            
+            [player prepareToPlay];
+            [playersArray addObject:player];
+        }
     }
-    if(((NSNumber*)(argu[1])).intValue == 1)
-        self.nextPlayersArray = playersArray;
-    else
-        self.lastPlayersArray = playersArray;
+    return playersArray;
 }
 
 #pragma mark - User Interface
@@ -371,10 +406,33 @@
 
 -(void)changeInstrumentButtonClicked:(UIButton*) sender
 {
+    while (self.preloadInstrumentFinishedOctaveNo != self.lowerOctaveNo)
+    {
+        NSLog(@"x");
+    }
+    [self.instrumentPlayersDic setObject:self.playersArray forKey:self.instrumentNameMap[self.instrumentNo]];
+    
     self.instrumentNo = (int)sender.tag;
     NSString* pictureName = [NSString stringWithFormat:@"%@_outline.png", self.instrumentNameMap[self.instrumentNo]];
     [self.instrumentImageView setImage:[UIImage imageNamed:pictureName]];
-    [self AVAudioPlayerInit];
+   // [self AVAudioPlayerInit];
+    
+    self.playersArray = [self.instrumentPlayersDic objectForKey:self.instrumentNameMap[self.instrumentNo]];
+    
+    if(self.lowerOctaveNo != 1)
+    {
+        NSArray* argu = [NSArray arrayWithObjects:[NSNumber numberWithInt:self.lowerOctaveNo-1], [NSNumber numberWithInt:0], nil];
+        NSThread *newThread = [[NSThread alloc] initWithTarget:self selector:@selector(preLoadPlayers:) object:argu];
+        [newThread start];
+    }
+    
+    if(self.lowerOctaveNo != 6)
+    {
+        NSArray* argu = [NSArray arrayWithObjects:[NSNumber numberWithInt:self.lowerOctaveNo+1], [NSNumber numberWithInt:1], nil];
+        NSThread *newThread = [[NSThread alloc] initWithTarget:self selector:@selector(preLoadPlayers:) object:argu];
+        [newThread start];
+    }
+    
     [self.mistView removeFromSuperview];
     [self.instrumentMenuScrollView removeFromSuperview];
 }
@@ -398,7 +456,9 @@
             {
                 self.lowerOctaveNo--;
                 [self avaudioPlayerGoUpper:NO];
-                
+                self.preloadInstrumentFinishedOctaveNo = 0;
+                NSThread* newThread = [[NSThread alloc] initWithTarget:self selector:@selector(preloadOtherInstrument:) object:[NSNumber numberWithInt:self.lowerOctaveNo]];
+                [newThread start];
             }
         }
         else
@@ -407,12 +467,17 @@
             {
                 self.lowerOctaveNo++;
                 [self avaudioPlayerGoUpper:YES];
+                self.preloadInstrumentFinishedOctaveNo = 0;
+                NSThread* newThread = [[NSThread alloc] initWithTarget:self selector:@selector(preloadOtherInstrument:) object:[NSNumber numberWithInt:self.lowerOctaveNo]];
+                [newThread start];
             }
         }
     }
     else if(sender.state == UIGestureRecognizerStateEnded)
     {
-        while (![self.subThread isFinished]);
+        int i=0;
+        while(i < 1000000)
+            i++;
         [self.mistView removeFromSuperview];
         [self.wholeKeyboardImageView removeFromSuperview];
     }

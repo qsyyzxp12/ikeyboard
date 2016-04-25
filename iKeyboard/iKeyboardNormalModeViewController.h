@@ -24,6 +24,7 @@
 @property NSArray* playersArray;
 @property NSArray* nextPlayersArray;
 @property NSArray* lastPlayersArray;
+@property NSMutableDictionary* instrumentPlayersDic;
 
 //No.
 @property int instrumentNo;
@@ -43,5 +44,6 @@
 @property int keyboard_gap_between_keys;
 @property CGSize blackKeySize;
 
-@property NSThread* subThread;
+@property int preloadInstrumentFinishedOctaveNo;
+
 @end
