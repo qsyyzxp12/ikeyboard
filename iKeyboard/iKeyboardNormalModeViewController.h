@@ -20,7 +20,7 @@
 @property UIView* mistView;
 
 @property NSMutableArray* whiteKeyImageViewArray;
-@property NSMutableArray* instrumentOctavesArray;
+@property NSArray* playersArray;
 
 @property int instrumentNo;
 @property int lower_octave_no;
