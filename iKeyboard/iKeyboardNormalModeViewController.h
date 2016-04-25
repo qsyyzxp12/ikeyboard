@@ -21,12 +21,16 @@
 
 @property NSMutableArray* whiteKeyImageViewArray;
 @property NSArray* playersArray;
+@property NSArray* nextPlayersArray;
+@property NSArray* lastPlayersArray;
 
 @property int instrumentNo;
-@property int lower_octave_no;
+@property int lowerOctaveNo;
 
 @property NSArray* noteNameMap;
 @property NSArray* instrumentNameMap;
+@property NSArray* noteArray;
+@property NSArray* halfStepArray;
 
 @property CGFloat screenHeight;
 @property int keyboard_top_padding;
