@@ -25,25 +25,25 @@
     
     self.lowerOctaveNo = 3;
     self.instrumentNo = 1;
-    self.preloadInstrumentFinishedOctaveNo = 0;
     
-    self.noteArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
+    
+    self.noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
     self.halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
     self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"guitar", @"piano", @"string", nil];
     
     self.screenHeight = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height;
-    
-    [self AVAudioPlayerInit];
+
     [self UIbuild];
+    [self.view addSubview:self.mistView];
+    [self.view addSubview:self.spinner];
+    [NSThread detachNewThreadSelector:@selector(AVAudioPlayerInit) toTarget:self withObject:nil];
 }
 
 #pragma mark - AVAudio Player
 
 -(void) AVAudioPlayerInit
 {
-    NSArray* noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
-    NSArray* halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
-    
+    NSString* instrumentName = self.instrumentNameMap[self.instrumentNo];
     NSMutableArray* octavesArray = [[NSMutableArray alloc] init];
     NSString *path;
     AVAudioPlayer* player;
@@ -51,18 +51,18 @@
     {
         NSMutableArray*  playersArray= [[NSMutableArray alloc] init];
         [octavesArray addObject:playersArray];
-        for(NSString* noteName in noteNameArray)
+        for(NSString* noteName in self.noteNameArray)
         {
-            NSString* fileName = [NSString stringWithFormat:@"piano_%@%d", noteName, i+1];
+            NSString* fileName = [NSString stringWithFormat:@"%@_%@%d", instrumentName, noteName, i+1];
             path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"mp3"];
             player = [[AVAudioPlayer alloc] initWithContentsOfURL:
                       [NSURL fileURLWithPath:path] error:NULL];
             [player prepareToPlay];
             [playersArray addObject:player];
         }
-        for(NSString* halfStep in halfStepArray)
+        for(NSString* halfStep in self.halfStepArray)
         {
-            NSString* fileName = [NSString stringWithFormat:@"piano_%@%d#", halfStep, i+1];
+            NSString* fileName = [NSString stringWithFormat:@"%@_%@%d#", instrumentName, halfStep, i+1];
             path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"mp3"];
             player = [[AVAudioPlayer alloc] initWithContentsOfURL:
                       [NSURL fileURLWithPath:path] error:NULL];
@@ -72,9 +72,16 @@
     }
     
     self.octavesArray = octavesArray;
+    [self performSelectorOnMainThread:@selector(removeSpinnerAndMistView) withObject:nil waitUntilDone:NO];
 }
 
 #pragma mark - User Interface
+
+-(void)removeSpinnerAndMistView
+{
+    [self.mistView removeFromSuperview];
+    [self.spinner removeFromSuperview];
+}
 
 -(void) screenCheck
 {
@@ -261,6 +268,11 @@
 
     [self drawInstrumentMenu];
     [self drawTablatureScrollView];
+    
+    self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.spinner.frame = CGRectMake(CGRectGetMidX(self.view.frame)-25, CGRectGetMidY(self.view.frame)-25, 50, 50);
+    self.spinner.backgroundColor = [UIColor whiteColor];
+    [self.spinner startAnimating];
 }
 
 -(void) drawTablatureScrollView
@@ -323,9 +335,10 @@
     self.instrumentNo = (int)sender.tag;
     NSString* pictureName = [NSString stringWithFormat:@"%@_outline.png", self.instrumentNameMap[self.instrumentNo]];
     [self.instrumentImageView setImage:[UIImage imageNamed:pictureName]];
-   
-    [self.mistView removeFromSuperview];
+   // [self AVAudioPlayerInit];
     [self.instrumentMenuScrollView removeFromSuperview];
+    [self.view addSubview:self.spinner];
+    [NSThread detachNewThreadSelector:@selector(AVAudioPlayerInit) toTarget:self withObject:nil];
 }
 
 -(void)instrumentButtonClicked

@@ -29,7 +29,7 @@
 
 //Name map
 @property NSArray* instrumentNameMap;
-@property NSArray* noteArray;
+@property NSArray* noteNameArray;
 @property NSArray* halfStepArray;
 
 //Screen Size control
@@ -41,6 +41,5 @@
 @property int keyboard_gap_between_keys;
 @property CGSize blackKeySize;
 
-@property int preloadInstrumentFinishedOctaveNo;
-
+@property UIActivityIndicatorView* spinner;
 @end
