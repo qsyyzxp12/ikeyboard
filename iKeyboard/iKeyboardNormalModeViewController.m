@@ -36,52 +36,37 @@
 
 -(void) AVAudioPlayerInit
 {
-    self.instrumentOctavesArray = [[NSMutableArray alloc] init];
+    NSArray* noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
+    NSArray* halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
     
-    NSArray* halfStepArray = [[NSArray alloc] initWithObjects:@"A", @"C", @"D", @"F", @"G", nil];
-    
-    for(NSString* instrumentName in self.instrumentNameMap)
+    NSMutableArray* octavesArray = [[NSMutableArray alloc] init];
+    NSString *path;
+    AVAudioPlayer* player;
+    for(int i=0; i<7; i++)
     {
-        if(instrumentName)
+        NSMutableArray*  playersArray= [[NSMutableArray alloc] init];
+        [octavesArray addObject:playersArray];
+        for(NSString* noteName in noteNameArray)
         {
-            NSLog(@"instrument name = %@", instrumentName);
-            NSMutableArray* octavesArray = [[NSMutableArray alloc] initWithCapacity:7];
-            NSString *path;
-            AVAudioPlayer* player;
-            for(int i=0; i<7; i++)
-            {
-                NSMutableDictionary* octaveDic = [[NSMutableDictionary alloc] init];
-                octavesArray[i] = octaveDic;
-                NSLog(@"\tOctave %d", i+1);
-                for(int j=(int)'A'; j<(int)'H'; j++)
-                {
-                    NSLog(@"\t\twhite key %c", (char)j);
-                    NSString* fileName = [NSString stringWithFormat:@"%@_%c%d", instrumentName, (char)j, i+1];
-                    path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"mp3"];
-                    player = [[AVAudioPlayer alloc] initWithContentsOfURL:
-                              [NSURL fileURLWithPath:path] error:NULL];
-                    [player prepareToPlay];
-                    NSString* key = [NSString stringWithFormat:@"%c", (char)j];
-                    if(!player)
-                        NSLog(@"xx");
-                    [octaveDic setObject:player forKey:key];
-                }
-                for(NSString* halfStep in halfStepArray)
-                {
-                    NSLog(@"\t\tblack key %@", halfStep);
-                    NSString* fileName = [NSString stringWithFormat:@"%@_%@%d#", instrumentName, halfStep, i+1];
-                    path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"mp3"];
-                    player = [[AVAudioPlayer alloc] initWithContentsOfURL:
-                              [NSURL fileURLWithPath:path] error:NULL];
-                    [player prepareToPlay];
-                    NSString* key = [NSString stringWithFormat:@"%@#", halfStep];
-                    [octaveDic setObject:player forKey:key];
-                }
-            }
-            
-            [self.instrumentOctavesArray addObject:octavesArray];
+            NSString* fileName = [NSString stringWithFormat:@"piano_%@%d", noteName, i+1];
+            path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"mp3"];
+            player = [[AVAudioPlayer alloc] initWithContentsOfURL:
+                      [NSURL fileURLWithPath:path] error:NULL];
+            [player prepareToPlay];
+            [playersArray addObject:player];
+        }
+        for(NSString* halfStep in halfStepArray)
+        {
+            NSString* fileName = [NSString stringWithFormat:@"piano_%@%d#", halfStep, i+1];
+            path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"mp3"];
+            player = [[AVAudioPlayer alloc] initWithContentsOfURL:
+                      [NSURL fileURLWithPath:path] error:NULL];
+            [player prepareToPlay];
+            [playersArray addObject:player];
         }
     }
+    
+    self.octavesArray = octavesArray;
 }
 
 
@@ -180,8 +165,11 @@
         NSString* highlightImageName = [NSString stringWithFormat:@"wkey%d_highlight.png", i+1];
         UIImageView* whiteKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName] highlightedImage:[UIImage imageNamed:highlightImageName]];
         whiteKeyImageView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
-
-        whiteKeyImageView.tag = i;
+        
+        if(i < 7)
+            whiteKeyImageView.tag = i+1;
+        else
+            whiteKeyImageView.tag = (i%7+1)*100;
         
         [whiteKeyImageView setUserInteractionEnabled:YES];
         
@@ -212,7 +200,10 @@
     for(int i=0; i<10; i++)
     {
         UIImageView* blackKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bkey.png"] highlightedImage:[UIImage imageNamed:@"bkey_highlight.png"]];
-        blackKeyImageView.tag = 14+i;
+        if(i < 5)
+            blackKeyImageView.tag = 8+i;
+        else
+            blackKeyImageView.tag = 800 + (i%5)*100;
         
         [blackKeyImageView setUserInteractionEnabled:YES];
         UILongPressGestureRecognizer *tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
@@ -305,7 +296,7 @@
     [self.instrumentMenuScrollView addSubview:instrumentButton];
     
     instrumentButton = [[UIButton alloc] init];
-    [instrumentButton setImage:[UIImage imageNamed:@"violin_outline.png"] forState:UIControlStateNormal];
+    [instrumentButton setImage:[UIImage imageNamed:@"string_outline.png"] forState:UIControlStateNormal];
     instrumentButton.tag = 2;
     instrumentButton.adjustsImageWhenHighlighted = NO;
     [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.69, CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.2, CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.18, self.instrumentMenuScrollView.frame.size.height*1.2)];
@@ -369,15 +360,16 @@
         imageView.highlighted = YES;
 
         int octaveNo;
-        if( (keyNo > 6 && keyNo < 14) || keyNo > 18)
+        if( keyNo >= 100)
+        {
             octaveNo = self.lower_octave_no + 1;
+            keyNo /= 100;
+        }
         else
             octaveNo = self.lower_octave_no;
         
-        NSArray* octavesArray = [self.instrumentOctavesArray objectAtIndex:self.instrumentNo];
-        NSDictionary* octaveDic = [octavesArray objectAtIndex:octaveNo-1];
-        NSString* key = self.noteNameMap[keyNo];
-        [[octaveDic objectForKey:key] play];
+        NSArray* playersArray = self.octavesArray[octaveNo-1];
+        [[playersArray objectAtIndex:keyNo-1] play];
     }
     else if(recognizer.state == UIGestureRecognizerStateEnded)
     {
@@ -387,18 +379,19 @@
             i++;
 
         int octaveNo;
-        if( (keyNo > 6 && keyNo < 14) || keyNo > 18)
+        if( keyNo >= 100)
+        {
             octaveNo = self.lower_octave_no + 1;
+            keyNo /= 100;
+        }
         else
             octaveNo = self.lower_octave_no;
         
-        NSArray* octavesArray = [self.instrumentOctavesArray objectAtIndex:self.instrumentNo];
-        NSDictionary* octaveDic = [octavesArray objectAtIndex:octaveNo-1];
-        NSString* key = self.noteNameMap[keyNo];
+        NSArray* playersArray = self.octavesArray[octaveNo-1];
         
-        [[octaveDic objectForKey:key] stop];
-        ((AVAudioPlayer*)[octaveDic objectForKey:key]).currentTime = 0;
-        [[octaveDic objectForKey:key] prepareToPlay];
+        [[playersArray objectAtIndex:keyNo-1] stop];
+        ((AVAudioPlayer*)[playersArray objectAtIndex:keyNo-1]).currentTime = 0;
+        [[playersArray objectAtIndex:keyNo-1] prepareToPlay];
     }
 }
 
