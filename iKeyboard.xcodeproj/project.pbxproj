@@ -673,9 +673,9 @@
 		C74B815C1CBF9FC6005307FF /* voice */ = {
 			isa = PBXGroup;
 			children = (
-				C74DD0591CCC82A9006D5F4D /* string */,
 				C74DCFA91CCC6CF2006D5F4D /* guitar */,
 				C74DCEF91CCBE0C4006D5F4D /* piano */,
+				C74DD0591CCC82A9006D5F4D /* string */,
 			);
 			path = voice;
 			sourceTree = "<group>";

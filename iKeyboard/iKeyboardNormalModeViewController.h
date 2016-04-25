@@ -11,9 +11,10 @@
 
 @interface iKeyboardNormalModeViewController : UIViewController
 
+//UI
 @property UIImageView *wholeKeyboardImageView;
 @property UIImageView *frameImageView;
-@property UIButton* instrumentButton;
+@property UIImageView* instrumentImageView;
 @property UILabel* blueToothStatusLabel;
 @property UIScrollView* instrumentMenuScrollView;
 @property UIScrollView* tablatureScrollView;
@@ -22,12 +23,16 @@
 @property NSMutableArray* whiteKeyImageViewArray;
 @property NSMutableArray* octavesArray;
 
+//No.
 @property int instrumentNo;
-@property int lower_octave_no;
+@property int lowerOctaveNo;
 
-@property NSArray* noteNameMap;
+//Name map
 @property NSArray* instrumentNameMap;
+@property NSArray* noteArray;
+@property NSArray* halfStepArray;
 
+//Screen Size control
 @property CGFloat screenHeight;
 @property int keyboard_top_padding;
 @property int keyboard_left_padding;
@@ -35,4 +40,7 @@
 @property int keyboard_button_padding;
 @property int keyboard_gap_between_keys;
 @property CGSize blackKeySize;
+
+@property int preloadInstrumentFinishedOctaveNo;
+
 @end
