@@ -25,7 +25,7 @@
     
     self.lowerOctaveNo = 3;
     self.instrumentNo = 1;
-    self.noteNameMap = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"A", @"B", @"C#", @"D#", @"F#", @"G#", @"A#", @"C#", @"D#", @"F#", @"G#", @"A#", nil];
+    
     self.noteArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
     self.halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
     self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"guitar", @"piano", @"string", nil];
@@ -91,8 +91,8 @@
         if(self.lowerOctaveNo != 6)
         {
             NSArray* argu = [NSArray arrayWithObjects:[NSNumber numberWithInt:self.lowerOctaveNo+1], [NSNumber numberWithInt:1], nil];
-            NSThread *newThread = [[NSThread alloc] initWithTarget:self selector:@selector(preLoadPlayersWithLowerOctave:) object:argu];
-            [newThread start];
+            self.subThread = [[NSThread alloc] initWithTarget:self selector:@selector(preLoadPlayersWithLowerOctave:) object:argu];
+            [self.subThread start];
         }
     }
     else
@@ -102,8 +102,8 @@
         if(self.lowerOctaveNo != 1)
         {
             NSArray* argu = [NSArray arrayWithObjects:[NSNumber numberWithInt:self.lowerOctaveNo-1], [NSNumber numberWithInt:0], nil];
-            NSThread *newThread = [[NSThread alloc] initWithTarget:self selector:@selector(preLoadPlayersWithLowerOctave:) object:argu];
-            [newThread start];
+            self.subThread = [[NSThread alloc] initWithTarget:self selector:@selector(preLoadPlayersWithLowerOctave:) object:argu];
+            [self.subThread start];
         }
     }
 }
@@ -173,13 +173,17 @@
 -(void) UIbuild
 {
     [self screenCheck];
-    self.instrumentButton = [[UIButton alloc] init];
-    [self.instrumentButton setImage:[UIImage imageNamed:@"piano_outline.png"] forState:UIControlStateNormal];
-    self.instrumentButton.adjustsImageWhenHighlighted = NO;
-    [self.instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0.05, self.navigationController.navigationBar.frame.size.height+self.screenHeight*0.1, CGRectGetWidth(self.view.frame)*0.135, self.screenHeight*0.56)];
-    [self.instrumentButton addTarget:self action:@selector(instrumentButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.instrumentButton];
     
+    self.instrumentImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"piano_outline.png"]];
+    self.instrumentImageView.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.05, self.navigationController.navigationBar.frame.size.height+self.screenHeight*0.1, CGRectGetWidth(self.view.frame)*0.135, self.screenHeight*0.56);
+    [self.view addSubview:self.instrumentImageView];
+    
+    UIButton* instrumentButton = [[UIButton alloc] init];
+    instrumentButton.adjustsImageWhenHighlighted = NO;
+    [instrumentButton setFrame:CGRectMake(CGRectGetMinX(self.instrumentImageView.frame), CGRectGetMinY(self.instrumentImageView.frame), CGRectGetWidth(self.instrumentImageView.frame), CGRectGetHeight(self.instrumentImageView.frame)/2)];
+    [instrumentButton addTarget:self action:@selector(instrumentButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:instrumentButton];
+  
     UIImageView* blueToothIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blueToothIcon.png"]];
     [blueToothIcon sizeToFit];
     blueToothIcon.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.8, self.navigationController.navigationBar.frame.size.height+5, CGRectGetWidth(blueToothIcon.frame)*0.6, CGRectGetHeight(blueToothIcon.frame)*0.6);
@@ -219,7 +223,6 @@
     
     
     //White Keys
-    self.whiteKeyImageViewArray = [[NSMutableArray alloc] init];
     for(int i=0; i<14; i++)
     {
         NSString* imageName = [NSString stringWithFormat:@"wkey%d.png", i+1];
@@ -239,7 +242,6 @@
         [whiteKeyImageView addGestureRecognizer:tapGestureRecognizer];
        // whiteKeyImageView.backgroundColor = [UIColor redColor];
         [self.view addSubview:whiteKeyImageView];
-        [self.whiteKeyImageViewArray addObject:whiteKeyImageView];
         
         UILabel* noLabel = [[UILabel alloc] initWithFrame:CGRectMake(keyX, CGRectGetMaxY(whiteKeyImageView.frame)-keyHeight*0.2, oneKeyWidth, keyHeight*0.2)];
         
@@ -371,7 +373,7 @@
 {
     self.instrumentNo = (int)sender.tag;
     NSString* pictureName = [NSString stringWithFormat:@"%@_outline.png", self.instrumentNameMap[self.instrumentNo]];
-    [self.instrumentButton setImage:[UIImage imageNamed:pictureName] forState:UIControlStateNormal];
+    [self.instrumentImageView setImage:[UIImage imageNamed:pictureName]];
     [self AVAudioPlayerInit];
     [self.mistView removeFromSuperview];
     [self.instrumentMenuScrollView removeFromSuperview];
@@ -410,6 +412,7 @@
     }
     else if(sender.state == UIGestureRecognizerStateEnded)
     {
+        while (![self.subThread isFinished]);
         [self.mistView removeFromSuperview];
         [self.wholeKeyboardImageView removeFromSuperview];
     }
