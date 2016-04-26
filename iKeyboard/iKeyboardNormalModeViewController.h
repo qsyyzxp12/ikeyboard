@@ -15,6 +15,7 @@
 @property UIImageView *wholeKeyboardImageView;
 @property UIImageView *frameImageView;
 @property UIImageView* instrumentImageView;
+@property UIImageView* tablatureImageView;
 @property UILabel* blueToothStatusLabel;
 @property UIScrollView* instrumentMenuScrollView;
 @property UIScrollView* tablatureMenuScrollView;
@@ -34,6 +35,7 @@
 @property NSArray* instrumentNameMap;
 @property NSArray* noteNameArray;
 @property NSArray* halfStepArray;
+@property NSArray* tablatureFileNameArray;
 
 //Screen Size control
 @property CGFloat screenHeight;

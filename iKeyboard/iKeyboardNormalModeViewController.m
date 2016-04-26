@@ -30,7 +30,7 @@
     self.noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
     self.halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
     self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"guitar", @"piano", @"string", nil];
-    
+    self.tablatureFileNameArray = [[NSArray alloc] initWithObjects:@"up.jpg", @"letItGo.jpg", @"canonInDMajor.jpg", nil];
     self.screenHeight = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height;
 
     [self UIbuild];
@@ -292,8 +292,6 @@
 
 -(void) drawTablatureMenu
 {
-    NSArray* fileNameArray = [[NSArray alloc] initWithObjects:@"up.jpg", @"letItGo.jpg", @"canonInDMajor.jpg", nil];
-    
     NSArray* fileNameLabelArray = [[NSArray alloc] initWithObjects:@"Pixar's Up-Theme Song", @"Frozen\nLet it Go", @"Pachelbel\nCanon in D major", nil];
     
     self.tablatureMenuScrollView = [[UIScrollView alloc] init];
@@ -301,13 +299,13 @@
     [self.tablatureMenuScrollView.layer setBorderWidth:2];
     self.tablatureMenuScrollView.backgroundColor = [UIColor whiteColor];
     
-    for(int i=0; i<[fileNameArray count]; i++)
+    for(int i=0; i<[self.tablatureFileNameArray count]; i++)
     {
         UIButton* icon = [[UIButton alloc] init];
         [icon setImage:[UIImage imageNamed:@"tablatureIcon.png"] forState:UIControlStateNormal];
-        icon.tag = 1;
+        icon.tag = i;
         icon.adjustsImageWhenHighlighted = NO;
-        int x = i - (int)[fileNameArray count]/2;
+        int x = i - (int)[self.tablatureFileNameArray count]/2;
         [icon setFrame:CGRectMake(CGRectGetWidth(self.tablatureMenuScrollView.frame)*(0.43+x*0.26), CGRectGetHeight(self.tablatureMenuScrollView.frame)*0.1, CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.14, self.tablatureMenuScrollView.frame.size.height*0.6)];
         [icon addTarget:self action:@selector(changeTablatureButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.tablatureMenuScrollView addSubview:icon];
@@ -335,13 +333,13 @@
     [self.tablatureScrollView.layer setBorderWidth:2];
     [self.view addSubview:self.tablatureScrollView];
  
-    UIImageView* tablature = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"up.jpg"]];
-    [tablature sizeToFit];
-    float scale = CGRectGetWidth(self.tablatureScrollView.frame)/tablature.frame.size.width;
-    tablature.frame = CGRectMake(0, 0, CGRectGetWidth(self.tablatureScrollView.frame), tablature.frame.size.height*scale);
-    [self.tablatureScrollView addSubview:tablature];
+    self.tablatureImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"up.jpg"]];
+    [self.tablatureImageView sizeToFit];
+    float scale = CGRectGetWidth(self.tablatureScrollView.frame)/self.tablatureImageView.frame.size.width;
+    self.tablatureImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.tablatureScrollView.frame), self.tablatureImageView.frame.size.height*scale);
+    [self.tablatureScrollView addSubview:self.tablatureImageView];
     
-    self.tablatureScrollView.contentSize = tablature.frame.size;
+    self.tablatureScrollView.contentSize = self.tablatureImageView.frame.size;
 }
 
 -(void) drawInstrumentMenu
@@ -351,14 +349,20 @@
     [self.instrumentMenuScrollView.layer setBorderWidth:2];
     self.instrumentMenuScrollView.backgroundColor = [UIColor whiteColor];
     
-    UIButton* instrumentButton = [[UIButton alloc] init];
-    [instrumentButton setImage:[UIImage imageNamed:@"piano_outline.png"] forState:UIControlStateNormal];
-    instrumentButton.tag = 1;
-    instrumentButton.adjustsImageWhenHighlighted = NO;
-    [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.41, CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.2, CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.18, self.instrumentMenuScrollView.frame.size.height*1.2)];
-    [instrumentButton addTarget:self action:@selector(changeInstrumentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.instrumentMenuScrollView addSubview:instrumentButton];
+    for(int i=0; i<[self.instrumentNameMap count]; i++)
+    {
+        UIButton* instrumentButton = [[UIButton alloc] init];
+        NSString* imageName = [NSString stringWithFormat:@"%@_outline.png", self.instrumentNameMap[i]];
+        [instrumentButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        instrumentButton.tag = i;
+        instrumentButton.adjustsImageWhenHighlighted = NO;
+        int x = i - (int)[self.instrumentNameMap count]/2;
+        [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*(0.41+x*0.28), CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.2, CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.18, self.instrumentMenuScrollView.frame.size.height*1.2)];
+        [instrumentButton addTarget:self action:@selector(changeInstrumentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.instrumentMenuScrollView addSubview:instrumentButton];
+    }
     
+    /*
     instrumentButton = [[UIButton alloc] init];
     [instrumentButton setImage:[UIImage imageNamed:@"guitar_outline.png"] forState:UIControlStateNormal];
     instrumentButton.tag = 0;
@@ -373,7 +377,7 @@
     instrumentButton.adjustsImageWhenHighlighted = NO;
     [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.69, CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.2, CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.18, self.instrumentMenuScrollView.frame.size.height*1.2)];
     [instrumentButton addTarget:self action:@selector(changeInstrumentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.instrumentMenuScrollView addSubview:instrumentButton];
+    [self.instrumentMenuScrollView addSubview:instrumentButton];*/
 }
 
 #pragma mark - Actions
@@ -389,7 +393,15 @@
 
 -(void) changeTablatureButtonClicked:(UIButton*) sender
 {
-    [self.view addSubview:self.tablatureMenuScrollView];
+    [self.tablatureImageView setImage: [UIImage imageNamed:self.tablatureFileNameArray[sender.tag]]];
+    [self.tablatureImageView sizeToFit];
+    float scale = CGRectGetWidth(self.tablatureScrollView.frame)/self.tablatureImageView.frame.size.width;
+    self.tablatureImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.tablatureScrollView.frame), self.tablatureImageView.frame.size.height*scale);
+    
+    self.tablatureScrollView.contentSize = self.tablatureImageView.frame.size;
+   
+    [self.mistView removeFromSuperview];
+    [self.tablatureMenuScrollView removeFromSuperview];
 }
 
 -(void)changeInstrumentButtonClicked:(UIButton*) sender
