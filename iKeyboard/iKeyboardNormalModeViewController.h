@@ -17,6 +17,7 @@
 @property UIImageView* instrumentImageView;
 @property UILabel* blueToothStatusLabel;
 @property UIScrollView* instrumentMenuScrollView;
+@property UIScrollView* tablatureMenuScrollView;
 @property UIScrollView* tablatureScrollView;
 @property UIView* mistView;
 @property UIView* leftMistBar;

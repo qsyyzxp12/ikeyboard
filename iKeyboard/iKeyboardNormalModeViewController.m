@@ -136,20 +136,14 @@
   
     UIButton* tablatureButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(instrumentButton.frame), CGRectGetMaxY(self.navigationController.navigationBar.frame)+ 15, CGRectGetWidth(instrumentButton.frame), CGRectGetWidth(instrumentButton.frame))];
     [tablatureButton setImage:[UIImage imageNamed:@"book.png"] forState:UIControlStateNormal];
+    [tablatureButton addTarget:self action:@selector(tablatureButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:tablatureButton];
     
     
     UIImageView* blueToothIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blueToothIcon.png"]];
     blueToothIcon.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.93, CGRectGetMinY(tablatureButton.frame), CGRectGetWidth(self.view.frame)*0.05, CGRectGetWidth(self.view.frame)*0.05);
     [self.view addSubview:blueToothIcon];
-    
-/*    self.blueToothStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(blueToothIcon.frame), CGRectGetMinY(blueToothIcon.frame), CGRectGetMaxX(self.view.frame)-CGRectGetMaxX(blueToothIcon.frame)-5, CGRectGetHeight(blueToothIcon.frame))];
-    self.blueToothStatusLabel.text = @"Unconnected";
-    self.blueToothStatusLabel.numberOfLines = 1;
-    self.blueToothStatusLabel.adjustsFontSizeToFitWidth = YES;
-    self.blueToothStatusLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:self.blueToothStatusLabel];
-  */
+ 
     self.wholeKeyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
     [self.wholeKeyboardImageView.layer setBorderWidth:2];
     self.wholeKeyboardImageView.frame = CGRectMake(0, self.navigationController.navigationBar.frame.size.height+self.screenHeight/8, self.view.frame.size.width, self.screenHeight/4);
@@ -293,6 +287,39 @@
     
     [self drawInstrumentMenu];
     [self drawTablatureScrollView];
+    [self drawTablatureMenu];
+}
+
+-(void) drawTablatureMenu
+{
+    NSArray* fileNameArray = [[NSArray alloc] initWithObjects:@"up.jpg", @"letItGo.jpg", @"canonInDMajor.jpg", nil];
+    
+    NSArray* fileNameLabelArray = [[NSArray alloc] initWithObjects:@"Pixar's Up-Theme Song", @"Frozen\nLet it Go", @"Pachelbel\nCanon in D major", nil];
+    
+    self.tablatureMenuScrollView = [[UIScrollView alloc] init];
+    self.tablatureMenuScrollView.frame = CGRectMake(7, CGRectGetHeight(self.view.frame)*0.33, self.view.frame.size.width-14, self.view.frame.size.height*0.53);
+    [self.tablatureMenuScrollView.layer setBorderWidth:2];
+    self.tablatureMenuScrollView.backgroundColor = [UIColor whiteColor];
+    
+    for(int i=0; i<[fileNameArray count]; i++)
+    {
+        UIButton* icon = [[UIButton alloc] init];
+        [icon setImage:[UIImage imageNamed:@"tablatureIcon.png"] forState:UIControlStateNormal];
+        icon.tag = 1;
+        icon.adjustsImageWhenHighlighted = NO;
+        int x = i - (int)[fileNameArray count]/2;
+        [icon setFrame:CGRectMake(CGRectGetWidth(self.tablatureMenuScrollView.frame)*(0.43+x*0.26), CGRectGetHeight(self.tablatureMenuScrollView.frame)*0.1, CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.14, self.tablatureMenuScrollView.frame.size.height*0.6)];
+        [icon addTarget:self action:@selector(changeTablatureButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.tablatureMenuScrollView addSubview:icon];
+        
+        UILabel* nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(icon.frame), CGRectGetMaxY(icon.frame), CGRectGetWidth(icon.frame), CGRectGetHeight(self.tablatureMenuScrollView.frame)*0.2)];
+        nameLabel.text = [fileNameLabelArray objectAtIndex:i];
+        nameLabel.textAlignment = NSTextAlignmentCenter;
+        nameLabel.numberOfLines = 2;
+        nameLabel.adjustsFontSizeToFitWidth = YES;
+        [self.tablatureMenuScrollView addSubview:nameLabel];
+        
+    }
 }
 
 -(void) adjustMistBar
@@ -308,7 +335,7 @@
     [self.tablatureScrollView.layer setBorderWidth:2];
     [self.view addSubview:self.tablatureScrollView];
  
-    UIImageView* tablature = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tablature.jpg"]];
+    UIImageView* tablature = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"up.jpg"]];
     [tablature sizeToFit];
     float scale = CGRectGetWidth(self.tablatureScrollView.frame)/tablature.frame.size.width;
     tablature.frame = CGRectMake(0, 0, CGRectGetWidth(self.tablatureScrollView.frame), tablature.frame.size.height*scale);
@@ -354,7 +381,15 @@
 -(void)mistViewTapped
 {
     [self.mistView removeFromSuperview];
-    [self.instrumentMenuScrollView removeFromSuperview];
+    if([self.tablatureMenuScrollView isDescendantOfView:self.view])
+        [self.tablatureMenuScrollView removeFromSuperview];
+    if([self.instrumentMenuScrollView isDescendantOfView:self.view])
+        [self.instrumentMenuScrollView removeFromSuperview];
+}
+
+-(void) changeTablatureButtonClicked:(UIButton*) sender
+{
+    [self.view addSubview:self.tablatureMenuScrollView];
 }
 
 -(void)changeInstrumentButtonClicked:(UIButton*) sender
@@ -366,6 +401,12 @@
     [self.instrumentMenuScrollView removeFromSuperview];
     [self.view addSubview:self.spinner];
     [NSThread detachNewThreadSelector:@selector(AVAudioPlayerInit) toTarget:self withObject:nil];
+}
+
+-(void)tablatureButtonClicked
+{
+    [self.view addSubview:self.mistView];
+    [self.view addSubview:self.tablatureMenuScrollView];
 }
 
 -(void)instrumentButtonClicked

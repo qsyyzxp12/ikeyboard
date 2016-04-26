@@ -53,7 +53,6 @@
 		C74DCEF51CCBD517006D5F4D /* leftArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C74DCECD1CCBD517006D5F4D /* leftArrow.png */; };
 		C74DCEF61CCBD517006D5F4D /* part_of_keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = C74DCECE1CCBD517006D5F4D /* part_of_keyboard.png */; };
 		C74DCEF71CCBD517006D5F4D /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C74DCECF1CCBD517006D5F4D /* rightArrow.png */; };
-		C74DCEF81CCBD517006D5F4D /* tablature.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C74DCED01CCBD517006D5F4D /* tablature.jpg */; };
 		C74DCF551CCBE0C4006D5F4D /* piano_A1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCEFB1CCBE0C4006D5F4D /* piano_A1#.mp3 */; };
 		C74DCF561CCBE0C4006D5F4D /* piano_A1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCEFC1CCBE0C4006D5F4D /* piano_A1.mp3 */; };
 		C74DCF571CCBE0C4006D5F4D /* piano_B1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCEFD1CCBE0C4006D5F4D /* piano_B1.mp3 */; };
@@ -309,6 +308,10 @@
 		C74DD10E1CCE3021006D5F4D /* gray.png in Resources */ = {isa = PBXBuildFile; fileRef = C74DD10D1CCE3021006D5F4D /* gray.png */; };
 		C74DD1101CCE31C7006D5F4D /* lightGray.png in Resources */ = {isa = PBXBuildFile; fileRef = C74DD10F1CCE31C7006D5F4D /* lightGray.png */; };
 		C74DD1121CCE354D006D5F4D /* book.png in Resources */ = {isa = PBXBuildFile; fileRef = C74DD1111CCE354D006D5F4D /* book.png */; };
+		C74DD1161CCE4D34006D5F4D /* letItGo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C74DD1141CCE4D34006D5F4D /* letItGo.jpg */; };
+		C74DD1171CCE4D34006D5F4D /* up.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C74DD1151CCE4D34006D5F4D /* up.jpg */; };
+		C74DD1191CCE4E35006D5F4D /* canonInDMajor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C74DD1181CCE4E35006D5F4D /* canonInDMajor.jpg */; };
+		C74DD11B1CCE4EFD006D5F4D /* tablatureIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = C74DD11A1CCE4EFD006D5F4D /* tablatureIcon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -363,7 +366,6 @@
 		C74DCECD1CCBD517006D5F4D /* leftArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftArrow.png; sourceTree = "<group>"; };
 		C74DCECE1CCBD517006D5F4D /* part_of_keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = part_of_keyboard.png; sourceTree = "<group>"; };
 		C74DCECF1CCBD517006D5F4D /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightArrow.png; sourceTree = "<group>"; };
-		C74DCED01CCBD517006D5F4D /* tablature.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tablature.jpg; sourceTree = "<group>"; };
 		C74DCEFB1CCBE0C4006D5F4D /* piano_A1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A1#.mp3"; sourceTree = "<group>"; };
 		C74DCEFC1CCBE0C4006D5F4D /* piano_A1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A1.mp3; sourceTree = "<group>"; };
 		C74DCEFD1CCBE0C4006D5F4D /* piano_B1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B1.mp3; sourceTree = "<group>"; };
@@ -619,6 +621,10 @@
 		C74DD10D1CCE3021006D5F4D /* gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray.png; sourceTree = "<group>"; };
 		C74DD10F1CCE31C7006D5F4D /* lightGray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightGray.png; sourceTree = "<group>"; };
 		C74DD1111CCE354D006D5F4D /* book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = book.png; sourceTree = "<group>"; };
+		C74DD1141CCE4D34006D5F4D /* letItGo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = letItGo.jpg; sourceTree = "<group>"; };
+		C74DD1151CCE4D34006D5F4D /* up.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = up.jpg; sourceTree = "<group>"; };
+		C74DD1181CCE4E35006D5F4D /* canonInDMajor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = canonInDMajor.jpg; sourceTree = "<group>"; };
+		C74DD11A1CCE4EFD006D5F4D /* tablatureIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablatureIcon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -689,8 +695,10 @@
 		C74DCEA41CCBD516006D5F4D /* image */ = {
 			isa = PBXGroup;
 			children = (
+				C74DD1131CCE4D34006D5F4D /* tablature */,
 				C74DCEA71CCBD516006D5F4D /* instrument */,
 				C74DCEAC1CCBD516006D5F4D /* keys */,
+				C74DD11A1CCE4EFD006D5F4D /* tablatureIcon.png */,
 				C74DD1111CCE354D006D5F4D /* book.png */,
 				C74DD10F1CCE31C7006D5F4D /* lightGray.png */,
 				C74DD10D1CCE3021006D5F4D /* gray.png */,
@@ -700,7 +708,6 @@
 				C74DCECD1CCBD517006D5F4D /* leftArrow.png */,
 				C74DCECE1CCBD517006D5F4D /* part_of_keyboard.png */,
 				C74DCECF1CCBD517006D5F4D /* rightArrow.png */,
-				C74DCED01CCBD517006D5F4D /* tablature.jpg */,
 			);
 			path = image;
 			sourceTree = "<group>";
@@ -1209,6 +1216,16 @@
 			path = octave7;
 			sourceTree = "<group>";
 		};
+		C74DD1131CCE4D34006D5F4D /* tablature */ = {
+			isa = PBXGroup;
+			children = (
+				C74DD1181CCE4E35006D5F4D /* canonInDMajor.jpg */,
+				C74DD1141CCE4D34006D5F4D /* letItGo.jpg */,
+				C74DD1151CCE4D34006D5F4D /* up.jpg */,
+			);
+			path = tablature;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1443,6 +1460,7 @@
 				C74DCF651CCBE0C4006D5F4D /* piano_C2.mp3 in Resources */,
 				C74DD00C1CCC6CF2006D5F4D /* guitar_E1.mp3 in Resources */,
 				C74DCED51CCBD517006D5F4D /* string_outline.png in Resources */,
+				C74DD1161CCE4D34006D5F4D /* letItGo.jpg in Resources */,
 				C74DCF831CCBE0C4006D5F4D /* piano_G4#.mp3 in Resources */,
 				C74DD01E1CCC6CF2006D5F4D /* guitar_A3.mp3 in Resources */,
 				C74DCEE71CCBD517006D5F4D /* wkey1.png in Resources */,
@@ -1481,6 +1499,7 @@
 				C74DCF991CCBE0C4006D5F4D /* piano_F6#.mp3 in Resources */,
 				C74DCF781CCBE0C4006D5F4D /* piano_G3.mp3 in Resources */,
 				C74DD0251CCC6CF2006D5F4D /* guitar_F3#.mp3 in Resources */,
+				C74DD1191CCE4E35006D5F4D /* canonInDMajor.jpg in Resources */,
 				C74DCF721CCBE0C4006D5F4D /* piano_D3#.mp3 in Resources */,
 				C74DCF5D1CCBE0C4006D5F4D /* piano_F1#.mp3 in Resources */,
 				C74DD0B81CCC82AA006D5F4D /* string_C1#.mp3 in Resources */,
@@ -1491,7 +1510,6 @@
 				C74DCF751CCBE0C4006D5F4D /* piano_F3#.mp3 in Resources */,
 				C74DD0311CCC6CF2006D5F4D /* guitar_F4#.mp3 in Resources */,
 				C74B81221CBE335C005307FF /* Assets.xcassets in Resources */,
-				C74DCEF81CCBD517006D5F4D /* tablature.jpg in Resources */,
 				C74DD0141CCC6CF2006D5F4D /* guitar_C2#.mp3 in Resources */,
 				C74DCF7D1CCBE0C4006D5F4D /* piano_C4.mp3 in Resources */,
 				C74DCEE91CCBD517006D5F4D /* wkey11.png in Resources */,
@@ -1513,6 +1531,7 @@
 				C74DCFA51CCBE0C4006D5F4D /* piano_F7#.mp3 in Resources */,
 				C74DD0F31CCC82AA006D5F4D /* string_B6.mp3 in Resources */,
 				C74DCF741CCBE0C4006D5F4D /* piano_E3.mp3 in Resources */,
+				C74DD11B1CCE4EFD006D5F4D /* tablatureIcon.png in Resources */,
 				C74DCF8F1CCBE0C4006D5F4D /* piano_G5#.mp3 in Resources */,
 				C74DD0E01CCC82AA006D5F4D /* string_E4.mp3 in Resources */,
 				C74DCED31CCBD517006D5F4D /* guitar_outline.png in Resources */,
@@ -1540,6 +1559,7 @@
 				C74DD0F01CCC82AA006D5F4D /* string_G5.mp3 in Resources */,
 				C74DD1071CCC82AA006D5F4D /* string_G7#.mp3 in Resources */,
 				C74DD0EB1CCC82AA006D5F4D /* string_D5.mp3 in Resources */,
+				C74DD1171CCE4D34006D5F4D /* up.jpg in Resources */,
 				C74DD0FC1CCC82AA006D5F4D /* string_G6.mp3 in Resources */,
 				C74DD0451CCC6CF2006D5F4D /* guitar_C6.mp3 in Resources */,
 				C74DD0F91CCC82AA006D5F4D /* string_F6#.mp3 in Resources */,
