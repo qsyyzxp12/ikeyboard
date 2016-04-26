@@ -26,7 +26,6 @@
     self.lowerOctaveNo = 3;
     self.instrumentNo = 1;
     
-    
     self.noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
     self.halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
     self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"guitar", @"piano", @"string", nil];
@@ -88,35 +87,30 @@
     if(IPhone4)
     {
         self.keyboard_top_padding = 40;
-        self.keyboard_button_padding = 1;
-        self.keyboard_left_padding = 2;
-        self.keyboard_right_padding = 4;
-        self.keyboard_gap_between_keys = 4;
+        self.keyboard_padding = 1;
+        self.blackKeySize = CGSizeMake(20, 56);
+        self.blackKeyOffsetVector = CGVectorMake(23, 15);
     }
     else if(IPhone5)
     {
         self.keyboard_top_padding = 40;
-        self.keyboard_button_padding = 1;
-        self.keyboard_left_padding = 3;
-        self.keyboard_right_padding = 5;
-        self.keyboard_gap_between_keys = 6;
+        self.keyboard_padding = 1;
+        self.blackKeySize = CGSizeMake(24, 56);
+        self.blackKeyOffsetVector = CGVectorMake(27, 18);
     }
     else if(IPhone6)
     {
         self.keyboard_top_padding = 47;
-        self.keyboard_button_padding = 2;
-        self.keyboard_left_padding = 3;
-        self.keyboard_right_padding = 5;
-        self.keyboard_gap_between_keys = 6;
-        self.blackKeySize = CGSizeMake(28, 65);
+        self.keyboard_padding = 2;
+        self.blackKeySize = CGSizeMake(28, 69);
+        self.blackKeyOffsetVector = CGVectorMake(32, 20);
     }
     else if(IPhone6sPlus)
     {
         self.keyboard_top_padding = 52;
-        self.keyboard_button_padding = 2;
-        self.keyboard_left_padding = 3;
-        self.keyboard_right_padding = 5;
-        self.keyboard_gap_between_keys = 6;
+        self.keyboard_padding = 2;
+        self.blackKeySize = CGSizeMake(31, 75);
+        self.blackKeyOffsetVector = CGVectorMake(36, 21);
     }
 }
 
@@ -159,22 +153,22 @@
     [self.mistView addGestureRecognizer:tapGest];
     
     //Keyboard backgorund
-    UIImageView* keyboardBgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"part_of_keyboard.png"]];
+    UIImageView* keyboardBgImageView = [[UIImageView alloc] init];
     keyboardBgImageView.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame)-self.screenHeight/2, self.view.frame.size.width, self.screenHeight/2);
     [self.view addSubview:keyboardBgImageView];
     
-    CGFloat oneKeyWidth = (keyboardBgImageView.frame.size.width - self.keyboard_right_padding -self.keyboard_gap_between_keys*13 - self.keyboard_left_padding)/14;
+    CGFloat oneKeyWidth = (keyboardBgImageView.frame.size.width - self.keyboard_padding*15)/14;
     
-    CGFloat keyX = self.keyboard_left_padding;
+    CGFloat keyX = self.keyboard_padding;
     CGFloat keyY = CGRectGetMinY(keyboardBgImageView.frame)+self.keyboard_top_padding;
-    CGFloat keyHeight = keyboardBgImageView.frame.size.height - self.keyboard_top_padding - self.keyboard_button_padding;
+    CGFloat keyHeight = keyboardBgImageView.frame.size.height - self.keyboard_padding - self.keyboard_top_padding;
     
     
     //White Keys
     for(int i=0; i<14; i++)
     {
-        NSString* imageName = [NSString stringWithFormat:@"wkey%d.png", i+1];
-        NSString* highlightImageName = [NSString stringWithFormat:@"wkey%d_highlight.png", i+1];
+        NSString* imageName = [NSString stringWithFormat:@"wkey.png"];
+        NSString* highlightImageName = [NSString stringWithFormat:@"key_highlight.png"];
         UIImageView* whiteKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName] highlightedImage:[UIImage imageNamed:highlightImageName]];
         whiteKeyImageView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
         
@@ -189,6 +183,7 @@
                                                               initWithTarget:self
                                                               action:@selector(keyTapped:)];
         [tapGestureRecognizer setMinimumPressDuration:0.01];
+        [whiteKeyImageView.layer setBorderWidth:2];
         
         [whiteKeyImageView addGestureRecognizer:tapGestureRecognizer];
        // whiteKeyImageView.backgroundColor = [UIColor redColor];
@@ -200,21 +195,22 @@
         noLabel.text = [NSString stringWithFormat:@"%d", i%7+1];
         [self.view addSubview:noLabel];
         
-        keyX += self.keyboard_gap_between_keys + oneKeyWidth;
+        keyX += self.keyboard_padding + oneKeyWidth;
         
     }
 
     //Black keys
-    CGFloat offset1 = 30;
-    CGFloat offset2 = 20;
-    keyX = self.keyboard_left_padding;
+    keyX = self.keyboard_padding;
     for(int i=0; i<10; i++)
     {
-        UIImageView* blackKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bkey.png"] highlightedImage:[UIImage imageNamed:@"bkey_highlight.png"]];
+        UIImageView* blackKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bkey.png"] highlightedImage:[UIImage imageNamed:@"key_highlight.png"]];
+        //UIImageView* blackKeyImageView = [[UIImageView alloc] init];
+        //blackKeyImageView.backgroundColor = [UIColor redColor];
         if(i < 5)
             blackKeyImageView.tag = 8+i;
         else
             blackKeyImageView.tag = 800 + (i%5)*100;
+        
         
         [blackKeyImageView setUserInteractionEnabled:YES];
         UILongPressGestureRecognizer *tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
@@ -227,13 +223,13 @@
         switch (i)
         {
             case 0:
-                keyX += offset1;
+                keyX += self.blackKeyOffsetVector.dx;
                 break;
             case 2: case 5: case 7:
-                keyX += offset1*2 + self.keyboard_gap_between_keys;
+                keyX += self.blackKeyOffsetVector.dx*2 + self.keyboard_padding;
                 break;
             default:
-                keyX += offset2;
+                keyX += self.blackKeyOffsetVector.dy;
                 break;
         }
         
@@ -248,7 +244,7 @@
     [self.view addSubview:keyboardImageView];
     
     UIImageView* grayBarImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"gray.png"]];
-    grayBarImageView.frame = CGRectMake(0, CGRectGetMaxY(keyboardImageView.frame), CGRectGetWidth(self.view.frame), self.keyboard_top_padding*0.2);
+    grayBarImageView.frame = CGRectMake(0, CGRectGetMaxY(keyboardImageView.frame), CGRectGetWidth(self.view.frame), self.keyboard_top_padding*0.2+2);
     [grayBarImageView.layer setBorderWidth:1];
     [self.view addSubview:grayBarImageView];
     
@@ -361,23 +357,6 @@
         [instrumentButton addTarget:self action:@selector(changeInstrumentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.instrumentMenuScrollView addSubview:instrumentButton];
     }
-    
-    /*
-    instrumentButton = [[UIButton alloc] init];
-    [instrumentButton setImage:[UIImage imageNamed:@"guitar_outline.png"] forState:UIControlStateNormal];
-    instrumentButton.tag = 0;
-    instrumentButton.adjustsImageWhenHighlighted = NO;
-    [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.13, CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.2, CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.18, self.instrumentMenuScrollView.frame.size.height*1.2)];
-    [instrumentButton addTarget:self action:@selector(changeInstrumentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.instrumentMenuScrollView addSubview:instrumentButton];
-    
-    instrumentButton = [[UIButton alloc] init];
-    [instrumentButton setImage:[UIImage imageNamed:@"string_outline.png"] forState:UIControlStateNormal];
-    instrumentButton.tag = 2;
-    instrumentButton.adjustsImageWhenHighlighted = NO;
-    [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.69, CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.2, CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.18, self.instrumentMenuScrollView.frame.size.height*1.2)];
-    [instrumentButton addTarget:self action:@selector(changeInstrumentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.instrumentMenuScrollView addSubview:instrumentButton];*/
 }
 
 #pragma mark - Actions
@@ -429,13 +408,6 @@
 
 - (void) arrowImageViewClicked:(UIButton*) sender
 {
-/*    if(sender.state == UIGestureRecognizerStateBegan)
-    {
-        [self.view addSubview:self.mistView];
-        [self.view addSubview:self.wholeKeyboardImageView];
-        UIImageView* imageView = (UIImageView*)sender.view;
-        if(imageView.tag == 0)
-  */
         if(sender.tag == 0)
         {
             if(self.lowerOctaveNo > 1)
@@ -452,15 +424,6 @@
                 [self adjustMistBar];
             }
         }
- /*   }
-    else if(sender.state == UIGestureRecognizerStateEnded)
-    {
-        int i=0;
-        while(i < 1000000)
-            i++;
-        [self.mistView removeFromSuperview];
-        [self.wholeKeyboardImageView removeFromSuperview];
-    }*/
 }
 
 - (void) keyTapped:(UILongPressGestureRecognizer*) recognizer

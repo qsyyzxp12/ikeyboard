@@ -40,11 +40,9 @@
 //Screen Size control
 @property CGFloat screenHeight;
 @property int keyboard_top_padding;
-@property int keyboard_left_padding;
-@property int keyboard_right_padding;
-@property int keyboard_button_padding;
-@property int keyboard_gap_between_keys;
+@property int keyboard_padding; //include left, right, button padding and the gap size between wkeys.
 @property CGSize blackKeySize;
+@property CGVector blackKeyOffsetVector;
 
 @property UIActivityIndicatorView* spinner;
 @end
