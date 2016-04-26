@@ -23,9 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.keyBeingTappedFrame = CGRectZero;
     self.lowerOctaveNo = 3;
     self.instrumentNo = 1;
-    
     self.noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
     self.halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
     self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"guitar", @"piano", @"string", nil];
@@ -158,11 +158,11 @@
     [self.view addSubview:keyboardBgImageView];
     
     CGFloat oneKeyWidth = (keyboardBgImageView.frame.size.width - self.keyboard_padding*15)/14;
-    
     CGFloat keyX = self.keyboard_padding;
     CGFloat keyY = CGRectGetMinY(keyboardBgImageView.frame)+self.keyboard_top_padding;
     CGFloat keyHeight = keyboardBgImageView.frame.size.height - self.keyboard_padding - self.keyboard_top_padding;
     
+    NSMutableArray* keyImageViewArray = [[NSMutableArray alloc] init];
     
     //White Keys
     for(int i=0; i<14; i++)
@@ -171,22 +171,7 @@
         NSString* highlightImageName = [NSString stringWithFormat:@"key_highlight.png"];
         UIImageView* whiteKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName] highlightedImage:[UIImage imageNamed:highlightImageName]];
         whiteKeyImageView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
-        
-        if(i < 7)
-            whiteKeyImageView.tag = i+1;
-        else
-            whiteKeyImageView.tag = (i%7+1)*100;
-        
-        [whiteKeyImageView setUserInteractionEnabled:YES];
-        
-        UILongPressGestureRecognizer *tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
-                                                              initWithTarget:self
-                                                              action:@selector(keyTapped:)];
-        [tapGestureRecognizer setMinimumPressDuration:0.01];
         [whiteKeyImageView.layer setBorderWidth:2];
-        
-        [whiteKeyImageView addGestureRecognizer:tapGestureRecognizer];
-       // whiteKeyImageView.backgroundColor = [UIColor redColor];
         [self.view addSubview:whiteKeyImageView];
         
         UILabel* noLabel = [[UILabel alloc] initWithFrame:CGRectMake(keyX, CGRectGetMaxY(whiteKeyImageView.frame)-keyHeight*0.2, oneKeyWidth, keyHeight*0.2)];
@@ -197,6 +182,7 @@
         
         keyX += self.keyboard_padding + oneKeyWidth;
         
+        [keyImageViewArray addObject:whiteKeyImageView];
     }
 
     //Black keys
@@ -204,22 +190,6 @@
     for(int i=0; i<10; i++)
     {
         UIImageView* blackKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bkey.png"] highlightedImage:[UIImage imageNamed:@"key_highlight.png"]];
-        //UIImageView* blackKeyImageView = [[UIImageView alloc] init];
-        //blackKeyImageView.backgroundColor = [UIColor redColor];
-        if(i < 5)
-            blackKeyImageView.tag = 8+i;
-        else
-            blackKeyImageView.tag = 800 + (i%5)*100;
-        
-        
-        [blackKeyImageView setUserInteractionEnabled:YES];
-        UILongPressGestureRecognizer *tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
-                                                              initWithTarget:self
-                                                              action:@selector(keyTapped:)];
-        [tapGestureRecognizer setMinimumPressDuration:0.01];
-        
-        [blackKeyImageView addGestureRecognizer:tapGestureRecognizer];
-        
         switch (i)
         {
             case 0:
@@ -236,7 +206,11 @@
         blackKeyImageView.frame = CGRectMake(keyX, keyY, self.blackKeySize.width, self.blackKeySize.height);
         keyX += self.blackKeySize.width;
         [self.view addSubview:blackKeyImageView];
+    
+        [keyImageViewArray addObject:blackKeyImageView];
     }
+    
+    self.keyImageViewArray = keyImageViewArray;
     
     UIImageView* keyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
     keyboardImageView.frame = CGRectMake(0, CGRectGetMinY(keyboardBgImageView.frame), CGRectGetWidth(self.view.frame), self.keyboard_top_padding*0.8);
@@ -281,6 +255,17 @@
     octaveUpButton.adjustsImageWhenHighlighted = NO;
     [self.view addSubview:octaveUpButton];
     
+    UIView* fingerSensorView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(keyboardBgImageView.frame)+self.keyboard_top_padding, CGRectGetWidth(self.view.frame), CGRectGetHeight(keyboardBgImageView.frame)-self.keyboard_top_padding)];
+    fingerSensorView.backgroundColor = [UIColor clearColor];
+    
+    UILongPressGestureRecognizer *tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
+                                                          initWithTarget:self
+                                                          action:@selector(tap:)];
+    [tapGestureRecognizer setMinimumPressDuration:0.01];
+    [fingerSensorView addGestureRecognizer:tapGestureRecognizer];
+    [self.view addSubview:fingerSensorView];
+    
+    
     [self drawInstrumentMenu];
     [self drawTablatureScrollView];
     [self drawTablatureMenu];
@@ -312,7 +297,6 @@
         nameLabel.numberOfLines = 2;
         nameLabel.adjustsFontSizeToFitWidth = YES;
         [self.tablatureMenuScrollView addSubview:nameLabel];
-        
     }
 }
 
@@ -360,6 +344,119 @@
 }
 
 #pragma mark - Actions
+-(void)tap:(UITapGestureRecognizer*)sender
+{
+    CGPoint point = [sender locationInView:self.view];
+    
+    if(sender.state == UIGestureRecognizerStateBegan)
+    {
+      //  NSLog(@"tapped began!");
+        for(int i=(int)[self.keyImageViewArray count]-1; i >= 0; i--)
+        {
+            CGRect keyRect = ((UIImageView*)self.keyImageViewArray[i]).frame;
+            if(CGRectContainsPoint(keyRect, point))
+            {
+                self.keyBeingTappedFrame = keyRect;
+                self.keyBeingTappedIndex = i;
+                [self tapBeganOnKey:i];
+                break;
+            }
+        }
+    }
+    else if(sender.state == UIGestureRecognizerStateEnded)
+    {
+      //  NSLog(@"tapped end!");
+        if(!CGRectEqualToRect(self.keyBeingTappedFrame, CGRectZero))
+        {
+            ((UIImageView*)(self.keyImageViewArray[self.keyBeingTappedIndex])).highlighted = NO;
+            [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:self.keyBeingTappedIndex]];
+    
+            self.keyBeingTappedFrame = CGRectZero;
+        }
+    }
+    else if(sender.state == UIGestureRecognizerStateChanged)
+    {
+       // NSLog(@"tapped changed!");
+        if(!CGRectEqualToRect(self.keyBeingTappedFrame, CGRectZero))
+        {
+            if(!CGRectContainsPoint(self.keyBeingTappedFrame, point))
+            {
+                ((UIImageView*)(self.keyImageViewArray[self.keyBeingTappedIndex])).highlighted = NO;
+                [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:self.keyBeingTappedIndex]];
+                self.keyBeingTappedFrame = CGRectZero;
+            }
+        }
+        else
+        {
+            for(int i=(int)[self.keyImageViewArray count]-1; i >= 0; i--)
+            {
+                CGRect keyRect = ((UIImageView*)self.keyImageViewArray[i]).frame;
+                if(CGRectContainsPoint(keyRect, point))
+                {
+                    self.keyBeingTappedFrame = keyRect;
+                    self.keyBeingTappedIndex = i;
+                    [self tapBeganOnKey:i];
+                    break;
+                }
+            }
+        }
+    }
+}
+
+-(void) tapBeganOnKey:(int)index
+{
+    ((UIImageView*)(self.keyImageViewArray[index])).highlighted = YES;
+    
+    int octaveNo = self.lowerOctaveNo;
+    int keyNo = index;
+ 
+    if(index < 7);
+    else if(index>6 && index<14)
+    {
+        octaveNo++;
+        keyNo -= 7;
+    }
+    else if(index > 13 && index < 19)
+        keyNo -= 7;
+    else
+    {
+        octaveNo++;
+        keyNo -= 12;
+    }
+    
+    NSArray* playersArray = self.octavesArray[octaveNo-1];
+    [[playersArray objectAtIndex:keyNo] play];
+}
+
+-(void) tapEndedOnKey:(NSNumber*)index
+{
+    int octaveNo = self.lowerOctaveNo;
+    int keyNo = index.intValue;
+    
+    if(index.intValue < 7);
+    else if(index.intValue > 6 && index.intValue < 14)
+    {
+        octaveNo++;
+        keyNo -= 7;
+    }
+    else if(index.intValue > 13 && index.intValue < 19)
+        keyNo -= 7;
+    else
+    {
+        octaveNo++;
+        keyNo -= 12;
+    }
+    
+    NSArray* playersArray = self.octavesArray[octaveNo-1];
+    
+    int i=0;
+    while (i<10000000)
+        i++;
+    
+    [[playersArray objectAtIndex:keyNo] stop];
+    ((AVAudioPlayer*)[playersArray objectAtIndex:keyNo]).currentTime = 0;
+    [[playersArray objectAtIndex:keyNo] prepareToPlay];
+}
 
 -(void)mistViewTapped
 {
@@ -433,7 +530,7 @@
     if(recognizer.state == UIGestureRecognizerStateBegan)
     {
         imageView.highlighted = YES;
-
+        
         int octaveNo;
         if( keyNo >= 100)
         {
@@ -452,7 +549,7 @@
         int i=0;
         while (i<10000000)
             i++;
-
+        
         int octaveNo;
         if( keyNo >= 100)
         {

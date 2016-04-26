@@ -26,6 +26,7 @@
 
 @property NSMutableArray* whiteKeyImageViewArray;
 @property NSMutableArray* octavesArray;
+@property NSArray* keyImageViewArray;
 
 //No.
 @property int instrumentNo;
@@ -45,4 +46,6 @@
 @property CGVector blackKeyOffsetVector;
 
 @property UIActivityIndicatorView* spinner;
+@property CGRect keyBeingTappedFrame;
+@property int keyBeingTappedIndex;
 @end
