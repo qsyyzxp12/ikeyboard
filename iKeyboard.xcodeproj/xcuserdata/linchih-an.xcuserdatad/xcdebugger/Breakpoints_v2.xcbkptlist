@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iKeyboard/iKeyboardNormalModeViewController.m"
-            timestampString = "483364433.675023"
+            timestampString = "483364689.831114"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "464"
-            endingLineNumber = "464"
+            startingLineNumber = "450"
+            endingLineNumber = "450"
             landmarkName = "-tapEndedOnKey:"
             landmarkType = "5">
          </BreakpointContent>

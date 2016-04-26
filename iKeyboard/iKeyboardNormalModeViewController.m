@@ -482,13 +482,18 @@
 
 -(void)changeInstrumentButtonClicked:(UIButton*) sender
 {
-    self.instrumentNo = (int)sender.tag;
-    NSString* pictureName = [NSString stringWithFormat:@"%@_outline.png", self.instrumentNameMap[self.instrumentNo]];
-    [self.instrumentImageView setImage:[UIImage imageNamed:pictureName]];
-   // [self AVAudioPlayerInit];
+    if(self.instrumentNo != (int)sender.tag)
+    {
+        self.instrumentNo = (int)sender.tag;
+        NSString* pictureName = [NSString stringWithFormat:@"%@_outline.png", self.instrumentNameMap[self.instrumentNo]];
+        [self.instrumentImageView setImage:[UIImage imageNamed:pictureName]];
+        [self.view addSubview:self.spinner];
+        [NSThread detachNewThreadSelector:@selector(AVAudioPlayerInit) toTarget:self withObject:nil];
+    }
+    else
+        [self.mistView removeFromSuperview];
+    
     [self.instrumentMenuScrollView removeFromSuperview];
-    [self.view addSubview:self.spinner];
-    [NSThread detachNewThreadSelector:@selector(AVAudioPlayerInit) toTarget:self withObject:nil];
 }
 
 -(void)tablatureButtonClicked
