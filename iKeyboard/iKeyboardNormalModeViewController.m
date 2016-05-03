@@ -24,6 +24,11 @@
     [super viewDidLoad];
     
     self.keyBeingTappedFrame = CGRectZero;
+    
+    self.keyBeingTappedFrameArray = [[NSMutableArray alloc] initWithObjects:NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), nil];
+    self.keyBeingTappedIndexArray = malloc(sizeof(int)*4);
+    bzero(self.keyBeingTappedIndexArray, sizeof(int)*4);
+    
     self.lowerOctaveNo = 3;
     self.instrumentNo = 1;
     self.noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
@@ -259,11 +264,27 @@
     UIView* fingerSensorView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(keyboardBgImageView.frame)+self.keyboard_top_padding, CGRectGetWidth(self.view.frame), CGRectGetHeight(keyboardBgImageView.frame)-self.keyboard_top_padding)];
     fingerSensorView.backgroundColor = [UIColor clearColor];
     
-    UILongPressGestureRecognizer *tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
+    self.tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
                                                           initWithTarget:self
                                                           action:@selector(tap:)];
-    [tapGestureRecognizer setMinimumPressDuration:0.01];
-    [fingerSensorView addGestureRecognizer:tapGestureRecognizer];
+    self.tapGestureRecognizer.delegate = self;
+    [self.tapGestureRecognizer setMinimumPressDuration:0.01];
+    [fingerSensorView addGestureRecognizer:self.tapGestureRecognizer];
+    
+    self.tapGestureRecognizer2 = [[UILongPressGestureRecognizer alloc]
+                                 initWithTarget:self
+                                 action:@selector(tap:)];
+    self.tapGestureRecognizer2.delegate = self;
+    [self.tapGestureRecognizer2 setMinimumPressDuration:0.01];
+    [fingerSensorView addGestureRecognizer:self.tapGestureRecognizer2];
+    
+    self.tapGestureRecognizer3 = [[UILongPressGestureRecognizer alloc]
+                                 initWithTarget:self
+                                 action:@selector(tap:)];
+    self.tapGestureRecognizer3.delegate = self;
+    [self.tapGestureRecognizer3 setMinimumPressDuration:0.01];
+    [fingerSensorView addGestureRecognizer:self.tapGestureRecognizer3];
+    
     [self.view addSubview:fingerSensorView];
     
     
@@ -348,6 +369,13 @@
 -(void)tap:(UITapGestureRecognizer*)sender
 {
     CGPoint point = [sender locationInView:self.view];
+    int gestNo;
+    if(sender == (UIGestureRecognizer*)self.tapGestureRecognizer)
+        gestNo = 0;
+    else if(sender == (UIGestureRecognizer*)self.tapGestureRecognizer2)
+        gestNo = 1;
+    else// if(sender == (UIGestureRecognizer*)self.tapGestureRecognizer3)
+        gestNo = 2;
     
     if(sender.state == UIGestureRecognizerStateBegan)
     {
@@ -357,8 +385,8 @@
             CGRect keyRect = ((UIImageView*)self.keyImageViewArray[i]).frame;
             if(CGRectContainsPoint(keyRect, point))
             {
-                self.keyBeingTappedFrame = keyRect;
-                self.keyBeingTappedIndex = i;
+                [self.keyBeingTappedFrameArray setObject:NSStringFromCGRect(keyRect) atIndexedSubscript:gestNo];
+                self.keyBeingTappedIndexArray[gestNo] = i;
                 [self tapBeganOnKey:i];
                 break;
             }
@@ -367,24 +395,25 @@
     else if(sender.state == UIGestureRecognizerStateEnded)
     {
       //  NSLog(@"tapped end!");
-        if(!CGRectEqualToRect(self.keyBeingTappedFrame, CGRectZero))
+        if(![self.keyBeingTappedFrameArray[gestNo] isEqualToString:NSStringFromCGRect(CGRectZero)])
         {
-            ((UIImageView*)(self.keyImageViewArray[self.keyBeingTappedIndex])).highlighted = NO;
-            [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:self.keyBeingTappedIndex]];
+            ((UIImageView*)(self.keyImageViewArray[self.keyBeingTappedIndexArray[gestNo]])).highlighted = NO;
+            [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:self.keyBeingTappedIndexArray[gestNo]]];
     
-            self.keyBeingTappedFrame = CGRectZero;
+            self.keyBeingTappedFrameArray[gestNo] = NSStringFromCGRect(CGRectZero);
         }
     }
     else if(sender.state == UIGestureRecognizerStateChanged)
     {
        // NSLog(@"tapped changed!");
-        if(!CGRectEqualToRect(self.keyBeingTappedFrame, CGRectZero))
+        if(![self.keyBeingTappedFrameArray[gestNo] isEqualToString:NSStringFromCGRect(CGRectZero)])
         {
-            if(!CGRectContainsPoint(self.keyBeingTappedFrame, point))
+            CGRect keyBeingTappedFrame = CGRectFromString(self.keyBeingTappedFrameArray[gestNo]);
+            if(!CGRectContainsPoint(keyBeingTappedFrame, point))
             {
-                ((UIImageView*)(self.keyImageViewArray[self.keyBeingTappedIndex])).highlighted = NO;
-                [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:self.keyBeingTappedIndex]];
-                self.keyBeingTappedFrame = CGRectZero;
+                ((UIImageView*)(self.keyImageViewArray[self.keyBeingTappedIndexArray[gestNo]])).highlighted = NO;
+                [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:self.keyBeingTappedIndexArray[gestNo]]];
+                self.keyBeingTappedFrameArray[gestNo] = NSStringFromCGRect(CGRectZero);
             }
         }
         else
@@ -394,8 +423,8 @@
                 CGRect keyRect = ((UIImageView*)self.keyImageViewArray[i]).frame;
                 if(CGRectContainsPoint(keyRect, point))
                 {
-                    self.keyBeingTappedFrame = keyRect;
-                    self.keyBeingTappedIndex = i;
+                    self.keyBeingTappedFrameArray[gestNo] = NSStringFromCGRect(keyRect);
+                    self.keyBeingTappedIndexArray[gestNo] = i;
                     [self tapBeganOnKey:i];
                     break;
                 }
@@ -431,7 +460,6 @@
         [player play];
     else
     {
-        NSLog(@"x");
         player.volume = 1;
         player.currentTime = 0;
     }
@@ -461,19 +489,19 @@
     int i=0;
     while (i<10000000)
         i++;
-    player.volume = 0.5;
+    player.volume = 0.1;
     
     i=0;
     while (i<40000000)
         i++;
     
     
-    NSLog(@"%f", player.currentTime);
+    player.volume = 1;
+  //  NSLog(@"%f", player.currentTime);
     if(player.currentTime > 0.18)
     {
-        NSLog(@"%f", player.currentTime);
+    //    NSLog(@"%f", player.currentTime);
         [player stop];
-        player.volume = 1;
         player.currentTime = 0;
         [player prepareToPlay];
     }
@@ -547,6 +575,39 @@
                 [self adjustMistBar];
             }
         }
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    int firstGestNo = 0, secGestNo = 0;
+    if(gestureRecognizer == (UIGestureRecognizer*)self.tapGestureRecognizer)
+        firstGestNo = 1;
+    else if(gestureRecognizer == (UIGestureRecognizer*)self.tapGestureRecognizer2)
+        firstGestNo = 2;
+    else if(gestureRecognizer == (UIGestureRecognizer*)self.tapGestureRecognizer3)
+        firstGestNo = 3;
+    
+    if(otherGestureRecognizer == (UIGestureRecognizer*)self.tapGestureRecognizer)
+        secGestNo = 1;
+    else if(otherGestureRecognizer == (UIGestureRecognizer*)self.tapGestureRecognizer2)
+        secGestNo = 2;
+    else if(otherGestureRecognizer == (UIGestureRecognizer*)self.tapGestureRecognizer3)
+        secGestNo = 3;
+    
+ //   NSLog(@"(%d, %d)", firstGestNo, secGestNo);
+    
+    CGPoint firstPoint = [gestureRecognizer locationInView:self.view];
+    CGPoint secPoint = [otherGestureRecognizer locationInView:self.view];
+    
+    if(!CGPointEqualToPoint(firstPoint, secPoint))
+    {
+  //      NSLog(@"(%d, %d)", firstGestNo, secGestNo);
+        return  YES;
+    }
+    
+    return NO;
 }
 
 #pragma mark - the others

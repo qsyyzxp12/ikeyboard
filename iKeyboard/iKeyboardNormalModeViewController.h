@@ -49,6 +49,8 @@
 @property UIActivityIndicatorView* spinner;
 @property CGRect keyBeingTappedFrame;
 @property int keyBeingTappedIndex;
+@property NSMutableArray* keyBeingTappedFrameArray;
+@property int* keyBeingTappedIndexArray;
 @property UILongPressGestureRecognizer *tapGestureRecognizer;
 @property UILongPressGestureRecognizer *tapGestureRecognizer2;
 @property UILongPressGestureRecognizer *tapGestureRecognizer3;
