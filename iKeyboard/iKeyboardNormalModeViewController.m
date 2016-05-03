@@ -238,27 +238,25 @@
     
     self.leftMistBar = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(keyboardImageView.frame), 0, CGRectGetHeight(keyboardImageView.frame))];
     self.leftMistBar.alpha = 0.5;
+    self.leftMistBar.tag = 0;
     self.leftMistBar.backgroundColor = [UIColor grayColor];
+    tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(arrowImageViewClicked:)];
+    tapGest.numberOfTapsRequired = 1;
+    tapGest.numberOfTouchesRequired = 1;
+    [self.leftMistBar addGestureRecognizer:tapGest];
     [self.view addSubview:self.leftMistBar];
     
     self.rightMistBar = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(keyboardImageView.frame), 0, CGRectGetHeight(keyboardImageView.frame))];
     self.rightMistBar.alpha = 0.5;
+    self.rightMistBar.tag = 1;
     self.rightMistBar.backgroundColor = [UIColor grayColor];
+    tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(arrowImageViewClicked:)];
+    tapGest.numberOfTapsRequired = 1;
+    tapGest.numberOfTouchesRequired = 1;
+    [self.rightMistBar addGestureRecognizer:tapGest];
     [self.view addSubview:self.rightMistBar];
     [self adjustMistBar];    
 
-    UIButton* octaveDownButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(keyboardImageView.frame), self.view.frame.size.width/2, CGRectGetHeight(keyboardImageView.frame))];
-    octaveDownButton.tag = 0;
-    [octaveDownButton addTarget:self action:@selector(arrowImageViewClicked:) forControlEvents:UIControlEventTouchUpInside];
-    octaveDownButton.adjustsImageWhenHighlighted = NO;
-    [self.view addSubview:octaveDownButton];
-
-    UIButton* octaveUpButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2, CGRectGetMinY(keyboardImageView.frame), self.view.frame.size.width/2, CGRectGetHeight(keyboardImageView.frame))];
-    octaveUpButton.tag = 1;
-    [octaveUpButton addTarget:self action:@selector(arrowImageViewClicked:) forControlEvents:UIControlEventTouchUpInside];
-    octaveUpButton.adjustsImageWhenHighlighted = NO;
-    [self.view addSubview:octaveUpButton];
-    
     UIView* fingerSensorView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(keyboardBgImageView.frame)+self.keyboard_top_padding, CGRectGetWidth(self.view.frame), CGRectGetHeight(keyboardBgImageView.frame)-self.keyboard_top_padding)];
     fingerSensorView.backgroundColor = [UIColor clearColor];
     
@@ -554,24 +552,25 @@
     [self.view addSubview:self.instrumentMenuScrollView];
 }
 
-- (void) arrowImageViewClicked:(UIButton*) sender
+- (void) arrowImageViewClicked:(UITapGestureRecognizer*) sender
 {
-        if(sender.tag == 0)
+    UIImageView* senderImageView = (UIImageView*)sender.view;
+    if(senderImageView.tag == 0)
+    {
+        if(self.lowerOctaveNo > 1)
         {
-            if(self.lowerOctaveNo > 1)
-            {
-                self.lowerOctaveNo--;
-                [self adjustMistBar];
-            }
+            self.lowerOctaveNo--;
+            [self adjustMistBar];
         }
-        else
+    }
+    else
+    {
+        if(self.lowerOctaveNo < 6)
         {
-            if(self.lowerOctaveNo < 6)
-            {
-                self.lowerOctaveNo++;
-                [self adjustMistBar];
-            }
+            self.lowerOctaveNo++;
+            [self adjustMistBar];
         }
+    }
 }
 
 #pragma mark - UIGestureRecognizerDelegate
