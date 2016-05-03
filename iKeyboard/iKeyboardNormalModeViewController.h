@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVAudioPlayer.h>
 
-@interface iKeyboardNormalModeViewController : UIViewController
+@interface iKeyboardNormalModeViewController : UIViewController<UIGestureRecognizerDelegate>
 
 //UI
 @property UIImageView *wholeKeyboardImageView;
@@ -49,4 +49,7 @@
 @property UIActivityIndicatorView* spinner;
 @property CGRect keyBeingTappedFrame;
 @property int keyBeingTappedIndex;
+@property UILongPressGestureRecognizer *tapGestureRecognizer;
+@property UILongPressGestureRecognizer *tapGestureRecognizer2;
+@property UILongPressGestureRecognizer *tapGestureRecognizer3;
 @end

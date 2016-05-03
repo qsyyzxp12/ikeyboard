@@ -31,9 +31,6 @@
     self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"guitar", @"piano", @"string", nil];
     self.tablatureFileNameArray = [[NSArray alloc] initWithObjects:@"up.jpg", @"letItGo.jpg", @"canonInDMajor.jpg", nil];
     self.screenHeight = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height;
-    self.resetArray = [[NSMutableArray alloc] init];
-    for(int i=0; i<24; i++)
-        [self.resetArray addObject:[NSNumber numberWithBool:NO]];
     [self UIbuild];
     [self.view addSubview:self.mistView];
     [self.view addSubview:self.spinner];
@@ -434,7 +431,7 @@
         [player play];
     else
     {
-        [self.resetArray setObject:[NSNumber numberWithBool:YES] atIndexedSubscript:index];
+        NSLog(@"x");
         player.volume = 1;
         player.currentTime = 0;
     }
@@ -463,27 +460,23 @@
     AVAudioPlayer* player = [playersArray objectAtIndex:keyNo];
     int i=0;
     while (i<10000000)
-    {
-        if(((NSNumber*)[self.resetArray objectAtIndex:index.intValue]).boolValue)
-            return;
         i++;
-    }
     player.volume = 0.5;
     
     i=0;
     while (i<40000000)
-    {
-        if(((NSNumber*)[self.resetArray objectAtIndex:index.intValue]).boolValue)
-            return;
         i++;
-    }
     
-
-    [player stop];
-    [self.resetArray setObject:[NSNumber numberWithBool:NO] atIndexedSubscript:index.intValue];
-    player.volume = 1;
-    player.currentTime = 0;
-    [player prepareToPlay];
+    
+    NSLog(@"%f", player.currentTime);
+    if(player.currentTime > 0.18)
+    {
+        NSLog(@"%f", player.currentTime);
+        [player stop];
+        player.volume = 1;
+        player.currentTime = 0;
+        [player prepareToPlay];
+    }
 }
 
 -(void)mistViewTapped
