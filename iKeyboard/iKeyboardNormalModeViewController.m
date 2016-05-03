@@ -23,8 +23,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.keyBeingTappedFrame = CGRectZero;
-    
     self.keyBeingTappedFrameArray = [[NSMutableArray alloc] initWithObjects:NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), nil];
     self.keyBeingTappedIndexArray = malloc(sizeof(int)*4);
     bzero(self.keyBeingTappedIndexArray, sizeof(int)*4);
@@ -495,7 +493,6 @@
     while (i<40000000)
         i++;
     
-    
     player.volume = 1;
   //  NSLog(@"%f", player.currentTime);
     if(player.currentTime > 0.18)
@@ -581,31 +578,11 @@
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    int firstGestNo = 0, secGestNo = 0;
-    if(gestureRecognizer == (UIGestureRecognizer*)self.tapGestureRecognizer)
-        firstGestNo = 1;
-    else if(gestureRecognizer == (UIGestureRecognizer*)self.tapGestureRecognizer2)
-        firstGestNo = 2;
-    else if(gestureRecognizer == (UIGestureRecognizer*)self.tapGestureRecognizer3)
-        firstGestNo = 3;
-    
-    if(otherGestureRecognizer == (UIGestureRecognizer*)self.tapGestureRecognizer)
-        secGestNo = 1;
-    else if(otherGestureRecognizer == (UIGestureRecognizer*)self.tapGestureRecognizer2)
-        secGestNo = 2;
-    else if(otherGestureRecognizer == (UIGestureRecognizer*)self.tapGestureRecognizer3)
-        secGestNo = 3;
-    
- //   NSLog(@"(%d, %d)", firstGestNo, secGestNo);
-    
     CGPoint firstPoint = [gestureRecognizer locationInView:self.view];
     CGPoint secPoint = [otherGestureRecognizer locationInView:self.view];
     
     if(!CGPointEqualToPoint(firstPoint, secPoint))
-    {
-  //      NSLog(@"(%d, %d)", firstGestNo, secGestNo);
         return  YES;
-    }
     
     return NO;
 }
