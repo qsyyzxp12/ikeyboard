@@ -27,6 +27,7 @@
 @property NSMutableArray* whiteKeyImageViewArray;
 @property NSMutableArray* octavesArray;
 @property NSArray* keyImageViewArray;
+@property NSMutableArray* resetArray;
 
 //No.
 @property int instrumentNo;

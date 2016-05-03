@@ -31,7 +31,9 @@
     self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"guitar", @"piano", @"string", nil];
     self.tablatureFileNameArray = [[NSArray alloc] initWithObjects:@"up.jpg", @"letItGo.jpg", @"canonInDMajor.jpg", nil];
     self.screenHeight = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height;
-
+    self.resetArray = [[NSMutableArray alloc] init];
+    for(int i=0; i<24; i++)
+        [self.resetArray addObject:[NSNumber numberWithBool:NO]];
     [self UIbuild];
     [self.view addSubview:self.mistView];
     [self.view addSubview:self.spinner];
@@ -56,6 +58,7 @@
             path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"mp3"];
             player = [[AVAudioPlayer alloc] initWithContentsOfURL:
                       [NSURL fileURLWithPath:path] error:NULL];
+            
             [player prepareToPlay];
             [playersArray addObject:player];
         }
@@ -71,6 +74,7 @@
     }
     
     self.octavesArray = octavesArray;
+        
     [self performSelectorOnMainThread:@selector(removeSpinnerAndMistView) withObject:nil waitUntilDone:NO];
 }
 
@@ -425,7 +429,15 @@
     }
     
     NSArray* playersArray = self.octavesArray[octaveNo-1];
-    [[playersArray objectAtIndex:keyNo] play];
+    AVAudioPlayer* player = [playersArray objectAtIndex:keyNo];
+    if(![player isPlaying])
+        [player play];
+    else
+    {
+        [self.resetArray setObject:[NSNumber numberWithBool:YES] atIndexedSubscript:index];
+        player.volume = 1;
+        player.currentTime = 0;
+    }
 }
 
 -(void) tapEndedOnKey:(NSNumber*)index
@@ -448,14 +460,30 @@
     }
     
     NSArray* playersArray = self.octavesArray[octaveNo-1];
-    
+    AVAudioPlayer* player = [playersArray objectAtIndex:keyNo];
     int i=0;
     while (i<10000000)
+    {
+        if(((NSNumber*)[self.resetArray objectAtIndex:index.intValue]).boolValue)
+            return;
         i++;
+    }
+    player.volume = 0.5;
     
-    [[playersArray objectAtIndex:keyNo] stop];
-    ((AVAudioPlayer*)[playersArray objectAtIndex:keyNo]).currentTime = 0;
-    [[playersArray objectAtIndex:keyNo] prepareToPlay];
+    i=0;
+    while (i<40000000)
+    {
+        if(((NSNumber*)[self.resetArray objectAtIndex:index.intValue]).boolValue)
+            return;
+        i++;
+    }
+    
+
+    [player stop];
+    [self.resetArray setObject:[NSNumber numberWithBool:NO] atIndexedSubscript:index.intValue];
+    player.volume = 1;
+    player.currentTime = 0;
+    [player prepareToPlay];
 }
 
 -(void)mistViewTapped
@@ -526,50 +554,6 @@
                 [self adjustMistBar];
             }
         }
-}
-
-- (void) keyTapped:(UILongPressGestureRecognizer*) recognizer
-{
-    UIImageView* imageView = (UIImageView*)recognizer.view;
-    int keyNo = (int)imageView.tag;
-    if(recognizer.state == UIGestureRecognizerStateBegan)
-    {
-        imageView.highlighted = YES;
-        
-        int octaveNo;
-        if( keyNo >= 100)
-        {
-            octaveNo = self.lowerOctaveNo + 1;
-            keyNo /= 100;
-        }
-        else
-            octaveNo = self.lowerOctaveNo;
-        
-        NSArray* playersArray = self.octavesArray[octaveNo-1];
-        [[playersArray objectAtIndex:keyNo-1] play];
-    }
-    else if(recognizer.state == UIGestureRecognizerStateEnded)
-    {
-        imageView.highlighted = NO;
-        int i=0;
-        while (i<10000000)
-            i++;
-        
-        int octaveNo;
-        if( keyNo >= 100)
-        {
-            octaveNo = self.lowerOctaveNo + 1;
-            keyNo /= 100;
-        }
-        else
-            octaveNo = self.lowerOctaveNo;
-        
-        NSArray* playersArray = self.octavesArray[octaveNo-1];
-        
-        [[playersArray objectAtIndex:keyNo-1] stop];
-        ((AVAudioPlayer*)[playersArray objectAtIndex:keyNo-1]).currentTime = 0;
-        [[playersArray objectAtIndex:keyNo-1] prepareToPlay];
-    }
 }
 
 #pragma mark - the others
