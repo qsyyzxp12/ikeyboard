@@ -145,6 +145,11 @@
     bluetoothIconImageView.frame = CGRectMake(viewW*0.95, 0, viewW*0.035, viewH*0.07);
     [self.view addSubview:bluetoothIconImageView];
     
+    UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(viewW*0.45, 0, viewW*0.1, viewH*0.07)];
+    titleLabel.text = @"iKeybo";
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.textColor = [UIColor whiteColor];
+    [self.view addSubview:titleLabel];
     
 /*  self.instrumentImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"piano_outline.png"]];
     self.instrumentImageView.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.025, self.navigationController.navigationBar.frame.size.height+self.screenHeight*0.23, CGRectGetWidth(self.view.frame)*0.07, self.screenHeight*0.28);
