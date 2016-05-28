@@ -23,7 +23,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-    self.navigationController.navigationBar.hidden = YES;
     self.keyBeingTappedFrameArray = [[NSMutableArray alloc] initWithObjects:NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), nil];
     self.keyBeingTappedIndexArray = malloc(sizeof(int)*4);
     bzero(self.keyBeingTappedIndexArray, sizeof(int)*4);
@@ -123,6 +122,9 @@
 {
     [self screenCheck];
     
+    CGFloat viewW = CGRectGetWidth(self.view.frame);
+    CGFloat viewH = CGRectGetHeight(self.view.frame);
+    
     UIImageView* BGImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background0.png"]];
     BGImageView.frame = self.view.frame;
     [self.view addSubview:BGImageView];
@@ -130,6 +132,20 @@
     UIImageView* keyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Piano-1.png"]];
     keyboardImageView.frame = self.view.frame;
     [self.view addSubview:keyboardImageView];
+    
+    UIImageView* barImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Bar_under_sheet-2.png"]];
+    barImageView.frame = self.view.frame;
+    [self.view addSubview:barImageView];
+    
+    UIButton* settingButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.011, viewH*0.01, viewW*0.03, viewH*0.05)];
+    [settingButton setImage:[UIImage imageNamed:@"Menu_button3.png"] forState:UIControlStateNormal];
+    [self.view addSubview:settingButton];
+    
+    UIImageView* bluetoothIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Bluetooth_gray3.png"]];
+    bluetoothIconImageView.frame = CGRectMake(viewW*0.95, 0, viewW*0.035, viewH*0.07);
+    [self.view addSubview:bluetoothIconImageView];
+    
+    
 /*  self.instrumentImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"piano_outline.png"]];
     self.instrumentImageView.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.025, self.navigationController.navigationBar.frame.size.height+self.screenHeight*0.23, CGRectGetWidth(self.view.frame)*0.07, self.screenHeight*0.28);
     [self.view addSubview:self.instrumentImageView];
@@ -144,11 +160,6 @@
     [tablatureButton setImage:[UIImage imageNamed:@"book.png"] forState:UIControlStateNormal];
     [tablatureButton addTarget:self action:@selector(tablatureButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:tablatureButton];
-    
-   
-    UIImageView* blueToothIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blueToothIcon.png"]];
-    blueToothIcon.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.93, CGRectGetMinY(tablatureButton.frame), CGRectGetWidth(self.view.frame)*0.05, CGRectGetWidth(self.view.frame)*0.05);
-    [self.view addSubview:blueToothIcon];
  
     self.wholeKeyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
     [self.wholeKeyboardImageView.layer setBorderWidth:2];
@@ -335,7 +346,7 @@
 
 -(void) drawTablatureScrollView
 {
-    self.tablatureScrollView = [[UIScrollView alloc] initWithFrame: CGRectMake(CGRectGetWidth(self.view.frame)*0.02, self.navigationController.navigationBar.frame.size.height, CGRectGetWidth(self.view.frame)*0.962, CGRectGetHeight(self.view.frame)*0.48)];
+    self.tablatureScrollView = [[UIScrollView alloc] initWithFrame: CGRectMake(CGRectGetWidth(self.view.frame)*0.02, self.navigationController.navigationBar.frame.size.height, CGRectGetWidth(self.view.frame)*0.962, CGRectGetHeight(self.view.frame)*0.47)];
     [self.view addSubview:self.tablatureScrollView];
  
     self.tablatureImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"up.jpg"]];

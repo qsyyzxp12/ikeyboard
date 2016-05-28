@@ -36,12 +36,18 @@
     UIButton* getOneButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(iKeyBoConnectButton.frame), CGRectGetHeight(self.view.frame)*0.55, CGRectGetWidth(self.view.frame)*0.2, CGRectGetHeight(self.view.frame)*0.25)];
     [getOneButton setImage:[UIImage imageNamed:@"Get_One1.png"] forState:UIControlStateNormal];
     [getOneButton setImage:[UIImage imageNamed:@"Get_One_pushed1.png"] forState:UIControlStateHighlighted];
+    [getOneButton addTarget:self action:@selector(getOneButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:getOneButton];
     
     UIButton* backButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0.455, CGRectGetHeight(self.view.frame)*0.9, CGRectGetWidth(self.view.frame)*0.09, CGRectGetHeight(self.view.frame)*0.06)];
     [backButton addTarget:self action:@selector(backButtonClicked) forControlEvents:UIControlEventTouchUpInside];
   //  [backButton setBackgroundColor:[UIColor redColor]];
     [self.view addSubview:backButton];
+}
+
+-(void)getOneButtonClicked
+{
+     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.google.com"]];
 }
 
 -(void)backButtonClicked
