@@ -16,8 +16,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    NSLog(@"%d", (char)'a');
-    // Do any additional setup after loading the view.
+    self.navigationController.navigationBar.hidden = YES;
+    
+    UIImageView* BGimageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"iKeybo_Base0.png"]];
+    BGimageView.frame = self.view.frame;
+    [self.view addSubview:BGimageView];
+    
+    UIButton* iKeyBoConnectButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0.07, CGRectGetHeight(self.view.frame)*0.17, CGRectGetWidth(self.view.frame)*0.49, CGRectGetHeight(self.view.frame)*0.21)];
+    [iKeyBoConnectButton setImage:[UIImage imageNamed:@"Connect1.png"] forState:UIControlStateNormal];
+    [iKeyBoConnectButton setImage:[UIImage imageNamed:@"Connect_Pushed1.png"] forState:UIControlStateHighlighted];
+    [self.view addSubview:iKeyBoConnectButton];
+    
+    UILabel* textLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0.09, CGRectGetHeight(self.view.frame)*0.47, CGRectGetWidth(iKeyBoConnectButton.frame)*0.7, CGRectGetHeight(self.view.frame)*0.18)];
+    textLabel.text = @"Don't have iKeybo?";
+    textLabel.font = [textLabel.font fontWithSize:25];
+    textLabel.textColor = [UIColor whiteColor];
+    [self.view addSubview:textLabel];
+    
+    UIButton* getOneButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(iKeyBoConnectButton.frame), CGRectGetHeight(self.view.frame)*0.55, CGRectGetWidth(self.view.frame)*0.2, CGRectGetHeight(self.view.frame)*0.25)];
+    [getOneButton setImage:[UIImage imageNamed:@"Get_One1.png"] forState:UIControlStateNormal];
+    [getOneButton setImage:[UIImage imageNamed:@"Get_One_pushed1.png"] forState:UIControlStateHighlighted];
+    [self.view addSubview:getOneButton];
+    
+    UIButton* backButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0.455, CGRectGetHeight(self.view.frame)*0.9, CGRectGetWidth(self.view.frame)*0.09, CGRectGetHeight(self.view.frame)*0.06)];
+    [backButton addTarget:self action:@selector(backButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+  //  [backButton setBackgroundColor:[UIColor redColor]];
+    [self.view addSubview:backButton];
+}
+
+-(void)backButtonClicked
+{
+    [self performSegueWithIdentifier:@"showNormalModeViewController" sender:nil];
 }
 
 - (void)didReceiveMemoryWarning {

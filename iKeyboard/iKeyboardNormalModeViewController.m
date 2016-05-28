@@ -22,7 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+  
+    self.navigationController.navigationBar.hidden = YES;
     self.keyBeingTappedFrameArray = [[NSMutableArray alloc] initWithObjects:NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), nil];
     self.keyBeingTappedIndexArray = malloc(sizeof(int)*4);
     bzero(self.keyBeingTappedIndexArray, sizeof(int)*4);
@@ -122,7 +123,14 @@
 {
     [self screenCheck];
     
-    self.instrumentImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"piano_outline.png"]];
+    UIImageView* BGImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background0.png"]];
+    BGImageView.frame = self.view.frame;
+    [self.view addSubview:BGImageView];
+ 
+    UIImageView* keyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Piano-1.png"]];
+    keyboardImageView.frame = self.view.frame;
+    [self.view addSubview:keyboardImageView];
+/*  self.instrumentImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"piano_outline.png"]];
     self.instrumentImageView.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.025, self.navigationController.navigationBar.frame.size.height+self.screenHeight*0.23, CGRectGetWidth(self.view.frame)*0.07, self.screenHeight*0.28);
     [self.view addSubview:self.instrumentImageView];
     
@@ -137,7 +145,7 @@
     [tablatureButton addTarget:self action:@selector(tablatureButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:tablatureButton];
     
-    
+   
     UIImageView* blueToothIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blueToothIcon.png"]];
     blueToothIcon.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.93, CGRectGetMinY(tablatureButton.frame), CGRectGetWidth(self.view.frame)*0.05, CGRectGetWidth(self.view.frame)*0.05);
     [self.view addSubview:blueToothIcon];
@@ -146,7 +154,7 @@
     [self.wholeKeyboardImageView.layer setBorderWidth:2];
     self.wholeKeyboardImageView.frame = CGRectMake(0, self.navigationController.navigationBar.frame.size.height+self.screenHeight/8, self.view.frame.size.width, self.screenHeight/4);
     
-    
+   
     //MistView
     self.mistView = [[UIView alloc] initWithFrame:self.view.frame];
     self.mistView.alpha = 0.8;
@@ -283,7 +291,7 @@
     
     [self.view addSubview:fingerSensorView];
     
-    
+    */
     [self drawInstrumentMenu];
     [self drawTablatureScrollView];
     [self drawTablatureMenu];
@@ -327,8 +335,7 @@
 
 -(void) drawTablatureScrollView
 {
-    self.tablatureScrollView = [[UIScrollView alloc] initWithFrame: CGRectMake(CGRectGetWidth(self.view.frame)*0.12, self.navigationController.navigationBar.frame.size.height+5, CGRectGetWidth(self.view.frame)*0.78, self.screenHeight/2-10-self.keyboard_top_padding*0.2)];
-    [self.tablatureScrollView.layer setBorderWidth:2];
+    self.tablatureScrollView = [[UIScrollView alloc] initWithFrame: CGRectMake(CGRectGetWidth(self.view.frame)*0.02, self.navigationController.navigationBar.frame.size.height, CGRectGetWidth(self.view.frame)*0.962, CGRectGetHeight(self.view.frame)*0.48)];
     [self.view addSubview:self.tablatureScrollView];
  
     self.tablatureImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"up.jpg"]];
@@ -372,6 +379,8 @@
         gestNo = 1;
     else// if(sender == (UIGestureRecognizer*)self.tapGestureRecognizer3)
         gestNo = 2;
+    
+    NSLog(@"gestNo = %d", gestNo);
     
     if(sender.state == UIGestureRecognizerStateBegan)
     {
@@ -491,9 +500,9 @@
     while (i<40000000)
         i++;
     
-    player.volume = 1;
+ //   player.volume = 1;
   //  NSLog(@"%f", player.currentTime);
-    if(player.currentTime > 0.18)
+    if(player.currentTime > 0.17)
     {
     //    NSLog(@"%f", player.currentTime);
         [player stop];
