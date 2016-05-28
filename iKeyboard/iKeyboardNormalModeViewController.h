@@ -12,6 +12,7 @@
 @interface iKeyboardNormalModeViewController : UIViewController<UIGestureRecognizerDelegate>
 
 //UI
+@property UIView* settingPageView;
 @property UIImageView *wholeKeyboardImageView;
 @property UIImageView *frameImageView;
 @property UIImageView* instrumentImageView;
@@ -52,4 +53,7 @@
 @property UILongPressGestureRecognizer *tapGestureRecognizer;
 @property UILongPressGestureRecognizer *tapGestureRecognizer2;
 @property UILongPressGestureRecognizer *tapGestureRecognizer3;
+@property BOOL showingSettingPage;
+@property int instrumentSelectedNo;
+@property int sheetSelectedNo;
 @end

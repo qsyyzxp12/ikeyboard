@@ -13,6 +13,8 @@
 #define IPhone5 [[UIScreen mainScreen] bounds].size.width == (double)568
 #define IPhone6 [[UIScreen mainScreen] bounds].size.width == (double)667
 #define IPhone6sPlus [[UIScreen mainScreen] bounds].size.width == (double)736
+#define viewW CGRectGetWidth(self.view.frame)
+#define viewH CGRectGetHeight(self.view.frame)
 
 @interface iKeyboardNormalModeViewController ()
 
@@ -23,21 +25,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
+    self.showingSettingPage = NO;
     self.keyBeingTappedFrameArray = [[NSMutableArray alloc] initWithObjects:NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), nil];
     self.keyBeingTappedIndexArray = malloc(sizeof(int)*4);
     bzero(self.keyBeingTappedIndexArray, sizeof(int)*4);
     
     self.lowerOctaveNo = 3;
+    self.sheetSelectedNo = 1;
     self.instrumentNo = 1;
+    self.instrumentSelectedNo = 1;
     self.noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
     self.halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
-    self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"guitar", @"piano", @"string", nil];
+    self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"Bass", @"Piano", @"Guitar", @"Saxophone", nil];
     self.tablatureFileNameArray = [[NSArray alloc] initWithObjects:@"up.jpg", @"letItGo.jpg", @"canonInDMajor.jpg", nil];
     self.screenHeight = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height;
     [self UIbuild];
     [self.view addSubview:self.mistView];
     [self.view addSubview:self.spinner];
-    [NSThread detachNewThreadSelector:@selector(AVAudioPlayerInit) toTarget:self withObject:nil];
+  //  [NSThread detachNewThreadSelector:@selector(AVAudioPlayerInit) toTarget:self withObject:nil];
 }
 
 #pragma mark - AVAudio Player
@@ -122,9 +127,6 @@
 {
     [self screenCheck];
     
-    CGFloat viewW = CGRectGetWidth(self.view.frame);
-    CGFloat viewH = CGRectGetHeight(self.view.frame);
-    
     UIImageView* BGImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background0.png"]];
     BGImageView.frame = self.view.frame;
     [self.view addSubview:BGImageView];
@@ -139,6 +141,7 @@
     
     UIButton* settingButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.011, viewH*0.01, viewW*0.03, viewH*0.05)];
     [settingButton setImage:[UIImage imageNamed:@"Menu_button3.png"] forState:UIControlStateNormal];
+    [settingButton addTarget:self action:@selector(settingButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:settingButton];
     
     UIImageView* bluetoothIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Bluetooth_gray3.png"]];
@@ -308,38 +311,89 @@
     [self.view addSubview:fingerSensorView];
     
     */
-    [self drawInstrumentMenu];
+  //  [self drawInstrumentMenu];
+    [self drawSettingPageView];
     [self drawTablatureScrollView];
-    [self drawTablatureMenu];
+  //  [self drawTablatureMenu];
 }
 
--(void) drawTablatureMenu
+-(void) drawSettingPageView
 {
-    NSArray* fileNameLabelArray = [[NSArray alloc] initWithObjects:@"Pixar's Up-Theme Song", @"Frozen\nLet it Go", @"Pachelbel\nCanon in D major", nil];
+    self.settingPageView = [[UIView alloc] initWithFrame:self.view.frame];
+    UIImageView* BGImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background1.png"]];
+    BGImageView.frame = self.view.frame;
+    [self.settingPageView addSubview:BGImageView];
+    
+    UIButton* leaveSettingPageButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0.015, CGRectGetHeight(self.view.frame)*0.008, CGRectGetWidth(self.view.frame)*0.031, CGRectGetHeight(self.view.frame)*0.052)];
+    [leaveSettingPageButton addTarget:self action:@selector(settingButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.settingPageView addSubview:leaveSettingPageButton];
+    
+    //draw instructment menu
+    self.instrumentMenuScrollView = [[UIScrollView alloc] init];
+    self.instrumentMenuScrollView.frame = CGRectMake(viewW*0.084, viewH*0.58, viewW*0.832, viewH*0.243);
+    
+    for(int i=0; i<[self.instrumentNameMap count]; i++)
+    {
+        UIButton* instrumentButton = [[UIButton alloc] init];
+        NSString* imageName = [NSString stringWithFormat:@"%@1.png", self.instrumentNameMap[i]];
+        [instrumentButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        instrumentButton.tag = i;
+        instrumentButton.adjustsImageWhenHighlighted = NO;
+        //int x = i - (int)[self.instrumentNameMap count]/2;
+        [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*(0.06+i*0.31), CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.2, CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.26, self.instrumentMenuScrollView.frame.size.height*0.8)];
+    //    [instrumentButton addTarget:self action:@selector(changeInstrumentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.instrumentMenuScrollView addSubview:instrumentButton];
+    }
+    [self.instrumentMenuScrollView setUserInteractionEnabled:NO];
+    self.instrumentMenuScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*(0.12+0.31*[self.instrumentNameMap count]-0.05), CGRectGetHeight(self.instrumentMenuScrollView.frame));
+    [self.settingPageView addSubview:self.instrumentMenuScrollView];
+    
+    UIButton* lastInstrumentButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.instrumentMenuScrollView.frame), CGRectGetMinY(self.instrumentMenuScrollView.frame), CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.033, CGRectGetHeight(self.instrumentMenuScrollView.frame))];
+    lastInstrumentButton.tag = 0;
+    [lastInstrumentButton addTarget:self action:@selector(instrumentNextOrLastButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.settingPageView addSubview:lastInstrumentButton];
+    
+    UIButton* nextInstrumentButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.instrumentMenuScrollView.frame)+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.967, CGRectGetMinY(self.instrumentMenuScrollView.frame), CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.033, CGRectGetHeight(self.instrumentMenuScrollView.frame))];
+    nextInstrumentButton.tag = 1;
+    [nextInstrumentButton addTarget:self action:@selector(instrumentNextOrLastButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.settingPageView addSubview:nextInstrumentButton];
+    
+    
+    //draw tablature menu
+    NSArray* fileNameLabelArray = [[NSArray alloc] initWithObjects:@"Moon Sonata", @"CANON in D", @"Fur Elise", nil];
     
     self.tablatureMenuScrollView = [[UIScrollView alloc] init];
-    self.tablatureMenuScrollView.frame = CGRectMake(7, CGRectGetHeight(self.view.frame)*0.33, self.view.frame.size.width-14, self.view.frame.size.height*0.53);
-    [self.tablatureMenuScrollView.layer setBorderWidth:2];
-    self.tablatureMenuScrollView.backgroundColor = [UIColor whiteColor];
+    self.tablatureMenuScrollView.frame = CGRectMake(viewW*0.084, viewH*0.19, viewW*0.832, viewH*0.243);
     
     for(int i=0; i<[self.tablatureFileNameArray count]; i++)
     {
         UIButton* icon = [[UIButton alloc] init];
-        [icon setImage:[UIImage imageNamed:@"tablatureIcon.png"] forState:UIControlStateNormal];
+        [icon setImage:[UIImage imageNamed:@"Sheets1.png"] forState:UIControlStateNormal];
         icon.tag = i;
         icon.adjustsImageWhenHighlighted = NO;
         int x = i - (int)[self.tablatureFileNameArray count]/2;
-        [icon setFrame:CGRectMake(CGRectGetWidth(self.tablatureMenuScrollView.frame)*(0.43+x*0.26), CGRectGetHeight(self.tablatureMenuScrollView.frame)*0.1, CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.14, self.tablatureMenuScrollView.frame.size.height*0.6)];
+        [icon setFrame:CGRectMake(CGRectGetWidth(self.tablatureMenuScrollView.frame)*(0.4+x*0.3), CGRectGetHeight(self.tablatureMenuScrollView.frame)*0.1, CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.2, self.tablatureMenuScrollView.frame.size.height*0.9)];
         [icon addTarget:self action:@selector(changeTablatureButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.tablatureMenuScrollView addSubview:icon];
         
-        UILabel* nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(icon.frame), CGRectGetMaxY(icon.frame), CGRectGetWidth(icon.frame), CGRectGetHeight(self.tablatureMenuScrollView.frame)*0.2)];
+        UILabel* nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(icon.frame), CGRectGetMaxY(icon.frame)-CGRectGetHeight(icon.frame)*0.3, CGRectGetWidth(icon.frame), CGRectGetHeight(icon.frame)*0.2)];
         nameLabel.text = [fileNameLabelArray objectAtIndex:i];
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.numberOfLines = 2;
         nameLabel.adjustsFontSizeToFitWidth = YES;
         [self.tablatureMenuScrollView addSubview:nameLabel];
     }
+    [self.settingPageView addSubview:self.tablatureMenuScrollView];
+    
+    UIButton* lastSheetButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.tablatureMenuScrollView.frame), CGRectGetMinY(self.tablatureMenuScrollView.frame), CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.033, CGRectGetHeight(self.tablatureMenuScrollView.frame))];
+    lastSheetButton.tag = 0;
+    [lastSheetButton addTarget:self action:@selector(sheetNextOrLastButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.settingPageView addSubview:lastSheetButton];
+    
+    UIButton* nextSheetButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.tablatureMenuScrollView.frame)+CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.967, CGRectGetMinY(self.tablatureMenuScrollView.frame), CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.033, CGRectGetHeight(self.tablatureMenuScrollView.frame))];
+    nextSheetButton.tag = 1;
+    [nextSheetButton addTarget:self action:@selector(sheetNextOrLastButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.settingPageView addSubview:nextSheetButton];
 }
 
 -(void) adjustMistBar
@@ -363,28 +417,70 @@
     self.tablatureScrollView.contentSize = self.tablatureImageView.frame.size;
 }
 
+-(void) drawTablatureMenu
+{
+}
+
 -(void) drawInstrumentMenu
 {
-    self.instrumentMenuScrollView = [[UIScrollView alloc] init];
-    self.instrumentMenuScrollView.frame = CGRectMake(7, CGRectGetHeight(self.view.frame)*0.33, self.view.frame.size.width-14, self.view.frame.size.height*0.53);
-    [self.instrumentMenuScrollView.layer setBorderWidth:2];
-    self.instrumentMenuScrollView.backgroundColor = [UIColor whiteColor];
-    
-    for(int i=0; i<[self.instrumentNameMap count]; i++)
-    {
-        UIButton* instrumentButton = [[UIButton alloc] init];
-        NSString* imageName = [NSString stringWithFormat:@"%@_outline.png", self.instrumentNameMap[i]];
-        [instrumentButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-        instrumentButton.tag = i;
-        instrumentButton.adjustsImageWhenHighlighted = NO;
-        int x = i - (int)[self.instrumentNameMap count]/2;
-        [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*(0.41+x*0.28), CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.2, CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.18, self.instrumentMenuScrollView.frame.size.height*1.2)];
-        [instrumentButton addTarget:self action:@selector(changeInstrumentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [self.instrumentMenuScrollView addSubview:instrumentButton];
-    }
 }
 
 #pragma mark - Actions
+
+-(void)sheetNextOrLastButtonClicked:(UIButton*)sender
+{
+    if(!sender.tag)
+    {
+        if(self.sheetSelectedNo > 0)
+        {
+            self.tablatureMenuScrollView.contentOffset = CGPointMake(self.tablatureMenuScrollView.contentOffset.x-CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.3, 0);
+            self.sheetSelectedNo--;
+        }
+    }
+    else
+    {
+        if(self.sheetSelectedNo < [self.instrumentNameMap count]-1)
+        {
+            self.tablatureMenuScrollView.contentOffset = CGPointMake(self.tablatureMenuScrollView.contentOffset.x+CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.3, 0);
+            self.sheetSelectedNo++;
+        }
+    }
+}
+
+-(void)instrumentNextOrLastButtonClicked:(UIButton*)sender
+{
+    if(!sender.tag)
+    {
+        if(self.instrumentSelectedNo > 0)
+        {
+            self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x-CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.31, 0);
+            self.instrumentSelectedNo--;
+        }
+    }
+    else
+    {
+        if(self.instrumentSelectedNo < 3-1)
+        {
+            self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.31, 0);
+            self.instrumentSelectedNo++;
+        }
+    }
+}
+
+-(void)settingButtonClicked
+{
+    if(!self.showingSettingPage)
+    {
+        [self.view addSubview:self.settingPageView];
+        self.showingSettingPage = YES;
+    }
+    else
+    {
+        [self.settingPageView removeFromSuperview];
+        self.showingSettingPage = NO;
+    }
+}
+
 -(void)tap:(UITapGestureRecognizer*)sender
 {
     CGPoint point = [sender locationInView:self.view];
