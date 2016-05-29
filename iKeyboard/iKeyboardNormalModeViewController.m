@@ -40,6 +40,17 @@
     self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"Bass", @"Piano", @"Guitar", @"Saxophone", nil];
     self.tablatureFileNameArray = [[NSArray alloc] initWithObjects:@"up.jpg", @"letItGo.jpg", @"canonInDMajor.jpg", nil];
     self.screenHeight = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height;
+    
+    NSMutableArray* highlightedKeyImageViewArray = [[NSMutableArray alloc] init];
+    for(int i=0; i<24; i++)
+    {
+        NSString* imageName = [NSString stringWithFormat:@"key%d_highlight.png", i];
+        UIImageView* highlightedKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+        highlightedKeyImageView.frame = self.view.frame;
+        [highlightedKeyImageViewArray addObject:highlightedKeyImageView];
+    }
+    self.highlightedKeyImageViewArray = highlightedKeyImageViewArray;
+    
     [self UIbuild];
     [self.view addSubview:self.mistView];
     [self.view addSubview:self.spinner];
@@ -204,7 +215,7 @@
     CGFloat keyY = viewH*0.72;
     CGFloat keyHeight = viewH*0.28;
     
-    NSMutableArray* keyImageViewArray = [[NSMutableArray alloc] init];
+    NSMutableArray* keyViewArray = [[NSMutableArray alloc] init];
     
     //White Keys
     for(int i=0; i<14; i++)
@@ -212,10 +223,10 @@
         UIView* whiteKeyView = [[UIImageView alloc] init];
         whiteKeyView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
         [self.view addSubview:whiteKeyView];
-        whiteKeyView.backgroundColor = [UIColor redColor];
-        whiteKeyView.alpha = 0.5;
+    //    whiteKeyView.backgroundColor = [UIColor redColor];
+    //    whiteKeyView.alpha = 0.5;
         keyX += self.keyboard_padding + oneKeyWidth;
-        [keyImageViewArray addObject:whiteKeyView];
+        [keyViewArray addObject:whiteKeyView];
     }
 
     //Black keys
@@ -241,36 +252,21 @@
         
         blackKeyView.frame = CGRectMake(keyX, keyY, self.blackKeySize.width, self.blackKeySize.height);
         keyX += self.blackKeySize.width;
-        blackKeyView.backgroundColor = [UIColor blueColor];
-        blackKeyView.alpha = 0.5;
+     //   blackKeyView.backgroundColor = [UIColor blueColor];
+     //   blackKeyView.alpha = 0.5;
         [self.view addSubview:blackKeyView];
     
-        [keyImageViewArray addObject:blackKeyView];
+        [keyViewArray addObject:blackKeyView];
     }
     
-    self.keyImageViewArray = keyImageViewArray;
+    self.keyViewArray = keyViewArray;
    /*
-    UIImageView* keyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
-    keyboardImageView.frame = CGRectMake(0, CGRectGetMinY(keyboardBgImageView.frame), CGRectGetWidth(self.view.frame), self.keyboard_top_padding*0.8);
-    [keyboardImageView.layer setBorderWidth:1];
-    [self.view addSubview:keyboardImageView];
-    
-    UIImageView* grayBarImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"gray.png"]];
-    grayBarImageView.frame = CGRectMake(0, CGRectGetMaxY(keyboardImageView.frame), CGRectGetWidth(self.view.frame), self.keyboard_top_padding*0.2+2);
-    [grayBarImageView.layer setBorderWidth:1];
-    [self.view addSubview:grayBarImageView];
-    
-    UIImageView* lightGrayBarImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lightGray.png"]];
-    lightGrayBarImageView.frame = CGRectMake(0, CGRectGetMinY(keyboardImageView.frame)-self.keyboard_top_padding*0.2, CGRectGetWidth(self.view.frame), self.keyboard_top_padding*0.2);
-    [lightGrayBarImageView.layer setBorderWidth:1];
-    [self.view addSubview:lightGrayBarImageView];
-    
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.spinner.frame = CGRectMake(CGRectGetMidX(self.view.frame)-25, CGRectGetMidY(self.view.frame)-25, 50, 50);
     self.spinner.backgroundColor = [UIColor whiteColor];
     [self.spinner startAnimating];
-    
-    UIView* fingerSensorView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(keyboardBgImageView.frame)+self.keyboard_top_padding, CGRectGetWidth(self.view.frame), CGRectGetHeight(keyboardBgImageView.frame)-self.keyboard_top_padding)];
+   */
+    UIView* fingerSensorView = [[UIView alloc] initWithFrame:CGRectMake(self.keyboard_left_padding, keyY, viewW-self.keyboard_left_padding-self.keyboard_right_padding, viewH*0.28)];
     fingerSensorView.backgroundColor = [UIColor clearColor];
     
     self.tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
@@ -296,7 +292,6 @@
     
     [self.view addSubview:fingerSensorView];
     
-    */
     [self drawSettingPageView];
 }
 
@@ -532,9 +527,9 @@
     if(sender.state == UIGestureRecognizerStateBegan)
     {
       //  NSLog(@"tapped began!");
-        for(int i=(int)[self.keyImageViewArray count]-1; i >= 0; i--)
+        for(int i=(int)[self.keyViewArray count]-1; i >= 0; i--)
         {
-            CGRect keyRect = ((UIImageView*)self.keyImageViewArray[i]).frame;
+            CGRect keyRect = ((UIView*)self.keyViewArray[i]).frame;
             if(CGRectContainsPoint(keyRect, point))
             {
                 [self.keyBeingTappedFrameArray setObject:NSStringFromCGRect(keyRect) atIndexedSubscript:gestNo];
@@ -549,7 +544,8 @@
       //  NSLog(@"tapped end!");
         if(![self.keyBeingTappedFrameArray[gestNo] isEqualToString:NSStringFromCGRect(CGRectZero)])
         {
-            ((UIImageView*)(self.keyImageViewArray[self.keyBeingTappedIndexArray[gestNo]])).highlighted = NO;
+           // ((UIView*)(self.keyImageViewArray[self.keyBeingTappedIndexArray[gestNo]])).highlighted = NO;
+            [self.highlightedKeyImageViewArray[self.keyBeingTappedIndexArray[gestNo]] removeFromSuperview];
             [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:self.keyBeingTappedIndexArray[gestNo]]];
     
             self.keyBeingTappedFrameArray[gestNo] = NSStringFromCGRect(CGRectZero);
@@ -563,16 +559,17 @@
             CGRect keyBeingTappedFrame = CGRectFromString(self.keyBeingTappedFrameArray[gestNo]);
             if(!CGRectContainsPoint(keyBeingTappedFrame, point))
             {
-                ((UIImageView*)(self.keyImageViewArray[self.keyBeingTappedIndexArray[gestNo]])).highlighted = NO;
+              //  ((UIImageView*)(self.keyImageViewArray[self.keyBeingTappedIndexArray[gestNo]])).highlighted = NO;
+                [self.highlightedKeyImageViewArray[self.keyBeingTappedIndexArray[gestNo]] removeFromSuperview];
                 [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:self.keyBeingTappedIndexArray[gestNo]]];
                 self.keyBeingTappedFrameArray[gestNo] = NSStringFromCGRect(CGRectZero);
             }
         }
         else
         {
-            for(int i=(int)[self.keyImageViewArray count]-1; i >= 0; i--)
+            for(int i=(int)[self.keyViewArray count]-1; i >= 0; i--)
             {
-                CGRect keyRect = ((UIImageView*)self.keyImageViewArray[i]).frame;
+                CGRect keyRect = ((UIView*)self.keyViewArray[i]).frame;
                 if(CGRectContainsPoint(keyRect, point))
                 {
                     self.keyBeingTappedFrameArray[gestNo] = NSStringFromCGRect(keyRect);
@@ -587,7 +584,8 @@
 
 -(void) tapBeganOnKey:(int)index
 {
-    ((UIImageView*)(self.keyImageViewArray[index])).highlighted = YES;
+  //  ((UIImageView*)(self.keyViewArray[index])).highlighted = YES;
+    [self.view addSubview:self.highlightedKeyImageViewArray[index]];
     
     int octaveNo = self.lowerOctaveNo;
     int keyNo = index;
