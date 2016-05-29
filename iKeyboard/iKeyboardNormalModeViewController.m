@@ -96,29 +96,30 @@
 {
     if(IPhone4)
     {
-        self.keyboard_top_padding = 40;
+        self.keyboard_left_padding = 40;
         self.keyboard_padding = 1;
         self.blackKeySize = CGSizeMake(20, 56);
         self.blackKeyOffsetVector = CGVectorMake(23, 15);
     }
     else if(IPhone5)
     {
-        self.keyboard_top_padding = 40;
+        self.keyboard_left_padding = 40;
         self.keyboard_padding = 1;
         self.blackKeySize = CGSizeMake(24, 56);
-        self.blackKeyOffsetVector = CGVectorMake(27, 18);
+        self.blackKeyOffsetVector = CGVectorMake(35, 22);
     }
     else if(IPhone6)
     {
-        self.keyboard_top_padding = 47;
-        self.keyboard_padding = 2;
-        self.blackKeySize = CGSizeMake(28, 69);
-        self.blackKeyOffsetVector = CGVectorMake(32, 20);
+        self.keyboard_left_padding = 12;
+        self.keyboard_right_padding = 15;
+        self.keyboard_padding = 1;
+        self.blackKeySize = CGSizeMake(28, 52);
+        self.blackKeyOffsetVector = CGVectorMake(26, 26);
         self.keyboardHeight = 160;
     }
     else if(IPhone6sPlus)
     {
-        self.keyboard_top_padding = 52;
+        self.keyboard_left_padding = 52;
         self.keyboard_padding = 2;
         self.blackKeySize = CGSizeMake(31, 75);
         self.blackKeyOffsetVector = CGVectorMake(36, 21);
@@ -197,62 +198,58 @@
     UIImageView* keyboardBgImageView = [[UIImageView alloc] init];
     keyboardBgImageView.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame)-self.screenHeight/2, self.view.frame.size.width, self.screenHeight/2);
     [self.view addSubview:keyboardBgImageView];
-    
-    CGFloat oneKeyWidth = (keyboardBgImageView.frame.size.width - self.keyboard_padding*15)/14;
-    CGFloat keyX = self.keyboard_padding;
-    CGFloat keyY = CGRectGetMinY(keyboardBgImageView.frame)+self.keyboard_top_padding;
-    CGFloat keyHeight = keyboardBgImageView.frame.size.height - self.keyboard_padding - self.keyboard_top_padding;
+ */
+    CGFloat oneKeyWidth = (viewW - self.keyboard_left_padding - self.keyboard_right_padding - self.keyboard_padding*13)/14;
+    CGFloat keyX = self.keyboard_left_padding;
+    CGFloat keyY = viewH*0.72;
+    CGFloat keyHeight = viewH*0.28;
     
     NSMutableArray* keyImageViewArray = [[NSMutableArray alloc] init];
     
     //White Keys
     for(int i=0; i<14; i++)
     {
-        NSString* imageName = [NSString stringWithFormat:@"wkey.png"];
-        NSString* highlightImageName = [NSString stringWithFormat:@"key_highlight.png"];
-        UIImageView* whiteKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName] highlightedImage:[UIImage imageNamed:highlightImageName]];
-        whiteKeyImageView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
-        [whiteKeyImageView.layer setBorderWidth:2];
-        [self.view addSubview:whiteKeyImageView];
-        
-        UILabel* noLabel = [[UILabel alloc] initWithFrame:CGRectMake(keyX, CGRectGetMaxY(whiteKeyImageView.frame)-keyHeight*0.2, oneKeyWidth, keyHeight*0.2)];
-        
-        noLabel.textAlignment = NSTextAlignmentCenter;
-        noLabel.text = [NSString stringWithFormat:@"%d", i%7+1];
-        [self.view addSubview:noLabel];
-        
+        UIView* whiteKeyView = [[UIImageView alloc] init];
+        whiteKeyView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
+        [self.view addSubview:whiteKeyView];
+        whiteKeyView.backgroundColor = [UIColor redColor];
+        whiteKeyView.alpha = 0.5;
         keyX += self.keyboard_padding + oneKeyWidth;
-        
-        [keyImageViewArray addObject:whiteKeyImageView];
+        [keyImageViewArray addObject:whiteKeyView];
     }
 
     //Black keys
-    keyX = self.keyboard_padding;
+    keyX = self.keyboard_left_padding;
     for(int i=0; i<10; i++)
     {
-        UIImageView* blackKeyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bkey.png"] highlightedImage:[UIImage imageNamed:@"key_highlight.png"]];
+        UIView* blackKeyView = [[UIView alloc] init];
         switch (i)
         {
             case 0:
                 keyX += self.blackKeyOffsetVector.dx;
                 break;
-            case 2: case 5: case 7:
+            case 2: case 7:
                 keyX += self.blackKeyOffsetVector.dx*2 + self.keyboard_padding;
+                break;
+            case 5:
+                keyX += self.blackKeyOffsetVector.dx*2 + self.keyboard_padding - 2;
                 break;
             default:
                 keyX += self.blackKeyOffsetVector.dy;
                 break;
         }
         
-        blackKeyImageView.frame = CGRectMake(keyX, keyY, self.blackKeySize.width, self.blackKeySize.height);
+        blackKeyView.frame = CGRectMake(keyX, keyY, self.blackKeySize.width, self.blackKeySize.height);
         keyX += self.blackKeySize.width;
-        [self.view addSubview:blackKeyImageView];
+        blackKeyView.backgroundColor = [UIColor blueColor];
+        blackKeyView.alpha = 0.5;
+        [self.view addSubview:blackKeyView];
     
-        [keyImageViewArray addObject:blackKeyImageView];
+        [keyImageViewArray addObject:blackKeyView];
     }
     
     self.keyImageViewArray = keyImageViewArray;
-    
+   /*
     UIImageView* keyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
     keyboardImageView.frame = CGRectMake(0, CGRectGetMinY(keyboardBgImageView.frame), CGRectGetWidth(self.view.frame), self.keyboard_top_padding*0.8);
     [keyboardImageView.layer setBorderWidth:1];
