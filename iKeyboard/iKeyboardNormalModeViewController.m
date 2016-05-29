@@ -37,7 +37,7 @@
     self.instrumentSelectedNo = 1;
     self.noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
     self.halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
-    self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"Bass", @"Piano", @"Guitar", @"Saxophone", nil];
+    self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"bass", @"piano", @"guitar", @"Saxophone", nil];
     self.tablatureFileNameArray = [[NSArray alloc] initWithObjects:@"up.jpg", @"letItGo.jpg", @"canonInDMajor.jpg", nil];
     self.screenHeight = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height;
     
@@ -54,7 +54,7 @@
     [self UIbuild];
     [self.view addSubview:self.mistView];
     [self.view addSubview:self.spinner];
-  //  [NSThread detachNewThreadSelector:@selector(AVAudioPlayerInit) toTarget:self withObject:nil];
+    [NSThread detachNewThreadSelector:@selector(AVAudioPlayerInit) toTarget:self withObject:nil];
 }
 
 #pragma mark - AVAudio Player
@@ -522,8 +522,6 @@
     else// if(sender == (UIGestureRecognizer*)self.tapGestureRecognizer3)
         gestNo = 2;
     
-    NSLog(@"gestNo = %d", gestNo);
-    
     if(sender.state == UIGestureRecognizerStateBegan)
     {
       //  NSLog(@"tapped began!");
@@ -607,7 +605,10 @@
     NSArray* playersArray = self.octavesArray[octaveNo-1];
     AVAudioPlayer* player = [playersArray objectAtIndex:keyNo];
     if(![player isPlaying])
+    {
+        player.volume = 1;
         [player play];
+    }
     else
     {
         player.volume = 1;
