@@ -155,27 +155,35 @@
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:titleLabel];
-    
-/*  self.instrumentImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"piano_outline.png"]];
-    self.instrumentImageView.frame = CGRectMake(CGRectGetWidth(self.view.frame)*0.025, self.navigationController.navigationBar.frame.size.height+self.screenHeight*0.23, CGRectGetWidth(self.view.frame)*0.07, self.screenHeight*0.28);
-    [self.view addSubview:self.instrumentImageView];
-    
-    UIButton* instrumentButton = [[UIButton alloc] init];
-    instrumentButton.adjustsImageWhenHighlighted = NO;
-    [instrumentButton setFrame:CGRectMake(CGRectGetMinX(self.instrumentImageView.frame), CGRectGetMinY(self.instrumentImageView.frame), CGRectGetWidth(self.instrumentImageView.frame), CGRectGetHeight(self.instrumentImageView.frame)/2)];
-    [instrumentButton addTarget:self action:@selector(instrumentButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:instrumentButton];
   
-    UIButton* tablatureButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(instrumentButton.frame), CGRectGetMaxY(self.navigationController.navigationBar.frame)+ 15, CGRectGetWidth(instrumentButton.frame), CGRectGetWidth(instrumentButton.frame))];
-    [tablatureButton setImage:[UIImage imageNamed:@"book.png"] forState:UIControlStateNormal];
-    [tablatureButton addTarget:self action:@selector(tablatureButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:tablatureButton];
- 
-    self.wholeKeyboardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard.png"]];
-    [self.wholeKeyboardImageView.layer setBorderWidth:2];
-    self.wholeKeyboardImageView.frame = CGRectMake(0, self.navigationController.navigationBar.frame.size.height+self.screenHeight/8, self.view.frame.size.width, self.screenHeight/4);
+    [self drawTablatureScrollView];
     
+    self.littleKeyboImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Scrollnotes-1.png"]];
+    self.littleKeyboImageView.frame = CGRectMake(viewW*0.311, viewH*0.593, viewW*0.266, viewH*0.114);
+  //  self.littleKeyboImageView.alpha = 0.5;
+    [self.view addSubview:self.littleKeyboImageView];
    
+    self.leftMistBar = [[UIView alloc] initWithFrame:CGRectMake(viewW*0.02, viewH*0.6, viewW*0.295, viewH*0.1)];
+ //   self.leftMistBar.alpha = 0.5;
+    self.leftMistBar.tag = 0;
+ //   self.leftMistBar.backgroundColor = [UIColor blueColor];
+    UITapGestureRecognizer* tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(arrowImageViewClicked:)];
+    tapGest.numberOfTapsRequired = 1;
+    tapGest.numberOfTouchesRequired = 1;
+    [self.leftMistBar addGestureRecognizer:tapGest];
+    [self.view addSubview:self.leftMistBar];
+    
+    self.rightMistBar = [[UIView alloc] initWithFrame:CGRectMake(viewW*0.573, viewH*0.6, viewW*0.402, viewH*0.1)];
+  //  self.rightMistBar.alpha = 0.5;
+    self.rightMistBar.tag = 1;
+  //  self.rightMistBar.backgroundColor = [UIColor blueColor];
+    tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(arrowImageViewClicked:)];
+    tapGest.numberOfTapsRequired = 1;
+    tapGest.numberOfTouchesRequired = 1;
+    [self.rightMistBar addGestureRecognizer:tapGest];
+    [self.view addSubview:self.rightMistBar];
+
+/*
     //MistView
     self.mistView = [[UIView alloc] initWithFrame:self.view.frame];
     self.mistView.alpha = 0.8;
@@ -265,27 +273,6 @@
     self.spinner.backgroundColor = [UIColor whiteColor];
     [self.spinner startAnimating];
     
-    self.leftMistBar = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(keyboardImageView.frame), 0, CGRectGetHeight(keyboardImageView.frame))];
-    self.leftMistBar.alpha = 0.5;
-    self.leftMistBar.tag = 0;
-    self.leftMistBar.backgroundColor = [UIColor grayColor];
-    tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(arrowImageViewClicked:)];
-    tapGest.numberOfTapsRequired = 1;
-    tapGest.numberOfTouchesRequired = 1;
-    [self.leftMistBar addGestureRecognizer:tapGest];
-    [self.view addSubview:self.leftMistBar];
-    
-    self.rightMistBar = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(keyboardImageView.frame), 0, CGRectGetHeight(keyboardImageView.frame))];
-    self.rightMistBar.alpha = 0.5;
-    self.rightMistBar.tag = 1;
-    self.rightMistBar.backgroundColor = [UIColor grayColor];
-    tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(arrowImageViewClicked:)];
-    tapGest.numberOfTapsRequired = 1;
-    tapGest.numberOfTouchesRequired = 1;
-    [self.rightMistBar addGestureRecognizer:tapGest];
-    [self.view addSubview:self.rightMistBar];
-    [self adjustMistBar];    
-
     UIView* fingerSensorView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(keyboardBgImageView.frame)+self.keyboard_top_padding, CGRectGetWidth(self.view.frame), CGRectGetHeight(keyboardBgImageView.frame)-self.keyboard_top_padding)];
     fingerSensorView.backgroundColor = [UIColor clearColor];
     
@@ -314,7 +301,6 @@
     
     */
     [self drawSettingPageView];
-    [self drawTablatureScrollView];
 }
 
 -(void) drawSettingPageView
@@ -729,7 +715,9 @@
         if(self.lowerOctaveNo > 1)
         {
             self.lowerOctaveNo--;
-            [self adjustMistBar];
+            self.leftMistBar.frame = CGRectMake(CGRectGetMinX(self.leftMistBar.frame), CGRectGetMinY(self.leftMistBar.frame), CGRectGetWidth(self.leftMistBar.frame)-viewW*0.129, CGRectGetHeight(self.leftMistBar.frame));
+            self.rightMistBar.frame = CGRectMake(CGRectGetMinX(self.rightMistBar.frame)-viewW*0.129, CGRectGetMinY(self.rightMistBar.frame), CGRectGetWidth(self.rightMistBar.frame)+viewW*0.129, CGRectGetHeight(self.rightMistBar.frame));
+            self.littleKeyboImageView.frame = CGRectMake(CGRectGetMinX(self.littleKeyboImageView.frame)-viewW*0.129, CGRectGetMinY(self.littleKeyboImageView.frame), CGRectGetWidth(self.littleKeyboImageView.frame), CGRectGetHeight(self.littleKeyboImageView.frame));
         }
     }
     else
@@ -737,7 +725,11 @@
         if(self.lowerOctaveNo < 6)
         {
             self.lowerOctaveNo++;
-            [self adjustMistBar];
+            self.leftMistBar.frame = CGRectMake(CGRectGetMinX(self.leftMistBar.frame), CGRectGetMinY(self.leftMistBar.frame), CGRectGetWidth(self.leftMistBar.frame)+viewW*0.129, CGRectGetHeight(self.leftMistBar.frame));
+            
+            self.rightMistBar.frame = CGRectMake(CGRectGetMinX(self.rightMistBar.frame)+viewW*0.129, CGRectGetMinY(self.rightMistBar.frame), CGRectGetWidth(self.rightMistBar.frame)-viewW*0.129, CGRectGetHeight(self.rightMistBar.frame));
+            
+            self.littleKeyboImageView.frame = CGRectMake(CGRectGetMinX(self.littleKeyboImageView.frame)+viewW*0.129, CGRectGetMinY(self.littleKeyboImageView.frame), CGRectGetWidth(self.littleKeyboImageView.frame), CGRectGetHeight(self.littleKeyboImageView.frame));
         }
     }
 }

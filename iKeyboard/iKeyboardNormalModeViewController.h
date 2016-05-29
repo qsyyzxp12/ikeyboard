@@ -14,8 +14,9 @@
 //UI
 @property UIView* settingPageView;
 @property UIView* plusPageView;
-@property UIImageView *wholeKeyboardImageView;
-@property UIImageView *frameImageView;
+@property UIImageView* wholeKeyboardImageView;
+@property UIImageView* frameImageView;
+@property UIImageView* littleKeyboImageView;
 @property UIImageView* instrumentImageView;
 @property UIImageView* tablatureImageView;
 @property UILabel* blueToothStatusLabel;
