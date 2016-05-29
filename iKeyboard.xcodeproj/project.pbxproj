@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C71909B81CFA86AE00EEDEC6 /* trashCanIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = C71909B61CFA86AE00EEDEC6 /* trashCanIcon.png */; };
+		C71909B91CFA86AE00EEDEC6 /* plusIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = C71909B71CFA86AE00EEDEC6 /* plusIcon.png */; };
 		C73982671CCF6D6D00F093E0 /* key_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = C73982631CCF6D6D00F093E0 /* key_highlight.png */; };
 		C73982681CCF6D6D00F093E0 /* wkey.png in Resources */ = {isa = PBXBuildFile; fileRef = C73982641CCF6D6D00F093E0 /* wkey.png */; };
 		C73982691CCF6D6D00F093E0 /* bkey.png in Resources */ = {isa = PBXBuildFile; fileRef = C73982651CCF6D6D00F093E0 /* bkey.png */; };
@@ -337,6 +339,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C71909B61CFA86AE00EEDEC6 /* trashCanIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trashCanIcon.png; sourceTree = "<group>"; };
+		C71909B71CFA86AE00EEDEC6 /* plusIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plusIcon.png; sourceTree = "<group>"; };
 		C73982631CCF6D6D00F093E0 /* key_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = key_highlight.png; sourceTree = "<group>"; };
 		C73982641CCF6D6D00F093E0 /* wkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wkey.png; sourceTree = "<group>"; };
 		C73982651CCF6D6D00F093E0 /* bkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bkey.png; sourceTree = "<group>"; };
@@ -1302,6 +1306,8 @@
 		C761C9F41CF8839200B39FF3 /* Menu_Select */ = {
 			isa = PBXGroup;
 			children = (
+				C71909B61CFA86AE00EEDEC6 /* trashCanIcon.png */,
+				C71909B71CFA86AE00EEDEC6 /* plusIcon.png */,
 				C761C9F51CF8839200B39FF3 /* Add_Sheet3.png */,
 				C761C9F61CF8839200B39FF3 /* Background1.png */,
 				C761C9F71CF8839200B39FF3 /* Bass1.png */,
@@ -1398,6 +1404,7 @@
 				C74DD0BB1CCC82AA006D5F4D /* string_D1.mp3 in Resources */,
 				C74DD03A1CCC6CF2006D5F4D /* guitar_D5#.mp3 in Resources */,
 				C761CA071CF8839200B39FF3 /* Background0.png in Resources */,
+				C71909B81CFA86AE00EEDEC6 /* trashCanIcon.png in Resources */,
 				C761CA311CF8839200B39FF3 /* Tutorial02.png in Resources */,
 				C74DCF591CCBE0C4006D5F4D /* piano_C1.mp3 in Resources */,
 				C74DCF851CCBE0C4006D5F4D /* piano_A5#.mp3 in Resources */,
@@ -1420,6 +1427,7 @@
 				C74DD0501CCC6CF2006D5F4D /* guitar_C7#.mp3 in Resources */,
 				C74DCF5F1CCBE0C4006D5F4D /* piano_G1#.mp3 in Resources */,
 				C74DCF8A1CCBE0C4006D5F4D /* piano_D5#.mp3 in Resources */,
+				C71909B91CFA86AE00EEDEC6 /* plusIcon.png in Resources */,
 				C74DD0BE1CCC82AA006D5F4D /* string_F1.mp3 in Resources */,
 				C74DD0D21CCC82AA006D5F4D /* string_D3#.mp3 in Resources */,
 				C761CA151CF8839200B39FF3 /* L56.png in Resources */,

@@ -26,6 +26,7 @@
     [super viewDidLoad];
   
     self.showingSettingPage = NO;
+    self.showingPlusPage = NO;
     self.keyBeingTappedFrameArray = [[NSMutableArray alloc] initWithObjects:NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), nil];
     self.keyBeingTappedIndexArray = malloc(sizeof(int)*4);
     bzero(self.keyBeingTappedIndexArray, sizeof(int)*4);
@@ -113,6 +114,7 @@
         self.keyboard_padding = 2;
         self.blackKeySize = CGSizeMake(28, 69);
         self.blackKeyOffsetVector = CGVectorMake(32, 20);
+        self.keyboardHeight = 160;
     }
     else if(IPhone6sPlus)
     {
@@ -311,10 +313,8 @@
     [self.view addSubview:fingerSensorView];
     
     */
-  //  [self drawInstrumentMenu];
     [self drawSettingPageView];
     [self drawTablatureScrollView];
-  //  [self drawTablatureMenu];
 }
 
 -(void) drawSettingPageView
@@ -383,6 +383,7 @@
         nameLabel.adjustsFontSizeToFitWidth = YES;
         [self.tablatureMenuScrollView addSubview:nameLabel];
     }
+    [self.tablatureMenuScrollView setUserInteractionEnabled:NO];
     [self.settingPageView addSubview:self.tablatureMenuScrollView];
     
     UIButton* lastSheetButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.tablatureMenuScrollView.frame), CGRectGetMinY(self.tablatureMenuScrollView.frame), CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.033, CGRectGetHeight(self.tablatureMenuScrollView.frame))];
@@ -394,6 +395,39 @@
     nextSheetButton.tag = 1;
     [nextSheetButton addTarget:self action:@selector(sheetNextOrLastButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.settingPageView addSubview:nextSheetButton];
+    
+    UIButton* trashCanButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.79, viewH*0.1, 30, 30)];
+    [trashCanButton setImage:[UIImage imageNamed:@"trashCanIcon.png"] forState:UIControlStateNormal];
+    [self.settingPageView addSubview:trashCanButton];
+    
+    UIButton* plusIconButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.86, viewH*0.1, 30, 30)];
+    [plusIconButton addTarget:self action:@selector(plusIconClicked) forControlEvents:UIControlEventTouchUpInside];
+    [plusIconButton setImage:[UIImage imageNamed:@"plusIcon.png"] forState:UIControlStateNormal];
+    [self.settingPageView addSubview:plusIconButton];
+    
+    [self drawPlusPage];
+}
+
+-(void)drawPlusPage
+{
+    self.plusPageView = [[UIView alloc] initWithFrame:self.view.frame];
+    UIImageView* BGImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Add_Sheet3.png"]];
+    BGImageView.frame = self.plusPageView.frame;
+    [self.plusPageView addSubview:BGImageView];
+    
+    UIButton* plusIconButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.855, viewH*0.127, viewW*0.03, viewH*0.05)];
+    [plusIconButton addTarget:self action:@selector(plusIconClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.plusPageView addSubview:plusIconButton];
+    
+    UITextField* sheetNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(viewW*0.615, viewH*0.67, viewW*0.231, viewH*0.07)];
+    sheetNameTextField.delegate = self;
+    sheetNameTextField.textAlignment = NSTextAlignmentCenter;
+    sheetNameTextField.textColor = [UIColor whiteColor];
+    [self.plusPageView addSubview:sheetNameTextField];
+    
+    UIButton* doneButton = [[UIButton alloc] initWithFrame: CGRectMake(viewW*0.68, viewH*0.8, viewW*0.1, viewW*0.043)];
+    [doneButton addTarget:self action:@selector(doneButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.plusPageView addSubview:doneButton];
 }
 
 -(void) adjustMistBar
@@ -426,6 +460,24 @@
 }
 
 #pragma mark - Actions
+
+-(void)doneButtonClicked
+{
+}
+
+-(void)plusIconClicked
+{
+    if(!self.showingPlusPage)
+    {
+        [self.view addSubview:self.plusPageView];
+        self.showingPlusPage = YES;
+    }
+    else
+    {
+        [self.plusPageView removeFromSuperview];
+        self.showingPlusPage = NO;
+    }
+}
 
 -(void)sheetNextOrLastButtonClicked:(UIButton*)sender
 {
@@ -626,10 +678,6 @@
 -(void)mistViewTapped
 {
     [self.mistView removeFromSuperview];
-    if([self.tablatureMenuScrollView isDescendantOfView:self.view])
-        [self.tablatureMenuScrollView removeFromSuperview];
-    if([self.instrumentMenuScrollView isDescendantOfView:self.view])
-        [self.instrumentMenuScrollView removeFromSuperview];
 }
 
 -(void) changeTablatureButtonClicked:(UIButton*) sender
@@ -705,6 +753,20 @@
         return  YES;
     
     return NO;
+}
+
+#pragma mark - UITextFieldDelegate
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.view.frame = CGRectMake(0, self.view.frame.origin.y-self.keyboardHeight, self.view.frame.size.width, self.view.frame.size.height);
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    self.view.frame = CGRectMake(0, self.view.frame.origin.y+self.keyboardHeight, self.view.frame.size.width, self.view.frame.size.height);
+    return YES;
 }
 
 #pragma mark - the others

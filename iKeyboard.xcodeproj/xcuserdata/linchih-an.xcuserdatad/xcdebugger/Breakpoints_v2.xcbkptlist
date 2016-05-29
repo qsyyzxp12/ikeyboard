@@ -6,15 +6,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iKeyboard/iKeyboardNormalModeViewController.m"
-            timestampString = "486146027.144078"
+            timestampString = "486185794.161964"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "632"
-            endingLineNumber = "632"
+            startingLineNumber = "680"
+            endingLineNumber = "680"
             landmarkName = "-mistViewTapped"
             landmarkType = "5">
          </BreakpointContent>

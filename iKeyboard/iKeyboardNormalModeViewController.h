@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVAudioPlayer.h>
 
-@interface iKeyboardNormalModeViewController : UIViewController<UIGestureRecognizerDelegate>
+@interface iKeyboardNormalModeViewController : UIViewController<UIGestureRecognizerDelegate, UITextFieldDelegate>
 
 //UI
 @property UIView* settingPageView;
+@property UIView* plusPageView;
 @property UIImageView *wholeKeyboardImageView;
 @property UIImageView *frameImageView;
 @property UIImageView* instrumentImageView;
@@ -41,6 +42,7 @@
 @property NSArray* tablatureFileNameArray;
 
 //Screen Size control
+@property int keyboardHeight;
 @property CGFloat screenHeight;
 @property int keyboard_top_padding;
 @property int keyboard_padding; //include left, right, button padding and the gap size between wkeys.
@@ -54,6 +56,7 @@
 @property UILongPressGestureRecognizer *tapGestureRecognizer2;
 @property UILongPressGestureRecognizer *tapGestureRecognizer3;
 @property BOOL showingSettingPage;
+@property BOOL showingPlusPage;
 @property int instrumentSelectedNo;
 @property int sheetSelectedNo;
 @end
