@@ -40,9 +40,9 @@
 
 //Name map
 @property NSArray* instrumentNameMap;
+@property NSMutableArray* sheetNameMap;
 @property NSArray* noteNameArray;
 @property NSArray* halfStepArray;
-@property NSArray* tablatureFileNameArray;
 
 //Screen Size control
 @property int keyboardHeight;
