@@ -330,10 +330,8 @@
     
     for(int i=0; i<[self.sheetNameMap count]; i++)
     {
-        UIButton* icon = [[UIButton alloc] init];
-        [icon setImage:[UIImage imageNamed:@"Sheets1.png"] forState:UIControlStateNormal];
+        UIImageView* icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Sheets1.png"]];
         icon.tag = i;
-        icon.adjustsImageWhenHighlighted = NO;
         int x = i - (int)[self.sheetNameMap count]/2;
         [icon setFrame:CGRectMake(CGRectGetWidth(self.tablatureMenuScrollView.frame)*(0.7+x*0.3), CGRectGetHeight(self.tablatureMenuScrollView.frame)*0.1, CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.2, self.tablatureMenuScrollView.frame.size.height*0.9)];
         [self.tablatureMenuScrollView addSubview:icon];
