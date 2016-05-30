@@ -33,6 +33,7 @@
     
     self.lowerOctaveNo = 3;
     self.sheetSelectedNo = 1;
+    self.sheetNo = 1;
     self.instrumentNo = 1;
     self.instrumentSelectedNo = 1;
     self.noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
@@ -195,21 +196,6 @@
     [self.rightMistBar addGestureRecognizer:tapGest];
     [self.view addSubview:self.rightMistBar];
 
-/*
-    //MistView
-    self.mistView = [[UIView alloc] initWithFrame:self.view.frame];
-    self.mistView.alpha = 0.8;
-    self.mistView.backgroundColor = [UIColor grayColor];
-    UITapGestureRecognizer* tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mistViewTapped)];
-    tapGest.numberOfTapsRequired = 1;
-    tapGest.numberOfTouchesRequired = 1;
-    [self.mistView addGestureRecognizer:tapGest];
-    
-    //Keyboard backgorund
-    UIImageView* keyboardBgImageView = [[UIImageView alloc] init];
-    keyboardBgImageView.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame)-self.screenHeight/2, self.view.frame.size.width, self.screenHeight/2);
-    [self.view addSubview:keyboardBgImageView];
- */
     CGFloat oneKeyWidth = (viewW - self.keyboard_left_padding - self.keyboard_right_padding - self.keyboard_padding*13)/14;
     CGFloat keyX = self.keyboard_left_padding;
     CGFloat keyY = viewH*0.72;
@@ -223,8 +209,6 @@
         UIView* whiteKeyView = [[UIImageView alloc] init];
         whiteKeyView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
         [self.view addSubview:whiteKeyView];
-    //    whiteKeyView.backgroundColor = [UIColor redColor];
-    //    whiteKeyView.alpha = 0.5;
         keyX += self.keyboard_padding + oneKeyWidth;
         [keyViewArray addObject:whiteKeyView];
     }
@@ -252,8 +236,6 @@
         
         blackKeyView.frame = CGRectMake(keyX, keyY, self.blackKeySize.width, self.blackKeySize.height);
         keyX += self.blackKeySize.width;
-     //   blackKeyView.backgroundColor = [UIColor blueColor];
-     //   blackKeyView.alpha = 0.5;
         [self.view addSubview:blackKeyView];
     
         [keyViewArray addObject:blackKeyView];
@@ -383,6 +365,10 @@
     [plusIconButton setImage:[UIImage imageNamed:@"plusIcon.png"] forState:UIControlStateNormal];
     [self.settingPageView addSubview:plusIconButton];
     
+    UIButton* doneButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.45, viewH*0.89, viewW*0.1, viewH*0.08)];
+    [doneButton addTarget:self action:@selector(doneButtonInSettingPageClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.settingPageView addSubview:doneButton];
+    
     [self drawPlusPage];
 }
 
@@ -404,15 +390,8 @@
     [self.plusPageView addSubview:sheetNameTextField];
     
     UIButton* doneButton = [[UIButton alloc] initWithFrame: CGRectMake(viewW*0.68, viewH*0.8, viewW*0.1, viewW*0.043)];
-    [doneButton addTarget:self action:@selector(doneButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton addTarget:self action:@selector(doneButtonInPlusPageClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.plusPageView addSubview:doneButton];
-}
-
--(void) adjustMistBar
-{
-    CGFloat octaveWidth = self.view.frame.size.width/7;
-    self.leftMistBar.frame = CGRectMake(0, CGRectGetMinY(self.leftMistBar.frame), octaveWidth*(self.lowerOctaveNo-1), CGRectGetHeight(self.leftMistBar.frame));
-    self.rightMistBar.frame = CGRectMake(CGRectGetMaxX(self.leftMistBar.frame)+octaveWidth*2, CGRectGetMinY(self.rightMistBar.frame), octaveWidth*(6-self.lowerOctaveNo), CGRectGetHeight(self.rightMistBar.frame));
 }
 
 -(void) drawTablatureScrollView
@@ -439,8 +418,15 @@
 
 #pragma mark - Actions
 
--(void)doneButtonClicked
+-(void)doneButtonInPlusPageClicked
 {
+}
+
+-(void)doneButtonInSettingPageClicked
+{
+    self.sheetNo = self.sheetSelectedNo;
+    self.instrumentNo = self.instrumentSelectedNo;
+    [self.settingPageView removeFromSuperview];
 }
 
 -(void)plusIconClicked
@@ -469,7 +455,7 @@
     }
     else
     {
-        if(self.sheetSelectedNo < [self.instrumentNameMap count]-1)
+        if(self.sheetSelectedNo < 3-1)
         {
             self.tablatureMenuScrollView.contentOffset = CGPointMake(self.tablatureMenuScrollView.contentOffset.x+CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.3, 0);
             self.sheetSelectedNo++;
@@ -489,7 +475,7 @@
     }
     else
     {
-        if(self.instrumentSelectedNo < 3-1)
+        if(self.instrumentSelectedNo < [self.instrumentNameMap count]-1)
         {
             self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.31, 0);
             self.instrumentSelectedNo++;
@@ -506,6 +492,14 @@
     }
     else
     {
+        
+        self.tablatureMenuScrollView.contentOffset = CGPointMake(self.tablatureMenuScrollView.contentOffset.x+CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.3*(self.sheetNo-self.sheetSelectedNo), 0);
+        self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.31*(self.instrumentNo-self.instrumentSelectedNo), 0);
+        
+        
+        self.sheetSelectedNo = self.sheetNo;
+        self.instrumentSelectedNo = self.instrumentNo;
+        
         [self.settingPageView removeFromSuperview];
         self.showingSettingPage = NO;
     }

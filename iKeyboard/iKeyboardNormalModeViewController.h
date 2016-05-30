@@ -36,6 +36,7 @@
 //No.
 @property int instrumentNo;
 @property int lowerOctaveNo;
+@property int sheetNo;
 
 //Name map
 @property NSArray* instrumentNameMap;
