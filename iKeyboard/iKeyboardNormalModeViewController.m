@@ -39,7 +39,7 @@
     self.sheetNameMap = [[NSMutableArray alloc] initWithObjects:@"Moon Sonata", @"CANON in D", @"Fur Elise", nil];
     self.noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
     self.halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
-    self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"bass", @"piano", @"guitar", @"Saxophone", nil];
+    self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"bass", @"piano", @"guitar", @"drums", nil];
     self.screenHeight = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height;
     
     NSMutableArray* highlightedKeyImageViewArray = [[NSMutableArray alloc] init];
@@ -115,10 +115,11 @@
     }
     else if(IPhone5)
     {
-        self.keyboard_left_padding = 40;
+        self.keyboard_left_padding = 10;
+        self.keyboard_right_padding = 13;
         self.keyboard_padding = 1;
-        self.blackKeySize = CGSizeMake(24, 56);
-        self.blackKeyOffsetVector = CGVectorMake(35, 22);
+        self.blackKeySize = CGSizeMake(24, 45);
+        self.blackKeyOffsetVector = CGVectorMake(22, 22);
     }
     else if(IPhone6)
     {
@@ -208,6 +209,8 @@
     {
         UIView* whiteKeyView = [[UIImageView alloc] init];
         whiteKeyView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
+     //   whiteKeyView.backgroundColor = [UIColor redColor];
+     //   whiteKeyView.alpha = 0.5;
         [self.view addSubview:whiteKeyView];
         keyX += self.keyboard_padding + oneKeyWidth;
         [keyViewArray addObject:whiteKeyView];
@@ -218,6 +221,8 @@
     for(int i=0; i<10; i++)
     {
         UIView* blackKeyView = [[UIView alloc] init];
+     //   blackKeyView.backgroundColor = [UIColor blueColor];
+     //   blackKeyView.alpha = 0.5;
         switch (i)
         {
             case 0:
@@ -299,15 +304,16 @@
     for(int i=0; i<[self.instrumentNameMap count]; i++)
     {
         UIButton* instrumentButton = [[UIButton alloc] init];
-        NSString* imageName = [NSString stringWithFormat:@"%@1.png", self.instrumentNameMap[i]];
+        NSString* imageName = [NSString stringWithFormat:@"%@.png", self.instrumentNameMap[i]];
         [instrumentButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
         instrumentButton.tag = i;
         instrumentButton.adjustsImageWhenHighlighted = NO;
-        [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*(0.37+i*0.31), CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.2, CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.26, self.instrumentMenuScrollView.frame.size.height*0.8)];
+        [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*(0.39+i*0.3), CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.2
+                                              , CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.22, self.instrumentMenuScrollView.frame.size.height*0.7)];
         [self.instrumentMenuScrollView addSubview:instrumentButton];
     }
     [self.instrumentMenuScrollView setUserInteractionEnabled:NO];
-    self.instrumentMenuScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*(0.74+0.31*[self.instrumentNameMap count]-0.05), CGRectGetHeight(self.instrumentMenuScrollView.frame));
+    self.instrumentMenuScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*(0.78+0.3*[self.instrumentNameMap count]-0.08), CGRectGetHeight(self.instrumentMenuScrollView.frame));
     
     self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.31, 0);
     [self.settingPageView addSubview:self.instrumentMenuScrollView];
@@ -381,7 +387,7 @@
     BGImageView.frame = self.plusPageView.frame;
     [self.plusPageView addSubview:BGImageView];
     
-    UIButton* plusIconButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.855, viewH*0.127, viewW*0.03, viewH*0.05)];
+    UIButton* plusIconButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.86, viewH*0.1, 30, 30)];
     [plusIconButton addTarget:self action:@selector(plusIconClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.plusPageView addSubview:plusIconButton];
     
@@ -398,7 +404,7 @@
 
 -(void) drawTablatureScrollView
 {
-    self.tablatureScrollView = [[UIScrollView alloc] initWithFrame: CGRectMake(CGRectGetWidth(self.view.frame)*0.02, self.navigationController.navigationBar.frame.size.height, CGRectGetWidth(self.view.frame)*0.962, CGRectGetHeight(self.view.frame)*0.47)];
+    self.tablatureScrollView = [[UIScrollView alloc] initWithFrame: CGRectMake(viewW*0.02, viewH*0.085, viewW*0.962, viewH*0.47)];
     [self.view addSubview:self.tablatureScrollView];
  
     self.tablatureImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CANON in D.jpg"]];
@@ -442,10 +448,10 @@
     
     if(self.instrumentNo != self.instrumentSelectedNo)
     {
-    //    [self.view addSubview:self.mistView];
-      //  [self.view addSubview:self.spinner];
+        [self.view addSubview:self.mistView];
+        [self.view addSubview:self.spinner];
         self.instrumentNo = self.instrumentSelectedNo;
-  //      [NSThread detachNewThreadSelector:@selector(AVAudioPlayerInit) toTarget:self withObject:nil];
+        [NSThread detachNewThreadSelector:@selector(AVAudioPlayerInit) toTarget:self withObject:nil];
     }
     
     [self.settingPageView removeFromSuperview];
@@ -558,7 +564,6 @@
       //  NSLog(@"tapped end!");
         if(![self.keyBeingTappedFrameArray[gestNo] isEqualToString:NSStringFromCGRect(CGRectZero)])
         {
-           // ((UIView*)(self.keyImageViewArray[self.keyBeingTappedIndexArray[gestNo]])).highlighted = NO;
             [self.highlightedKeyImageViewArray[self.keyBeingTappedIndexArray[gestNo]] removeFromSuperview];
             [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:self.keyBeingTappedIndexArray[gestNo]]];
     
@@ -573,7 +578,6 @@
             CGRect keyBeingTappedFrame = CGRectFromString(self.keyBeingTappedFrameArray[gestNo]);
             if(!CGRectContainsPoint(keyBeingTappedFrame, point))
             {
-              //  ((UIImageView*)(self.keyImageViewArray[self.keyBeingTappedIndexArray[gestNo]])).highlighted = NO;
                 [self.highlightedKeyImageViewArray[self.keyBeingTappedIndexArray[gestNo]] removeFromSuperview];
                 [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:self.keyBeingTappedIndexArray[gestNo]]];
                 self.keyBeingTappedFrameArray[gestNo] = NSStringFromCGRect(CGRectZero);

@@ -29,7 +29,7 @@
     
     UILabel* textLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0.09, CGRectGetHeight(self.view.frame)*0.47, CGRectGetWidth(iKeyBoConnectButton.frame)*0.7, CGRectGetHeight(self.view.frame)*0.18)];
     textLabel.text = @"Don't have iKeybo?";
-    textLabel.font = [textLabel.font fontWithSize:25];
+    textLabel.adjustsFontSizeToFitWidth = YES;
     textLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:textLabel];
     
@@ -42,6 +42,7 @@
     UIButton* backButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0.455, CGRectGetHeight(self.view.frame)*0.9, CGRectGetWidth(self.view.frame)*0.09, CGRectGetHeight(self.view.frame)*0.06)];
     [backButton addTarget:self action:@selector(backButtonClicked) forControlEvents:UIControlEventTouchUpInside];
   //  [backButton setBackgroundColor:[UIColor redColor]];
+  //  backButton.alpha = 0.5;
     [self.view addSubview:backButton];
 }
 

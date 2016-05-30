@@ -36,6 +36,10 @@
 		C73A5D931CFC7253002D691A /* CANON in D.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C73A5D901CFC7253002D691A /* CANON in D.jpg */; };
 		C73A5D941CFC7253002D691A /* Fur Elise.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C73A5D911CFC7253002D691A /* Fur Elise.jpg */; };
 		C73A5D951CFC7253002D691A /* Moon Sonata.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C73A5D921CFC7253002D691A /* Moon Sonata.jpg */; };
+		C73A5D9A1CFC820E002D691A /* bass.png in Resources */ = {isa = PBXBuildFile; fileRef = C73A5D961CFC820E002D691A /* bass.png */; };
+		C73A5D9B1CFC820E002D691A /* drums.png in Resources */ = {isa = PBXBuildFile; fileRef = C73A5D971CFC820E002D691A /* drums.png */; };
+		C73A5D9C1CFC820E002D691A /* guitar.png in Resources */ = {isa = PBXBuildFile; fileRef = C73A5D981CFC820E002D691A /* guitar.png */; };
+		C73A5D9D1CFC820E002D691A /* piano.png in Resources */ = {isa = PBXBuildFile; fileRef = C73A5D991CFC820E002D691A /* piano.png */; };
 		C74B81171CBE335C005307FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B81161CBE335C005307FF /* main.m */; };
 		C74B811A1CBE335C005307FF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B81191CBE335C005307FF /* AppDelegate.m */; };
 		C74B81201CBE335C005307FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74B811E1CBE335C005307FF /* Main.storyboard */; };
@@ -314,9 +318,6 @@
 		C761CA261CF8839200B39FF3 /* Sheets-1.png in Resources */ = {isa = PBXBuildFile; fileRef = C761C9F31CF8839200B39FF3 /* Sheets-1.png */; };
 		C761CA271CF8839200B39FF3 /* Add_Sheet3.png in Resources */ = {isa = PBXBuildFile; fileRef = C761C9F51CF8839200B39FF3 /* Add_Sheet3.png */; };
 		C761CA281CF8839200B39FF3 /* Background1.png in Resources */ = {isa = PBXBuildFile; fileRef = C761C9F61CF8839200B39FF3 /* Background1.png */; };
-		C761CA291CF8839200B39FF3 /* bass1.png in Resources */ = {isa = PBXBuildFile; fileRef = C761C9F71CF8839200B39FF3 /* bass1.png */; };
-		C761CA2A1CF8839200B39FF3 /* guitar1.png in Resources */ = {isa = PBXBuildFile; fileRef = C761C9F81CF8839200B39FF3 /* guitar1.png */; };
-		C761CA2B1CF8839200B39FF3 /* piano1.png in Resources */ = {isa = PBXBuildFile; fileRef = C761C9F91CF8839200B39FF3 /* piano1.png */; };
 		C761CA2C1CF8839200B39FF3 /* Saxophone1.png in Resources */ = {isa = PBXBuildFile; fileRef = C761C9FA1CF8839200B39FF3 /* Saxophone1.png */; };
 		C761CA2D1CF8839200B39FF3 /* Sheets1.png in Resources */ = {isa = PBXBuildFile; fileRef = C761C9FB1CF8839200B39FF3 /* Sheets1.png */; };
 		C761CA2E1CF8839200B39FF3 /* Sheets_delete2.png in Resources */ = {isa = PBXBuildFile; fileRef = C761C9FC1CF8839200B39FF3 /* Sheets_delete2.png */; };
@@ -355,6 +356,10 @@
 		C73A5D901CFC7253002D691A /* CANON in D.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "CANON in D.jpg"; sourceTree = "<group>"; };
 		C73A5D911CFC7253002D691A /* Fur Elise.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Fur Elise.jpg"; sourceTree = "<group>"; };
 		C73A5D921CFC7253002D691A /* Moon Sonata.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Moon Sonata.jpg"; sourceTree = "<group>"; };
+		C73A5D961CFC820E002D691A /* bass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bass.png; sourceTree = "<group>"; };
+		C73A5D971CFC820E002D691A /* drums.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drums.png; sourceTree = "<group>"; };
+		C73A5D981CFC820E002D691A /* guitar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guitar.png; sourceTree = "<group>"; };
+		C73A5D991CFC820E002D691A /* piano.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piano.png; sourceTree = "<group>"; };
 		C74B81121CBE335B005307FF /* iKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C74B81161CBE335C005307FF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C74B81181CBE335C005307FF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -638,9 +643,6 @@
 		C761C9F31CF8839200B39FF3 /* Sheets-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sheets-1.png"; sourceTree = "<group>"; };
 		C761C9F51CF8839200B39FF3 /* Add_Sheet3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Add_Sheet3.png; sourceTree = "<group>"; };
 		C761C9F61CF8839200B39FF3 /* Background1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background1.png; sourceTree = "<group>"; };
-		C761C9F71CF8839200B39FF3 /* bass1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bass1.png; sourceTree = "<group>"; };
-		C761C9F81CF8839200B39FF3 /* guitar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guitar1.png; sourceTree = "<group>"; };
-		C761C9F91CF8839200B39FF3 /* piano1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piano1.png; sourceTree = "<group>"; };
 		C761C9FA1CF8839200B39FF3 /* Saxophone1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Saxophone1.png; sourceTree = "<group>"; };
 		C761C9FB1CF8839200B39FF3 /* Sheets1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sheets1.png; sourceTree = "<group>"; };
 		C761C9FC1CF8839200B39FF3 /* Sheets_delete2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sheets_delete2.png; sourceTree = "<group>"; };
@@ -1251,13 +1253,14 @@
 		C761C9F41CF8839200B39FF3 /* Menu_Select */ = {
 			isa = PBXGroup;
 			children = (
+				C73A5D961CFC820E002D691A /* bass.png */,
+				C73A5D971CFC820E002D691A /* drums.png */,
+				C73A5D981CFC820E002D691A /* guitar.png */,
+				C73A5D991CFC820E002D691A /* piano.png */,
 				C71909B61CFA86AE00EEDEC6 /* trashCanIcon.png */,
 				C71909B71CFA86AE00EEDEC6 /* plusIcon.png */,
 				C761C9F51CF8839200B39FF3 /* Add_Sheet3.png */,
 				C761C9F61CF8839200B39FF3 /* Background1.png */,
-				C761C9F71CF8839200B39FF3 /* bass1.png */,
-				C761C9F81CF8839200B39FF3 /* guitar1.png */,
-				C761C9F91CF8839200B39FF3 /* piano1.png */,
 				C761C9FA1CF8839200B39FF3 /* Saxophone1.png */,
 				C761C9FB1CF8839200B39FF3 /* Sheets1.png */,
 				C761C9FC1CF8839200B39FF3 /* Sheets_delete2.png */,
@@ -1380,10 +1383,12 @@
 				C74DD0331CCC6CF2006D5F4D /* guitar_G4#.mp3 in Resources */,
 				C74DD0D61CCC82AA006D5F4D /* string_F3.mp3 in Resources */,
 				C74DCF921CCBE0C4006D5F4D /* piano_A6.mp3 in Resources */,
+				C73A5D9B1CFC820E002D691A /* drums.png in Resources */,
 				C74DCF701CCBE0C4006D5F4D /* piano_C3#.mp3 in Resources */,
 				C74DD0161CCC6CF2006D5F4D /* guitar_D2#.mp3 in Resources */,
 				C74DD0C41CCC82AA006D5F4D /* string_C2#.mp3 in Resources */,
 				C761CA2E1CF8839200B39FF3 /* Sheets_delete2.png in Resources */,
+				C73A5D9D1CFC820E002D691A /* piano.png in Resources */,
 				C74DD0CC1CCC82AA006D5F4D /* string_G2.mp3 in Resources */,
 				C74DD0121CCC6CF2006D5F4D /* guitar_A2.mp3 in Resources */,
 				C74DCF9D1CCBE0C4006D5F4D /* piano_A7#.mp3 in Resources */,
@@ -1420,7 +1425,6 @@
 				C74DD0D71CCC82AA006D5F4D /* string_G3#.mp3 in Resources */,
 				C74DD0561CCC6CF2006D5F4D /* guitar_F7.mp3 in Resources */,
 				C74DCFA41CCBE0C4006D5F4D /* piano_E7.mp3 in Resources */,
-				C761CA291CF8839200B39FF3 /* bass1.png in Resources */,
 				C761CA271CF8839200B39FF3 /* Add_Sheet3.png in Resources */,
 				C74DD0511CCC6CF2006D5F4D /* guitar_C7.mp3 in Resources */,
 				C71909D61CFB5D7F00EEDEC6 /* key19_highlight.png in Resources */,
@@ -1525,7 +1529,6 @@
 				C74DCF831CCBE0C4006D5F4D /* piano_G4#.mp3 in Resources */,
 				C74DD01E1CCC6CF2006D5F4D /* guitar_A3.mp3 in Resources */,
 				C74DD0051CCC6CF2006D5F4D /* guitar_A1#.mp3 in Resources */,
-				C761CA2A1CF8839200B39FF3 /* guitar1.png in Resources */,
 				C74DD0081CCC6CF2006D5F4D /* guitar_C1#.mp3 in Resources */,
 				C761CA281CF8839200B39FF3 /* Background1.png in Resources */,
 				C74DD01F1CCC6CF2006D5F4D /* guitar_B3.mp3 in Resources */,
@@ -1543,6 +1546,7 @@
 				C74DCF7F1CCBE0C4006D5F4D /* piano_D4.mp3 in Resources */,
 				C74DD04B1CCC6CF2006D5F4D /* guitar_G6#.mp3 in Resources */,
 				C74DD02E1CCC6CF2006D5F4D /* guitar_D4#.mp3 in Resources */,
+				C73A5D9C1CFC820E002D691A /* guitar.png in Resources */,
 				C74DCF811CCBE0C4006D5F4D /* piano_F4#.mp3 in Resources */,
 				C74DD0D11CCC82AA006D5F4D /* string_C3.mp3 in Resources */,
 				C74DD0F71CCC82AA006D5F4D /* string_D6.mp3 in Resources */,
@@ -1581,12 +1585,12 @@
 				C74DCF881CCBE0C4006D5F4D /* piano_C5#.mp3 in Resources */,
 				C74DD01C1CCC6CF2006D5F4D /* guitar_G2.mp3 in Resources */,
 				C74DCF561CCBE0C4006D5F4D /* piano_A1.mp3 in Resources */,
+				C73A5D9A1CFC820E002D691A /* bass.png in Resources */,
 				C74DD0551CCC6CF2006D5F4D /* guitar_F7#.mp3 in Resources */,
 				C74DD0241CCC6CF2006D5F4D /* guitar_E3.mp3 in Resources */,
 				C74DD0CE1CCC82AA006D5F4D /* string_A3.mp3 in Resources */,
 				C74DD0421CCC6CF2006D5F4D /* guitar_A6.mp3 in Resources */,
 				C761CA011CF8839200B39FF3 /* Connect1.png in Resources */,
-				C761CA2B1CF8839200B39FF3 /* piano1.png in Resources */,
 				C74DD0271CCC6CF2006D5F4D /* guitar_G3#.mp3 in Resources */,
 				C74DD0351CCC6CF2006D5F4D /* guitar_A5#.mp3 in Resources */,
 				C74DCFA51CCBE0C4006D5F4D /* piano_F7#.mp3 in Resources */,
