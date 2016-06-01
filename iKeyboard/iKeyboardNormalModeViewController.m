@@ -49,6 +49,7 @@
     self.sheetNameMap = [NSMutableArray arrayWithContentsOfFile:sheetPlistPath];
     
  //   self.sheetNameMap = [[NSMutableArray alloc] initWithObjects:@"Moon Sonata", @"CANON in D", @"Fur Elise", nil];
+    self.sheetButtonArray = [[NSMutableArray alloc] init];
     self.noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
     self.halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
     self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"bass", @"piano", @"guitar", @"drums", nil];
@@ -347,11 +348,15 @@
     
     for(int i=0; i<[self.sheetNameMap count]; i++)
     {
-        UIImageView* icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Sheets1.png"]];
+        UIButton* icon = [[UIButton alloc] init];
+        [icon setImage:[UIImage imageNamed:@"Sheets1.png"] forState:UIControlStateNormal];
+        [icon setUserInteractionEnabled:NO];
+     //   UIImageView* icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Sheets1.png"]];
         icon.tag = i;
         int x = i - (int)[self.sheetNameMap count]/2;
         [icon setFrame:CGRectMake(CGRectGetWidth(self.tablatureMenuScrollView.frame)*(0.7+x*0.3), CGRectGetHeight(self.tablatureMenuScrollView.frame)*0.1, CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.2, self.tablatureMenuScrollView.frame.size.height*0.9)];
         [self.tablatureMenuScrollView addSubview:icon];
+        [self.sheetButtonArray addObject:icon];
         
         UILabel* nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(icon.frame), CGRectGetMaxY(icon.frame)-CGRectGetHeight(icon.frame)*0.3, CGRectGetWidth(icon.frame), CGRectGetHeight(icon.frame)*0.2)];
         nameLabel.text = [self.sheetNameMap objectAtIndex:i];
@@ -376,6 +381,7 @@
     [self.settingPageView addSubview:nextSheetButton];
     
     UIButton* trashCanButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.79, viewH*0.1, 30, 30)];
+    [trashCanButton addTarget:self action:@selector(trashCanButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [trashCanButton setImage:[UIImage imageNamed:@"trashCanIcon.png"] forState:UIControlStateNormal];
     [self.settingPageView addSubview:trashCanButton];
     
@@ -460,6 +466,15 @@
     
     [self.settingPageView removeFromSuperview];
     self.showingSettingPage = NO;
+}
+
+-(void)trashCanButtonClicked
+{
+    for(UIButton* sheetIcon in self.sheetButtonArray)
+    {
+        [sheetIcon setImage:[UIImage imageNamed:@"Sheets_delete2.png"] forState:UIControlStateNormal];
+        [sheetIcon setUserInteractionEnabled:YES];
+    }
 }
 
 -(void)plusIconClicked

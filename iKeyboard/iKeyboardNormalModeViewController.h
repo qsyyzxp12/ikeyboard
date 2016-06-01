@@ -31,6 +31,7 @@
 @property NSArray* keyViewArray;
 @property NSMutableArray* resetArray;
 @property NSArray* highlightedKeyImageViewArray;
+@property NSMutableArray* sheetButtonArray;
 
 //No.
 @property int instrumentNo;
