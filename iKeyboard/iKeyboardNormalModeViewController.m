@@ -28,6 +28,13 @@
   
     self.showingSettingPage = NO;
     self.showingPlusPage = NO;
+    
+    self.photoArray = [[NSMutableArray alloc] init];
+    
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.delegate = self;
+  //  self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
     self.keyBeingTappedFrameArray = [[NSMutableArray alloc] initWithObjects:NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), nil];
     self.keyBeingTappedIndexArray = malloc(sizeof(int)*4);
     bzero(self.keyBeingTappedIndexArray, sizeof(int)*4);
@@ -37,7 +44,11 @@
     self.sheetNo = 1;
     self.instrumentNo = 1;
     self.instrumentSelectedNo = 1;
-    self.sheetNameMap = [[NSMutableArray alloc] initWithObjects:@"Moon Sonata", @"CANON in D", @"Fur Elise", nil];
+    
+    NSString* sheetPlistPath = [NSString stringWithFormat:@"%@/Documents/sheets.plist", NSHomeDirectory()];
+    self.sheetNameMap = [NSMutableArray arrayWithContentsOfFile:sheetPlistPath];
+    
+ //   self.sheetNameMap = [[NSMutableArray alloc] initWithObjects:@"Moon Sonata", @"CANON in D", @"Fur Elise", nil];
     self.noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
     self.halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
     self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"bass", @"piano", @"guitar", @"drums", nil];
@@ -457,12 +468,12 @@
     {
         [self.view addSubview:self.mistView];
         [self.view addSubview:self.plusPageView];
-        
+     
         ALAssetsGroupEnumerationResultsBlock resultBlock = ^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if (result && [[result valueForProperty:ALAssetPropertyType] isEqual:ALAssetTypePhoto])
             {
                 UIImage* image = [UIImage imageWithCGImage:result.defaultRepresentation.fullResolutionImage];
-
+                [self.photoArray addObject:image];
             }
         };
         
@@ -472,10 +483,6 @@
                 [group enumerateAssetsWithOptions:0
                                        usingBlock:nil];
                 [group enumerateAssetsUsingBlock:resultBlock];
-            }
-            else if (self.photoGroupArray.count > 0)
-            {
-                NSLog(@"xxx");
             }
         };
         
@@ -488,7 +495,7 @@
         [self.sharedAssetsLibrary enumerateGroupsWithTypes:type
                                                 usingBlock:resultsBlock
                                               failureBlock:failureBlock];
-    
+        
         self.showingPlusPage = YES;
     }
     else
@@ -772,9 +779,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    UIImage * image=[info objectForKey:UIImagePickerControllerOriginalImage];
-    _imageView.image=image;
-    
+  //  UIImage * image=[info objectForKey:UIImagePickerControllerOriginalImage];
 }
 
 #pragma mark - the others

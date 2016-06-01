@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVAudioPlayer.h>
-#import "iKeyboardImagePickerController.h"
 
 @interface iKeyboardNormalModeViewController : UIViewController<UIGestureRecognizerDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -64,6 +63,5 @@
 @property int sheetSelectedNo;
 
 @property UIImagePickerController* imagePicker;
-@property UIImageView* imageView;
-@property NSMutableArray* photoGroupArray;
+@property NSMutableArray* photoArray;
 @end

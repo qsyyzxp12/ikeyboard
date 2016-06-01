@@ -17,6 +17,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    NSString* src = [[NSBundle mainBundle] pathForResource:@"sheets" ofType:@"plist"];
+    NSFileManager* fm = [[NSFileManager alloc] init];
+    NSString* sheetPlistPath = [NSString stringWithFormat:@"%@/Documents/sheets.plist", NSHomeDirectory()];
+    if(![fm fileExistsAtPath:sheetPlistPath])
+        [fm copyItemAtPath:src toPath:sheetPlistPath error:nil];
+    
     return YES;
 }
 
