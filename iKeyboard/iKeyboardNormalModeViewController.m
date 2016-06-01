@@ -307,14 +307,14 @@
         [instrumentButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
         instrumentButton.tag = i;
         instrumentButton.adjustsImageWhenHighlighted = NO;
-        [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*(0.39+i*0.3), CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.2
-                                              , CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.22, self.instrumentMenuScrollView.frame.size.height*0.7)];
+        [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*(0.36+i*0.32), CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.1
+                                              , CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.28, self.instrumentMenuScrollView.frame.size.height*0.9)];
         [self.instrumentMenuScrollView addSubview:instrumentButton];
     }
     [self.instrumentMenuScrollView setUserInteractionEnabled:NO];
-    self.instrumentMenuScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*(0.78+0.3*[self.instrumentNameMap count]-0.08), CGRectGetHeight(self.instrumentMenuScrollView.frame));
+    self.instrumentMenuScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*(0.72+0.32*[self.instrumentNameMap count]-0.04), CGRectGetHeight(self.instrumentMenuScrollView.frame));
     
-    self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.31, 0);
+    self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.32, 0);
     [self.settingPageView addSubview:self.instrumentMenuScrollView];
     
     UIButton* lastInstrumentButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.instrumentMenuScrollView.frame), CGRectGetMinY(self.instrumentMenuScrollView.frame), CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.033, CGRectGetHeight(self.instrumentMenuScrollView.frame))];
@@ -492,7 +492,7 @@
     {
         if(self.instrumentSelectedNo > 0)
         {
-            self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x-CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.31, 0);
+            self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x-CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.32, 0);
             self.instrumentSelectedNo--;
         }
     }
@@ -500,7 +500,7 @@
     {
         if(self.instrumentSelectedNo < [self.instrumentNameMap count]-1)
         {
-            self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.31, 0);
+            self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.32, 0);
             self.instrumentSelectedNo++;
         }
     }
