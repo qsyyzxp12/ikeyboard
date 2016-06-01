@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVAudioPlayer.h>
 
-@interface iKeyboardNormalModeViewController : UIViewController<UIGestureRecognizerDelegate, UITextFieldDelegate>
+@interface iKeyboardNormalModeViewController : UIViewController<UIGestureRecognizerDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate>
 
 //UI
 @property UIView* settingPageView;
@@ -19,7 +19,6 @@
 @property UIImageView* littleKeyboImageView;
 @property UIImageView* instrumentImageView;
 @property UIImageView* tablatureImageView;
-@property UILabel* blueToothStatusLabel;
 @property UIScrollView* instrumentMenuScrollView;
 @property UIScrollView* tablatureMenuScrollView;
 @property UIScrollView* tablatureScrollView;
@@ -46,7 +45,6 @@
 
 //Screen Size control
 @property int keyboardHeight;
-@property CGFloat screenHeight;
 @property int keyboard_left_padding;
 @property int keyboard_right_padding;
 @property int keyboard_padding; //include left, right, button padding and the gap size between wkeys.

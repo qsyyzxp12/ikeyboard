@@ -40,7 +40,6 @@
     self.noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
     self.halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
     self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"bass", @"piano", @"guitar", @"drums", nil];
-    self.screenHeight = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height;
     
     NSMutableArray* highlightedKeyImageViewArray = [[NSMutableArray alloc] init];
     for(int i=0; i<24; i++)
@@ -389,6 +388,7 @@
     
     UIButton* plusIconButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.86, viewH*0.1, 30, 30)];
     [plusIconButton addTarget:self action:@selector(plusIconClicked) forControlEvents:UIControlEventTouchUpInside];
+    [plusIconButton setImage:[UIImage imageNamed:@"plusIcon.png"] forState:UIControlStateNormal];
     [self.plusPageView addSubview:plusIconButton];
     
     UITextField* sheetNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(viewW*0.615, viewH*0.67, viewW*0.231, viewH*0.07)];
@@ -415,14 +415,6 @@
     [self.tablatureScrollView addSubview:self.tablatureImageView];
     
     self.tablatureScrollView.contentSize = self.tablatureImageView.frame.size;
-}
-
--(void) drawTablatureMenu
-{
-}
-
--(void) drawInstrumentMenu
-{
 }
 
 #pragma mark - Actions
@@ -462,11 +454,13 @@
 {
     if(!self.showingPlusPage)
     {
+        [self.view addSubview:self.mistView];
         [self.view addSubview:self.plusPageView];
         self.showingPlusPage = YES;
     }
     else
     {
+        [self.mistView removeFromSuperview];
         [self.plusPageView removeFromSuperview];
         self.showingPlusPage = NO;
     }
@@ -675,23 +669,6 @@
         player.currentTime = 0;
         [player prepareToPlay];
     }
-}
-
--(void)mistViewTapped
-{
-    [self.mistView removeFromSuperview];
-}
-
--(void)tablatureButtonClicked
-{
-    [self.view addSubview:self.mistView];
-    [self.view addSubview:self.tablatureMenuScrollView];
-}
-
--(void)instrumentButtonClicked
-{
-    [self.view addSubview:self.mistView];
-    [self.view addSubview:self.instrumentMenuScrollView];
 }
 
 - (void) arrowImageViewClicked:(UITapGestureRecognizer*) sender
