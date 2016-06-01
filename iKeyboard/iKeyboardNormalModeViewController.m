@@ -29,8 +29,6 @@
     self.showingSettingPage = NO;
     self.showingPlusPage = NO;
     
-    self.photoArray = [[NSMutableArray alloc] init];
-    
     self.imagePicker = [[UIImagePickerController alloc] init];
     self.imagePicker.delegate = self;
   //  self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -395,27 +393,94 @@
     [self.settingPageView addSubview:doneButton];
     
     [self drawPlusPage];
+    [self drawPhotoPickPage];
+}
+
+-(void) drawPhotoPickPage
+{
+    self.photoPickView = [[UIView alloc] initWithFrame:self.view.frame];
+    UIImageView* BGImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Add_Sheet3.png"]];
+    BGImageView.frame = self.photoPickView.frame;
+    [self.photoPickView addSubview:BGImageView];
+    
+    UIButton* plusIconButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.86, viewH*0.1, 30, 30)];
+    [plusIconButton addTarget:self action:@selector(plusIconClicked) forControlEvents:UIControlEventTouchUpInside];
+    [plusIconButton setImage:[UIImage imageNamed:@"plusIcon.png"] forState:UIControlStateNormal];
+    [self.photoPickView addSubview:plusIconButton];
+    
+    NSMutableArray* photoButtonArray = [[NSMutableArray alloc] init];
+    CGFloat x = viewW*0.197;
+    CGFloat y = viewH*0.27;
+    CGFloat width = viewW*0.13;
+    CGFloat height = viewH*0.21;
+    for(int i=0; i<17; i++)
+    {
+        UIButton* photoButton = [[UIButton alloc] initWithFrame:CGRectMake(x, y, width, height)];
+        [photoButton addTarget:self action:@selector(photoButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        photoButton.tag = i;
+        [photoButton setBackgroundColor:[UIColor whiteColor]];
+        photoButton.alpha = 0.5;
+        photoButton.layer.cornerRadius = 5;
+        [photoButton.layer setMasksToBounds:YES];
+        [photoButton setUserInteractionEnabled:NO];
+        
+        [self.photoPickView addSubview:photoButton];
+        
+        if(!((i+2)%6))
+        {
+            x -= (width + viewW*0.007)*5;
+            y += height + viewH*0.024;
+        }
+        else
+            x += width + viewW*0.007;
+        
+        [photoButtonArray addObject:photoButton];
+    }
+    self.photoButtonArray = photoButtonArray;
+    
+    UIButton* cameraButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.06, viewH*0.27, width, height)];
+    [cameraButton addTarget:self action:@selector(cameraButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.photoPickView addSubview:cameraButton];
 }
 
 -(void)drawPlusPage
 {
     self.plusPageView = [[UIView alloc] initWithFrame:self.view.frame];
-    UIImageView* BGImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Add_Sheet3.png"]];
+    UIImageView* BGImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Add_Sheet4.png"]];
     BGImageView.frame = self.plusPageView.frame;
     [self.plusPageView addSubview:BGImageView];
+    
+    UIImageView* uploadImageView = [[UIImageView alloc] initWithFrame:CGRectMake(viewW*0.613, viewH*0.27, viewW*0.24, viewH*0.38)];
+    uploadImageView.backgroundColor = [UIColor whiteColor];
+    uploadImageView.alpha = 0.3;
+    uploadImageView.layer.cornerRadius = 10;
+    [uploadImageView.layer setMasksToBounds:YES];
+    
+    [self.plusPageView addSubview:uploadImageView];
+    
+    UIButton* uploadButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.648, viewH*0.34, viewW*0.17, viewH*0.24)];
+    [uploadButton setImage:[UIImage imageNamed:@"Upload_Sheet4.png"] forState:UIControlStateNormal];
+    [uploadButton addTarget:self action:@selector(uploadButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.plusPageView addSubview:uploadButton];
     
     UIButton* plusIconButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.86, viewH*0.1, 30, 30)];
     [plusIconButton addTarget:self action:@selector(plusIconClicked) forControlEvents:UIControlEventTouchUpInside];
     [plusIconButton setImage:[UIImage imageNamed:@"plusIcon.png"] forState:UIControlStateNormal];
     [self.plusPageView addSubview:plusIconButton];
     
-    UITextField* sheetNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(viewW*0.615, viewH*0.67, viewW*0.231, viewH*0.07)];
+    UITextField* sheetNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(viewW*0.613, viewH*0.67, viewW*0.24, viewH*0.07)];
+    sheetNameTextField.alpha = 0.5;
+    sheetNameTextField.backgroundColor = [UIColor grayColor];
+    sheetNameTextField.layer.cornerRadius = 10;
+    sheetNameTextField.layer.borderWidth = 3;
+    sheetNameTextField.layer.borderColor=[[UIColor whiteColor] CGColor];
     sheetNameTextField.delegate = self;
     sheetNameTextField.textAlignment = NSTextAlignmentCenter;
     sheetNameTextField.textColor = [UIColor whiteColor];
     [self.plusPageView addSubview:sheetNameTextField];
-    
+  
     UIButton* doneButton = [[UIButton alloc] initWithFrame: CGRectMake(viewW*0.68, viewH*0.8, viewW*0.1, viewW*0.043)];
+    [doneButton setImage:[UIImage imageNamed:@"DONE_button.png"] forState:UIControlStateNormal];
     [doneButton addTarget:self action:@selector(doneButtonInPlusPageClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.plusPageView addSubview:doneButton];
 }
@@ -436,6 +501,16 @@
 }
 
 #pragma mark - Actions
+
+-(void) uploadButtonClicked
+{
+    [self.view addSubview:self.photoPickView];
+}
+
+-(void) cameraButtonClicked
+{
+    
+}
 
 -(void)doneButtonInPlusPageClicked
 {
@@ -477,40 +552,32 @@
     }
 }
 
+-(void)photoButtonClicked
+{
+    [self.photoPickView removeFromSuperview];
+}
+
 -(void)plusIconClicked
 {
     if(!self.showingPlusPage)
     {
         [self.view addSubview:self.mistView];
         [self.view addSubview:self.plusPageView];
-     
-        ALAssetsGroupEnumerationResultsBlock resultBlock = ^(ALAsset *result, NSUInteger index, BOOL *stop) {
-            if (result && [[result valueForProperty:ALAssetPropertyType] isEqual:ALAssetTypePhoto])
+
+        for(int i=0; i<16; i++)
+        {
+            if(i < [self.photoArray count])
             {
-                UIImage* image = [UIImage imageWithCGImage:result.defaultRepresentation.fullResolutionImage];
-                [self.photoArray addObject:image];
+                [self.photoButtonArray[i] setImage:self.photoArray[i] forState:UIControlStateNormal];
+                ((UIButton*)(self.photoButtonArray[i])).alpha = 1;
+                [((UIButton*)(self.photoButtonArray[i])) setUserInteractionEnabled:YES];
             }
-        };
-        
-        ALAssetsLibraryGroupsEnumerationResultsBlock resultsBlock = ^(ALAssetsGroup *group, BOOL *stop) {
-            if (group && group.numberOfAssets > 0)
+            else
             {
-                [group enumerateAssetsWithOptions:0
-                                       usingBlock:nil];
-                [group enumerateAssetsUsingBlock:resultBlock];
+                ((UIButton*)(self.photoButtonArray[i])).alpha = 0.5;
+                [((UIButton*)(self.photoButtonArray[i])) setUserInteractionEnabled:NO];
             }
-        };
-        
-        ALAssetsLibraryAccessFailureBlock failureBlock = ^(NSError *error) {
-            
-        };
-        
-        ALAssetsGroupType type = ALAssetsGroupAll;
-        
-        [self.sharedAssetsLibrary enumerateGroupsWithTypes:type
-                                                usingBlock:resultsBlock
-                                              failureBlock:failureBlock];
-        
+        }
         self.showingPlusPage = YES;
     }
     else
@@ -576,6 +643,35 @@
     {
         [self.view addSubview:self.settingPageView];
         self.showingSettingPage = YES;
+        
+        self.photoArray = [[NSMutableArray alloc] init];
+        
+        ALAssetsGroupEnumerationResultsBlock resultBlock = ^(ALAsset *result, NSUInteger index, BOOL *stop) {
+            if (result && [[result valueForProperty:ALAssetPropertyType] isEqual:ALAssetTypePhoto])
+            {
+                UIImage* image = [UIImage imageWithCGImage:result.defaultRepresentation.fullResolutionImage];
+                [self.photoArray addObject:image];
+            }
+        };
+        
+        ALAssetsLibraryGroupsEnumerationResultsBlock resultsBlock = ^(ALAssetsGroup *group, BOOL *stop) {
+            if (group && group.numberOfAssets > 0)
+            {
+                [group enumerateAssetsWithOptions:0
+                                       usingBlock:nil];
+                [group enumerateAssetsUsingBlock:resultBlock];
+            }
+        };
+        
+        ALAssetsLibraryAccessFailureBlock failureBlock = ^(NSError *error) {
+            
+        };
+        
+        ALAssetsGroupType type = ALAssetsGroupAll;
+        
+        [self.sharedAssetsLibrary enumerateGroupsWithTypes:type
+                                                usingBlock:resultsBlock
+                                              failureBlock:failureBlock];
     }
     else
     {

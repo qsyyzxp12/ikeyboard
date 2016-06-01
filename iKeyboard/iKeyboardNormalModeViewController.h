@@ -14,6 +14,7 @@
 //UI
 @property UIView* settingPageView;
 @property UIView* plusPageView;
+@property UIView* photoPickView;
 @property UIImageView* wholeKeyboardImageView;
 @property UIImageView* frameImageView;
 @property UIImageView* littleKeyboImageView;
@@ -32,6 +33,7 @@
 @property NSMutableArray* resetArray;
 @property NSArray* highlightedKeyImageViewArray;
 @property NSMutableArray* sheetButtonArray;
+@property NSArray* photoButtonArray;
 
 //No.
 @property int instrumentNo;

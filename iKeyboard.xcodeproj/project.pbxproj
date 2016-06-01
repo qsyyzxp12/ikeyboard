@@ -85,6 +85,7 @@
 		C74B81251CBE335C005307FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74B81231CBE335C005307FF /* LaunchScreen.storyboard */; };
 		C74B812E1CBE358F005307FF /* iKeyboardMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B812D1CBE358F005307FF /* iKeyboardMenuViewController.m */; };
 		C74B81431CBE4325005307FF /* iKeyboardNormalModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B81421CBE4325005307FF /* iKeyboardNormalModeViewController.m */; };
+		C74BAAA81CFF565300DA5BFB /* Add_Sheet4.png in Resources */ = {isa = PBXBuildFile; fileRef = C74BAAA71CFF565300DA5BFB /* Add_Sheet4.png */; };
 		C74DCF551CCBE0C4006D5F4D /* piano_A1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCEFB1CCBE0C4006D5F4D /* piano_A1#.mp3 */; };
 		C74DCF561CCBE0C4006D5F4D /* piano_A1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCEFC1CCBE0C4006D5F4D /* piano_A1.mp3 */; };
 		C74DCF571CCBE0C4006D5F4D /* piano_B1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C74DCEFD1CCBE0C4006D5F4D /* piano_B1.mp3 */; };
@@ -340,6 +341,7 @@
 		C74DD1161CCE4D34006D5F4D /* letItGo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C74DD1141CCE4D34006D5F4D /* letItGo.jpg */; };
 		C74DD1171CCE4D34006D5F4D /* up.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C74DD1151CCE4D34006D5F4D /* up.jpg */; };
 		C74DD1191CCE4E35006D5F4D /* canonInDMajor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C74DD1181CCE4E35006D5F4D /* canonInDMajor.jpg */; };
+		C753947D1CFF63C300ED5119 /* DONE_button.png in Resources */ = {isa = PBXBuildFile; fileRef = C753947C1CFF63C300ED5119 /* DONE_button.png */; };
 		C757FE3B1CFEFD2C007F725C /* sheets.plist in Resources */ = {isa = PBXBuildFile; fileRef = C757FE3A1CFEFD2C007F725C /* sheets.plist */; };
 		C75D5F071CFD892100540C86 /* bass_A1#.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C75D5EAD1CFD892100540C86 /* bass_A1#.mp3 */; };
 		C75D5F081CFD892100540C86 /* bass_A1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C75D5EAE1CFD892100540C86 /* bass_A1.mp3 */; };
@@ -533,6 +535,7 @@
 		C74B812D1CBE358F005307FF /* iKeyboardMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iKeyboardMenuViewController.m; sourceTree = "<group>"; };
 		C74B81411CBE4325005307FF /* iKeyboardNormalModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iKeyboardNormalModeViewController.h; sourceTree = "<group>"; };
 		C74B81421CBE4325005307FF /* iKeyboardNormalModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iKeyboardNormalModeViewController.m; sourceTree = "<group>"; };
+		C74BAAA71CFF565300DA5BFB /* Add_Sheet4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Add_Sheet4.png; sourceTree = "<group>"; };
 		C74DCEFB1CCBE0C4006D5F4D /* piano_A1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano_A1#.mp3"; sourceTree = "<group>"; };
 		C74DCEFC1CCBE0C4006D5F4D /* piano_A1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_A1.mp3; sourceTree = "<group>"; };
 		C74DCEFD1CCBE0C4006D5F4D /* piano_B1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano_B1.mp3; sourceTree = "<group>"; };
@@ -788,6 +791,7 @@
 		C74DD1141CCE4D34006D5F4D /* letItGo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = letItGo.jpg; sourceTree = "<group>"; };
 		C74DD1151CCE4D34006D5F4D /* up.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = up.jpg; sourceTree = "<group>"; };
 		C74DD1181CCE4E35006D5F4D /* canonInDMajor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = canonInDMajor.jpg; sourceTree = "<group>"; };
+		C753947C1CFF63C300ED5119 /* DONE_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DONE_button.png; sourceTree = "<group>"; };
 		C757FE3A1CFEFD2C007F725C /* sheets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sheets.plist; sourceTree = "<group>"; };
 		C75D5EAD1CFD892100540C86 /* bass_A1#.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bass_A1#.mp3"; sourceTree = "<group>"; };
 		C75D5EAE1CFD892100540C86 /* bass_A1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bass_A1.mp3; sourceTree = "<group>"; };
@@ -1710,6 +1714,8 @@
 		C761C9F41CF8839200B39FF3 /* Menu_Select */ = {
 			isa = PBXGroup;
 			children = (
+				C753947C1CFF63C300ED5119 /* DONE_button.png */,
+				C74BAAA71CFF565300DA5BFB /* Add_Sheet4.png */,
 				C73A5D961CFC820E002D691A /* bass.png */,
 				C73A5D971CFC820E002D691A /* drums.png */,
 				C73A5D981CFC820E002D691A /* guitar.png */,
@@ -2162,7 +2168,9 @@
 				C75D5F311CFD892100540C86 /* bass_D4.mp3 in Resources */,
 				C74DCF8F1CCBE0C4006D5F4D /* piano_G5#.mp3 in Resources */,
 				C74DD0E01CCC82AA006D5F4D /* string_E4.mp3 in Resources */,
+				C753947D1CFF63C300ED5119 /* DONE_button.png in Resources */,
 				C74DCF7A1CCBE0C4006D5F4D /* piano_A4.mp3 in Resources */,
+				C74BAAA81CFF565300DA5BFB /* Add_Sheet4.png in Resources */,
 				C74DD04C1CCC6CF2006D5F4D /* guitar_G6.mp3 in Resources */,
 				C75D5F071CFD892100540C86 /* bass_A1#.mp3 in Resources */,
 				C74DCF7C1CCBE0C4006D5F4D /* piano_C4#.mp3 in Resources */,
