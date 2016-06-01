@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVAudioPlayer.h>
+#import "iKeyboardImagePickerController.h"
 
-@interface iKeyboardNormalModeViewController : UIViewController<UIGestureRecognizerDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate>
+@interface iKeyboardNormalModeViewController : UIViewController<UIGestureRecognizerDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 //UI
 @property UIView* settingPageView;
@@ -61,4 +62,8 @@
 @property BOOL showingPlusPage;
 @property int instrumentSelectedNo;
 @property int sheetSelectedNo;
+
+@property UIImagePickerController* imagePicker;
+@property UIImageView* imageView;
+@property NSMutableArray* photoGroupArray;
 @end

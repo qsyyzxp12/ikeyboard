@@ -78,6 +78,7 @@
 		C73A5DEA1CFC8CD2002D691A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C73A5DC41CFC8CD2002D691A /* Icon.png */; };
 		C73A5DEB1CFC8CD2002D691A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73A5DC51CFC8CD2002D691A /* Icon@2x.png */; };
 		C73A5DEC1CFC8CD2002D691A /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73A5DC61CFC8CD2002D691A /* iTunesArtwork@2x.png */; };
+		C7475A951CFEDCCC004D1894 /* iKeyboardImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7475A931CFEDCCC004D1894 /* iKeyboardImagePickerController.m */; };
 		C74B81171CBE335C005307FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B81161CBE335C005307FF /* main.m */; };
 		C74B811A1CBE335C005307FF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B81191CBE335C005307FF /* AppDelegate.m */; };
 		C74B81201CBE335C005307FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74B811E1CBE335C005307FF /* Main.storyboard */; };
@@ -520,6 +521,8 @@
 		C73A5DC41CFC8CD2002D691A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		C73A5DC51CFC8CD2002D691A /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		C73A5DC61CFC8CD2002D691A /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		C7475A931CFEDCCC004D1894 /* iKeyboardImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iKeyboardImagePickerController.m; sourceTree = "<group>"; };
+		C7475A941CFEDCCC004D1894 /* iKeyboardImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iKeyboardImagePickerController.h; sourceTree = "<group>"; };
 		C74B81121CBE335B005307FF /* iKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C74B81161CBE335C005307FF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C74B81181CBE335C005307FF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -988,6 +991,8 @@
 		C74B81141CBE335C005307FF /* iKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				C7475A931CFEDCCC004D1894 /* iKeyboardImagePickerController.m */,
+				C7475A941CFEDCCC004D1894 /* iKeyboardImagePickerController.h */,
 				C74B81181CBE335C005307FF /* AppDelegate.h */,
 				C74B81191CBE335C005307FF /* AppDelegate.m */,
 				C74B812C1CBE358F005307FF /* iKeyboardMenuViewController.h */,
@@ -2236,6 +2241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C74B811A1CBE335C005307FF /* AppDelegate.m in Sources */,
+				C7475A951CFEDCCC004D1894 /* iKeyboardImagePickerController.m in Sources */,
 				C74B81431CBE4325005307FF /* iKeyboardNormalModeViewController.m in Sources */,
 				C74B81171CBE335C005307FF /* main.m in Sources */,
 				C74B812E1CBE358F005307FF /* iKeyboardMenuViewController.m in Sources */,

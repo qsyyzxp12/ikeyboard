@@ -8,6 +8,7 @@
 
 #import "iKeyboardNormalModeViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "AssetsLibrary/AssetsLibrary.h"
 
 #define IPhone4 [[UIScreen mainScreen] bounds].size.width == (double)480
 #define IPhone5 [[UIScreen mainScreen] bounds].size.width == (double)568
@@ -456,6 +457,38 @@
     {
         [self.view addSubview:self.mistView];
         [self.view addSubview:self.plusPageView];
+        
+        ALAssetsGroupEnumerationResultsBlock resultBlock = ^(ALAsset *result, NSUInteger index, BOOL *stop) {
+            if (result && [[result valueForProperty:ALAssetPropertyType] isEqual:ALAssetTypePhoto])
+            {
+                UIImage* image = [UIImage imageWithCGImage:result.defaultRepresentation.fullResolutionImage];
+
+            }
+        };
+        
+        ALAssetsLibraryGroupsEnumerationResultsBlock resultsBlock = ^(ALAssetsGroup *group, BOOL *stop) {
+            if (group && group.numberOfAssets > 0)
+            {
+                [group enumerateAssetsWithOptions:0
+                                       usingBlock:nil];
+                [group enumerateAssetsUsingBlock:resultBlock];
+            }
+            else if (self.photoGroupArray.count > 0)
+            {
+                NSLog(@"xxx");
+            }
+        };
+        
+        ALAssetsLibraryAccessFailureBlock failureBlock = ^(NSError *error) {
+            
+        };
+        
+        ALAssetsGroupType type = ALAssetsGroupAll;
+        
+        [self.sharedAssetsLibrary enumerateGroupsWithTypes:type
+                                                usingBlock:resultsBlock
+                                              failureBlock:failureBlock];
+    
         self.showingPlusPage = YES;
     }
     else
@@ -464,6 +497,15 @@
         [self.plusPageView removeFromSuperview];
         self.showingPlusPage = NO;
     }
+}
+
+- (ALAssetsLibrary *)sharedAssetsLibrary {
+    static dispatch_once_t pred = 0;
+    static ALAssetsLibrary *assetsLibrary = nil;
+    dispatch_once(&pred, ^{
+        assetsLibrary = [[ALAssetsLibrary alloc] init];
+    });
+    return assetsLibrary;
 }
 
 -(void)sheetNextOrLastButtonClicked:(UIButton*)sender
@@ -723,6 +765,16 @@
     [textField resignFirstResponder];
     self.view.frame = CGRectMake(0, self.view.frame.origin.y+self.keyboardHeight, self.view.frame.size.width, self.view.frame.size.height);
     return YES;
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    UIImage * image=[info objectForKey:UIImagePickerControllerOriginalImage];
+    _imageView.image=image;
+    
 }
 
 #pragma mark - the others
