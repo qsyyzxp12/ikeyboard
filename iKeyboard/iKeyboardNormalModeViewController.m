@@ -416,7 +416,7 @@
     for(int i=0; i<17; i++)
     {
         UIButton* photoButton = [[UIButton alloc] initWithFrame:CGRectMake(x, y, width, height)];
-        [photoButton addTarget:self action:@selector(photoButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        [photoButton addTarget:self action:@selector(photoButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         photoButton.tag = i;
         [photoButton setBackgroundColor:[UIColor whiteColor]];
         photoButton.alpha = 0.5;
@@ -451,6 +451,7 @@
     [self.plusPageView addSubview:BGImageView];
     
     UIImageView* uploadImageView = [[UIImageView alloc] initWithFrame:CGRectMake(viewW*0.613, viewH*0.27, viewW*0.24, viewH*0.38)];
+    uploadImageView.tag = 1;
     uploadImageView.backgroundColor = [UIColor whiteColor];
     uploadImageView.alpha = 0.3;
     uploadImageView.layer.cornerRadius = 10;
@@ -472,7 +473,7 @@
     sheetNameTextField.alpha = 0.5;
     sheetNameTextField.backgroundColor = [UIColor grayColor];
     sheetNameTextField.layer.cornerRadius = 10;
-    sheetNameTextField.layer.borderWidth = 3;
+    sheetNameTextField.layer.borderWidth = 2;
     sheetNameTextField.layer.borderColor=[[UIColor whiteColor] CGColor];
     sheetNameTextField.delegate = self;
     sheetNameTextField.textAlignment = NSTextAlignmentCenter;
@@ -552,8 +553,10 @@
     }
 }
 
--(void)photoButtonClicked
+-(void)photoButtonClicked:(UIButton*)sender
 {
+    ((UIImageView*)([self.plusPageView viewWithTag:1])).image = self.photoArray[sender.tag];
+    ((UIImageView*)([self.plusPageView viewWithTag:1])).alpha = 0.8;
     [self.photoPickView removeFromSuperview];
 }
 
@@ -563,7 +566,9 @@
     {
         [self.view addSubview:self.mistView];
         [self.view addSubview:self.plusPageView];
-
+        
+        ((UIImageView*)([self.plusPageView viewWithTag:1])).image = NULL;
+        ((UIImageView*)([self.plusPageView viewWithTag:1])).alpha = 0.3;
         for(int i=0; i<16; i++)
         {
             if(i < [self.photoArray count])
