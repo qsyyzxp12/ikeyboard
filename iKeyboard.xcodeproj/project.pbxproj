@@ -449,6 +449,7 @@
 		C761CA2F1CF8839200B39FF3 /* Upload_Sheet4.png in Resources */ = {isa = PBXBuildFile; fileRef = C761C9FD1CF8839200B39FF3 /* Upload_Sheet4.png */; };
 		C761CA301CF8839200B39FF3 /* Tutorial01.png in Resources */ = {isa = PBXBuildFile; fileRef = C761C9FF1CF8839200B39FF3 /* Tutorial01.png */; };
 		C761CA311CF8839200B39FF3 /* Tutorial02.png in Resources */ = {isa = PBXBuildFile; fileRef = C761CA001CF8839200B39FF3 /* Tutorial02.png */; };
+		C7D27A721D113341005D004B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D27A711D113341005D004B /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -899,6 +900,7 @@
 		C761C9FD1CF8839200B39FF3 /* Upload_Sheet4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Upload_Sheet4.png; sourceTree = "<group>"; };
 		C761C9FF1CF8839200B39FF3 /* Tutorial01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial01.png; sourceTree = "<group>"; };
 		C761CA001CF8839200B39FF3 /* Tutorial02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial02.png; sourceTree = "<group>"; };
+		C7D27A711D113341005D004B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -906,6 +908,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7D27A721D113341005D004B /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,6 +979,7 @@
 		C74B81091CBE335B005307FF = {
 			isa = PBXGroup;
 			children = (
+				C7D27A711D113341005D004B /* CoreBluetooth.framework */,
 				C74B81141CBE335C005307FF /* iKeyboard */,
 				C74DCEA41CCBD516006D5F4D /* image */,
 				C74B815C1CBF9FC6005307FF /* voice */,

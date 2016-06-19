@@ -26,6 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
+  //  [self.serafimPeripheral discoverServices:nil];
+    
     self.showingSettingPage = NO;
     self.showingPlusPage = NO;
     
@@ -66,6 +68,20 @@
     [self.view addSubview:self.mistView];
     [self.view addSubview:self.spinner];
     [NSThread detachNewThreadSelector:@selector(AVAudioPlayerInit) toTarget:self withObject:nil];
+}
+
+-(void) bluetoothMesHandler:(const char*) mes
+{
+    if(mes[0] != 0x02)
+    {
+        NSLog(@"Command code wrong: %02lX", (long)mes[0]);
+        return;
+    }
+    for(int i=0; i<MIN((long)mes[1], 3); i++)
+    {
+        NSLog(@"%02lX", (long)mes[i+2]);
+        [self tapBeganOnKey:mes[i+2]-1];
+    }
 }
 
 #pragma mark - AVAudio Player
@@ -904,6 +920,77 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - CBPeripheralDelegate
+
+-(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
+{
+    NSLog(@"didDiscoverServices:\n");
+    //   if( peripheral.UUID == NULL  ) return; // zach ios6 added
+    if (!error)
+    {
+        NSLog(@"====%@\n",peripheral.name);
+        //    NSLog(@"=========== %d of service for UUID %@ ===========\n",peripheral.services.count,CFUUIDCreateString(NULL,peripheral.UUID));
+        
+        for (CBService *s in peripheral.services){
+            NSLog(@"Service found with UUID: %@\n", s.UUID);
+            [peripheral discoverCharacteristics:nil forService:s];
+        }
+        
+    }
+    else {
+        NSLog(@"Service discovery was unsuccessfull !\n");
+    }
+}
+
+-(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
+{
+    CBService *s = [peripheral.services objectAtIndex:(peripheral.services.count - 1)];
+    NSLog(@"=========== Service UUID %@ ===========\n",service.UUID);
+    if (!error)
+    {
+        NSLog(@"=========== %lu Characteristics of service ",service.characteristics.count);
+        
+        for(CBCharacteristic *c in service.characteristics)
+        {
+            NSLog(@" %@ \n",c.UUID);
+            if(service.UUID == NULL || s.UUID == NULL)
+                return;
+            
+            if ([service.UUID isEqual:[CBUUID UUIDWithString:@"FFA0"]])
+            {
+                if ([c.UUID isEqual:[CBUUID UUIDWithString:@"FFA1"]])
+                    self.FFA1 = c;
+                else if([c.UUID isEqual:[CBUUID UUIDWithString:@"FFA3"]])
+                    [peripheral setNotifyValue:YES forCharacteristic:c];
+            }
+        }
+        NSLog(@"=== Finished set notification ===\n");
+    }
+    else
+    {
+        NSLog(@"Characteristic discorvery unsuccessfull !\n");
+    }
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    NSLog(@"UUID = %@", characteristic.UUID);
+    if (error)
+    {
+        NSLog(@"Error reading characteristics: %@", [error localizedDescription]);
+        return;
+    }
+    
+    if (characteristic.value != nil)
+    {
+        NSData* data = characteristic.value;
+        
+        char* datas = data.bytes;
+        [self bluetoothMesHandler:datas];
+    }
+}
+
 
 /*
 #pragma mark - Navigation

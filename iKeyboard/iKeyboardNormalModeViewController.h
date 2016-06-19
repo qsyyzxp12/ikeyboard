@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVAudioPlayer.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
-@interface iKeyboardNormalModeViewController : UIViewController<UIGestureRecognizerDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface iKeyboardNormalModeViewController : UIViewController<UIGestureRecognizerDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CBPeripheralDelegate>
 
 //UI
 @property UIView* settingPageView;
@@ -67,4 +68,7 @@
 
 @property UIImagePickerController* imagePicker;
 @property NSMutableArray* photoArray;
+
+//Bluttooth
+@property CBCharacteristic* FFA1;
 @end

@@ -39,9 +39,6 @@
                     <navigationItem key="navigationItem" id="Uw6-O9-W9J"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <segue destination="rF2-sd-QU9" kind="show" identifier="showNormalModeViewController" id="Qfh-gO-Llh"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
