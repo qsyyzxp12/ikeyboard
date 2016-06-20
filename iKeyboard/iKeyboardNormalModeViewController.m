@@ -29,6 +29,7 @@
     [super viewDidLoad];
     
     self.audioPlayerReady = NO;
+    self.photoPickViewShowing = NO;
     
     self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     self.keyPressingArray = malloc(sizeof(int)*4);
@@ -585,6 +586,7 @@
 -(void) uploadButtonClicked
 {
     [self.view addSubview:self.photoPickView];
+    self.photoPickViewShowing = YES;
 }
 
 -(void) cameraButtonClicked
@@ -641,7 +643,12 @@
 
 -(void)plusIconClicked
 {
-    if(!self.showingPlusPage)
+    if(self.photoPickViewShowing)
+    {
+        [self.photoPickView removeFromSuperview];
+        self.photoPickViewShowing = NO;
+    }
+    else if(!self.showingPlusPage)
     {
         [self.view addSubview:self.mistView];
         [self.view addSubview:self.plusPageView];

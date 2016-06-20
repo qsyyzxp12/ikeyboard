@@ -74,4 +74,5 @@
 //Bluttooth
 @property AppDelegate* appDelegate;
 @property int audioPlayerReady;
+@property int photoPickViewShowing;
 @end
