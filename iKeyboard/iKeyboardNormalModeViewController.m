@@ -17,6 +17,8 @@
 #define viewW CGRectGetWidth(self.view.frame)
 #define viewH CGRectGetHeight(self.view.frame)
 
+#undef DEBUG
+
 @interface iKeyboardNormalModeViewController ()
 
 @end
@@ -25,8 +27,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
-  //  [self.serafimPeripheral discoverServices:nil];
+    
+    self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    self.keyPressingArray = malloc(sizeof(int)*4);
+    bzero(self.keyPressingArray, sizeof(int)*4);
     
     self.showingSettingPage = NO;
     self.showingPlusPage = NO;
@@ -79,9 +83,61 @@
     }
     for(int i=0; i<MIN((long)mes[1], 3); i++)
     {
+#ifdef DEBUG
         NSLog(@"%02lX", (long)mes[i+2]);
-        [self tapBeganOnKey:mes[i+2]-1];
+#endif
+        int keyNo = (int)mes[i+2];
+        if(keyNo)
+        {
+            if(self.keyPressingArray[i] != keyNo)
+            {
+                if(keyNo == 25)
+                    [self goLowerOctave];
+                else if(keyNo == 26)
+                    [self goHigherOctave];
+                else
+                    [self tapBeganOnKey:mes[i+2]-1];
+            }
+        }
+        else
+        {
+            if(self.keyPressingArray[i])
+            {
+                if(self.keyPressingArray[i] != 25 && self.keyPressingArray[i] != 26)
+                {
+                    [self.highlightedKeyImageViewArray[self.keyPressingArray[i]-1] removeFromSuperview];
+                    [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:self.keyPressingArray[i]-1]];
+                }
+            }
+        }
+        self.keyPressingArray[i] = keyNo;
     }
+}
+
+-(void) changeIkeyboMode:(CBPeripheral*)peripheral
+{
+    NSString* code = @"02";
+    NSData* data = [self dataWithStringHex:code];
+    [peripheral writeValue:data forCharacteristic:self.appDelegate.FFA1 type:CBCharacteristicWriteWithResponse];
+}
+
+- (NSData *)dataWithStringHex:(NSString *)string
+{
+    NSString *cleanString;
+    cleanString = [string stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    cleanString = [cleanString stringByReplacingOccurrencesOfString:@">" withString:@""];
+    cleanString = [cleanString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSInteger length = [cleanString length];
+    uint8_t buffer[length/2];
+    for (NSInteger i = 0; i < length; i+=2)
+    {
+        unsigned result = 0;
+        NSScanner *scanner = [NSScanner scannerWithString:[cleanString substringWithRange:NSMakeRange(i, 2)]];
+        [scanner scanHexInt:&result];
+        buffer[i/2] = result;
+    }
+    return  [[NSMutableData alloc] initWithBytes:&buffer   length:length/2];
 }
 
 #pragma mark - AVAudio Player
@@ -852,31 +908,37 @@
     }
 }
 
+-(void)goHigherOctave
+{
+    if(self.lowerOctaveNo < 6)
+    {
+        self.lowerOctaveNo++;
+        self.leftMistBar.frame = CGRectMake(CGRectGetMinX(self.leftMistBar.frame), CGRectGetMinY(self.leftMistBar.frame), CGRectGetWidth(self.leftMistBar.frame)+viewW*0.129, CGRectGetHeight(self.leftMistBar.frame));
+        
+        self.rightMistBar.frame = CGRectMake(CGRectGetMinX(self.rightMistBar.frame)+viewW*0.129, CGRectGetMinY(self.rightMistBar.frame), CGRectGetWidth(self.rightMistBar.frame)-viewW*0.129, CGRectGetHeight(self.rightMistBar.frame));
+        
+        self.littleKeyboImageView.frame = CGRectMake(CGRectGetMinX(self.littleKeyboImageView.frame)+viewW*0.129, CGRectGetMinY(self.littleKeyboImageView.frame), CGRectGetWidth(self.littleKeyboImageView.frame), CGRectGetHeight(self.littleKeyboImageView.frame));
+    }
+}
+
+-(void) goLowerOctave
+{
+    if(self.lowerOctaveNo > 1)
+    {
+        self.lowerOctaveNo--;
+        self.leftMistBar.frame = CGRectMake(CGRectGetMinX(self.leftMistBar.frame), CGRectGetMinY(self.leftMistBar.frame), CGRectGetWidth(self.leftMistBar.frame)-viewW*0.129, CGRectGetHeight(self.leftMistBar.frame));
+        self.rightMistBar.frame = CGRectMake(CGRectGetMinX(self.rightMistBar.frame)-viewW*0.129, CGRectGetMinY(self.rightMistBar.frame), CGRectGetWidth(self.rightMistBar.frame)+viewW*0.129, CGRectGetHeight(self.rightMistBar.frame));
+        self.littleKeyboImageView.frame = CGRectMake(CGRectGetMinX(self.littleKeyboImageView.frame)-viewW*0.129, CGRectGetMinY(self.littleKeyboImageView.frame), CGRectGetWidth(self.littleKeyboImageView.frame), CGRectGetHeight(self.littleKeyboImageView.frame));
+    }
+}
+
 - (void) arrowImageViewClicked:(UITapGestureRecognizer*) sender
 {
     UIImageView* senderImageView = (UIImageView*)sender.view;
     if(senderImageView.tag == 0)
-    {
-        if(self.lowerOctaveNo > 1)
-        {
-            self.lowerOctaveNo--;
-            self.leftMistBar.frame = CGRectMake(CGRectGetMinX(self.leftMistBar.frame), CGRectGetMinY(self.leftMistBar.frame), CGRectGetWidth(self.leftMistBar.frame)-viewW*0.129, CGRectGetHeight(self.leftMistBar.frame));
-            self.rightMistBar.frame = CGRectMake(CGRectGetMinX(self.rightMistBar.frame)-viewW*0.129, CGRectGetMinY(self.rightMistBar.frame), CGRectGetWidth(self.rightMistBar.frame)+viewW*0.129, CGRectGetHeight(self.rightMistBar.frame));
-            self.littleKeyboImageView.frame = CGRectMake(CGRectGetMinX(self.littleKeyboImageView.frame)-viewW*0.129, CGRectGetMinY(self.littleKeyboImageView.frame), CGRectGetWidth(self.littleKeyboImageView.frame), CGRectGetHeight(self.littleKeyboImageView.frame));
-        }
-    }
+        [self goLowerOctave];
     else
-    {
-        if(self.lowerOctaveNo < 6)
-        {
-            self.lowerOctaveNo++;
-            self.leftMistBar.frame = CGRectMake(CGRectGetMinX(self.leftMistBar.frame), CGRectGetMinY(self.leftMistBar.frame), CGRectGetWidth(self.leftMistBar.frame)+viewW*0.129, CGRectGetHeight(self.leftMistBar.frame));
-            
-            self.rightMistBar.frame = CGRectMake(CGRectGetMinX(self.rightMistBar.frame)+viewW*0.129, CGRectGetMinY(self.rightMistBar.frame), CGRectGetWidth(self.rightMistBar.frame)-viewW*0.129, CGRectGetHeight(self.rightMistBar.frame));
-            
-            self.littleKeyboImageView.frame = CGRectMake(CGRectGetMinX(self.littleKeyboImageView.frame)+viewW*0.129, CGRectGetMinY(self.littleKeyboImageView.frame), CGRectGetWidth(self.littleKeyboImageView.frame), CGRectGetHeight(self.littleKeyboImageView.frame));
-        }
-    }
+        [self goHigherOctave];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
@@ -925,47 +987,59 @@
 
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
+#ifdef DEBUG
     NSLog(@"didDiscoverServices:\n");
+#endif
     //   if( peripheral.UUID == NULL  ) return; // zach ios6 added
     if (!error)
     {
+#ifdef DEBUG
         NSLog(@"====%@\n",peripheral.name);
-        //    NSLog(@"=========== %d of service for UUID %@ ===========\n",peripheral.services.count,CFUUIDCreateString(NULL,peripheral.UUID));
+#endif
         
-        for (CBService *s in peripheral.services){
+        for (CBService *s in peripheral.services)
+        {
+#ifdef DEBUG
             NSLog(@"Service found with UUID: %@\n", s.UUID);
+#endif
             [peripheral discoverCharacteristics:nil forService:s];
         }
         
     }
-    else {
+    else
         NSLog(@"Service discovery was unsuccessfull !\n");
-    }
 }
 
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
     CBService *s = [peripheral.services objectAtIndex:(peripheral.services.count - 1)];
+#ifdef DEBUG
     NSLog(@"=========== Service UUID %@ ===========\n",service.UUID);
+#endif
     if (!error)
     {
+#ifdef DEBUG
         NSLog(@"=========== %lu Characteristics of service ",service.characteristics.count);
-        
+#endif
         for(CBCharacteristic *c in service.characteristics)
         {
+#ifdef DEBUG
             NSLog(@" %@ \n",c.UUID);
+#endif
             if(service.UUID == NULL || s.UUID == NULL)
                 return;
             
             if ([service.UUID isEqual:[CBUUID UUIDWithString:@"FFA0"]])
             {
                 if ([c.UUID isEqual:[CBUUID UUIDWithString:@"FFA1"]])
-                    self.FFA1 = c;
+                {
+                    self.appDelegate.FFA1 = c;
+                    [self changeIkeyboMode:peripheral];
+                }
                 else if([c.UUID isEqual:[CBUUID UUIDWithString:@"FFA3"]])
                     [peripheral setNotifyValue:YES forCharacteristic:c];
             }
         }
-        NSLog(@"=== Finished set notification ===\n");
     }
     else
     {
@@ -975,7 +1049,9 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
+#ifdef DEBUG
     NSLog(@"UUID = %@", characteristic.UUID);
+#endif
     if (error)
     {
         NSLog(@"Error reading characteristics: %@", [error localizedDescription]);
@@ -985,7 +1061,6 @@
     if (characteristic.value != nil)
     {
         NSData* data = characteristic.value;
-        
         char* datas = data.bytes;
         [self bluetoothMesHandler:datas];
     }

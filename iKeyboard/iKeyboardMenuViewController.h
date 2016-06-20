@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "iKeyboardNormalModeViewController.h"
+#import "AppDelegate.h"
 
 @interface iKeyboardMenuViewController : UIViewController<CBCentralManagerDelegate>
 
 @property CBCentralManager* cbManager;
-@property CBPeripheral* serafimPeripheral;
+@property AppDelegate* appDelegate;
 @property iKeyboardNormalModeViewController* normalModeViewController;
 @end

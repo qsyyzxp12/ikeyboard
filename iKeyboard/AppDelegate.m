@@ -28,8 +28,31 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    if(self.serafimPeripheral && self.FFA1)
+    {
+        NSString* code = @"00";
+        NSData* data = [self dataWithStringHex:code];
+        [self.serafimPeripheral writeValue:data forCharacteristic:self.FFA1 type:CBCharacteristicWriteWithResponse];
+    }
+}
+
+- (NSData *)dataWithStringHex:(NSString *)string
+{
+    NSString *cleanString;
+    cleanString = [string stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    cleanString = [cleanString stringByReplacingOccurrencesOfString:@">" withString:@""];
+    cleanString = [cleanString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSInteger length = [cleanString length];
+    uint8_t buffer[length/2];
+    for (NSInteger i = 0; i < length; i+=2)
+    {
+        unsigned result = 0;
+        NSScanner *scanner = [NSScanner scannerWithString:[cleanString substringWithRange:NSMakeRange(i, 2)]];
+        [scanner scanHexInt:&result];
+        buffer[i/2] = result;
+    }
+    return  [[NSMutableData alloc] initWithBytes:&buffer   length:length/2];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -38,7 +61,12 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    if(self.serafimPeripheral && self.FFA1)
+    {
+        NSString* code = @"02";
+        NSData* data = [self dataWithStringHex:code];
+        [self.serafimPeripheral writeValue:data forCharacteristic:self.FFA1 type:CBCharacteristicWriteWithResponse];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

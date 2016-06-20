@@ -7,6 +7,8 @@
 //
 
 #import "iKeyboardMenuViewController.h"
+//#undef DEBUG
+
 
 @interface iKeyboardMenuViewController ()
 
@@ -18,6 +20,7 @@
     [super viewDidLoad];
     
     self.normalModeViewController = [[iKeyboardNormalModeViewController alloc] init];
+    self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     self.cbManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     
@@ -58,7 +61,7 @@
     NSArray<CBUUID*>* iKeyboService = [NSArray arrayWithObject:[CBUUID UUIDWithString:@"FFA0"]];
     NSArray<CBPeripheral*>* iKeyboperipherals = [self.cbManager retrieveConnectedPeripheralsWithServices:iKeyboService];
     if(iKeyboperipherals.count == 1)
-        self.serafimPeripheral = [iKeyboperipherals objectAtIndex:0];
+        self.appDelegate.serafimPeripheral = [iKeyboperipherals objectAtIndex:0];
     else
         [self.cbManager scanForPeripheralsWithServices:nil options:options];
     
@@ -68,8 +71,8 @@
 
 -(void)iKeyboConnectionButtonClicked
 {
-    if(self.serafimPeripheral)
-        [self.cbManager connectPeripheral:self.serafimPeripheral options:nil];
+    if(self.appDelegate.serafimPeripheral)
+        [self.cbManager connectPeripheral:self.appDelegate.serafimPeripheral options:nil];
     else
     {
         NSLog(@"No Serafim device found");
@@ -85,7 +88,6 @@
 -(void)backButtonClicked
 {
     [self presentViewController:self.normalModeViewController animated:YES completion:nil];
-  //  [self performSegueWithIdentifier:@"showNormalModeViewController" sender:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -126,13 +128,14 @@
             [nsmstring appendString:@"none\n"];
             break;
     }
+#ifdef DEBUG
     NSLog(@"%@",nsmstring);
-    //  [delegate didUpdateState:isWork message:nsmstring getStatus:cManager.state];
+#endif
 }
 
 -(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    /*
+#ifdef DEBUG
     NSMutableString* nsmstring=[NSMutableString stringWithString:@"\n"];
     [nsmstring appendString:@"Peripheral Info:"];
     [nsmstring appendFormat:@"NAME: %@\n",peripheral.name];
@@ -142,15 +145,14 @@
     [nsmstring appendFormat:@"adverisement:%@",advertisementData];
     [nsmstring appendString:@"didDiscoverPeripheral\n"];
      NSLog(@"%@",nsmstring);
-     */
+#endif
     if([[advertisementData objectForKey:@"kCBAdvDataLocalName"] isEqualToString:@"Serafim iKeybo"])
-        self.serafimPeripheral = peripheral;
+        self.appDelegate.serafimPeripheral = peripheral;
 }
 
 -(void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
     peripheral.delegate = self.normalModeViewController;
-  //  self.normalModeViewController.serafimPeripheral = self.serafimPeripheral;
     [peripheral discoverServices:nil];
     [self presentViewController:self.normalModeViewController animated:YES completion:nil];
 }

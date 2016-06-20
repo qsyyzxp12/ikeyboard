@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVAudioPlayer.h>
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "AppDelegate.h"
 
 @interface iKeyboardNormalModeViewController : UIViewController<UIGestureRecognizerDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CBPeripheralDelegate>
 
@@ -65,10 +66,11 @@
 @property BOOL showingPlusPage;
 @property int instrumentSelectedNo;
 @property int sheetSelectedNo;
+@property int* keyPressingArray;
 
 @property UIImagePickerController* imagePicker;
 @property NSMutableArray* photoArray;
 
 //Bluttooth
-@property CBCharacteristic* FFA1;
+@property AppDelegate* appDelegate;
 @end
