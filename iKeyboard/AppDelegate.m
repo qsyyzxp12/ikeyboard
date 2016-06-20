@@ -82,7 +82,7 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
         return UIInterfaceOrientationMaskAll;
     else  /* iphone */
-        return UIInterfaceOrientationMaskAllButUpsideDown;
+        return UIInterfaceOrientationMaskLandscape;
 }
 
 @end
