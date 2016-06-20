@@ -95,7 +95,7 @@
                     [self goLowerOctave];
                 else if(keyNo == 26)
                     [self goHigherOctave];
-                else
+                else if(!self.showingSettingPage)
                     [self tapBeganOnKey:mes[i+2]-1];
             }
         }
@@ -103,7 +103,7 @@
         {
             if(self.keyPressingArray[i])
             {
-                if(self.keyPressingArray[i] != 25 && self.keyPressingArray[i] != 26)
+                if(self.keyPressingArray[i] != 25 && self.keyPressingArray[i] != 26 && !self.showingSettingPage)
                 {
                     [self.highlightedKeyImageViewArray[self.keyPressingArray[i]-1] removeFromSuperview];
                     [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:self.keyPressingArray[i]-1]];
