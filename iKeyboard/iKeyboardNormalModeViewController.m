@@ -28,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.audioPlayerReady = NO;
+    
     self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     self.keyPressingArray = malloc(sizeof(int)*4);
     bzero(self.keyPressingArray, sizeof(int)*4);
@@ -81,6 +83,10 @@
         NSLog(@"Command code wrong: %02lX", (long)mes[0]);
         return;
     }
+    
+    if(!self.audioPlayerReady)
+        return;
+    
     for(int i=0; i<MIN((long)mes[1], 3); i++)
     {
 #ifdef DEBUG
@@ -176,6 +182,7 @@
     self.octavesArray = octavesArray;
         
     [self performSelectorOnMainThread:@selector(removeSpinnerAndMistView) withObject:nil waitUntilDone:NO];
+    self.audioPlayerReady = YES;
 }
 
 #pragma mark - User Interface

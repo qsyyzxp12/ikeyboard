@@ -73,4 +73,5 @@
 
 //Bluttooth
 @property AppDelegate* appDelegate;
+@property int audioPlayerReady;
 @end
