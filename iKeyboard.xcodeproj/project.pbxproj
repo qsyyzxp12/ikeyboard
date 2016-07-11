@@ -1776,7 +1776,7 @@
 				TargetAttributes = {
 					C74B81111CBE335B005307FF = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = KRGS5BKS3M;
+						DevelopmentTeam = QMZBQA899J;
 					};
 				};
 			};
@@ -2373,7 +2373,7 @@
 				INFOPLIST_FILE = iKeyboard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.iKeyboard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.iKeyboard.hairy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Finch/**";
@@ -2389,7 +2389,7 @@
 				INFOPLIST_FILE = iKeyboard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.iKeyboard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.iKeyboard.hairy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Finch/**";

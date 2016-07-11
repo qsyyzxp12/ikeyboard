@@ -9,6 +9,8 @@
 #import "iKeyboardNormalModeViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "AssetsLibrary/AssetsLibrary.h"
+#import "iKeyboardMenuViewController.h"
+#import "AppDelegate.h"
 
 #define IPhone4 [[UIScreen mainScreen] bounds].size.width == (double)480
 #define IPhone5 [[UIScreen mainScreen] bounds].size.width == (double)568
@@ -24,10 +26,11 @@
 @end
 
 @implementation iKeyboardNormalModeViewController
+@synthesize delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.audioPlayerReady = NO;
     self.photoPickViewShowing = NO;
     
@@ -75,6 +78,18 @@
     [self.view addSubview:self.mistView];
     [self.view addSubview:self.spinner];
     [NSThread detachNewThreadSelector:@selector(AVAudioPlayerInit) toTarget:self withObject:nil];
+    
+    //return app detecter
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didBecomeActive:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
+}
+
+//do something when return
+- (void)didBecomeActive:(NSNotification *)notification;
+{
+    [self AVAudioPlayerInit];
 }
 
 -(void) bluetoothMesHandler:(const char*) mes
@@ -245,14 +260,23 @@
     barImageView.frame = self.view.frame;
     [self.view addSubview:barImageView];
     
-    UIButton* settingButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.011, viewH*0.01, viewW*0.03, viewH*0.05)];
-    [settingButton setImage:[UIImage imageNamed:@"Menu_button3.png"] forState:UIControlStateNormal];
+    
+    UIImageView* settingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Menu_button3.png"]];
+    settingImageView.frame = CGRectMake(viewW*0.015, viewH*0.006, viewW*0.031, viewH*0.055);
+    [self.view addSubview:settingImageView];
+    
+    UIButton* settingButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.011, viewH*0.01, viewW*0.05, viewH*0.08)];
     [settingButton addTarget:self action:@selector(settingButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:settingButton];
     
     UIImageView* bluetoothIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Bluetooth_gray3.png"]];
     bluetoothIconImageView.frame = CGRectMake(viewW*0.95, 0, viewW*0.035, viewH*0.07);
     [self.view addSubview:bluetoothIconImageView];
+    
+    UIButton* bluetoothButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.9, viewH*0.01, viewW*0.05, viewH*0.08)];
+    bluetoothButton.backgroundColor = UIColor.blackColor;
+    [bluetoothButton addTarget:self action:@selector(reConnectButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:bluetoothButton];
     
     UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(viewW*0.45, 0, viewW*0.1, viewH*0.07)];
     titleLabel.text = @"iKeybo";
@@ -340,7 +364,9 @@
    
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.spinner.frame = CGRectMake(CGRectGetMidX(self.view.frame)-25, CGRectGetMidY(self.view.frame)-25, 50, 50);
-    self.spinner.backgroundColor = [UIColor whiteColor];
+    self.spinner.backgroundColor = [UIColor grayColor];
+    //self.spinner.alpha = 0.7;
+    self.spinner.layer.cornerRadius = 5;
     [self.spinner startAnimating];
    
     self.mistView = [[UIView alloc] initWithFrame:self.view.frame];
@@ -383,9 +409,14 @@
     BGImageView.frame = self.view.frame;
     [self.settingPageView addSubview:BGImageView];
     
-    UIButton* leaveSettingPageButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0.015, CGRectGetHeight(self.view.frame)*0.008, CGRectGetWidth(self.view.frame)*0.031, CGRectGetHeight(self.view.frame)*0.052)];
+    UIButton* leaveSettingPageButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0.015, CGRectGetHeight(self.view.frame)*0.008, CGRectGetWidth(self.view.frame)*0.08, CGRectGetHeight(self.view.frame)*0.1)];
     [leaveSettingPageButton addTarget:self action:@selector(settingButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.settingPageView addSubview:leaveSettingPageButton];
+    
+    UIButton* bluetoothButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.9, viewH*0.01, viewW*0.05, viewH*0.08)];
+    bluetoothButton.backgroundColor = UIColor.blackColor;
+    [bluetoothButton addTarget:self action:@selector(reConnectButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:bluetoothButton];
     
     //draw instructment menu
     self.instrumentMenuScrollView = [[UIScrollView alloc] init];
@@ -408,12 +439,12 @@
     self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.32, 0);
     [self.settingPageView addSubview:self.instrumentMenuScrollView];
     
-    UIButton* lastInstrumentButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.instrumentMenuScrollView.frame), CGRectGetMinY(self.instrumentMenuScrollView.frame), CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.033, CGRectGetHeight(self.instrumentMenuScrollView.frame))];
+    UIButton* lastInstrumentButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.instrumentMenuScrollView.frame), CGRectGetMinY(self.instrumentMenuScrollView.frame), CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.08, CGRectGetHeight(self.instrumentMenuScrollView.frame))];
     lastInstrumentButton.tag = 0;
     [lastInstrumentButton addTarget:self action:@selector(instrumentNextOrLastButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.settingPageView addSubview:lastInstrumentButton];
     
-    UIButton* nextInstrumentButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.instrumentMenuScrollView.frame)+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.967, CGRectGetMinY(self.instrumentMenuScrollView.frame), CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.033, CGRectGetHeight(self.instrumentMenuScrollView.frame))];
+    UIButton* nextInstrumentButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.instrumentMenuScrollView.frame)+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.967, CGRectGetMinY(self.instrumentMenuScrollView.frame), CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.08, CGRectGetHeight(self.instrumentMenuScrollView.frame))];
     nextInstrumentButton.tag = 1;
     [nextInstrumentButton addTarget:self action:@selector(instrumentNextOrLastButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.settingPageView addSubview:nextInstrumentButton];
@@ -448,12 +479,12 @@
     self.tablatureMenuScrollView.contentOffset = CGPointMake(self.tablatureMenuScrollView.contentOffset.x+CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.3, 0);
     [self.settingPageView addSubview:self.tablatureMenuScrollView];
     
-    UIButton* lastSheetButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.tablatureMenuScrollView.frame), CGRectGetMinY(self.tablatureMenuScrollView.frame), CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.033, CGRectGetHeight(self.tablatureMenuScrollView.frame))];
+    UIButton* lastSheetButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.tablatureMenuScrollView.frame), CGRectGetMinY(self.tablatureMenuScrollView.frame), CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.08, CGRectGetHeight(self.tablatureMenuScrollView.frame))];
     lastSheetButton.tag = 0;
     [lastSheetButton addTarget:self action:@selector(sheetNextOrLastButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.settingPageView addSubview:lastSheetButton];
     
-    UIButton* nextSheetButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.tablatureMenuScrollView.frame)+CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.967, CGRectGetMinY(self.tablatureMenuScrollView.frame), CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.033, CGRectGetHeight(self.tablatureMenuScrollView.frame))];
+    UIButton* nextSheetButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.tablatureMenuScrollView.frame)+CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.967, CGRectGetMinY(self.tablatureMenuScrollView.frame), CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.08, CGRectGetHeight(self.tablatureMenuScrollView.frame))];
     nextSheetButton.tag = 1;
     [nextSheetButton addTarget:self action:@selector(sheetNextOrLastButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.settingPageView addSubview:nextSheetButton];
@@ -728,6 +759,8 @@
     }
 }
 
+
+
 -(void)settingButtonClicked
 {
     if(!self.showingSettingPage)
@@ -750,7 +783,7 @@
             {
                 [group enumerateAssetsWithOptions:0
                                        usingBlock:nil];
-                [group enumerateAssetsUsingBlock:resultBlock];
+                //[group enumerateAssetsUsingBlock:resultBlock];
             }
         };
         
@@ -871,13 +904,27 @@
     AVAudioPlayer* player = [playersArray objectAtIndex:keyNo];
     if(![player isPlaying])
     {
-        player.volume = 1;
+        player.volume = 0.1;
         [player play];
+        /*int i = 0;
+        float up = 0.005;
+        while (i<1000000 && player.volume < 0.1){
+            i++;
+            player.volume += up;
+        }*/
     }
     else
     {
-        player.volume = 1;
+        [player stop];
+        player.volume = 0.1;
         player.currentTime = 0;
+        [player play];
+        /*int i = 0;
+        float up = 0.005;
+        while (i<1000000 && player.volume < 0.1){
+            i++;
+            player.volume += up;
+        }*/
     }
 }
 
@@ -901,25 +948,28 @@
     }
     
     NSArray* playersArray = self.octavesArray[octaveNo-1];
-    AVAudioPlayer* player = [playersArray objectAtIndex:keyNo];
-    int i=0;
-    while (i<10000000)
-        i++;
-    player.volume = 0.1;
+    AVAudioPlayer *player = [playersArray objectAtIndex:keyNo];
     
-    i=0;
-    while (i<40000000)
+    
+    int i=0;
+    float de = 0.0008;
+    while (i<1000000 && player.volume > 0.001){
         i++;
+        if (player.volume < 0.1)
+            de = 0.00005;
+        player.volume -= de;
+    }
+    
     
  //   player.volume = 1;
   //  NSLog(@"%f", player.currentTime);
-    if(player.currentTime > 0.17)
+    /*if(player.currentTime > 0.17)
     {
-    //    NSLog(@"%f", player.currentTime);
+        //    NSLog(@"%f", player.currentTime);
         [player stop];
         player.currentTime = 0;
         [player prepareToPlay];
-    }
+    }*/
 }
 
 -(void)goHigherOctave
@@ -934,6 +984,8 @@
         self.littleKeyboImageView.frame = CGRectMake(CGRectGetMinX(self.littleKeyboImageView.frame)+viewW*0.129, CGRectGetMinY(self.littleKeyboImageView.frame), CGRectGetWidth(self.littleKeyboImageView.frame), CGRectGetHeight(self.littleKeyboImageView.frame));
     }
 }
+
+
 
 -(void) goLowerOctave
 {
@@ -1080,6 +1132,37 @@
     }
 }
 
+-(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
+{
+    //#ifdef DEBUG
+    NSMutableString* nsmstring=[NSMutableString stringWithString:@"\n"];
+    [nsmstring appendString:@"Peripheral Info:"];
+    [nsmstring appendFormat:@"NAME: %@\n",peripheral.name];
+    [nsmstring appendFormat:@"RSSI: %@\n",RSSI];
+    
+    
+    [nsmstring appendFormat:@"adverisement:%@",advertisementData];
+    [nsmstring appendString:@"didDiscoverPeripheral\n"];
+    NSLog(@"%@",nsmstring);
+    //#endif
+    //if([[advertisementData objectForKey:@"kCBAdvDataLocalName"] isEqualToString:@"Serafim iKeybo"]){
+    if([[peripheral name] isEqualToString:@"Serafim iKeybo"]){
+        _appDelegate.serafimPeripheral = peripheral;
+        //[self.cbManager connectPeripheral:self.appDelegate.serafimPeripheral options:nil];
+        NSLog(@"fuck u");
+    }
+}
+
+-(void)reConnectButtonClicked
+{
+    NSInteger* pageID = 0;
+    //[self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    //if([self.delegate respondsToSelector:@selector(keyboViewDismissed:)])
+    //{
+        [self.delegate keyboViewDismissed:pageID];
+    //}
+}
 
 /*
 #pragma mark - Navigation

@@ -10,8 +10,16 @@
 #import <AVFoundation/AVAudioPlayer.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "AppDelegate.h"
+//@class iKeyboardMenuViewController;
+
+@protocol keyboDelegate <NSObject>
+-(void) keyboViewDismissed:(NSInteger *)pageIDforFirst;
+@end
 
 @interface iKeyboardNormalModeViewController : UIViewController<UIGestureRecognizerDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CBPeripheralDelegate>
+
+
+@property (nonatomic, weak) id<keyboDelegate> delegate;
 
 //UI
 @property UIView* settingPageView;
@@ -75,4 +83,5 @@
 @property AppDelegate* appDelegate;
 @property int audioPlayerReady;
 @property int photoPickViewShowing;
+
 @end
