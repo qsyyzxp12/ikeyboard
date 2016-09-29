@@ -8,12 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
-#import "iKeyboardNormalModeViewController.h"
 #import "AppDelegate.h"
+#import "iKeyboardNormalModeViewController.h"
 
-@interface iKeyboardMenuViewController : UIViewController<CBCentralManagerDelegate>
+@interface iKeyboardMenuViewController : UIViewController<CBCentralManagerDelegate,keyboDelegate>
+-(void) keyboViewDismissed:(NSInteger *)pageIDforFirst;
 
 @property CBCentralManager* cbManager;
 @property AppDelegate* appDelegate;
 @property iKeyboardNormalModeViewController* normalModeViewController;
+@property NSInteger* pageID;
+@property UIActivityIndicatorView *spinner;
+@property UIView *mistView;
+@property NSTimer *autoConnectionTimer;
+-(void) bluetoothReady;
+-(void) bluetoothConnect;
 @end

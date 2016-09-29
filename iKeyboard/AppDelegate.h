@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property CBCharacteristic* FFA1;
-@property CBPeripheral* serafimPeripheral;
+@property CBPeripheral *serafimPeripheral;
 
 @end
 

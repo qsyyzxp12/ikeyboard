@@ -9,6 +9,8 @@
 #import "iKeyboardNormalModeViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "AssetsLibrary/AssetsLibrary.h"
+#import "iKeyboardMenuViewController.h"
+#import "AppDelegate.h"
 
 #define IPhone4 [[UIScreen mainScreen] bounds].size.width == (double)480
 #define IPhone5 [[UIScreen mainScreen] bounds].size.width == (double)568
@@ -24,16 +26,26 @@
 @end
 
 @implementation iKeyboardNormalModeViewController
+@synthesize delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.x = malloc(sizeof(int)*4);
+    bzero(self.x, sizeof(int)*4);
+    self.count = 0;
+    
+    self.isRecording = NO;
     self.audioPlayerReady = NO;
     self.photoPickViewShowing = NO;
-    
+    self.isPlayingRecord = NO;
+
     self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     self.keyPressingArray = malloc(sizeof(int)*4);
     bzero(self.keyPressingArray, sizeof(int)*4);
+    
+    //self.keyPressing = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInt:0], nil];
+    self.keyPressing = [[NSMutableArray alloc] init];
     
     self.showingSettingPage = NO;
     self.showingPlusPage = NO;
@@ -59,7 +71,7 @@
     self.sheetButtonArray = [[NSMutableArray alloc] init];
     self.noteNameArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"E", @"F", @"G", @"A", @"B", nil];
     self.halfStepArray = [[NSArray alloc] initWithObjects:@"C", @"D", @"F", @"G", @"A", nil];
-    self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"bass", @"piano", @"guitar", @"drums", nil];
+    self.instrumentNameMap = [[NSArray alloc] initWithObjects:@"bass", @"piano", @"guitar", @"drum", nil];
     
     NSMutableArray* highlightedKeyImageViewArray = [[NSMutableArray alloc] init];
     for(int i=0; i<24; i++)
@@ -75,6 +87,18 @@
     [self.view addSubview:self.mistView];
     [self.view addSubview:self.spinner];
     [NSThread detachNewThreadSelector:@selector(AVAudioPlayerInit) toTarget:self withObject:nil];
+    
+    //return app detecter
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didBecomeActive:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
+}
+
+//do something when return
+- (void)didBecomeActive:(NSNotification *)notification;
+{
+    [self AVAudioPlayerInit];
 }
 
 -(void) bluetoothMesHandler:(const char*) mes
@@ -87,39 +111,80 @@
     
     if(!self.audioPlayerReady)
         return;
-    
-    for(int i=0; i<MIN((long)mes[1], 3); i++)
-    {
+    int playingPointer = 0;
+    for(int i=0; i<MIN((long)mes[1], 3); i++){
+        int keyNo = (int)mes[i+2];
 #ifdef DEBUG
         NSLog(@"%02lX", (long)mes[i+2]);
 #endif
-        int keyNo = (int)mes[i+2];
-        if(keyNo)
-        {
-            if(self.keyPressingArray[i] != keyNo)
-            {
-                if(keyNo == 25)
-                    [self goLowerOctave];
-                else if(keyNo == 26)
-                    [self goHigherOctave];
-                else if(!self.showingSettingPage)
-                    [self tapBeganOnKey:mes[i+2]-1];
-            }
-        }
-        else
-        {
-            if(self.keyPressingArray[i])
-            {
-                if(self.keyPressingArray[i] != 25 && self.keyPressingArray[i] != 26 && !self.showingSettingPage)
-                {
-                    [self.highlightedKeyImageViewArray[self.keyPressingArray[i]-1] removeFromSuperview];
-                    [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:self.keyPressingArray[i]-1]];
+        if(keyNo){
+            if(keyNo == 25)
+                [self goLowerOctave];
+            else if(keyNo == 26)
+                [self goHigherOctave];
+            else if(!self.showingSettingPage && _keyPressing.count > 0){
+                //for(playingPointer; playingPointer < [_keyPressing count];playingPointer++){
+                while(true){
+                    if(playingPointer >= [_keyPressing count]){
+                        [self.view addSubview:self.highlightedKeyImageViewArray[keyNo-1]];
+                        [NSThread detachNewThreadSelector:@selector(tapBeganOnKey:) toTarget:self withObject:[NSNumber numberWithInt:keyNo-1]];
+                        //[self tapBeganOnKey:keyNo-1];
+                        NSNumber* newPlay = [NSNumber numberWithInt:keyNo-1];
+                        [_keyPressing addObject:newPlay];
+                        playingPointer++;
+                        break;
+                    }
+                    else{
+                        int playingKey = [_keyPressing[playingPointer] intValue];
+                        if(playingKey > keyNo-1){
+                            [self.view addSubview:self.highlightedKeyImageViewArray[keyNo-1]];
+                            [NSThread detachNewThreadSelector:@selector(tapBeganOnKey:) toTarget:self withObject:[NSNumber numberWithInt:keyNo-1]];
+                            //[self tapBeganOnKey:keyNo-1];
+                            NSNumber* newPlay = [NSNumber numberWithInt:keyNo-1];
+                            [_keyPressing insertObject:newPlay atIndex:playingPointer];
+                            playingPointer++;
+                            break;
+                        }
+                        else if(playingKey < keyNo-1){
+                            [self.highlightedKeyImageViewArray[[self.keyPressing[playingPointer] intValue]] removeFromSuperview];
+                            [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:self.keyPressing[playingPointer]];
+                            [_keyPressing removeObjectAtIndex:playingPointer];
+                        }
+                        else {
+                            playingPointer++;
+                            break;
+                        }
+                    }
+                }
+                if(i == (MIN((long)mes[1], 3)-1) && playingPointer < [_keyPressing count]){
+                    for(playingPointer; playingPointer < [_keyPressing count];playingPointer++){
+                        [self.highlightedKeyImageViewArray[[self.keyPressing[playingPointer] intValue]] removeFromSuperview];
+                        [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:self.keyPressing[playingPointer]];
+                        [_keyPressing removeObjectAtIndex:playingPointer];
+                        playingPointer--;
+                    }
                 }
             }
+            else if(!self.showingSettingPage){
+                //[self tapBeganOnKey:keyNo - 1];
+                NSNumber* newPlay = [NSNumber numberWithInt:keyNo-1];
+                [_keyPressing addObject:newPlay];
+                [self.view addSubview:self.highlightedKeyImageViewArray[keyNo-1]];
+                [NSThread detachNewThreadSelector:@selector(tapBeganOnKey:) toTarget:self withObject:[NSNumber numberWithInt:keyNo-1]];
+                playingPointer++;
+            }
         }
-        self.keyPressingArray[i] = keyNo;
+        else{
+            for(int j = 0; j < [_keyPressing count];j++){
+                [self.highlightedKeyImageViewArray[[self.keyPressing[j] intValue]] removeFromSuperview];
+                [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:self.keyPressing[j]];
+            }
+            [_keyPressing removeAllObjects];
+            break;
+        }
     }
 }
+
 
 -(void) changeIkeyboMode:(CBPeripheral*)peripheral
 {
@@ -245,8 +310,12 @@
     barImageView.frame = self.view.frame;
     [self.view addSubview:barImageView];
     
-    UIButton* settingButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.011, viewH*0.01, viewW*0.03, viewH*0.05)];
-    [settingButton setImage:[UIImage imageNamed:@"Menu_button3.png"] forState:UIControlStateNormal];
+    
+    UIImageView* settingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Menu_button3.png"]];
+    settingImageView.frame = CGRectMake(viewW*0.015, viewH*0.006, viewW*0.031, viewH*0.055);
+    [self.view addSubview:settingImageView];
+    
+    UIButton* settingButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewW*0.08, viewH*0.1)];
     [settingButton addTarget:self action:@selector(settingButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:settingButton];
     
@@ -264,13 +333,22 @@
     
     self.littleKeyboImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Scrollnotes-1.png"]];
     self.littleKeyboImageView.frame = CGRectMake(viewW*0.311, viewH*0.593, viewW*0.266, viewH*0.114);
-  //  self.littleKeyboImageView.alpha = 0.5;
     [self.view addSubview:self.littleKeyboImageView];
-   
+    
+    self.octaveView = [[UIView alloc] initWithFrame:CGRectMake(0, viewH*0.6, viewW, viewH*0.1)];
+    [_octaveView setUserInteractionEnabled:YES];
+    UISwipeGestureRecognizer *swipeOctiveRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(octaveSwiped:)];
+    swipeOctiveRight.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    UISwipeGestureRecognizer *swipeOctiveLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(octaveSwiped:)];
+    swipeOctiveLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    [_octaveView addGestureRecognizer:swipeOctiveLeft];
+    [_octaveView addGestureRecognizer:swipeOctiveRight];
+    [self.view addSubview:_octaveView];
+    
     self.leftMistBar = [[UIView alloc] initWithFrame:CGRectMake(viewW*0.02, viewH*0.6, viewW*0.295, viewH*0.1)];
- //   self.leftMistBar.alpha = 0.5;
     self.leftMistBar.tag = 0;
- //   self.leftMistBar.backgroundColor = [UIColor blueColor];
     UITapGestureRecognizer* tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(arrowImageViewClicked:)];
     tapGest.numberOfTapsRequired = 1;
     tapGest.numberOfTouchesRequired = 1;
@@ -278,16 +356,14 @@
     [self.view addSubview:self.leftMistBar];
     
     self.rightMistBar = [[UIView alloc] initWithFrame:CGRectMake(viewW*0.573, viewH*0.6, viewW*0.402, viewH*0.1)];
-  //  self.rightMistBar.alpha = 0.5;
     self.rightMistBar.tag = 1;
-  //  self.rightMistBar.backgroundColor = [UIColor blueColor];
     tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(arrowImageViewClicked:)];
     tapGest.numberOfTapsRequired = 1;
     tapGest.numberOfTouchesRequired = 1;
     [self.rightMistBar addGestureRecognizer:tapGest];
     [self.view addSubview:self.rightMistBar];
 
-    CGFloat oneKeyWidth = (viewW - self.keyboard_left_padding - self.keyboard_right_padding - self.keyboard_padding*13)/14;
+    CGFloat oneKeyWidth = (viewW - self.keyboard_left_padding - self.keyboard_right_padding/* - self.keyboard_padding*13*/)/14;
     CGFloat keyX = self.keyboard_left_padding;
     CGFloat keyY = viewH*0.72;
     CGFloat keyHeight = viewH*0.28;
@@ -302,8 +378,9 @@
      //   whiteKeyView.backgroundColor = [UIColor redColor];
      //   whiteKeyView.alpha = 0.5;
         [self.view addSubview:whiteKeyView];
-        keyX += self.keyboard_padding + oneKeyWidth;
+        keyX += /*self.keyboard_padding +*/ oneKeyWidth;
         [keyViewArray addObject:whiteKeyView];
+        
     }
 
     //Black keys
@@ -340,40 +417,91 @@
    
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.spinner.frame = CGRectMake(CGRectGetMidX(self.view.frame)-25, CGRectGetMidY(self.view.frame)-25, 50, 50);
-    self.spinner.backgroundColor = [UIColor whiteColor];
+    self.spinner.backgroundColor = [UIColor grayColor];
+    //self.spinner.alpha = 0.7;
+    self.spinner.layer.cornerRadius = 5;
     [self.spinner startAnimating];
    
     self.mistView = [[UIView alloc] initWithFrame:self.view.frame];
     self.mistView.backgroundColor = [UIColor blackColor];
     self.mistView.alpha = 0.5;
     
-    UIView* fingerSensorView = [[UIView alloc] initWithFrame:CGRectMake(self.keyboard_left_padding, keyY, viewW-self.keyboard_left_padding-self.keyboard_right_padding, viewH*0.28)];
-    fingerSensorView.backgroundColor = [UIColor clearColor];
-    
+    self.fingerSensorView = [[UIView alloc] initWithFrame:CGRectMake(self.keyboard_left_padding, keyY, viewW-self.keyboard_left_padding-self.keyboard_right_padding, viewH*0.28)];
+    self.fingerSensorView.backgroundColor = [UIColor clearColor];
+    self.fingerSensorView.multipleTouchEnabled = YES;
+ /*
     self.tapGestureRecognizer = [[UILongPressGestureRecognizer alloc]
                                                           initWithTarget:self
                                                           action:@selector(tap:)];
     self.tapGestureRecognizer.delegate = self;
+   // self.tapGestureRecognizer.numberOfTouchesRequired = 2;
     [self.tapGestureRecognizer setMinimumPressDuration:0.01];
-    [fingerSensorView addGestureRecognizer:self.tapGestureRecognizer];
+    [self.fingerSensorView addGestureRecognizer:self.tapGestureRecognizer];
     
     self.tapGestureRecognizer2 = [[UILongPressGestureRecognizer alloc]
                                  initWithTarget:self
                                  action:@selector(tap:)];
     self.tapGestureRecognizer2.delegate = self;
     [self.tapGestureRecognizer2 setMinimumPressDuration:0.01];
-    [fingerSensorView addGestureRecognizer:self.tapGestureRecognizer2];
+    [self.fingerSensorView addGestureRecognizer:self.tapGestureRecognizer2];
     
     self.tapGestureRecognizer3 = [[UILongPressGestureRecognizer alloc]
                                  initWithTarget:self
                                  action:@selector(tap:)];
     self.tapGestureRecognizer3.delegate = self;
     [self.tapGestureRecognizer3 setMinimumPressDuration:0.01];
-    [fingerSensorView addGestureRecognizer:self.tapGestureRecognizer3];
+    [self.fingerSensorView addGestureRecognizer:self.tapGestureRecognizer3];
+    */
+  //  [self.fingerSensorView setMultipleTouchEnabled:YES];
     
-    [self.view addSubview:fingerSensorView];
-    
+    [self.view addSubview:self.fingerSensorView];
+  
     [self drawSettingPageView];
+    
+    UIButton* recordButton = [[UIButton alloc] initWithFrame:CGRectMake(560, 50, 80, 25)];
+    recordButton.layer.borderWidth = 1;
+    [recordButton setTitle:@"Record" forState:UIControlStateNormal];
+   // [recordButton setBackgroundColor:[UIColor redColor]];
+    [recordButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [recordButton addTarget:self action:@selector(recordButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:recordButton];
+    
+    UIButton* playMenuButton = [[UIButton alloc] initWithFrame:CGRectMake(470, 50, 80, 25)];
+    playMenuButton.layer.borderWidth = 1;
+    playMenuButton.tag = 0;
+    [playMenuButton setTitle:@"Play" forState:UIControlStateNormal];
+    [playMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [playMenuButton addTarget:self action:@selector(playMenuButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:playMenuButton];
+    
+    self.recordView = [[UIView alloc] initWithFrame:CGRectMake(0, 100, viewW, viewH-100)];
+    self.recordView.backgroundColor = [UIColor whiteColor];
+    self.recordView.layer.borderWidth = 1;
+    
+    NSFileManager* fm = [[NSFileManager alloc] init];
+    NSString* recordPlistPath = [NSString stringWithFormat:@"%@/Documents/record.plist", NSHomeDirectory()];
+    if(![fm fileExistsAtPath:recordPlistPath])
+    {
+        NSString* orgRecordPlistPath = [[NSBundle mainBundle] pathForResource:@"record" ofType:@"plist"];
+        [fm copyItemAtPath:orgRecordPlistPath toPath:recordPlistPath error:nil];
+        recordPlistPath = orgRecordPlistPath;
+    }
+    
+    NSArray* recordArray = [NSMutableArray arrayWithContentsOfFile:recordPlistPath];
+    NSLog(@"%@", recordArray);
+    int width = 80;
+    for(int i=0; i<recordArray.count; i++)
+    {
+        if([fm fileExistsAtPath:recordArray[i]])
+            NSLog(@"EXIST");
+        UIButton* playerButton = [[UIButton alloc] initWithFrame:CGRectMake(50+width*i, 50, 80, 25)];
+        playerButton.layer.borderWidth = 1;
+        playerButton.tag = i;
+        [playerButton setTitle:@"Play" forState:UIControlStateNormal];
+        [playerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [playerButton addTarget:self action:@selector(playButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.recordView addSubview:playerButton];
+    }
 }
 
 -(void) drawSettingPageView
@@ -383,14 +511,14 @@
     BGImageView.frame = self.view.frame;
     [self.settingPageView addSubview:BGImageView];
     
-    UIButton* leaveSettingPageButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0.015, CGRectGetHeight(self.view.frame)*0.008, CGRectGetWidth(self.view.frame)*0.031, CGRectGetHeight(self.view.frame)*0.052)];
+    UIButton* leaveSettingPageButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)*0, CGRectGetHeight(self.view.frame)*0, CGRectGetWidth(self.view.frame)*0.1, CGRectGetHeight(self.view.frame)*0.15)];
     [leaveSettingPageButton addTarget:self action:@selector(settingButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.settingPageView addSubview:leaveSettingPageButton];
+
     
     //draw instructment menu
     self.instrumentMenuScrollView = [[UIScrollView alloc] init];
     self.instrumentMenuScrollView.frame = CGRectMake(viewW*0.084, viewH*0.58, viewW*0.832, viewH*0.243);
-    
     for(int i=0; i<[self.instrumentNameMap count]; i++)
     {
         UIButton* instrumentButton = [[UIButton alloc] init];
@@ -400,24 +528,37 @@
         instrumentButton.adjustsImageWhenHighlighted = NO;
         [instrumentButton setFrame:CGRectMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*(0.36+i*0.32), CGRectGetHeight(self.instrumentMenuScrollView.frame)*0.1
                                               , CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.28, self.instrumentMenuScrollView.frame.size.height*0.9)];
+        [instrumentButton addTarget:self action:@selector(instrumentClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
         [self.instrumentMenuScrollView addSubview:instrumentButton];
     }
-    [self.instrumentMenuScrollView setUserInteractionEnabled:NO];
+    [self.instrumentMenuScrollView setUserInteractionEnabled:YES];
+    [self.instrumentMenuScrollView setScrollEnabled:NO];
     self.instrumentMenuScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.instrumentMenuScrollView.frame)*(0.72+0.32*[self.instrumentNameMap count]-0.04), CGRectGetHeight(self.instrumentMenuScrollView.frame));
     
     self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.32, 0);
+    
     [self.settingPageView addSubview:self.instrumentMenuScrollView];
     
-    UIButton* lastInstrumentButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.instrumentMenuScrollView.frame), CGRectGetMinY(self.instrumentMenuScrollView.frame), CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.033, CGRectGetHeight(self.instrumentMenuScrollView.frame))];
+    UIButton* lastInstrumentButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.instrumentMenuScrollView.frame), CGRectGetMinY(self.instrumentMenuScrollView.frame), CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.08, CGRectGetHeight(self.instrumentMenuScrollView.frame))];
     lastInstrumentButton.tag = 0;
     [lastInstrumentButton addTarget:self action:@selector(instrumentNextOrLastButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.settingPageView addSubview:lastInstrumentButton];
     
-    UIButton* nextInstrumentButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.instrumentMenuScrollView.frame)+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.967, CGRectGetMinY(self.instrumentMenuScrollView.frame), CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.033, CGRectGetHeight(self.instrumentMenuScrollView.frame))];
+    UIButton* nextInstrumentButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.instrumentMenuScrollView.frame)+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.967, CGRectGetMinY(self.instrumentMenuScrollView.frame), CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.08, CGRectGetHeight(self.instrumentMenuScrollView.frame))];
     nextInstrumentButton.tag = 1;
     [nextInstrumentButton addTarget:self action:@selector(instrumentNextOrLastButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.settingPageView addSubview:nextInstrumentButton];
     
+    //add swipe Gesture
+    UISwipeGestureRecognizer *swipeInstrumentRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(instrumentLastSwipe:)];
+    swipeInstrumentRight.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    UISwipeGestureRecognizer *swipeInstrumentLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(instrumentNextSwipe:)];
+    swipeInstrumentLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    [_instrumentMenuScrollView addGestureRecognizer:swipeInstrumentLeft];
+    [_instrumentMenuScrollView addGestureRecognizer:swipeInstrumentRight];
     
     //draw tablature menu
     
@@ -443,20 +584,31 @@
         nameLabel.adjustsFontSizeToFitWidth = YES;
         [self.tablatureMenuScrollView addSubview:nameLabel];
     }
-    [self.tablatureMenuScrollView setUserInteractionEnabled:NO];
+    [self.tablatureMenuScrollView setUserInteractionEnabled:YES];
+    [self.tablatureMenuScrollView setScrollEnabled:NO];
     self.tablatureMenuScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.tablatureMenuScrollView.frame)*(1.4+0.3*[self.instrumentNameMap count]-0.1), CGRectGetHeight(self.tablatureMenuScrollView.frame));
     self.tablatureMenuScrollView.contentOffset = CGPointMake(self.tablatureMenuScrollView.contentOffset.x+CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.3, 0);
     [self.settingPageView addSubview:self.tablatureMenuScrollView];
     
-    UIButton* lastSheetButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.tablatureMenuScrollView.frame), CGRectGetMinY(self.tablatureMenuScrollView.frame), CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.033, CGRectGetHeight(self.tablatureMenuScrollView.frame))];
+    UIButton* lastSheetButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.tablatureMenuScrollView.frame), CGRectGetMinY(self.tablatureMenuScrollView.frame), CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.08, CGRectGetHeight(self.tablatureMenuScrollView.frame))];
     lastSheetButton.tag = 0;
     [lastSheetButton addTarget:self action:@selector(sheetNextOrLastButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.settingPageView addSubview:lastSheetButton];
     
-    UIButton* nextSheetButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.tablatureMenuScrollView.frame)+CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.967, CGRectGetMinY(self.tablatureMenuScrollView.frame), CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.033, CGRectGetHeight(self.tablatureMenuScrollView.frame))];
+    UIButton* nextSheetButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.tablatureMenuScrollView.frame)+CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.967, CGRectGetMinY(self.tablatureMenuScrollView.frame), CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.08, CGRectGetHeight(self.tablatureMenuScrollView.frame))];
     nextSheetButton.tag = 1;
     [nextSheetButton addTarget:self action:@selector(sheetNextOrLastButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.settingPageView addSubview:nextSheetButton];
+    
+    //add swipe Gesture
+    UISwipeGestureRecognizer *swipeSheetRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(sheetLastSwipe:)];
+    swipeSheetRight.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    UISwipeGestureRecognizer *swipeSheetLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(sheetNextSwipe:)];
+    swipeSheetLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    [_tablatureMenuScrollView addGestureRecognizer:swipeSheetLeft];
+    [_tablatureMenuScrollView addGestureRecognizer:swipeSheetRight];
     
     UIButton* trashCanButton = [[UIButton alloc] initWithFrame:CGRectMake(viewW*0.79, viewH*0.1, 30, 30)];
     [trashCanButton addTarget:self action:@selector(trashCanButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -583,6 +735,111 @@
 
 #pragma mark - Actions
 
+-(void)playMenuButtonClicked:(UIButton*)sender
+{
+    if(!sender.tag)
+    {
+        [self.view addSubview:self.recordView];
+        sender.tag = 1;
+        NSString* recordPlistPath = [NSString stringWithFormat:@"%@/Documents/record.plist", NSHomeDirectory()];
+        self.recordArray = [NSMutableArray arrayWithContentsOfFile:recordPlistPath];
+        int buttonCount = (int)self.recordArray.count;
+        for(int i=0; i<5; i++)
+        {
+            if([self.recordView viewWithTag:i] && i >= buttonCount)
+                [[self.recordView viewWithTag:i] removeFromSuperview];
+            else if(![self.recordView viewWithTag:i] && i < buttonCount)
+            {
+                int x;
+                if(i == 0)
+                    x = 50;
+                else
+                    x = [self.recordView viewWithTag:i-1].frame.origin.x;
+                UIButton* playerButton = [[UIButton alloc] initWithFrame:CGRectMake(x, 50, 80, 25)];
+                playerButton.layer.borderWidth = 1;
+                playerButton.tag = i;
+                [playerButton setTitle:@"Play" forState:UIControlStateNormal];
+                [playerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [playerButton addTarget:self action:@selector(playButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+                [self.recordView addSubview:playerButton];
+            }
+        }
+    }
+    else
+    {
+        [self.recordView removeFromSuperview];
+        sender.tag = 0;
+    }
+}
+
+-(void)playButtonClicked:(UIButton*)sender
+{
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    NSError * error;
+
+    NSURL* url = [NSURL URLWithString:self.recordArray[sender.tag]];
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    self.audioPlayer.delegate = self;
+    BOOL success = [self.audioPlayer play];
+    if (success) {
+        NSLog(@"播放成功");
+    }else{
+        NSLog(@"播放失败");
+    }
+
+}
+
+-(void) recordButtonClicked
+{
+    if(!self.isRecording)
+    {
+        NSError* error;
+        NSString * url = NSHomeDirectory();
+        url = [url stringByAppendingString:[NSString stringWithFormat:@"%f.wav", [[NSDate date] timeIntervalSince1970]]];
+        NSMutableDictionary* settings = [[NSMutableDictionary alloc] init];
+        [settings setObject:[NSNumber numberWithFloat:8000.0] forKey:AVSampleRateKey];
+        [settings setObject:[NSNumber numberWithInt: kAudioFormatLinearPCM] forKey:AVFormatIDKey];
+        [settings setObject:@1 forKey:AVNumberOfChannelsKey];
+        [settings setObject:@16 forKey:AVLinearPCMBitDepthKey];
+        
+        NSFileManager* fm = [[NSFileManager alloc] init];
+        NSString* recordPlistPath = [NSString stringWithFormat:@"%@/Documents/record.plist", NSHomeDirectory()];
+        NSMutableArray* recordArray = [NSMutableArray arrayWithContentsOfFile:recordPlistPath];
+
+        if(recordArray.count == 5)
+        {
+            NSString* deletePath = recordArray[0];
+            if([fm fileExistsAtPath:deletePath])
+                [fm removeItemAtPath:deletePath error:nil];
+            for(int i=0; i<4; i++)
+                recordArray[i] = recordArray[i+1];
+            [recordArray setObject:url atIndexedSubscript:4];
+        }
+        else
+            [recordArray addObject:url];
+        
+  //      NSLog(@"%d", [recordArray writeToFile:recordPlistPath atomically:YES]);
+        
+        self.audioRecorder = [[AVAudioRecorder  alloc] initWithURL:[NSURL fileURLWithPath:url] settings:settings error:&error];
+        self.audioRecorder.meteringEnabled = YES;
+        self.audioRecorder.delegate = self;
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryRecord error:nil];
+        BOOL success = [self.audioRecorder record];
+        if(success)
+        {
+            NSLog(@"Success");
+            self.isRecording = YES;
+        }
+        else
+            NSLog(@"Fail");
+    }
+    else
+    {
+        [self.audioRecorder stop];
+        self.isRecording = NO;
+    }
+}
+
 -(void) uploadButtonClicked
 {
     [self.view addSubview:self.photoPickView];
@@ -596,6 +853,19 @@
 
 -(void)doneButtonInPlusPageClicked
 {
+}
+
+-(void)instrumentClicked:(UIButton*) sender{
+    if(self.instrumentSelectedNo > (int)sender.tag){
+        self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x-CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.32, 0);
+    }
+    else if(self.instrumentSelectedNo < (int)sender.tag){
+        self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.32, 0);
+    }
+    
+    self.instrumentSelectedNo = (int)sender.tag;
+    
+    [self doneButtonInSettingPageClicked];
 }
 
 -(void)doneButtonInSettingPageClicked
@@ -708,6 +978,27 @@
     }
 }
 
+-(void)sheetNextSwipe:(UISwipeGestureRecognizer *)gestureRecognizer{
+    if(self.sheetSelectedNo < 3-1)
+    {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.tablatureMenuScrollView.contentOffset = CGPointMake(self.tablatureMenuScrollView.contentOffset.x+CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.3, 0);
+        }];
+        self.sheetSelectedNo++;
+        
+    }
+}
+
+-(void)sheetLastSwipe:(UISwipeGestureRecognizer *)gestureRecognizer{
+    if(self.sheetSelectedNo > 0)
+    {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.tablatureMenuScrollView.contentOffset = CGPointMake(self.tablatureMenuScrollView.contentOffset.x-CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.3, 0);
+        }];
+        self.sheetSelectedNo--;
+    }
+}
+
 -(void)instrumentNextOrLastButtonClicked:(UIButton*)sender
 {
     if(!sender.tag)
@@ -728,6 +1019,26 @@
     }
 }
 
+-(void)instrumentNextSwipe:(UISwipeGestureRecognizer *)gestureRecognizer{
+    if(self.instrumentSelectedNo < [self.instrumentNameMap count]-1)
+    {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.32, 0);
+        }];
+        self.instrumentSelectedNo++;
+    }
+}
+-(void)instrumentLastSwipe:(UISwipeGestureRecognizer *)gestureRecognizer{
+    if(self.instrumentSelectedNo > 0)
+    {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x-CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.32, 0);
+        }];
+        self.instrumentSelectedNo--;
+    }
+}
+
+
 -(void)settingButtonClicked
 {
     if(!self.showingSettingPage)
@@ -735,7 +1046,7 @@
         [self.view addSubview:self.settingPageView];
         self.showingSettingPage = YES;
         
-        self.photoArray = [[NSMutableArray alloc] init];
+        /*self.photoArray = [[NSMutableArray alloc] init];
         
         ALAssetsGroupEnumerationResultsBlock resultBlock = ^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if (result && [[result valueForProperty:ALAssetPropertyType] isEqual:ALAssetTypePhoto])
@@ -750,7 +1061,7 @@
             {
                 [group enumerateAssetsWithOptions:0
                                        usingBlock:nil];
-                [group enumerateAssetsUsingBlock:resultBlock];
+                //[group enumerateAssetsUsingBlock:resultBlock];
             }
         };
         
@@ -763,15 +1074,18 @@
         [self.sharedAssetsLibrary enumerateGroupsWithTypes:type
                                                 usingBlock:resultsBlock
                                               failureBlock:failureBlock];
+         */
     }
     else
     {
-        self.tablatureMenuScrollView.contentOffset = CGPointMake(self.tablatureMenuScrollView.contentOffset.x+CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.3*(self.sheetNo-self.sheetSelectedNo), 0);
-        self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.31*(self.instrumentNo-self.instrumentSelectedNo), 0);
+        /*self.tablatureMenuScrollView.contentOffset = CGPointMake(self.tablatureMenuScrollView.contentOffset.x+CGRectGetWidth(self.tablatureMenuScrollView.frame)*0.3*(self.sheetNo-self.sheetSelectedNo), 0);
+         self.instrumentMenuScrollView.contentOffset = CGPointMake(self.instrumentMenuScrollView.contentOffset.x+CGRectGetWidth(self.instrumentMenuScrollView.frame)*0.31*(self.instrumentNo-self.instrumentSelectedNo), 0);
+         */
         
+        //self.sheetSelectedNo = self.sheetNo;
+        //self.instrumentSelectedNo = self.instrumentNo;
         
-        self.sheetSelectedNo = self.sheetNo;
-        self.instrumentSelectedNo = self.instrumentNo;
+        [self doneButtonInSettingPageClicked];
         
         [self.settingPageView removeFromSuperview];
         self.showingSettingPage = NO;
@@ -781,6 +1095,7 @@
 -(void)tap:(UITapGestureRecognizer*)sender
 {
     CGPoint point = [sender locationInView:self.view];
+    
     int gestNo;
     if(sender == (UIGestureRecognizer*)self.tapGestureRecognizer)
         gestNo = 0;
@@ -791,7 +1106,7 @@
     
     if(sender.state == UIGestureRecognizerStateBegan)
     {
-      //  NSLog(@"tapped began!");
+        NSLog(@"tapped began!");
         for(int i=(int)[self.keyViewArray count]-1; i >= 0; i--)
         {
             CGRect keyRect = ((UIView*)self.keyViewArray[i]).frame;
@@ -799,7 +1114,9 @@
             {
                 [self.keyBeingTappedFrameArray setObject:NSStringFromCGRect(keyRect) atIndexedSubscript:gestNo];
                 self.keyBeingTappedIndexArray[gestNo] = i;
-                [self tapBeganOnKey:i];
+                NSNumber* playKey = [NSNumber numberWithInt:i];
+                [self.view addSubview:self.highlightedKeyImageViewArray[i]];
+                [self tapBeganOnKey:playKey];
                 break;
             }
         }
@@ -837,7 +1154,9 @@
                 {
                     self.keyBeingTappedFrameArray[gestNo] = NSStringFromCGRect(keyRect);
                     self.keyBeingTappedIndexArray[gestNo] = i;
-                    [self tapBeganOnKey:i];
+                    [self.view addSubview:self.highlightedKeyImageViewArray[i]];
+                    NSNumber* playKey = [NSNumber numberWithInt:i];
+                    [self tapBeganOnKey:playKey];
                     break;
                 }
             }
@@ -845,10 +1164,13 @@
     }
 }
 
--(void) tapBeganOnKey:(int)index
+-(void) tapBeganOnKey:(NSNumber*)indexNum
 {
+    int index = [indexNum intValue];
   //  ((UIImageView*)(self.keyViewArray[index])).highlighted = YES;
-    [self.view addSubview:self.highlightedKeyImageViewArray[index]];
+    //int index = [NSindex intValue];
+    self.startVolume = self.instrumentSelectedNo == 1 || self.instrumentSelectedNo == 3 ? 0.7 : 0.1 ;
+    
     
     int octaveNo = self.lowerOctaveNo;
     int keyNo = index;
@@ -871,54 +1193,52 @@
     AVAudioPlayer* player = [playersArray objectAtIndex:keyNo];
     if(![player isPlaying])
     {
-        player.volume = 1;
+        player.volume = self.startVolume;
         [player play];
     }
     else
     {
-        player.volume = 1;
+        [player stop];
+        player.volume = self.startVolume;
         player.currentTime = 0;
+        [player play];
     }
+    
 }
 
 -(void) tapEndedOnKey:(NSNumber*)index
 {
-    int octaveNo = self.lowerOctaveNo;
-    int keyNo = index.intValue;
-    
-    if(index.intValue < 7);
-    else if(index.intValue > 6 && index.intValue < 14)
+    if(self.instrumentSelectedNo != 3)
     {
-        octaveNo++;
-        keyNo -= 7;
-    }
-    else if(index.intValue > 13 && index.intValue < 19)
-        keyNo -= 7;
-    else
-    {
-        octaveNo++;
-        keyNo -= 12;
-    }
+        int octaveNo = self.lowerOctaveNo;
+        int keyNo = index.intValue;
     
-    NSArray* playersArray = self.octavesArray[octaveNo-1];
-    AVAudioPlayer* player = [playersArray objectAtIndex:keyNo];
-    int i=0;
-    while (i<10000000)
-        i++;
-    player.volume = 0.1;
+        if(index.intValue < 7);
+        else if(index.intValue > 6 && index.intValue < 14)
+        {
+            octaveNo++;
+            keyNo -= 7;
+        }
+        else if(index.intValue > 13 && index.intValue < 19)
+            keyNo -= 7;
+        else
+        {
+            octaveNo++;
+            keyNo -= 12;
+        }
     
-    i=0;
-    while (i<40000000)
-        i++;
+        NSArray* playersArray = self.octavesArray[octaveNo-1];
+        AVAudioPlayer *player = [playersArray objectAtIndex:keyNo];
     
- //   player.volume = 1;
-  //  NSLog(@"%f", player.currentTime);
-    if(player.currentTime > 0.17)
-    {
-    //    NSLog(@"%f", player.currentTime);
-        [player stop];
-        player.currentTime = 0;
-        [player prepareToPlay];
+        int i=0;
+        float de = 0.0004;
+        while (i<1000000 && player.volume > 0.001)
+        {
+            i++;
+            if (player.volume < 0.1)
+                de = 0.00003;
+            player.volume -= de;
+        }
     }
 }
 
@@ -949,10 +1269,30 @@
 - (void) arrowImageViewClicked:(UITapGestureRecognizer*) sender
 {
     UIImageView* senderImageView = (UIImageView*)sender.view;
-    if(senderImageView.tag == 0)
-        [self goLowerOctave];
-    else
-        [self goHigherOctave];
+    if(senderImageView.tag == 0){
+        [UIView animateWithDuration:0.1 animations:^{
+            [self goLowerOctave];
+        }];
+    }
+    else{
+        [UIView animateWithDuration:0.1 animations:^{
+            [self goHigherOctave];
+        }];
+    }
+}
+
+- (void) octaveSwiped:(UISwipeGestureRecognizer*) sender
+{
+    if(sender.direction == UISwipeGestureRecognizerDirectionLeft){
+        [UIView animateWithDuration:0.1 animations:^{
+            [self goLowerOctave];
+        }];
+    }
+    else{
+        [UIView animateWithDuration:0.1 animations:^{
+            [self goHigherOctave];
+        }];
+    }
 }
 
 #pragma mark - UIGestureRecognizerDelegate
@@ -961,11 +1301,110 @@
 {
     CGPoint firstPoint = [gestureRecognizer locationInView:self.view];
     CGPoint secPoint = [otherGestureRecognizer locationInView:self.view];
-    
+  //  NSLog(@"Fst: (%f, %f) Sec: (%f, %f)", firstPoint.x, firstPoint.y, secPoint.x, secPoint.y);
     if(!CGPointEqualToPoint(firstPoint, secPoint))
         return  YES;
     
     return NO;
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)Event
+{
+    NSLog(@"Began");
+    for(int i=0; i < [[touches allObjects] count]; i++)
+    {
+        UITouch *touch = [[touches allObjects] objectAtIndex:i];
+        CGPoint point = [touch locationInView:self.view];
+        for(int j=23; j >= 0; j--)
+        {
+            CGRect keyRect = ((UIView*)self.keyViewArray[j]).frame;
+            if(CGRectContainsPoint(keyRect, point))
+            {
+                int top = 0;
+                while(top < 3 && self.x[top] != 0)
+                    top++;
+                if(top == 3)
+                    break;
+                self.x[top] = j;
+                self.count++;
+                NSNumber* playKey = [NSNumber numberWithInt:j];
+                [self.view addSubview:self.highlightedKeyImageViewArray[j]];
+                [self tapBeganOnKey:playKey];
+                break;
+            }
+        }
+    }
+    NSLog(@"%@", [NSString stringWithFormat:@"%d, %d, %d", self.x[0], self.x[1], self.x[2]]);
+
+}
+
+-(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+ //   NSLog(@"move: %d", (int)[[touches allObjects] count]);
+    for(int i=0; i < [[touches allObjects] count]; i++)
+    {
+        UITouch *touch = [[touches allObjects] objectAtIndex:i];
+        CGPoint point = [touch locationInView:self.view];
+        CGPoint prevPoint = [touch previousLocationInView:self.view];
+        for(int j=0; j<self.count; j++)
+        {
+            int index = self.x[j];
+            CGRect keyRect = ((UIView*)self.keyViewArray[index]).frame;
+            if(CGRectContainsPoint(keyRect, prevPoint))
+            {
+                if(CGRectContainsPoint(keyRect, point))
+                    break;
+                else
+                {
+                    [self.highlightedKeyImageViewArray[index] removeFromSuperview];
+                    [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:index]];
+                    
+                    for(int k=23; k >= 0; k--)
+                    {
+                        CGRect keyRect = ((UIView*)self.keyViewArray[k]).frame;
+                        if(CGRectContainsPoint(keyRect, point))
+                        {
+                            self.x[j] = k;
+                            NSNumber* playKey = [NSNumber numberWithInt:k];
+                            [self.view addSubview:self.highlightedKeyImageViewArray[k]];
+                            [self tapBeganOnKey:playKey];
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+ //   NSLog(@"%@", [NSString stringWithFormat:@"%d, %d, %d", self.x[0], self.x[1], self.x[2]]);
+}
+
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"End");
+    
+    for(int i=0; i < [[touches allObjects] count]; i++)
+    {
+        UITouch *touch = [[touches allObjects] objectAtIndex:i];
+        CGPoint point = [touch locationInView:self.view];
+        for(int j=(int)[self.keyViewArray count]-1; j >= 0; j--)
+        {
+            CGRect keyRect = ((UIView*)self.keyViewArray[j]).frame;
+            if(CGRectContainsPoint(keyRect, point))
+            {
+                for(int k=0; k<3; k++)
+                    if(self.x[k] == j)
+                    {
+                        self.x[k] = 0;
+                        self.count--;
+                        break;
+                    }
+                [self.highlightedKeyImageViewArray[j] removeFromSuperview];
+                [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:j]];
+                break;
+            }
+        }
+    }
+    NSLog(@"%@", [NSString stringWithFormat:@"%d, %d, %d", self.x[0], self.x[1], self.x[2]]);
 }
 
 #pragma mark - UITextFieldDelegate
@@ -1071,15 +1510,112 @@
         NSLog(@"Error reading characteristics: %@", [error localizedDescription]);
         return;
     }
-    
     if (characteristic.value != nil)
     {
         NSData* data = characteristic.value;
-        char* datas = data.bytes;
-        [self bluetoothMesHandler:datas];
+//        char* datas = data.bytes;
+        [_soundLockTimer invalidate];
+        _soundLockTimer = [NSTimer scheduledTimerWithTimeInterval:0.04 target:self           selector:@selector(releaseLock:) userInfo:data repeats:NO];
+//        [self bluetoothMesHandler:datas];
     }
 }
 
+-(void)releaseLock:(NSTimer*) timer{
+    NSData *data = (NSData*)[timer userInfo];
+    char* datas = data.bytes;
+    [self bluetoothMesHandler:datas];
+}
+
+/*-(void)reConnectButtonClicked
+{
+    NSInteger* pageID = 0;
+    //[self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    //if([self.delegate respondsToSelector:@selector(keyboViewDismissed:)])
+    //{
+        [self.delegate keyboViewDismissed:pageID];
+    //}
+}*/
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSLog(@"%f", scrollView.contentOffset.x);
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    self.scrollStop = YES;
+    //scrollView.pagingEnabled = YES;
+    CGFloat newx = scrollView.contentOffset.x;
+    if([self scrollStop]){
+        if(NSLocationInRange(scrollView.contentOffset.x, NSMakeRange(0, 89)))
+            newx = 0;
+        else if(NSLocationInRange(scrollView.contentOffset.x, NSMakeRange(89, 178)))
+            newx = 178;
+        else if(NSLocationInRange(scrollView.contentOffset.x, NSMakeRange(267, 178)))newx = 356;
+        else if(NSLocationInRange(scrollView.contentOffset.x, NSMakeRange(445, 178)))
+            newx = 534;
+        [UIView animateWithDuration:0.5 animations:^{
+            [scrollView setContentOffset:CGPointMake(newx, 0)];
+        }];
+    }
+    //scrollView.pagingEnabled = NO;
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    CGFloat newx = 0;
+    if(NSLocationInRange(scrollView.contentOffset.x, NSMakeRange(0, 89))){
+        newx = 0;
+    }
+    else if(NSLocationInRange(scrollView.contentOffset.x, NSMakeRange(89, 267))){
+        newx = 178;
+    }
+    else if(NSLocationInRange(scrollView.contentOffset.x, NSMakeRange(267, 445))){
+        newx = 356;
+    }
+    else {
+        newx = 534;
+    }
+    [UIView animateWithDuration:0.1 animations:^{
+        [scrollView setContentOffset:CGPointMake(newx, 0)];
+    }];
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)size {
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *destImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return destImage;
+}
+
+#pragma mark - AVAudioRecorderDelegate
+
+- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
+{
+    NSLog(@"%s", __func__);
+    self.url = recorder.url;
+    self.audioRecorder.delegate = nil;
+    self.audioRecorder = nil;
+}
+
+- (void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError * __nullable)error
+{
+    NSLog(@"%@", error);
+}
+
+#pragma mark - AVAudioPlayerDelegate
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    NSLog(@"%s", __func__);
+    self.audioPlayer.delegate = nil;
+    self.audioPlayer = nil;
+}
+
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError * __nullable)error
+{
+    NSLog(@"%@", error);
+}
 
 /*
 #pragma mark - Navigation

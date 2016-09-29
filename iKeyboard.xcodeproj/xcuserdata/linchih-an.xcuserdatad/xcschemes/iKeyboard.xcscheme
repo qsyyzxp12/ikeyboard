@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C74B81111CBE335B005307FF"
-               BuildableName = "iKeyboard.app"
+               BuildableName = "iKeybo.app"
                BlueprintName = "iKeyboard"
                ReferencedContainer = "container:iKeyboard.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C74B81111CBE335B005307FF"
-            BuildableName = "iKeyboard.app"
+            BuildableName = "iKeybo.app"
             BlueprintName = "iKeyboard"
             ReferencedContainer = "container:iKeyboard.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C74B81111CBE335B005307FF"
-            BuildableName = "iKeyboard.app"
+            BuildableName = "iKeybo.app"
             BlueprintName = "iKeyboard"
             ReferencedContainer = "container:iKeyboard.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C74B81111CBE335B005307FF"
-            BuildableName = "iKeyboard.app"
+            BuildableName = "iKeybo.app"
             BlueprintName = "iKeyboard"
             ReferencedContainer = "container:iKeyboard.xcodeproj">
          </BuildableReference>
