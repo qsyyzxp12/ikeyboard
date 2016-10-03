@@ -482,8 +482,8 @@
     {
         UIView* whiteKeyView = [[UIImageView alloc] init];
         whiteKeyView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
-        whiteKeyView.backgroundColor = [UIColor redColor];
-        whiteKeyView.alpha = 0.5;
+    //    whiteKeyView.backgroundColor = [UIColor redColor];
+    //    whiteKeyView.alpha = 0.5;
         [self.view addSubview:whiteKeyView];
         keyX += /*self.keyboard_padding +*/ oneKeyWidth;
         [keyViewArray addObject:whiteKeyView];
@@ -495,8 +495,8 @@
     for(int i=0; i<10; i++)
     {
         UIView* blackKeyView = [[UIView alloc] init];
-        blackKeyView.backgroundColor = [UIColor blueColor];
-        blackKeyView.alpha = 0.5;
+   //     blackKeyView.backgroundColor = [UIColor blueColor];
+   //     blackKeyView.alpha = 0.5;
         switch (i)
         {
             case 0:
