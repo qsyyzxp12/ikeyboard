@@ -84,12 +84,13 @@
 
 @property UIActivityIndicatorView* spinner;
 @property NSMutableArray* keyBeingTappedFrameArray;
-@property int* x;
-@property int count;
 @property int* keyBeingTappedIndexArray;
-@property UILongPressGestureRecognizer *tapGestureRecognizer;
-@property UILongPressGestureRecognizer *tapGestureRecognizer2;
-@property UILongPressGestureRecognizer *tapGestureRecognizer3;
+@property int keyBeingTappedCount;
+@property int** keysBesideMap;
+//@property int* keyBeingTappedIndexArray;
+//@property UILongPressGestureRecognizer *tapGestureRecognizer;
+//@property UILongPressGestureRecognizer *tapGestureRecognizer2;
+//@property UILongPressGestureRecognizer *tapGestureRecognizer3;
 @property BOOL showingSettingPage;
 @property BOOL showingPlusPage;
 @property int instrumentSelectedNo;

@@ -31,9 +31,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.x = malloc(sizeof(int)*4);
-    bzero(self.x, sizeof(int)*4);
-    self.count = 0;
+    self.keyBeingTappedIndexArray = malloc(sizeof(int)*4);
+    bzero(self.keyBeingTappedIndexArray, sizeof(int)*4);
+    self.keyBeingTappedCount = 0;
+    [self initKeyBesideMap];
+  
+    int i=0;
+    do {
+        NSLog(@"%d", self.keysBesideMap[7][i++]);
+    } while (self.keysBesideMap[7][i]);
     
     self.isRecording = NO;
     self.audioPlayerReady = NO;
@@ -55,8 +61,8 @@
   //  self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
     
     self.keyBeingTappedFrameArray = [[NSMutableArray alloc] initWithObjects:NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), NSStringFromCGRect(CGRectZero), nil];
-    self.keyBeingTappedIndexArray = malloc(sizeof(int)*4);
-    bzero(self.keyBeingTappedIndexArray, sizeof(int)*4);
+ //   self.keyBeingTappedIndexArray = malloc(sizeof(int)*4);
+ //   bzero(self.keyBeingTappedIndexArray, sizeof(int)*4);
     
     self.lowerOctaveNo = 3;
     self.sheetSelectedNo = 1;
@@ -185,6 +191,107 @@
     }
 }
 
+-(void)initKeyBesideMap
+{
+    self.keysBesideMap = malloc(sizeof(int*)*25);
+    bzero(self.keysBesideMap, sizeof(int*)*25);
+    
+    int* key0 = malloc(sizeof(int)*3);
+    key0[0] = 1; key0[1] = 14; key0[2] = 0;
+    self.keysBesideMap[0] = key0;
+    
+    int* key1 = malloc(sizeof(int)*5);
+    key1[0] = 0; key1[1] = 2; key1[2] = 14; key1[3] = 15; key1[4] = 0;
+    self.keysBesideMap[1] = key1;
+    
+    int* key2 = malloc(sizeof(int)*4);
+    key2[0] = 1; key2[1] = 3; key2[2] = 15; key2[3] = 0;
+    self.keysBesideMap[2] = key2;
+    
+    int* key3 = malloc(sizeof(int)*4);
+    key3[0] = 2; key3[1] = 4; key3[2] = 16; key3[3] = 0;
+    self.keysBesideMap[3] = key3;
+    
+    int* key4 = malloc(sizeof(int)*5);
+    key4[0] = 3; key4[1] = 5; key4[2] = 16; key4[3] = 17; key4[4] = 0;
+    self.keysBesideMap[4] = key4;
+    
+    int* key5 = malloc(sizeof(int)*5);
+    key5[0] = 4; key5[1] = 6; key5[2] = 17; key5[3] = 18; key5[4] = 0;
+    self.keysBesideMap[5] = key5;
+    
+    int* key6 = malloc(sizeof(int)*4);
+    key6[0] = 5; key6[1] = 7; key6[2] = 18; key6[3] = 0;
+    self.keysBesideMap[6] = key6;
+    
+    int* key7 = malloc(sizeof(int)*4);
+    key7[0] = 6; key7[1] = 8; key7[2] = 19; key7[3] = 0;
+    self.keysBesideMap[7] = key7;
+    
+    int* key8 = malloc(sizeof(int)*5);
+    key8[0] = 7; key8[1] = 9; key8[2] = 19; key8[3] = 20; key8[4] = 0;
+    self.keysBesideMap[8] = key8;
+    
+    int* key9 = malloc(sizeof(int)*4);
+    key9[0] = 8; key9[1] = 10; key9[2] = 20; key9[3] = 0;
+    self.keysBesideMap[9] = key9;
+    
+    int* key10 = malloc(sizeof(int)*4);
+    key10[0] = 9; key10[1] = 11; key10[2] = 21; key10[3] = 0;
+    self.keysBesideMap[10] = key10;
+    
+    int* key11 = malloc(sizeof(int)*5);
+    key11[0] = 10; key11[1] = 12; key11[2] = 21; key11[3] = 22; key11[4] = 0;
+    self.keysBesideMap[11] = key11;
+    
+    int* key12 = malloc(sizeof(int)*5);
+    key12[0] = 11; key12[1] = 13; key12[2] = 22; key12[3] = 23; key12[4] = 0;
+    self.keysBesideMap[12] = key12;
+    
+    int* key13 = malloc(sizeof(int)*3);
+    key13[0] = 12; key13[1] = 23; key13[2] = 0;
+    self.keysBesideMap[13] = key13;
+    
+    int* key14 = malloc(sizeof(int)*3);
+    key14[0] = 0; key14[1] = 1; key14[2] = 0;
+    self.keysBesideMap[14] = key14;
+    
+    int* key15 = malloc(sizeof(int)*3);
+    key15[0] = 1; key15[1] = 2; key15[2] = 0;
+    self.keysBesideMap[15] = key15;
+    
+    int* key16 = malloc(sizeof(int)*3);
+    key16[0] = 3; key16[1] = 4; key16[2] = 0;
+    self.keysBesideMap[16] = key16;
+    
+    int* key17 = malloc(sizeof(int)*3);
+    key17[0] = 4; key17[1] = 5; key17[2] = 0;
+    self.keysBesideMap[17] = key17;
+    
+    int* key18 = malloc(sizeof(int)*3);
+    key18[0] = 5; key18[1] = 6; key18[2] = 0;
+    self.keysBesideMap[18] = key18;
+    
+    int* key19 = malloc(sizeof(int)*3);
+    key19[0] = 7; key19[1] = 8; key19[2] = 0;
+    self.keysBesideMap[19] = key19;
+    
+    int* key20 = malloc(sizeof(int)*3);
+    key20[0] = 8; key20[1] = 9; key20[2] = 0;
+    self.keysBesideMap[20] = key20;
+    
+    int* key21 = malloc(sizeof(int)*3);
+    key21[0] = 10; key21[1] = 11; key21[2] = 0;
+    self.keysBesideMap[21] = key21;
+    
+    int* key22 = malloc(sizeof(int)*3);
+    key22[0] = 11; key22[1] = 12; key22[2] = 0;
+    self.keysBesideMap[22] = key22;
+    
+    int* key23 = malloc(sizeof(int)*3);
+    key23[0] = 12; key23[1] = 13; key23[2] = 0;
+    self.keysBesideMap[23] = key23;
+}
 
 -(void) changeIkeyboMode:(CBPeripheral*)peripheral
 {
@@ -1091,7 +1198,7 @@
         self.showingSettingPage = NO;
     }
 }
-
+/*
 -(void)tap:(UITapGestureRecognizer*)sender
 {
     CGPoint point = [sender locationInView:self.view];
@@ -1163,7 +1270,7 @@
         }
     }
 }
-
+*/
 -(void) tapBeganOnKey:(NSNumber*)indexNum
 {
     int index = [indexNum intValue];
@@ -1296,7 +1403,7 @@
 }
 
 #pragma mark - UIGestureRecognizerDelegate
-
+/*
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
     CGPoint firstPoint = [gestureRecognizer locationInView:self.view];
@@ -1307,7 +1414,7 @@
     
     return NO;
 }
-
+*/
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)Event
 {
     NSLog(@"Began");
@@ -1321,12 +1428,14 @@
             if(CGRectContainsPoint(keyRect, point))
             {
                 int top = 0;
-                while(top < 3 && self.x[top] != 0)
+                while(top < 3 && self.keyBeingTappedIndexArray[top] != 0)
+                {
                     top++;
+                }
                 if(top == 3)
                     break;
-                self.x[top] = j;
-                self.count++;
+                self.keyBeingTappedIndexArray[top] = j;
+                self.keyBeingTappedCount++;
                 NSNumber* playKey = [NSNumber numberWithInt:j];
                 [self.view addSubview:self.highlightedKeyImageViewArray[j]];
                 [self tapBeganOnKey:playKey];
@@ -1334,8 +1443,7 @@
             }
         }
     }
-    NSLog(@"%@", [NSString stringWithFormat:@"%d, %d, %d", self.x[0], self.x[1], self.x[2]]);
-
+    NSLog(@"%@", [NSString stringWithFormat:@"%d, %d, %d", self.keyBeingTappedIndexArray[0], self.keyBeingTappedIndexArray[1], self.keyBeingTappedIndexArray[2]]);
 }
 
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -1346,9 +1454,9 @@
         UITouch *touch = [[touches allObjects] objectAtIndex:i];
         CGPoint point = [touch locationInView:self.view];
         CGPoint prevPoint = [touch previousLocationInView:self.view];
-        for(int j=0; j<self.count; j++)
+        for(int j=0; j<self.keyBeingTappedCount; j++)
         {
-            int index = self.x[j];
+            int index = self.keyBeingTappedIndexArray[j];
             CGRect keyRect = ((UIView*)self.keyViewArray[index]).frame;
             if(CGRectContainsPoint(keyRect, prevPoint))
             {
@@ -1359,18 +1467,36 @@
                     [self.highlightedKeyImageViewArray[index] removeFromSuperview];
                     [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:index]];
                     
+                    int k=1;
+                    while(self.keysBesideMap[index][k])
+                        k++;
+                    
+                    for(k--;k >= 0; k--)
+                    {
+                        int besideKeyNo = self.keysBesideMap[index][k];
+                        CGRect keyRect = ((UIView*)self.keyViewArray[besideKeyNo]).frame;
+                        if(CGRectContainsPoint(keyRect, point))
+                        {
+                            self.keyBeingTappedIndexArray[j] = besideKeyNo;
+                            NSNumber* playKey = [NSNumber numberWithInt:besideKeyNo];
+                            [self.view addSubview:self.highlightedKeyImageViewArray[besideKeyNo]];
+                            [self tapBeganOnKey:playKey];
+                            break;
+                        }
+                    }
+       /*
                     for(int k=23; k >= 0; k--)
                     {
                         CGRect keyRect = ((UIView*)self.keyViewArray[k]).frame;
                         if(CGRectContainsPoint(keyRect, point))
                         {
-                            self.x[j] = k;
+                            self.keyBeingTappedIndexArray[j] = k;
                             NSNumber* playKey = [NSNumber numberWithInt:k];
                             [self.view addSubview:self.highlightedKeyImageViewArray[k]];
                             [self tapBeganOnKey:playKey];
                             break;
                         }
-                    }
+                    }*/
                 }
             }
         }
@@ -1392,10 +1518,10 @@
             if(CGRectContainsPoint(keyRect, point))
             {
                 for(int k=0; k<3; k++)
-                    if(self.x[k] == j)
+                    if(self.keyBeingTappedIndexArray[k] == j)
                     {
-                        self.x[k] = 0;
-                        self.count--;
+                        self.keyBeingTappedIndexArray[k] = 0;
+                        self.keyBeingTappedCount--;
                         break;
                     }
                 [self.highlightedKeyImageViewArray[j] removeFromSuperview];
@@ -1404,7 +1530,7 @@
             }
         }
     }
-    NSLog(@"%@", [NSString stringWithFormat:@"%d, %d, %d", self.x[0], self.x[1], self.x[2]]);
+    NSLog(@"%@", [NSString stringWithFormat:@"%d, %d, %d", self.keyBeingTappedIndexArray[0], self.keyBeingTappedIndexArray[1], self.keyBeingTappedIndexArray[2]]);
 }
 
 #pragma mark - UITextFieldDelegate
