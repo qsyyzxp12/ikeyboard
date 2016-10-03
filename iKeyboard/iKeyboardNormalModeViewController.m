@@ -482,8 +482,8 @@
     {
         UIView* whiteKeyView = [[UIImageView alloc] init];
         whiteKeyView.frame = CGRectMake(keyX, keyY, oneKeyWidth, keyHeight);
-     //   whiteKeyView.backgroundColor = [UIColor redColor];
-     //   whiteKeyView.alpha = 0.5;
+        whiteKeyView.backgroundColor = [UIColor redColor];
+        whiteKeyView.alpha = 0.5;
         [self.view addSubview:whiteKeyView];
         keyX += /*self.keyboard_padding +*/ oneKeyWidth;
         [keyViewArray addObject:whiteKeyView];
@@ -495,18 +495,18 @@
     for(int i=0; i<10; i++)
     {
         UIView* blackKeyView = [[UIView alloc] init];
-     //   blackKeyView.backgroundColor = [UIColor blueColor];
-     //   blackKeyView.alpha = 0.5;
+        blackKeyView.backgroundColor = [UIColor blueColor];
+        blackKeyView.alpha = 0.5;
         switch (i)
         {
             case 0:
                 keyX += self.blackKeyOffsetVector.dx;
                 break;
             case 2: case 7:
-                keyX += self.blackKeyOffsetVector.dx*2 + self.keyboard_padding;
+                keyX += self.blackKeyOffsetVector.dx*2/* + self.keyboard_padding*/;
                 break;
             case 5:
-                keyX += self.blackKeyOffsetVector.dx*2 + self.keyboard_padding - 2;
+                keyX += self.blackKeyOffsetVector.dx*2/* + self.keyboard_padding - 2*/;
                 break;
             default:
                 keyX += self.blackKeyOffsetVector.dy;
@@ -1460,18 +1460,40 @@
             CGRect keyRect = ((UIView*)self.keyViewArray[index]).frame;
             if(CGRectContainsPoint(keyRect, prevPoint))
             {
+                int k=1;
+                while(self.keysBesideMap[index][k])
+                    k++;
                 if(CGRectContainsPoint(keyRect, point))
+                {
+                    int whiteKeyBesideCount;
+                    if(index != 0 && index != 13)
+                        whiteKeyBesideCount = 2;
+                    else
+                        whiteKeyBesideCount = 1;
+                    
+                    for(k--; k>=whiteKeyBesideCount; k--)
+                    {
+                        int besideKeyNo = self.keysBesideMap[index][k];
+                        CGRect keyRect = ((UIView*)self.keyViewArray[besideKeyNo]).frame;
+                        if(CGRectContainsPoint(keyRect, point))
+                        {
+                            [self.highlightedKeyImageViewArray[index] removeFromSuperview];
+                            [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:index]];
+                            self.keyBeingTappedIndexArray[j] = besideKeyNo;
+                            NSNumber* playKey = [NSNumber numberWithInt:besideKeyNo];
+                            [self.view addSubview:self.highlightedKeyImageViewArray[besideKeyNo]];
+                            [self tapBeganOnKey:playKey];
+                            break;
+                        }
+                    }
                     break;
+                }
                 else
                 {
                     [self.highlightedKeyImageViewArray[index] removeFromSuperview];
                     [NSThread detachNewThreadSelector:@selector(tapEndedOnKey:) toTarget:self withObject:[NSNumber numberWithInt:index]];
                     
-                    int k=1;
-                    while(self.keysBesideMap[index][k])
-                        k++;
-                    
-                    for(k--;k >= 0; k--)
+                    for(;k >= 0; k--)
                     {
                         int besideKeyNo = self.keysBesideMap[index][k];
                         CGRect keyRect = ((UIView*)self.keyViewArray[besideKeyNo]).frame;
@@ -1484,19 +1506,6 @@
                             break;
                         }
                     }
-       /*
-                    for(int k=23; k >= 0; k--)
-                    {
-                        CGRect keyRect = ((UIView*)self.keyViewArray[k]).frame;
-                        if(CGRectContainsPoint(keyRect, point))
-                        {
-                            self.keyBeingTappedIndexArray[j] = k;
-                            NSNumber* playKey = [NSNumber numberWithInt:k];
-                            [self.view addSubview:self.highlightedKeyImageViewArray[k]];
-                            [self tapBeganOnKey:playKey];
-                            break;
-                        }
-                    }*/
                 }
             }
         }
